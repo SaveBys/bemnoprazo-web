@@ -1,9 +1,8 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-export default function Lavos() {
+export default function Login() {
     return (
-        
             <div className="flex flex-col items-center gap-8 p-12">
                 <div className="flex flex-col items-center gap-4">
                     <h1 className="text-title text-[#FF8D28]">Login</h1>
@@ -12,11 +11,11 @@ export default function Lavos() {
 
                 <div className="flex flex-col gap-8 w-md">
                     <div className="">
-                        <label className="text-legend text-[#8e8d8d]">E-mail:</label>
+                        <label className="text-legend text-[#8e8d8d]">E-mail</label>
                         <Input type="email" placeholder="exemplo@gmail.com" className="border-orange-300 border-2" />
                     </div>
                     <div className="">
-                        <label className="text-legend text-[#8e8d8d]">Senha:</label>
+                        <label className="text-legend text-[#8e8d8d]">Senha</label>
                         <Input type="password" placeholder="********" className="border-orange-300 border-2 " />
                     </div>
                 </div>

@@ -23,8 +23,8 @@ export default function Footer() {
                                 <p className='text-content text-[#595959] '>suporte@bemnoprazo.com.br</p>
                             </div>
                         </div>
-                        <p className='text-content text-[#595959] '>Copyright ©2026 BemNoPrazo - Medicamento sem desperdício</p>
-                        <div className='flex flex-col items-center'>
+                        <p className='text-content text-[#595959]'>Copyright ©2026 BemNoPrazo - Medicamento sem desperdício</p>
+                        <div className='flex flex-col items-center gap-2'>
                             <Image className='' src="/img/LogoSavebys.png" alt="logo" width={100} height={50} />
                             <p className='text-legend text-[#595959]'>Powered by savebys.com</p>
                         </div>
