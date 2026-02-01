@@ -1,9 +1,9 @@
 import { Button } from "@/components/ui/button";
-import { FishIcon } from "@phosphor-icons/react/ssr";
+import { FishIcon, InstagramLogoIcon } from "@phosphor-icons/react/ssr";
 
 export default function Home() {
   return (
-    <> 
+    <>
       <div className="bg-primary-1 text-title text-secondary-1">colors</div>
       <div className="bg-primary-2 text-subtitle">colors</div>
       <div className="bg-primary-3 text-content">colors</div>
