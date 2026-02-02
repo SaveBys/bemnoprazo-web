@@ -1,7 +1,7 @@
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 
-export default function Lavos() {
+export default function LoginPage() {
   return (
     <div className="w-fit flex flex-col items-center gap-8 p-12">
       <div className="flex flex-col items-center gap-4">
