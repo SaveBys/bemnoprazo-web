@@ -7,12 +7,12 @@ export default function TesteLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <>
+    <main className='flex flex-col justify-center items-center'>
       <Header />
-      <div className='my-4'>
+      <div className='w-fit my-4'>
         {children}
       </div>
-      <Footer/>
-    </>
+      <Footer />
+    </main>
   );
 }
