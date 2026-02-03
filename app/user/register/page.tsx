@@ -1,5 +1,7 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import InputBase from "@/components/ui/input/input-base"
+import InputPassword from "@/components/ui/input/input-password"
+import InputText from "@/components/ui/input/input-text"
 
 export default function RegisterPage() {
   return (
@@ -9,35 +11,57 @@ export default function RegisterPage() {
         <h2 className="text-subtitle text-base-3">Informe os seus dados para realizar o cadastro.</h2>
       </div>
 
-      <div className="flex flex-col gap-8 w-md">
-        <div className="">
-          <label className="text-legend text-base-3">Nome da Empresa</label>
-          <Input type="email" placeholder="Ex: Bem no Prazo Tecnologia LTDA" className="border-orange-300 border-2" />
-        </div>
-        <div className="">
-          <label className="text-legend text-base-3">CNPJ</label>
-          <Input type="email" placeholder="00.000.000/0001-00" className="border-orange-300 border-2" />
-        </div>
-        <div className="">
-          <label className="text-legend text-base-3">Responsável pela conta</label>
-          <Input type="email" placeholder="João Silva" className="border-orange-300 border-2" />
-        </div>
-        <div className="">
-          <label className="text-legend text-base-3">Telefome/Whatsapp</label>
-          <Input type="email" placeholder="(11) 9 9999-9999" className="border-orange-300 border-2" />
-        </div>
-        <div className="">
-          <label className="text-legend text-base-3">E-mail</label>
-          <Input type="email" placeholder="exemplo@gmail.com" className="border-orange-300 border-2" />
-        </div>
-        <div className="">
-          <label className="text-legend text-base-3">Senha</label>
-          <Input type="email" placeholder="Mínimo de 8 caracteres" className="border-orange-300 border-2" />
-        </div>
-        <div className="">
-          <label className="text-legend text-base-3">Confirmar Senha</label>
-          <Input type="password" placeholder="Repita a senha" className="border-orange-300 border-2 " />
-        </div>
+      <div className="flex flex-col gap-4 w-md">
+        <InputText
+          label="Nome da Empresa"
+          name="company-name"
+          type="text"
+          placeholder="Bem no Prazo Tecnologia LTDA" >
+        </InputText>
+
+        <InputText
+          label="CNPJ"
+          name="cnpj"
+          type="email"
+          placeholder="00.000.000/0001-00"
+          mask="99.9999.999/9999-99" >
+        </InputText>
+
+        <InputText
+          label="Responsável pela conta"
+          name="company-responsible"
+          type="text"
+          placeholder="João Silva" >
+        </InputText>
+
+        <InputText
+          label="Telefome/Whatsapp"
+          name="numero-contato"
+          type="text"
+          placeholder="(11) 9 8959-9760"
+          mask={["(99) 9999-9999", "(99) 9 9999-9999"]} >
+        </InputText>
+
+        <InputText
+          label="E-mail"
+          name="email"
+          type="email"
+          placeholder="exemplo@gmail.com" >
+        </InputText>
+
+        <InputPassword
+          label="Senha"
+          name="password"
+          type="password"
+          placeholder="Mínimo de 8 caracteres" >
+        </InputPassword>
+
+        <InputPassword
+          label="Confirmar Senha"
+          name="confirm-password"
+          type="password"
+          placeholder="Repita a senha" >
+        </InputPassword>
       </div>
 
 

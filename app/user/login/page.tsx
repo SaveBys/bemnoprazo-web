@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
+import InputBase from "@/components/ui/input/input-base"
 
 export default function LoginPage() {
   return (
@@ -12,11 +12,11 @@ export default function LoginPage() {
       <form className="flex flex-col gap-8 w-md">
         <div className="">
           <label className="text-legend text-base-3">E-mail</label>
-          <Input type="email" placeholder="exemplo@gmail.com" className="border-primary-3 border-1" />
+          <InputBase type="email" placeholder="exemplo@gmail.com" className="border-primary-3 border-1" />
         </div>
         <div className="">
           <label className="text-legend text-base-3">Senha</label>
-          <Input type="password" placeholder="********" className="border-primary-3 border-1" />
+          <InputBase type="password" placeholder="********" className="border-primary-3 border-1" />
         </div>
       </form>
 
