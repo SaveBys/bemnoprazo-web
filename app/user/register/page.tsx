@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button"
-import InputBase from "@/components/ui/input/input-base"
 import InputPassword from "@/components/ui/input/input-password"
 import InputText from "@/components/ui/input/input-text"
 
@@ -64,10 +63,12 @@ export default function RegisterPage() {
         </InputPassword>
       </div>
 
-
       <div className="flex flex-col items-center gap-8">
         <Button>Cadastrar</Button>
-        <a href="" className="text-legend text-primary-2">Já possui conta? Clique aqui para entrar</a>
+
+        <Button href="/user/login" variant="text" isLink>
+          Já possui conta? Clique aqui para entrar
+        </Button>
       </div>
     </div>
   )

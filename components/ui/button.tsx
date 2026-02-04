@@ -2,6 +2,7 @@ import * as React from "react"
 import { cva, type VariantProps } from "class-variance-authority"
 
 import { cn } from "@/lib/utils/cn.function"
+import Link from "next/link";
 
 const buttonVariants = cva("inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg transition-all disabled:pointer-events-none disabled:opacity-50 shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
   {
@@ -30,10 +31,11 @@ function Button({
 }: React.ComponentProps<"button"> & VariantProps<typeof buttonVariants> & {
   icon?: React.ReactNode;
   iconInverse?: boolean;
-  isLink?: false;
+  isLink?: boolean;
+  href?: string
 }) {
 
-  return (
+  const component = (
     <button
       data-slot="button"
       data-variant={variant}
@@ -45,7 +47,14 @@ function Button({
         {props.children}
       </span>
     </button>
-  )
+  );
+  return !props.isLink 
+  ? (component) 
+  : (
+    <Link href={props.href ?? ''}>
+      {component}
+    </Link>
+  );
 }
 
 export { Button, buttonVariants }

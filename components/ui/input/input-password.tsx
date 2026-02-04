@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import InputBase from "./input-base";
-import { EyeClosedIcon, EyeIcon, EyeSlashIcon } from "@phosphor-icons/react/dist/ssr";
+import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react/dist/ssr";
 
 interface InputPasswordProps extends React.ComponentProps<"input"> {
   label: string;
@@ -60,7 +60,7 @@ export default function InputPassword({
         onClick={toggleShowPassword}
         className="absolute right-3 bottom-11/50 -translate-y-1/2 text-sm text-primary-1"
       >
-        {showPassword ? <EyeIcon className="size-8" /> : <EyeSlashIcon className="size-6" />}
+        {showPassword ? <EyeIcon className="size-6" /> : <EyeSlashIcon className="size-6" />}
       </button>
 
       <p className="size-4 text-red-500 text-sm">{errorMessage}</p>
