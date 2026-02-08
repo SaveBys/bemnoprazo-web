@@ -1,25 +1,59 @@
+import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import { FishIcon, InstagramLogoIcon } from "@phosphor-icons/react/ssr";
+import Image from "next/image";
 
 export default function Home() {
   return (
     <>
-      <div className="bg-primary-1 text-title text-secondary-1">colors</div>
-      <div className="bg-primary-2 text-subtitle">colors</div>
-      <div className="bg-primary-3 text-content">colors</div>
-      <div className="bg-secondary-1 text-legend">colors</div>
-      <div className="bg-base-5 p-10 flex gap-4">
-        <Button icon={<FishIcon />}>
-          Click me
-        </Button>
-        <Button icon={<FishIcon />} variant="secondary">Click me</Button>
-        <Button icon={<FishIcon />} variant="text">Click me</Button>
-      </div>
-      <div className="bg-secondary-3">colors</div>
-      <FishIcon />
-      <main className="bg-foreground flex min-h-screen flex-col items-center justify-between p-24">
-        <h1 className="text-4xl font-bold">Welcome to Next.js!</h1>
+      <main className="w-full flex flex-col items-center" >
+        <section className="width-barrier w-full flex flex-col items-center gap-16 py-8">
+          <figure className="w-full flex justify-center items center">
+            <Image
+              src="/img/LogoBemnoprazo.png"
+              width={400}
+              height={180}
+              alt="Logo da marca SaveBys"
+              className="h-auto"
+            />
+          </figure>
+
+          <h1 className="text-secondary-2 text-5xl font-bold text-center py-8">
+            Transformando prazos em saúde para todos.
+          </h1>
+
+          <div className="flex gap-16">
+            <Button href="/user/register" isLink={true}>
+              Cadastre-se
+            </Button>
+            <Button href="/user/login" variant="secondary" isLink={true}>
+              Já possui login?
+            </Button>
+          </div>
+        </section>
+
+        <section className="w-full">
+          <div className="bg-secondary-2 w-full flex flex-col-reverse sm:flex-row">
+            <figure className="w-[380px] sm:w-[595px] h-auto">
+              <Image
+                src="/img/banner.png"
+                width={380}
+                height={200}
+                alt="Logo da marca SaveBys"
+                className="w-[380px] sm:w-[595px] relative"
+              />
+            </figure>
+            <div className="flex-1 flex items-center px-4 sm:px-0">
+              <p className="w-[591px] text-3xl font-medium text-base-5 text-center">
+                Conectamos farmácias e distribuidoras a consumidores — pessoas físicas,
+                hospitais e clínicas — oferecendo produtos próximos ao vencimento, com
+                preços reduzidos e garantia de qualidade e segurança.
+              </p>
+            </div>
+          </div>
+        </section>
       </main>
+      <Footer />
     </>
   );
 }

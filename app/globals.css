@@ -1,15 +1,13 @@
 @import "tailwindcss";
 @import "tw-animate-css";
 
-@custom-variant dark (&:is(.dark *));
-
 :root {
   --primary-1: #dd6a03;
   --primary-2: #FF8D28;
   --primary-3: #ffb77a;
-  --secondary-1: #008c92;
-  --secondary-2: #00c3d0;
-  --secondary-3: #13f1fb;
+  --secondary-1: #2B7A8B;
+  --secondary-2: #37A2BD;
+  --secondary-3: #44BDD9;
   --base-1: #030202;
   --base-2: #595959;
   --base-3: #8e8d8d;
@@ -163,4 +161,15 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+}
+
+.dark {
+  --sidebar: hsl(240 5.9% 10%);
+  --sidebar-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-primary: hsl(224.3 76.3% 48%);
+  --sidebar-primary-foreground: hsl(0 0% 100%);
+  --sidebar-accent: hsl(240 3.7% 15.9%);
+  --sidebar-accent-foreground: hsl(240 4.8% 95.9%);
+  --sidebar-border: hsl(240 3.7% 15.9%);
+  --sidebar-ring: hsl(217.2 91.2% 59.8%);
 }
