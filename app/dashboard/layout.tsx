@@ -1,5 +1,3 @@
-import './dashboard.css';
-
 export default function UserLayout({
   children,
 }: Readonly<{

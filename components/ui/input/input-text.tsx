@@ -2,7 +2,7 @@
 
 import { useState, ChangeEvent } from "react";
 import InputBase from "./input-base";
-import { applyMask } from "@/lib/utils/apply-mask.function";
+import { applyMask } from "@/lib/apply-mask.function";
 
 interface InputTextProps extends React.ComponentProps<"input"> {
   label: string;
