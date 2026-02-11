@@ -20,8 +20,14 @@ export default function Header({
         {
           isAuthenticated && (
             <div className="flex flex-row gap-8">
-              <Button variant="secondary"><SquaresFourIcon className="text-primary-2" size={32} />Meu dashboard</Button>
-              <Button><ShoppingCartIcon size={32} color="#ffffff" /></Button>
+              <Button variant="secondary" href="/dashboard" isLink>
+                <SquaresFourIcon className="text-primary-2" size={32} />
+                Meu dashboard
+              </Button>
+
+              <Button>
+                <ShoppingCartIcon size={32} color="#ffffff" />
+              </Button>
             </div>
           )
         }

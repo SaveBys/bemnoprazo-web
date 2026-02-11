@@ -4,24 +4,19 @@ import data from "./data.json"
 import { TabelaProdutos } from "@/components/layout/tabela-produtos"
 
 import { Button } from "@/components/ui/button"
-import { PlusIcon } from "@phosphor-icons/react/dist/ssr"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/input/select"
 import InputSearch from "@/components/ui/input/input-search"
 import { Paginator } from "@/components/layout/paginator"
 import { useState } from "react"
 
-export default function DashboardPage() {
+export default function BackofficePage() {
   const [page, setPage] = useState<number>(0)
 
   return (
     <div className="w-full flex flex-col gap-8 pr-4 py-8">
       <div className="flex flex-col gap-8">
         <div className="flex justify-between items-center">
-          <h1 className="text-title text-base-2">Meus produtos</h1>
-          <Button variant="secondary">
-            <PlusIcon className="size-5" />
-            <span>Novo produto</span>
-          </Button>
+          <h1 className="text-title text-base-2">Gestão de produtos</h1>
         </div>
 
         <div className="flex items-end gap-4">

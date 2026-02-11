@@ -26,7 +26,9 @@ export function NavUser({
             <span className="truncate text-content text-base-2">{user.email}</span>
           </div>
 
-          <Button className="w-fit" variant="secondary">Sair</Button>
+          <Button className="w-fit" variant="secondary">
+            Sair
+          </Button>
         </div>
       </SidebarMenuItem>
     </SidebarMenu>
