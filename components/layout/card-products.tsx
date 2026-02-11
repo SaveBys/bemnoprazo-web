@@ -1,26 +1,7 @@
 import Image from "next/image"
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr"
 import { Button } from "../ui/button"
-
-export interface Page {
-  size: number,
-  number: number,
-  totalElements: number,
-  totalPages: number
-}
-
-export interface Pageable<T> {
-  content: T[]
-  page: Page
-}
-
-export interface ProdutoResumo {
-  name: string
-  ean: string
-  basePrice: number
-  price: number
-  expirationDate: string
-}
+import { ProdutoResumo } from "@/types/products-resume";
 
 interface CardProductsProps {
   data?: ProdutoResumo
