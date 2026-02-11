@@ -1,6 +1,6 @@
 "use client"
 
-import { CardProdutos, Page, ProdutoResumo } from "@/components/layout/card-products";
+import { CardProducts, Page, ProdutoResumo } from "@/components/layout/card-products";
 import { FilterProducts } from "@/components/layout/filter-products";
 import { Paginator } from "@/components/layout/paginator";
 import { listarAnuncio } from "@/services/anuncio.service";
@@ -28,7 +28,7 @@ export default function Produtos() {
           {
             announcements.map(announcement => {
               return (
-                <CardProdutos key={announcement.ean} data={announcement} />
+                <CardProducts key={announcement.ean} data={announcement} />
               )
             })
           }
