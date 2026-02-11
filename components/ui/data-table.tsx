@@ -17,13 +17,14 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useMemo } from "react"
+import { Paginator } from "../layout/paginator"
 
 interface DataTableProps<TData> {
   data: TData[]
   columns: ColumnDef<TData>[]
 }
 
-export function DataTable<TData>({ 
+export function DataTable<TData>({
   data,
   columns
 }: DataTableProps<TData>) {
@@ -48,9 +49,9 @@ export function DataTable<TData>({
                     {header.isPlaceholder
                       ? null
                       : flexRender(
-                          header.column.columnDef.header,
-                          header.getContext()
-                        )}
+                        header.column.columnDef.header,
+                        header.getContext()
+                      )}
                   </TableHead>
                 ))}
               </TableRow>
