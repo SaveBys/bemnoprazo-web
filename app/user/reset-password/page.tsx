@@ -1,5 +1,5 @@
 import { Button } from "@/components/ui/button"
-import InputBase from "@/components/ui/input/input-base"
+import InputText from "@/components/ui/input/input-text"
 
 export default function ResetPasswordPage() {
   return (
@@ -10,10 +10,12 @@ export default function ResetPasswordPage() {
       </div>
 
       <form className="flex flex-col gap-8 w-md">
-        <div className="">
-          <label className="text-legend text-base-3">E-mail</label>
-          <InputBase type="email" placeholder="exemplo@gmail.com" className="border-primary-3 border-1" />
-        </div>
+        <InputText
+          label="E-mail"
+          name="email"
+          type="email"
+          placeholder="exemplo@gmail.com" >
+        </InputText>
       </form>
 
       <div className="flex flex-col items-center gap-8">

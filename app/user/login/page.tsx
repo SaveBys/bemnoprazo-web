@@ -1,5 +1,6 @@
 import { Button } from "@/components/ui/button"
-import InputBase from "@/components/ui/input/input-base"
+import InputPassword from "@/components/ui/input/input-password"
+import InputText from "@/components/ui/input/input-text"
 
 export default function LoginPage() {
   return (
@@ -10,14 +11,19 @@ export default function LoginPage() {
       </div>
 
       <form className="flex flex-col gap-8 w-md">
-        <div className="">
-          <label className="text-legend text-base-3">E-mail</label>
-          <InputBase type="email" placeholder="exemplo@gmail.com" className="border-primary-3 border-1" />
-        </div>
-        <div className="">
-          <label className="text-legend text-base-3">Senha</label>
-          <InputBase type="password" placeholder="********" className="border-primary-3 border-1" />
-        </div>
+        <InputText
+          label="E-mail"
+          name="email"
+          type="email"
+          placeholder="exemplo@gmail.com" >
+        </InputText>
+
+        <InputPassword
+          label="Senha"
+          name="password"
+          type="password"
+          placeholder="Mínimo de 8 caracteres" >
+        </InputPassword>
       </form>
 
       <div className="flex flex-col items-center gap-8">
