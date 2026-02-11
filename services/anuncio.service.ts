@@ -1,4 +1,4 @@
-import { Pageable, ProdutoResumo } from "@/components/layout/card-produto";
+import { Pageable, ProdutoResumo } from "@/components/layout/card-products";
 import { api } from "@/lib/utils/axios";
 
 
