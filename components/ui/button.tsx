@@ -48,20 +48,24 @@ type ButtonAsLinkProps =
 
 type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps
 
-function Button(props: ButtonProps) {
+export function Button(rawProps: ButtonProps) {
+
   const {
+    isLink,
     className,
     variant = "default",
     size = "default",
     icon,
     iconInverse,
     children,
-  } = props
+    ...rest
+  } = rawProps
 
   const content = (
     <span
-      className={`flex items-center gap-2 ${iconInverse ? "flex-row-reverse" : "flex-row"
-        }`}
+      className={`flex items-center gap-2 ${
+        iconInverse ? "flex-row-reverse" : "flex-row"
+      }`}
     >
       {icon}
       {children}
@@ -70,8 +74,11 @@ function Button(props: ButtonProps) {
 
   const classes = cn(buttonVariants({ variant, size, className }))
 
-  if (props.isLink) {
-    const { href, ...linkProps } = props
+  if (isLink) {
+    const { href, ...linkProps } = rest as Omit<
+      ButtonAsLinkProps,
+      "isLink"
+    >
 
     return (
       <Link
@@ -80,14 +87,12 @@ function Button(props: ButtonProps) {
         data-variant={variant}
         data-size={size}
         className={classes}
-        {...linkProps}
+        {...linkProps}  
       >
         {content}
       </Link>
     )
   }
-
-  const { ...buttonProps } = props
 
   return (
     <button
@@ -95,11 +100,9 @@ function Button(props: ButtonProps) {
       data-variant={variant}
       data-size={size}
       className={classes}
-      {...buttonProps}
+      {...(rest as Omit<ButtonAsButtonProps, "isLink">)} 
     >
       {content}
     </button>
   )
 }
-
-export { Button, buttonVariants }
