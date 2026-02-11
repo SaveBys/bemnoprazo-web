@@ -1,6 +1,5 @@
 "use client"
 
-import { z } from "zod"
 import {
   ColumnDef,
   flexRender,
@@ -17,53 +16,17 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table"
-import { Button } from "@/components/ui/button"
-import { EyeIcon } from "@phosphor-icons/react/dist/ssr"
 import { useMemo } from "react"
 
-export const schema = z.object({
-  id: z.number(),
-  nome: z.string(),
-  categoria: z.string(),
-  validade: z.string(),
-  status: z.string(),
-})
+interface DataTableProps<TData> {
+  data: TData[]
+  columns: ColumnDef<TData>[]
+}
 
-export type RowData = z.infer<typeof schema>
-
-export const columns: ColumnDef<RowData>[] = [
-  {
-    accessorKey: "id",
-    header: "Id",
-  },
-  {
-    accessorKey: "nome",
-    header: "Nome",
-  },
-  {
-    accessorKey: "categoria",
-    header: "Categoria",
-  },
-  {
-    accessorKey: "validade",
-    header: "Validade",
-  },
-  {
-    accessorKey: "status",
-    header: "Status",
-  },
-  {
-    id: "actions",
-    header: "Ações",
-    cell: () => (
-      <Button variant="secondary">
-        <EyeIcon className="size-5" />
-      </Button>
-    ),
-  },
-]
-
-export function DataTable({ data }: { data: RowData[] }) {
+export function DataTable<TData>({ 
+  data,
+  columns
+}: DataTableProps<TData>) {
   const memoData = useMemo(() => data, [data])
 
   const table = useReactTable({

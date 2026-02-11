@@ -1,5 +1,5 @@
 import { AppSidebar } from "@/components/layout/app-sidebar"
-import { DataTable } from "@/components/layout/data-table"
+import { DataTable } from "@/components/ui/data-table"
 import {
   SidebarProvider,
 } from "@/components/ui/sidebar"
@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button"
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/input/select"
 import InputSearch from "@/components/ui/input/input-search"
+import { TabelaProdutos } from "@/components/layout/tabela-produtos"
 
 
 export default function Page() {
@@ -60,7 +61,7 @@ export default function Page() {
             </div>
           </div>
 
-          <DataTable data={data[0]} />
+          <TabelaProdutos data={data[0]} />
 
         </div>
       </div>
