@@ -28,8 +28,14 @@ export default function LoginPage() {
 
       <div className="flex flex-col items-center gap-8">
         <Button>Entrar</Button>
-        <a href="" className="text-legend text-primary-2">Ainda não possui conta? Clique aqui para se cadastrar</a>
-        <a href="" className="text-legend text-primary-2">Esqueci minha senha</a>
+
+        <Button href="/user/register" variant="text" isLink>
+          Ainda não possui conta? Clique aqui para se cadastrar
+        </Button>
+
+        <Button href="/user/reset-password" variant="text" isLink>
+          Esqueci minha senha
+        </Button>
       </div>
     </div>
   )

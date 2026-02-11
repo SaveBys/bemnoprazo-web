@@ -1,6 +1,4 @@
 import { Button } from "@/components/ui/button"
-import InputBase from "@/components/ui/input/input-base"
-import InputText from "@/components/ui/input/input-text"
 import InputPassword from "@/components/ui/input/input-password"
 
 export default function ResetPasswordPage() {
@@ -18,6 +16,7 @@ export default function ResetPasswordPage() {
           type="password"
           placeholder="Mínimo de 8 caracteres" >
         </InputPassword>
+
         <InputPassword
           label="Confirmar Senha"
           name="password"
@@ -28,7 +27,10 @@ export default function ResetPasswordPage() {
 
       <div className="flex flex-col items-center gap-8">
         <Button>Salvar</Button>
-        <a href="" className="text-legend text-primary-2">Já possui conta? Clique aqui para entrar</a>
+
+        <Button href="/user/login" variant="text" isLink>
+          Já possui conta? Clique aqui para entrar
+        </Button>
       </div>
     </div>
   )

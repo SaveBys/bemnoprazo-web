@@ -58,7 +58,7 @@ export default function InputPassword({
       <button
         type="button"
         onClick={toggleShowPassword}
-        className="absolute right-3 bottom-11/50 -translate-y-1/2 text-sm text-primary-1"
+        className="absolute right-3 bottom-1/5 -translate-y-1/2 text-sm text-primary-1"
       >
         {showPassword ? <EyeIcon className="size-6" /> : <EyeSlashIcon className="size-6" />}
       </button>
