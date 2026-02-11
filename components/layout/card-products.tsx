@@ -22,11 +22,11 @@ export interface ProdutoResumo {
   expirationDate: string
 }
 
-interface CardProdutosProps {
+interface CardProductsProps {
   data?: ProdutoResumo
 }
 
-export function CardProducts(props: CardProdutosProps) {
+export function CardProducts(props: CardProductsProps) {
   const formatCurrency = (amount: number | undefined, locale = 'pt-BR', currency = 'BRL') => {
     if (!amount) return;
 
