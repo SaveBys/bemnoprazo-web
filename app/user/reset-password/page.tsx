@@ -20,8 +20,14 @@ export default function ResetPasswordPage() {
 
       <div className="flex flex-col items-center gap-8">
         <Button>Enviar</Button>
-        <a href="" className="text-legend text-primary-2">Ainda não possui conta? Clique aqui para se cadastrar</a>
-        <a href="" className="text-legend text-primary-2">Já possui conta? Clique aqui para entrar</a>
+
+        <Button href="/user/register" variant="text" isLink>
+          Ainda não possui conta? Clique aqui para se cadastrar
+        </Button>
+
+        <Button href="/user/login" variant="text" isLink>
+          Já possui conta? Clique aqui para entrar
+        </Button>
       </div>
     </div>
   )

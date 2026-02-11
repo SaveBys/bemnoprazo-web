@@ -8,12 +8,11 @@ interface HeaderProps {
   isAuthenticated?: boolean
 };
 
-
 export default function Header({
   isAuthenticated = false
 }: HeaderProps) {
   return (
-    <header className='flex justify-center px-10 py-8 shadow-sm'>
+    <header className='w-full flex justify-center px-10 py-8 shadow-sm'>
       <div className="width-barrier w-full flex justify-between items-center">
         <nav>
           <Image src="/img/LogoBemnoprazo.png" alt="logo Bem no prazo" width={200} height={88.25} />
