@@ -1,8 +1,22 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import InputPassword from "@/components/ui/input/input-password"
 import InputText from "@/components/ui/input/input-text"
+import { login } from "@/lib/auth"
+import { useRouter } from "next/navigation"
+import { useState } from "react"
 
 export default function LoginPage() {
+  const [username, setUsername] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+
+  const router = useRouter()
+
+  async function handleLogin(username: string, password: string) {
+    login(username, password).then(() => (router.push("/dashboard")));
+  }
+
   return (
     <div className="w-fit flex flex-col items-center gap-8 p-12">
       <div className="flex flex-col items-center gap-4">
@@ -15,19 +29,25 @@ export default function LoginPage() {
           label="E-mail"
           name="email"
           type="email"
-          placeholder="exemplo@gmail.com" >
+          placeholder="exemplo@gmail.com"
+          value={username}
+          onChange={(e) => setUsername(e.target.value)}>
         </InputText>
 
         <InputPassword
           label="Senha"
           name="password"
           type="password"
-          placeholder="Mínimo de 8 caracteres" >
+          placeholder="Mínimo de 8 caracteres" 
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}>
         </InputPassword>
       </form>
 
       <div className="flex flex-col items-center gap-8">
-        <Button>Entrar</Button>
+        <Button onClick={() => handleLogin(username, password)}>
+          Entrar
+        </Button>
 
         <Button href="/user/register" variant="text" isLink>
           Ainda não possui conta? Clique aqui para se cadastrar

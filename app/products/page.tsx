@@ -3,7 +3,7 @@
 import { CardProducts } from "@/components/layout/card-products";
 import { FilterProducts } from "@/components/layout/filter-products";
 import { Paginator } from "@/components/layout/paginator";
-import { listarAnuncio } from "@/services/anuncio.service";
+import { getAllAnnouncements } from "@/services/announcements.service";
 import { Page } from "@/types/page";
 import { ProdutoResumo } from "@/types/products-resume";
 import { useEffect, useState } from "react";
@@ -14,7 +14,7 @@ export default function Produtos() {
   const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
-    listarAnuncio({ page, size: 9 }).then(res => {
+    getAllAnnouncements({ page, size: 9 }).then(res => {
       setAnnouncements(res.content);
       setPageData(res.page);
     });

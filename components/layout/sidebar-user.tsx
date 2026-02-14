@@ -23,7 +23,7 @@ const data = {
   navMain: [
     {
       title: "Início",
-      url: "/",
+      url: "/products",
       icon: HouseIcon,
     },
     {
@@ -58,7 +58,7 @@ export function SidebarUser({ ...props }: React.ComponentProps<typeof Sidebar>) 
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   )
