@@ -1,7 +1,21 @@
+"use client"
+
 import { Button } from "@/components/ui/button"
 import InputPassword from "@/components/ui/input/input-password"
+import { updatePassword } from "@/services/user.service"
+import { useSearchParams } from "next/navigation"
+import { useState } from "react"
 
 export default function ResetPasswordPage() {
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
+  
+  const [password, setPassword] = useState<string>("")
+
+  const handleUpdatePassword = () => {
+    token && updatePassword(token, password);
+  }
+
   return (
     <div className="w-fit flex flex-col items-center gap-8 p-12">
       <div className="flex flex-col items-center gap-4">
@@ -14,7 +28,9 @@ export default function ResetPasswordPage() {
           label="Senha"
           name="password"
           type="password"
-          placeholder="Mínimo de 8 caracteres" >
+          placeholder="Mínimo de 8 caracteres"
+          value={password}
+          onChange={(e) => setPassword(e.target.value)} >
         </InputPassword>
 
         <InputPassword
@@ -26,7 +42,9 @@ export default function ResetPasswordPage() {
       </form>
 
       <div className="flex flex-col items-center gap-8">
-        <Button>Salvar</Button>
+        <Button onClick={handleUpdatePassword}>
+          Salvar
+        </Button>
 
         <Button href="/user/login" variant="text" isLink>
           Já possui conta? Clique aqui para entrar
