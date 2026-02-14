@@ -1,5 +1,6 @@
 "use client"
 
+import { Dialog, Message } from "@/components/layout/dialog"
 import { Button } from "@/components/ui/button"
 import InputText from "@/components/ui/input/input-text"
 import { resetPassword } from "@/services/user.service"
@@ -7,9 +8,22 @@ import { useState } from "react"
 
 export default function ResetPasswordPage() {
   const [email, setEmail] = useState<string>("")
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>()
 
   const handleResetPassword = () => {
-    resetPassword(email);
+    resetPassword(email).then(() => {
+      setMessage({
+        title: "Sucesso!",
+        description: "Em breve receberá um e-mail com os próximos passos."
+      })
+    }).catch((error) => {
+      const errorMessage = error.response.data.message;
+      setMessage({
+        title: "Ocorreu um erro",
+        description: errorMessage,
+      })
+    }).finally(() => setOpen(true));
   }
 
   return (
@@ -43,6 +57,13 @@ export default function ResetPasswordPage() {
           Já possui conta? Clique aqui para entrar
         </Button>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description} >
+      </Dialog>
     </div>
   )
 }

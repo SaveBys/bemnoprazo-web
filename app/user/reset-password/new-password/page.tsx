@@ -1,19 +1,38 @@
 "use client"
 
+import { Dialog, Message } from "@/components/layout/dialog"
 import { Button } from "@/components/ui/button"
 import InputPassword from "@/components/ui/input/input-password"
 import { updatePassword } from "@/services/user.service"
-import { useSearchParams } from "next/navigation"
+import { useRouter, useSearchParams } from "next/navigation"
 import { useState } from "react"
 
 export default function ResetPasswordPage() {
   const searchParams = useSearchParams();
   const token = searchParams.get("token");
-  
+
+  const router = useRouter();
   const [password, setPassword] = useState<string>("")
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>()
 
   const handleUpdatePassword = () => {
-    token && updatePassword(token, password);
+    if (token) {
+
+      updatePassword(token, password).then(() => {
+        setMessage({
+          title: "Sucesso!",
+          description: "Senha alterada com sucesso, você será redirecionado ao login.",
+          callback: () => router.push("/user/login")
+        })
+      }).catch((error) => {
+        const errorMessage = error.response.data.message;
+        setMessage({
+          title: "Ocorreu um erro",
+          description: errorMessage,
+        })
+      }).finally(() => setOpen(true));
+    }
   }
 
   return (
@@ -50,6 +69,14 @@ export default function ResetPasswordPage() {
           Já possui conta? Clique aqui para entrar
         </Button>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback} >
+      </Dialog>
     </div>
   )
 }

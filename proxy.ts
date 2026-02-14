@@ -11,7 +11,8 @@ const publicPaths = [
   "/api/backend/users/reset-password",  // reset-password
   "/api/backend/announcements",         // anúncios
   "/api/backend/users/update-password",
-  "/api/login"
+  "/api/login",
+  "/api/backend/users"
 ];
 
 // Função para atualizar token
