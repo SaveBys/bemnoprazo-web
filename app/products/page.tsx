@@ -39,7 +39,6 @@ export default function Produtos() {
           pageData={pageData}
           currentPage={page}
           onPageChange={(newPage) => {
-            console.log("Mudou para página:", newPage)
             setPage(newPage)
           }}
         />

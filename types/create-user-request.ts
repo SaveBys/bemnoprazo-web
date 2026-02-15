@@ -1,7 +1,7 @@
 export interface CreateUserRequest {
   companyName: string;
   companyDocument: string;
-  companyResponsible: string;
+  accountResponsible: string;
   contactNumber: string;
   email: string;
   password: string;

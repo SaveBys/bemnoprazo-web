@@ -5,17 +5,15 @@ const REALM = process.env.KEYCLOAK_REALM!;
 const CLIENT_ID = process.env.KEYCLOAK_CLIENT_ID!;
 const CLIENT_SECRET = process.env.KEYCLOAK_CLIENT_SECRET!;
 
-// Rotas públicas que não precisam de autenticação
 const publicPaths = [
-  "/user",                              // todas as rotas /user/*
-  "/api/backend/users/reset-password",  // reset-password
-  "/api/backend/announcements",         // anúncios
+  "/user",
+  "/api/backend/users/reset-password",
+  "/api/backend/announcements",
   "/api/backend/users/update-password",
   "/api/login",
   "/api/backend/users"
 ];
 
-// Função para atualizar token
 async function refreshAccessToken(refreshToken: string) {
   try {
     const res = await fetch(
@@ -44,13 +42,11 @@ async function refreshAccessToken(refreshToken: string) {
   }
 }
 
-// Redireciona para login
 function redirectToLogin(req: NextRequest) {
   const loginUrl = new URL("/user/login", req.nextUrl.origin);
   return NextResponse.redirect(loginUrl);
 }
 
-// Atualiza cookies com novo token
 async function handleRefreshToken(req: NextRequest, refreshToken: string) {
   const newTokens = await refreshAccessToken(refreshToken);
   if (!newTokens) return redirectToLogin(req);
@@ -78,33 +74,26 @@ async function handleRefreshToken(req: NextRequest, refreshToken: string) {
   return res;
 }
 
-// Middleware principal
 export async function proxy(req: NextRequest) {
   const pathname = req.nextUrl.pathname;
   const accessToken = req.cookies.get("access_token")?.value;
   const refreshToken = req.cookies.get("refresh_token")?.value;
   const isApi = pathname.startsWith("/api");
 
-  // Se a rota estiver na lista de públicas, libera
-  console.log(pathname)
   if (publicPaths.some((path) => pathname === path || pathname.startsWith(path + "/"))) {
-    console.log('ok')
     return NextResponse.next();
   }
 
-  // Sem token algum
   if (!accessToken && !refreshToken) {
     if (isApi) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
     return redirectToLogin(req);
   }
 
-  // Refresh token disponível mas access token vazio
   if ((!accessToken || accessToken === "") && refreshToken) {
     if (isApi) return NextResponse.json({ error: "Sessão expirada" }, { status: 401 });
     return handleRefreshToken(req, refreshToken);
   }
 
-  // Verifica expiração do access token
   if (accessToken) {
     try {
       const [, payloadBase64] = accessToken.split(".");
@@ -115,7 +104,6 @@ export async function proxy(req: NextRequest) {
       const exp = payload.exp * 1000;
       const now = Date.now();
 
-      // Se o token expirar em menos de 30s, tenta refresh
       if (now > exp - 30_000 && refreshToken) {
         if (isApi) return NextResponse.json({ error: "Sessão expirada" }, { status: 401 });
         return handleRefreshToken(req, refreshToken);
@@ -128,12 +116,10 @@ export async function proxy(req: NextRequest) {
     }
   }
 
-  // Fallback
   if (isApi) return NextResponse.json({ error: "Não autorizado" }, { status: 401 });
   return redirectToLogin(req);
 }
 
-// Configuração do matcher
 export const config = {
-  matcher: ["/((?!_next/|favicon.ico|users).*)"], // aplica middleware a todas rotas, exceto estáticos
+  matcher: ["/((?!_next/|favicon.ico|users).*)"],
 };

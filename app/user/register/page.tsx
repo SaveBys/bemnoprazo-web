@@ -1,27 +1,39 @@
 "use client"
 
-import { useState } from "react";
-import { useRouter } from "next/navigation";
-import { Dialog, Message } from "@/components/layout/dialog";
-import { Button } from "@/components/ui/button";
-import InputPassword from "@/components/ui/input/input-password";
-import InputText from "@/components/ui/input/input-text";
-import { register } from "@/services/user.service";
-import { CreateUserRequest } from "@/types/create-user-request";
+import { useRouter } from "next/navigation"
+import { useState } from "react"
+import { useForm, useWatch } from "react-hook-form"
+
+import { Dialog, Message } from "@/components/layout/dialog"
+import { Button } from "@/components/ui/button"
+import { registerUser as registerUser } from "@/services/user.service"
+import { CreateUserRequest } from "@/types/create-user-request"
+
+import InputPassword from "@/components/ui/input/input-password"
+import { InputText } from "@/components/ui/input/input-text"
 
 export default function RegisterPage() {
-  const router = useRouter();
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState<Message>();
+  const router = useRouter()
+  const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState<Message>()
 
-  const handleRegister = async (e: React.SubmitEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    control,
+    formState: { errors, isValid, isSubmitting }
+  } = useForm<CreateUserRequest>({
+    mode: "onChange"
+  })
 
-    const formData = new FormData(e.currentTarget);
+  const password = useWatch({
+    control,
+    name: "password",
+    defaultValue: ""
+  })
 
-    const data = Object.fromEntries(formData.entries()) as unknown as CreateUserRequest;
-
-    register(data).then(() => {
+  function onSubmit(data: CreateUserRequest) {
+    registerUser(data).then(() => {
       setMessage({
         title: "Sucesso!",
         description: "Recebemos seu cadastro e ele já está em análise. Em breve entraremos em contato.",
@@ -47,61 +59,79 @@ export default function RegisterPage() {
 
       <form
         className="flex flex-col gap-4 w-md"
-        onSubmit={handleRegister}
+        onSubmit={handleSubmit(onSubmit)}
       >
         <InputText
           label="Nome da Empresa"
-          name="companyName"
-          type="text"
           placeholder="Bem no Prazo Tecnologia LTDA"
+          {...register("companyName", { required: "Campo obrigatório" })}
+          errorMessage={errors.companyName?.message}
         />
 
         <InputText
           label="CNPJ"
-          name="companyDocument"
-          type="text"
           placeholder="00.000.000/0001-00"
           mask="99.9999.999/9999-99"
+          {...register("companyDocument", { required: "Campo obrigatório" })}
+          errorMessage={errors.companyDocument?.message}
         />
 
         <InputText
           label="Responsável pela conta"
-          name="companyResponsible"
-          type="text"
           placeholder="João Silva"
+          {...register("accountResponsible", { required: "Campo obrigatório" })}
+          errorMessage={errors.accountResponsible?.message}
         />
 
         <InputText
           label="Telefone/Whatsapp"
-          name="contactNumber"
-          type="text"
           placeholder="(11) 9 8959-9760"
           mask={["(99) 9999-9999", "(99) 9 9999-9999"]}
+          {...register("contactNumber", { required: "Campo obrigatório" })}
+          errorMessage={errors.contactNumber?.message}
         />
 
         <InputText
           label="E-mail"
-          name="email"
           type="email"
           placeholder="exemplo@gmail.com"
+          {...register("email", {
+            required: "Campo obrigatório"
+          })}
+          errorMessage={errors.email?.message}
         />
 
         <InputPassword
           label="Senha"
-          name="password"
-          type="password"
           placeholder="Mínimo de 8 caracteres"
+          {...register("password", {
+            required: "Campo obrigatório",
+            minLength: {
+              value: 8,
+              message: "Mínimo de 8 caracteres"
+            }
+          })}
+          errorMessage={errors.password?.message}
         />
 
         <InputPassword
           label="Confirmar Senha"
-          name="confirmPassword"
-          type="password"
           placeholder="Repita a senha"
+          {...register("confirmPassword", {
+            required: "Campo obrigatório",
+            validate: value =>
+              value === password || "As senhas não coincidem"
+          })}
+          errorMessage={errors.confirmPassword?.message}
         />
 
         <div className="flex flex-col items-center gap-8 mt-4">
-          <Button type="submit">Cadastrar</Button>
+          <Button
+            type="submit"
+            disabled={!isValid || isSubmitting}
+          >
+            Cadastrar
+          </Button>
 
           <Button href="/user/login" variant="text" isLink>
             Já possui conta? Clique aqui para entrar
@@ -119,4 +149,3 @@ export default function RegisterPage() {
     </div>
   )
 }
-

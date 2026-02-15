@@ -50,7 +50,7 @@ export default function BackofficePage() {
           pageData={{ number: 1, totalElements: 1, totalPages: 1, size: 1 }}
           currentPage={page}
           onPageChange={(newPage) => {
-            console.log("Mudou para página:", newPage)
+            
             setPage(newPage)
           }}
         />

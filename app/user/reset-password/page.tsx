@@ -2,7 +2,7 @@
 
 import { Dialog, Message } from "@/components/layout/dialog"
 import { Button } from "@/components/ui/button"
-import InputText from "@/components/ui/input/input-text"
+import { InputText } from "@/components/ui/input/input-text"
 import { resetPassword } from "@/services/user.service"
 import { useState } from "react"
 

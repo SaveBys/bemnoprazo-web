@@ -13,7 +13,7 @@ import {
 
 export interface Message {
   title: string;
-  description: string;
+  description?: string;
   callback?: () => void
 }
 

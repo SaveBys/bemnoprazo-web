@@ -21,7 +21,7 @@ export async function updatePassword(token: string, password: string): Promise<U
   return data;
 }
 
-export async function register(body: CreateUserRequest): Promise<UserDataResponse> {
+export async function registerUser(body: CreateUserRequest): Promise<UserDataResponse> {
   const { data } = await api.post("/users", body);
   return data;
 }
