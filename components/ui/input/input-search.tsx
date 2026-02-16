@@ -1,9 +1,9 @@
 "use client";
 
 import { useState, ChangeEvent } from "react";
-import InputBase from "./input-base";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
+import { InputBase } from "./input-base";
 
 interface InputSearchProps extends React.ComponentProps<"input"> {
   label: string;

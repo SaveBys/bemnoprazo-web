@@ -1,7 +1,31 @@
+"use client"
+
+import { Dialog, Message } from "@/components/layout/dialog"
 import { Button } from "@/components/ui/button"
-import InputText from "@/components/ui/input/input-text"
+import { InputText } from "@/components/ui/input/input-text"
+import { resetPassword } from "@/services/user.service"
+import { useState } from "react"
 
 export default function ResetPasswordPage() {
+  const [email, setEmail] = useState<string>("")
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>()
+
+  const handleResetPassword = () => {
+    resetPassword(email).then(() => {
+      setMessage({
+        title: "Sucesso!",
+        description: "Em breve receberá um e-mail com os próximos passos."
+      })
+    }).catch((error) => {
+      const errorMessage = error.response.data.message;
+      setMessage({
+        title: "Ocorreu um erro",
+        description: errorMessage,
+      })
+    }).finally(() => setOpen(true));
+  }
+
   return (
     <div className="w-fit flex flex-col items-center gap-8 p-12">
       <div className="flex flex-col items-center gap-4">
@@ -14,12 +38,16 @@ export default function ResetPasswordPage() {
           label="E-mail"
           name="email"
           type="email"
-          placeholder="exemplo@gmail.com" >
+          placeholder="exemplo@gmail.com"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)} >
         </InputText>
       </form>
 
       <div className="flex flex-col items-center gap-8">
-        <Button>Enviar</Button>
+        <Button onClick={handleResetPassword}>
+          Enviar
+        </Button>
 
         <Button href="/user/register" variant="text" isLink>
           Ainda não possui conta? Clique aqui para se cadastrar
@@ -29,6 +57,13 @@ export default function ResetPasswordPage() {
           Já possui conta? Clique aqui para entrar
         </Button>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description} >
+      </Dialog>
     </div>
   )
 }

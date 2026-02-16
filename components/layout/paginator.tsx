@@ -1,5 +1,5 @@
+import { Page } from "@/types/page";
 import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from "../ui/pagination";
-import { Page } from "./card-products";
 
 interface PaginatorProps {
   pageData: Page | undefined
@@ -23,6 +23,10 @@ export function Paginator({
   const handlePageClick = (pageUi: number) => {
     const pageZeroBased = pageUi - 1
     onPageChange(pageZeroBased)
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   }
 
   return (
@@ -35,6 +39,10 @@ export function Paginator({
               e.preventDefault()
               if (currentPage > 0) {
                 onPageChange(currentPage - 1)
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
               }
             }}
           />
@@ -72,6 +80,10 @@ export function Paginator({
               e.preventDefault()
               if (currentPage < totalPages - 1) {
                 onPageChange(currentPage + 1)
+                window.scrollTo({
+                  top: 0,
+                  behavior: "smooth",
+                });
               }
             }}
           />

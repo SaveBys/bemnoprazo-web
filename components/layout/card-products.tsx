@@ -1,32 +1,13 @@
 import Image from "next/image"
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr"
 import { Button } from "../ui/button"
+import { ProdutoResumo } from "@/types/products-resume";
 
-export interface Page {
-  size: number,
-  number: number,
-  totalElements: number,
-  totalPages: number
-}
-
-export interface Pageable<T> {
-  content: T[]
-  page: Page
-}
-
-export interface ProdutoResumo {
-  name: string
-  ean: string
-  basePrice: number
-  price: number
-  expirationDate: string
-}
-
-interface CardProdutosProps {
+interface CardProductsProps {
   data?: ProdutoResumo
 }
 
-export function CardProducts(props: CardProdutosProps) {
+export function CardProducts(props: CardProductsProps) {
   const formatCurrency = (amount: number | undefined, locale = 'pt-BR', currency = 'BRL') => {
     if (!amount) return;
 
