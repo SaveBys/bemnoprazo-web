@@ -1,9 +1,8 @@
 import { Button } from "../ui/button";
 import { Field, FieldLabel } from "../ui/field";
-import { Input } from "../ui/input";
 import { Checkbox } from "../ui/input/checkbox";
 import InputSearch from "../ui/input/input-search";
-import InputText from "../ui/input/input-text";
+import { InputText } from "../ui/input/input-text";
 
 export function FilterProducts() {
   return (

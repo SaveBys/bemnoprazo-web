@@ -10,7 +10,7 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar"
-import { CurrencyDollarIcon, HouseIcon, UserGearIcon, UsersIcon } from "@phosphor-icons/react/dist/ssr"
+import { CurrencyDollarIcon, HouseIcon, UsersIcon } from "@phosphor-icons/react/dist/ssr"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -27,26 +27,21 @@ const data = {
       icon: HouseIcon,
     },
     {
-      title: "Meus produtos",
+      title: "Gestão de produtos",
       url: "products",
       icon: CurrencyDollarIcon,
     },
     {
-      title: "Gestão de usuários",
+      title: "Gestão de clientes",
       url: "users",
       icon: UsersIcon,
-    },
-    {
-      title: "Meu perfil",
-      url: "me",
-      icon: UserGearIcon,
     },
   ],
 }
 
-export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+export function SidebarBackoffice({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
-    <Sidebar collapsible="offcanvas" {...props}>
+    <Sidebar {...props}>
       <SidebarHeader>
         <Link href="/" className="w-fit m-auto">
           <Image src="/img/LogoBemnoprazo.png" alt="logo" width={200} height={88} />

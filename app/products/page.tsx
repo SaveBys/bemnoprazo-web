@@ -1,34 +1,35 @@
 "use client"
 
-import { CardProducts, Page, ProdutoResumo } from "@/components/layout/card-products";
+import { CardProducts } from "@/components/layout/card-products";
 import { FilterProducts } from "@/components/layout/filter-products";
 import { Paginator } from "@/components/layout/paginator";
-import { listarAnuncio } from "@/services/anuncio.service";
+import { getAllAnnouncements } from "@/services/announcements.service";
+import { Page } from "@/types/page";
+import { ProdutoResumo } from "@/types/products-resume";
 import { useEffect, useState } from "react";
 
 export default function Produtos() {
   const [announcements, setAnnouncements] = useState<ProdutoResumo[]>([]);
   const [pageData, setPageData] = useState<Page>();
-  const [page, setPage] = useState<number>(1);
+  const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
-    listarAnuncio().then(res => {
+    getAllAnnouncements({ page, size: 9 }).then(res => {
       setAnnouncements(res.content);
       setPageData(res.page);
-      setPage(res.page.number);
     });
-  }, [])
+  }, [page]);
 
   return (
     <main className="width-barrier flex gap-8 px-8 py-16 m-auto">
       <FilterProducts />
 
       <div className="w-full flex flex-col gap-8">
-        <div className="flex flex-row gap-8">
+        <div className="w-full grid grid-cols-3 grid-rows-3 gap-4">
           {
             announcements.map(announcement => {
               return (
-                <CardProducts key={announcement.ean} data={announcement} />
+                <CardProducts key={announcement.id} data={announcement} />
               )
             })
           }
@@ -38,7 +39,6 @@ export default function Produtos() {
           pageData={pageData}
           currentPage={page}
           onPageChange={(newPage) => {
-            console.log("Mudou para página:", newPage)
             setPage(newPage)
           }}
         />
