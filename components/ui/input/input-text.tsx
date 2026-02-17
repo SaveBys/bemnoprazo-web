@@ -29,19 +29,9 @@ export function InputText({
       ? applyMask(inputValue, mask)
       : inputValue;
 
-    const syntheticEvent = {
-      ...e,
-      target: {
-        ...e.target,
-        value: nextValue,
-      },
-      currentTarget: {
-        ...e.currentTarget,
-        value: nextValue,
-      },
-    };
+    e.target.value = nextValue;
 
-    onChange?.(syntheticEvent as ChangeEvent<HTMLInputElement>);
+    onChange?.(e);
   }
 
   return (

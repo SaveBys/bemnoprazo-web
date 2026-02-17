@@ -52,7 +52,7 @@ export function Paginator({
           const isActive = currentPage === pageUi - 1
 
           return (
-            <PaginationItem key={pageUi}>
+            <PaginationItem key={pageUi} isActive={isActive}>
               <PaginationLink
                 href="#"
                 isActive={isActive}

@@ -1,4 +1,4 @@
-export interface ProdutoResumo {
+export interface AnnouncementResumeResponse {
   id: string;
   name: string
   ean: string

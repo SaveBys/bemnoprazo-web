@@ -11,7 +11,8 @@ const publicPaths = [
   "/api/backend/announcements",
   "/api/backend/users/update-password",
   "/api/login",
-  "/api/backend/users"
+  "/api/backend/users",
+  "/products",
 ];
 
 async function refreshAccessToken(refreshToken: string) {
@@ -121,5 +122,5 @@ export async function proxy(req: NextRequest) {
 }
 
 export const config = {
-  matcher: ["/((?!_next/|favicon.ico|users).*)"],
+  matcher: ["/((?!_next/|favicon.ico|img/|users).*)"],
 };

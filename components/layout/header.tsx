@@ -12,7 +12,7 @@ export default function Header({
   isAuthenticated = false
 }: HeaderProps) {
   return (
-    <header className='w-full flex justify-center px-10 py-8 shadow-sm'>
+    <header className='w-full flex justify-center px-10 py-8 custom-shadow-sm'>
       <div className="width-barrier w-full flex justify-between items-center">
         <nav>
           <Image src="/img/LogoBemnoprazo.png" alt="logo Bem no prazo" width={200} height={88.25} />
@@ -21,12 +21,12 @@ export default function Header({
           isAuthenticated && (
             <div className="flex flex-row gap-8">
               <Button variant="secondary" href="/dashboard" isLink>
-                <SquaresFourIcon className="text-primary-2" size={32} />
-                Meu dashboard
+                <SquaresFourIcon className="size-5" />
+                <span>Meu dashboard</span>
               </Button>
 
-              <Button>
-                <ShoppingCartIcon size={32} color="#ffffff" />
+              <Button  href="/products/shop" isLink>
+                <ShoppingCartIcon className="size-5" />
               </Button>
             </div>
           )

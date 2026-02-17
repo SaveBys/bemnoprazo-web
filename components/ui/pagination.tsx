@@ -5,8 +5,8 @@ import {
   MoreHorizontalIcon,
 } from "lucide-react"
 
-import { buttonVariants, type Button } from "@/components/ui/button"
 import { cn } from "@/lib/utils"
+import { Button } from "./button"
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
@@ -33,8 +33,13 @@ function PaginationContent({
   )
 }
 
-function PaginationItem({ ...props }: React.ComponentProps<"li">) {
-  return <li data-slot="pagination-item" className="w-8 h-8 text-subtitle text-base-2 flex justify-center items-center border-2 border-base-2 rounded-md p-1" {...props} />
+function PaginationItem({  isActive, ...props }: React.ComponentProps<"li"> & { isActive?: boolean }) {
+  return <li
+    data-slot="pagination-item"
+    data-active={isActive}
+    className="size-8 flex justify-center items-center border-2 border-base-3 text-base-2 hover:text-primary-3 hover:border-primary-3 data-[active=true]:border-primary-2 rounded-md p-1"
+    {...props} >
+  </li>
 }
 
 type PaginationLinkProps = {
@@ -43,9 +48,7 @@ type PaginationLinkProps = {
   React.ComponentProps<"a">
 
 function PaginationLink({
-  className,
   isActive,
-  size = "icon",
   ...props
 }: PaginationLinkProps) {
   return (
@@ -53,7 +56,7 @@ function PaginationLink({
       aria-current={isActive ? "page" : undefined}
       data-slot="pagination-link"
       data-active={isActive}
-      className={className}
+      className="text-sm font-bold hover:border-primary-3 data-[active=true]:text-primary-2"
       {...props}
     />
   )
@@ -65,7 +68,7 @@ function PaginationPrevious({
 }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink
-      aria-label="Go to previous page"
+      aria-label="Página anterior"
       size="default"
       className={className}
       {...props}
@@ -82,7 +85,7 @@ function PaginationNext({
 }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink
-      aria-label="Go to next page"
+      aria-label="Próxima página"
       size="default"
       className={className}
       {...props}
