@@ -1,5 +1,5 @@
 import { api } from "@/lib/axios";
-import { CreateUserRequest } from "@/types/create-user-request";
+import { CreateUserRequest } from "@/types/create-user.request";
 import { UserDataResponse } from "@/types/user-data.response";
 
 export async function getUserData(): Promise<UserDataResponse> {

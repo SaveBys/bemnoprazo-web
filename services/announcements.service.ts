@@ -1,14 +1,20 @@
 
 import { api } from "@/lib/axios";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params";
+import { AnnouncementResponse } from "@/types/announcement-details.response";
+import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
 import { Pageable } from "@/types/pageable";
-import { ProdutoResumo } from "@/types/products-resume";
+import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
 
 export async function getAllAnnouncements(
   params: AnnouncementsFilterParams
-): Promise<Pageable<ProdutoResumo>> {
+): Promise<Pageable<AnnouncementResumeResponse>> {
   const { data } = await api.get("/announcements", {
     params: params
   });
+  return data;
+}
+
+export async function getById(id: string): Promise<AnnouncementResponse> {
+  const { data } = await api.get(`/announcements/${id}`);
   return data;
 }

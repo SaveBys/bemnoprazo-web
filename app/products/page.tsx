@@ -5,11 +5,12 @@ import { FilterProducts } from "@/components/layout/filter-products";
 import { Paginator } from "@/components/layout/paginator";
 import { getAllAnnouncements } from "@/services/announcements.service";
 import { Page } from "@/types/page";
-import { ProdutoResumo } from "@/types/products-resume";
+import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
 import { useEffect, useState } from "react";
+import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
 
 export default function Produtos() {
-  const [announcements, setAnnouncements] = useState<ProdutoResumo[]>([]);
+  const [announcements, setAnnouncements] = useState<AnnouncementResumeResponse[]>([]);
   const [pageData, setPageData] = useState<Page>();
   const [page, setPage] = useState<number>(0);
 
@@ -20,9 +21,13 @@ export default function Produtos() {
     });
   }, [page]);
 
+  const handleFilter = (data: AnnouncementsFilterParams) => {
+    console.log(data)
+  }
+
   return (
-    <main className="width-barrier flex gap-8 px-8 py-16 m-auto">
-      <FilterProducts />
+    <main className="width-barrier flex gap-8 px-11 py-16 m-auto">
+      <FilterProducts onSubmitFilters={(data) => handleFilter(data)} />
 
       <div className="w-full flex flex-col gap-8">
         <div className="w-full grid grid-cols-3 grid-rows-3 gap-4">

@@ -1,13 +1,16 @@
 import Image from "next/image"
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr"
 import { Button } from "../ui/button"
-import { ProdutoResumo } from "@/types/products-resume";
+import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
+import { useRouter } from "next/navigation";
 
 interface CardProductsProps {
-  data?: ProdutoResumo
+  data?: AnnouncementResumeResponse
 }
 
 export function CardProducts(props: CardProductsProps) {
+  const router = useRouter();
+  
   const formatCurrency = (amount: number | undefined, locale = 'pt-BR', currency = 'BRL') => {
     if (!amount) return;
 
@@ -23,15 +26,21 @@ export function CardProducts(props: CardProductsProps) {
     return date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1")
   }
 
+  const navigateToDatails = (pid: string) => {
+    router.push(`/products/details?pid=${pid}`);
+  };
+
   return (
-    <div className="w-[300px] h-[548px] flex flex-col custom-shadow-sm rounded-md gap-6 p-5">
-      <div className="flex flex-col items-center">
+    <div className="w-[300px] h-[518px] flex flex-col custom-shadow-sm rounded-md gap-6 p-6">
+      <figure className="w-[252px] h-[220px] overflow-hidden flex flex-col items-center">
         <Image
+          className="w-full h-full"
           src="/img/Produtos.png"
           alt="produtos"
           width={252}
           height={220} />
-      </div>
+      </figure>
+
       <div className="flex flex-col items-start">
         <div className="flex flex-col">
           <h2 className="text-subtitle text-base-2 capitalize">
@@ -61,7 +70,7 @@ export function CardProducts(props: CardProductsProps) {
         </h2>
       </div>
       <div className="flex flex-col items-center">
-        <Button>
+        <Button onClick={() => navigateToDatails(props.data!.id)}>
           <EyeIcon size={32} color="#fcfcfc" />
           Ver detalhes
         </Button>
