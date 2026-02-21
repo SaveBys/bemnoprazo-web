@@ -14,8 +14,15 @@ type Props = {
   onSubmitFilters: (data: AnnouncementsFilterParams) => void;
 };
 
+type FilterFormParams = Omit<
+  AnnouncementsFilterParams,
+  "minPrice" | "maxPrice"
+> & {
+  rangePrice?: number[];
+};
+
 export function FilterProducts({ onSubmitFilters }: Props) {
-  const defaultFilters: AnnouncementsFilterParams = {
+  const defaultFilters: FilterFormParams = {
     category: [],
     rangePrice: [0, 1000],
     expirationSoon: false,
@@ -23,23 +30,22 @@ export function FilterProducts({ onSubmitFilters }: Props) {
     maxExpirationDate: "",
   };
 
-  const { register, handleSubmit, reset, control } =
-    useForm<AnnouncementsFilterParams>({
-      defaultValues: defaultFilters,
-    });
+  const { register, handleSubmit, reset, control } = useForm<FilterFormParams>({
+    defaultValues: defaultFilters,
+  });
 
   const rangePrice = useWatch({
     control,
     name: "rangePrice",
   });
 
-  function onSubmit(data: AnnouncementsFilterParams) {
-    const payload = {
-      ...data,
-      minPrice: data.rangePrice?.[0] ?? null,
-      maxPrice: data.rangePrice?.[1] ?? null,
+  function onSubmit(data: FilterFormParams) {
+    const { rangePrice, ...rest } = data;
+    const payload: AnnouncementsFilterParams = {
+      ...rest,
+      minPrice: rangePrice?.[0],
+      maxPrice: rangePrice?.[1],
     };
-
     onSubmitFilters(payload);
   }
 
@@ -92,6 +98,7 @@ export function FilterProducts({ onSubmitFilters }: Props) {
         <Controller
           control={control}
           name="rangePrice"
+          defaultValue={[0, 10000]}
           render={({ field }) => (
             <Slider
               min={0}
