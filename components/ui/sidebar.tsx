@@ -188,7 +188,7 @@ function Sidebar({
         <div
           data-sidebar="sidebar"
           data-slot="sidebar-inner"
-          className="custom-custom-shadow-sm p-4 rounded-2xl bg-sidebar flex h-full w-full flex-col"
+          className="custom-shadow-sm p-4 rounded-2xl bg-sidebar flex h-full w-full flex-col"
         >
           {children}
         </div>

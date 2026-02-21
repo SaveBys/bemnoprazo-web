@@ -6,6 +6,7 @@ const CLIENT_ID = process.env.KEYCLOAK_CLIENT_ID!;
 const CLIENT_SECRET = process.env.KEYCLOAK_CLIENT_SECRET!;
 
 const publicPaths = [
+  "/",
   "/user",
   "/api/backend/users/reset-password",
   "/api/backend/announcements",
