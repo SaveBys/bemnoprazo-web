@@ -3,31 +3,28 @@
 import { CardProducts } from "@/components/layout/card-products";
 import { FilterProducts } from "@/components/layout/filter-products";
 import { Paginator } from "@/components/layout/paginator";
-import { getAllAnnouncements } from "@/services/announcements.service";
 import { Page } from "@/types/page";
 import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
 import { useEffect, useState } from "react";
 import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { findAllAnnouncements } from "@/services/announcements.service";
 
 export default function Produtos() {
-  const [announcements, setAnnouncements] = useState<
-    AnnouncementResumeResponse[]
-  >([]);
+  const [announcements, setAnnouncements] = useState<AnnouncementResumeResponse[]>([]);
   const [pageData, setPageData] = useState<Page>();
   const [page, setPage] = useState<number>(0);
+  const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
 
   useEffect(() => {
-    getAllAnnouncements({ page, size: 9 }).then((res) => {
+    findAllAnnouncements({ ...filters, page, size: 9 }).then((res) => {
       setAnnouncements(res.content);
       setPageData(res.page);
     });
-  }, [page]);
+  }, [page, filters]);
 
   const handleFilter = (data: AnnouncementsFilterParams) => {
-    getAllAnnouncements({ ...data, page, size: 9 }).then((res) => {
-      setAnnouncements(res.content);
-      setPageData(res.page);
-    });
+    setFilters(data);
+    setPage(0);
   };
 
   return (

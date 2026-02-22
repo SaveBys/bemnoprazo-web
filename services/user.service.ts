@@ -3,7 +3,7 @@ import { CreateUserRequest } from "@/types/create-user.request";
 import { UserDataResponse } from "@/types/user-data.response";
 
 export async function getUserData(): Promise<UserDataResponse> {
-  const { data } = await api.get("/users");
+  const { data } = await api.get("/users/me");
   return data;
 }
 
