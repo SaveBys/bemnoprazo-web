@@ -9,22 +9,24 @@ import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.r
 import { Checkbox } from "../ui/input/checkbox";
 import { CheckboxGroup } from "../ui/input/checkbox-group";
 import { Slider } from "../ui/slider";
+import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
+import { useEffect, useState } from "react";
+import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
 
 type Props = {
   onSubmitFilters: (data: AnnouncementsFilterParams) => void;
 };
 
-type FilterFormParams = Omit<
-  AnnouncementsFilterParams,
-  "minPrice" | "maxPrice"
-> & {
+type FilterFormParams = Omit<AnnouncementsFilterParams, "minPrice" | "maxPrice"> & {
   rangePrice?: number[];
 };
 
 export function FilterProducts({ onSubmitFilters }: Props) {
+  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
+
   const defaultFilters: FilterFormParams = {
-    category: [],
-    rangePrice: [0, 1000],
+    categories: [],
+    rangePrice: [0, 10000],
     expirationSoon: false,
     minExpirationDate: "",
     maxExpirationDate: "",
@@ -38,6 +40,12 @@ export function FilterProducts({ onSubmitFilters }: Props) {
     control,
     name: "rangePrice",
   });
+
+  useEffect(() => {
+    findAllAnnouncementsCategory({ page: 0 }).then((res) => {
+      setCategories(res.content);
+    });
+  }, []);
 
   function onSubmit(data: FilterFormParams) {
     const { rangePrice, ...rest } = data;
@@ -59,37 +67,21 @@ export function FilterProducts({ onSubmitFilters }: Props) {
       <h1 className="text-title text-base-2">Filtros</h1>
 
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
-        <InputSearch
-          label="Buscar"
-          placeholder="Digite nome ou código"
-          {...register("search")}
-        />
+        <InputSearch label="Buscar" placeholder="Digite nome ou código" {...register("search")} />
 
         <h2 className="text-subtitle text-base-2">Categoria</h2>
 
-        <CheckboxGroup
-          name="category"
-          control={control}
-          className="flex flex-col gap-6"
-          options={[
-            {
-              label: "Medicamentos especiais",
-              value: "018f4a10-7a01-7b2c-9c01-1a2b3c4d0001",
-            },
-            {
-              label: "Medicamentos",
-              value: "018f4a10-7a02-7b2c-9c01-1a2b3c4d0002",
-            },
-            {
-              label: "Contraceptivos",
-              value: "018f4a10-7a03-7b2c-9c01-1a2b3c4d0003",
-            },
-            {
-              label: "Suplementos",
-              value: "018f4a10-7a04-7b2c-9c01-1a2b3c4d0004",
-            },
-          ]}
-        />
+        {categories && (
+          <CheckboxGroup
+            name="categories"
+            control={control}
+            className="flex flex-col gap-6"
+            options={categories?.map((category) => ({
+              label: category.name,
+              value: category.id,
+            }))}
+          />
+        )}
 
         <hr className="w-full border-base-3 border" />
 
