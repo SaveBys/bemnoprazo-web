@@ -5,7 +5,10 @@ const REALM = process.env.KEYCLOAK_REALM!;
 const CLIENT_ID = process.env.KEYCLOAK_CLIENT_ID!;
 const CLIENT_SECRET = process.env.KEYCLOAK_CLIENT_SECRET!;
 
-const publicPaths = process.env.BFF_PUBLIC_ROUTES!.split(",");
+const publicPaths = (process.env.BFF_PUBLIC_ROUTES || "")
+  .split(",")
+  .map((p) => p.trim())
+  .filter(Boolean);
 
 async function refreshAccessToken(refreshToken: string) {
   try {
