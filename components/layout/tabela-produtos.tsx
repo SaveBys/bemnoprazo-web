@@ -8,30 +8,31 @@ import { ColumnDef } from "@tanstack/react-table";
 import z from "zod";
 
 export const schema = z.object({
-  id: z.number(),
-  nome: z.string(),
-  categoria: z.string(),
-  validade: z.string(),
+  id: z.string(),
+  name: z.string(),
+  category: z.string(),
+  expirationDate: z.string(),
   status: z.string(),
-})
+  ean: z.string(),
+});
 
 export type RowData = z.infer<typeof schema>
 
 export const columns: ColumnDef<RowData>[] = [
   {
-    accessorKey: "id",
-    header: "Id",
+    accessorKey: "ean",
+    header: "EAN",
   },
   {
-    accessorKey: "nome",
+    accessorKey: "name",
     header: "Nome",
   },
   {
-    accessorKey: "categoria",
+    accessorKey: "category",
     header: "Categoria",
   },
   {
-    accessorKey: "validade",
+    accessorKey: "expirationDate",
     header: "Validade",
   },
   {
@@ -47,7 +48,7 @@ export const columns: ColumnDef<RowData>[] = [
       </Button>
     ),
   },
-]
+];
 
 interface TabelaProdutosProps {
   data: RowData[]
