@@ -3,11 +3,11 @@
 import { CardProducts } from "@/components/layout/card-products";
 import { FilterProducts } from "@/components/layout/filter-products";
 import { Paginator } from "@/components/layout/paginator";
-import { getAllAnnouncements } from "@/services/announcements.service";
 import { Page } from "@/types/page";
 import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
 import { useEffect, useState } from "react";
 import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { findAllAnnouncements } from "@/services/announcements.service";
 
 export default function Produtos() {
   const [announcements, setAnnouncements] = useState<
@@ -17,14 +17,14 @@ export default function Produtos() {
   const [page, setPage] = useState<number>(0);
 
   useEffect(() => {
-    getAllAnnouncements({ page, size: 9 }).then((res) => {
+    findAllAnnouncements({ page, size: 9 }).then((res) => {
       setAnnouncements(res.content);
       setPageData(res.page);
     });
   }, [page]);
 
   const handleFilter = (data: AnnouncementsFilterParams) => {
-    getAllAnnouncements({ ...data, page, size: 9 }).then((res) => {
+    findAllAnnouncements({ ...data, page, size: 9 }).then((res) => {
       setAnnouncements(res.content);
       setPageData(res.page);
     });
