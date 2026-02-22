@@ -10,15 +10,20 @@ import { DashboardAnnouncementsFilterForm } from "@/components/layout/dashboard-
 import { findAllMyAnnouncements } from "@/services/announcements.service";
 import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
 import { AnnouncementTableResponse } from "@/types/announcement-table.response";
+import { Page } from "@/types/page";
 
 export default function DashboardPage() {
   const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
   const [announcements, setAnnouncements] = useState<AnnouncementTableResponse[]>();
   const [page, setPage] = useState<number>(0);
+  const [pageData, setPageData] = useState<Page>();
 
   useEffect(() => {
-    findAllMyAnnouncements(filters).then((res) => setAnnouncements(res.content));
-  }, [filters]);
+    findAllMyAnnouncements({ ...filters, page }).then((res) => {
+      setAnnouncements(res.content);
+      setPageData(res.page);
+    });
+  }, [filters, page]);
 
   return (
     <div className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
@@ -35,11 +40,11 @@ export default function DashboardPage() {
       </div>
 
       <div className="flex flex-col gap-8">
-        {announcements && (
+        {announcements && pageData && (
           <>
             <TabelaProdutos data={announcements} />
             <Paginator
-              pageData={{ number: 1, totalElements: 1, totalPages: 1, size: 1 }}
+              pageData={pageData}
               currentPage={page}
               onPageChange={(newPage) => {
                 setPage(newPage);

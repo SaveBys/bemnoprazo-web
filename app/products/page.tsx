@@ -10,24 +10,21 @@ import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.r
 import { findAllAnnouncements } from "@/services/announcements.service";
 
 export default function Produtos() {
-  const [announcements, setAnnouncements] = useState<
-    AnnouncementResumeResponse[]
-  >([]);
+  const [announcements, setAnnouncements] = useState<AnnouncementResumeResponse[]>([]);
   const [pageData, setPageData] = useState<Page>();
   const [page, setPage] = useState<number>(0);
+  const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
 
   useEffect(() => {
-    findAllAnnouncements({ page, size: 9 }).then((res) => {
+    findAllAnnouncements({ ...filters, page, size: 9 }).then((res) => {
       setAnnouncements(res.content);
       setPageData(res.page);
     });
-  }, [page]);
+  }, [page, filters]);
 
   const handleFilter = (data: AnnouncementsFilterParams) => {
-    findAllAnnouncements({ ...data, page, size: 9 }).then((res) => {
-      setAnnouncements(res.content);
-      setPageData(res.page);
-    });
+    setFilters(data);
+    setPage(0);
   };
 
   return (

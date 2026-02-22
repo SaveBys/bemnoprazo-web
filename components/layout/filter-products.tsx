@@ -23,7 +23,6 @@ type FilterFormParams = Omit<AnnouncementsFilterParams, "minPrice" | "maxPrice">
 
 export function FilterProducts({ onSubmitFilters }: Props) {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
-  const [page, setPage] = useState<number>(0);
 
   const defaultFilters: FilterFormParams = {
     categories: [],
@@ -43,11 +42,10 @@ export function FilterProducts({ onSubmitFilters }: Props) {
   });
 
   useEffect(() => {
-    findAllAnnouncementsCategory({ page }).then((res) => {
+    findAllAnnouncementsCategory({ page: 0 }).then((res) => {
       setCategories(res.content);
-      setPage(res.page.number);
     });
-  }, [page]);
+  }, []);
 
   function onSubmit(data: FilterFormParams) {
     const { rangePrice, ...rest } = data;
