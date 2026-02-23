@@ -13,6 +13,7 @@ const publicPaths = [
   "/api/login",
   "/api/backend/users",
   "/products",
+  "/dashboard"
 ];
 
 async function refreshAccessToken(refreshToken: string) {

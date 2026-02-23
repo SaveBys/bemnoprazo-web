@@ -147,6 +147,9 @@ body {
   .width-barrier {
     max-width: 1366px;
   }
+  .width-barrier-2 {
+    max-width: 1190px;
+  }
 
   .custom-shadow-sm {
     box-shadow:
