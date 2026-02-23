@@ -4,35 +4,10 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 import Accordion from "@/components/layout/accordion";
-import { useEffect, useEffectEvent, useState } from "react";
+import { useEffect, useState } from "react";
 import { getById } from "@/services/announcements.service";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnnouncementResponse } from "@/types/announcement-details.response";
-
-const itemsEspecificações = [
-  {
-    value: "item-1",
-    trigger: "Especificações",
-    content: [
-      { key: "Conservação:", value: "15° a 30°" },
-      { key: "Conteúdo:", value: "Comprimido revestido contendo 1 mg de anastrozol em embalagem blíster com 30 comprimidos revestidos." },
-      { key: "Princípio Ativo:", value: "Anastrozol" },
-      { key: "Formas de Administração", value: "Via Oral" },
-      { key: "Classificação:", value: "Tarja Vermelha" },
-      { key: "Prescrição Médica: ", value: "Sem retenção de receita" },
-    ]
-  }
-]
-const itemsModoUso = [
-  {
-    value: "item-2",
-    trigger: "Conteúdo",
-    content: [
-      { key: "Tome o medicamento por via oral, com um pouco de água." },
-      { key: "Engula o comprimido inteiro, sem partir, mastigar ou triturar." },
-    ]
-  }
-]
 
 export default function Detail() {
   const [announcement, setAnnouncement] = useState<AnnouncementResponse>()

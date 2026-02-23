@@ -53,7 +53,7 @@ export function SidebarBackoffice({ ...props }: React.ComponentProps<typeof Side
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
   )

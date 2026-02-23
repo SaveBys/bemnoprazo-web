@@ -27,20 +27,32 @@ export default function NewProductPage() {
             <InputSearch className="w-full" label="Lote do medicamento" placeholder="n° do lote" />
           </div>
           <div className="w-full flex flex-row justify-between gap-4">
-            <InputText className="w-191.5" label="Data de validade" placeholder="00/00/00" mask="99/99/9999" name="min-expiration-date" />
-            <InputText className="w-70" label="Quantidade" placeholder="0" mask="99/99/9999" name="min-expiration-date" />
-            <Select>
-              <SelectTrigger className="bg-base-4 border-base-3 border-1 w-70 h-10 mt-7">
-                <SelectValue placeholder="Aguardando aprovação" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectGroup placeholder="Aguardando aprovação">
-                  <SelectItem value="light">Light</SelectItem>
-                  <SelectItem value="dark">Dark</SelectItem>
-                  <SelectItem value="system">System</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+            <InputText className="w-full" label="Data de validade" placeholder="00/00/00" mask="99/99/9999" name="min-expiration-date" />
+            <InputText className="w-full" label="Quantidade" placeholder="0" mask="99/99/9999" name="min-expiration-date" />
+            <div className="w-full flex flex-col gap-1">
+                <label
+                  htmlFor="status"
+                  className="text-4/5 text-base-3"
+                >
+                  Status
+                </label>
+
+                <Select>
+                  <SelectTrigger className="bg-base-4 border-base-3 border-1" id="status">
+                    <SelectValue placeholder="Aguardando aprovação" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectGroup placeholder="Aguardando aprovação">
+                      <SelectItem value="Referência">Referência</SelectItem>
+                      <SelectItem value="Genérico">Genérico</SelectItem>
+                      <SelectItem value="Similar">Similar</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <p className="size-4"></p>
+              </div>
           </div>
           <div className="flex items-center">
             <h1 className="text-title text-base-2">Especificações</h1>
@@ -59,20 +71,33 @@ export default function NewProductPage() {
             </RadioGroup>
           </div>
           <div className="flex flex-col gap-4">
-            <div className="w-full flex flex-row justify-between items-center">
-              <Select>
-                <SelectTrigger className="w-169 h-10 mt-2">
-                  <SelectValue placeholder="Aguardando aprovação" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup placeholder="Aguardando aprovação">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <InputText className="w-169" label="Classificação" />
+            <div className="w-full flex flex-row gap-4 justify-between items-center">
+              <div className="w-full flex flex-col gap-1">
+                <label
+                  htmlFor="tipo"
+                  className="text-4/5 text-base-3"
+                >
+                  Tipo
+                </label>
+
+                <Select>
+                  <SelectTrigger id="status">
+                    <SelectValue placeholder="Referência, Genérico, Similar" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectGroup placeholder="Referência, Genérico, Similar">
+                      <SelectItem value="Referência">Referência</SelectItem>
+                      <SelectItem value="Genérico">Genérico</SelectItem>
+                      <SelectItem value="Similar">Similar</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <p className="size-4"></p>
+              </div>
+
+              <InputText className="w-full" label="Classificação" />
             </div>
             <div className="flex items-end gap-4">
               <InputText className="w-169" label="Principio ativo" />
@@ -111,20 +136,32 @@ export default function NewProductPage() {
           </div>
           <div className="flex flex-col gap-8">
             <div className="w-full flex flex-row justify-between gap-4">
-              <Select>
-                <SelectTrigger className="bg-base-4 border-base-3 border-1 w-115 h-10 mt-7">
-                  <SelectValue placeholder="Dia" />
-                </SelectTrigger>
-                <SelectContent>
-                  <SelectGroup placeholder="Dia">
-                    <SelectItem value="light">Light</SelectItem>
-                    <SelectItem value="dark">Dark</SelectItem>
-                    <SelectItem value="system">System</SelectItem>
-                  </SelectGroup>
-                </SelectContent>
-              </Select>
-              <InputText className="bg-base-4 border-base-3 border-1 w-115" label="Quantidade" placeholder="5"/>
-              <InputText className="bg-base-4 border-base-3 border-1 w-115" label="Percentual desconto" placeholder="15%"/>
+            <div className="w-full flex flex-col gap-1">
+                <label
+                  htmlFor="unidade"
+                  className="text-4/5 text-base-3"
+                >
+                  Unidade
+                </label>
+
+                <Select>
+                  <SelectTrigger className="bg-base-4 border-base-3 border-1" id="status">
+                    <SelectValue placeholder="Dia" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    <SelectGroup placeholder="Dia">
+                      <SelectItem value="Referência">Referência</SelectItem>
+                      <SelectItem value="Genérico">Genérico</SelectItem>
+                      <SelectItem value="Similar">Similar</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
+
+                <p className="size-4"></p>
+              </div>
+              <InputText className="bg-base-4 border-base-3 border-1 w-115" label="Quantidade" placeholder="5" />
+              <InputText className="bg-base-4 border-base-3 border-1 w-115" label="Percentual desconto" placeholder="15%" />
             </div>
           </div>
           <div className="w-full flex flex-col items-end gap-8 mt-8">

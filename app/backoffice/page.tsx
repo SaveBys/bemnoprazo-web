@@ -45,7 +45,7 @@ export default function BackofficePage() {
       </div>
 
       <div className="flex flex-col gap-8">
-        <TabelaProdutos data={data[0]} />
+        {/* <TabelaProdutos data={data[0]} /> */}
         <Paginator
           pageData={{ number: 1, totalElements: 1, totalPages: 1, size: 1 }}
           currentPage={page}
