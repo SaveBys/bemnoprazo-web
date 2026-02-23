@@ -19,7 +19,11 @@ export default function DashboardPage() {
   const [pageData, setPageData] = useState<Page>();
 
   useEffect(() => {
-    findAllMyAnnouncements({ ...filters, page }).then((res) => {
+    const payload = {
+      ...filters,
+      categories: filters.category ? [filters.category] : undefined,
+    };
+    findAllMyAnnouncements({ ...payload, page }).then((res) => {
       setAnnouncements(res.content);
       setPageData(res.page);
     });

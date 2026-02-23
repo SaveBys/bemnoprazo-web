@@ -45,7 +45,7 @@ function SelectTrigger({
         `w-fit bg-transparent 
           flex justify-between items-center gap-2 
           px-4 py-2 
-          text-sm font-medium text-base-2 data-[placeholder]:text-base-3 whitespace-nowrap
+          text-sm font-medium text-base-2 data-placeholder:text-base-3 whitespace-nowrap
 
           aria-invalid:ring-destructive/20
           aria-invalid:border-destructive

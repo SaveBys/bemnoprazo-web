@@ -23,6 +23,15 @@ export async function findAllMyAnnouncements(
   return data;
 }
 
+export async function findAllAnnouncementsBackoffice(
+  params: AnnouncementsFilterParams,
+): Promise<Pageable<AnnouncementTableResponse>> {
+  const { data } = await api.get("/announcements/backoffice", {
+    params: params,
+  });
+  return data;
+}
+
 export async function getById(id: string): Promise<AnnouncementResponse> {
   const { data } = await api.get(`/announcements/${id}`);
   return data;
