@@ -59,7 +59,7 @@ export default function Shop() {
                   Finalizar a reserva
                 </Button>
 
-                <Button variant="secondary">
+                <Button variant="secondary" href="/products" isLink>
                   Continuar escolhendo
                 </Button>
               </div>
