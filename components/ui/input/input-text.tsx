@@ -35,7 +35,7 @@ export function InputText({
   }
 
   return (
-    <div className="flex flex-col gap-1">
+    <div className="w-full flex flex-col gap-1">
       <label className={cn(srOnly && "sr-only", "text-legend text-base-3")}>
         {label}
       </label>

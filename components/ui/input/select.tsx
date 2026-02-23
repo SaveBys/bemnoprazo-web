@@ -42,7 +42,7 @@ function SelectTrigger({
     <SelectPrimitive.Trigger
       data-slot="select-trigger"
       className={cn(
-        `w-fit bg-transparent 
+        `w-full bg-transparent 
           flex justify-between items-center gap-2 
           px-4 py-2 
           text-sm font-medium text-base-2 data-placeholder:text-base-3 whitespace-nowrap

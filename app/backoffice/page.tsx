@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
 import { DashboardAnnouncementsFilterForm } from "@/components/layout/dashboard-produtcs-filter-form";
-import { findAllAnnouncementsBackoffice, findAllMyAnnouncements } from "@/services/announcements.service";
+import { findAllAnnouncementsBackoffice } from "@/services/announcements.service";
 import { AnnouncementTableResponse } from "@/types/announcement-table.response";
 import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
 import { Page } from "@/types/page";
