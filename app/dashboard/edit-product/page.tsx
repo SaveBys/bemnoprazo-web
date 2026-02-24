@@ -10,7 +10,7 @@ import InputSearch from "@/components/ui/input/input-search"
 import { useState } from "react"
 import { InputText } from "@/components/ui/input/input-text"
 
-export default function NewProductPage() {
+export default function EditProductPage() {
   const [page, setPage] = useState<number>(0)
 
   return (
@@ -18,7 +18,7 @@ export default function NewProductPage() {
       <div className="w-full flex flex-col gap-8 py-8">
         <div className="flex flex-col gap-8">
           <div className="flex items-center">
-            <h1 className="text-title text-base-2">Novo anúncio</h1>
+            <h1 className="text-title text-base-2">Editar Anúncio</h1>
           </div>
           <div className="flex items-center">
             <h1 className="text-subtitle text-base-2">Dados do produto</h1>
