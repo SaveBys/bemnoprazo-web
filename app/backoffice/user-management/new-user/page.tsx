@@ -1,13 +1,7 @@
 "use client"
 
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
 import { Button } from "@/components/ui/button"
-import { PlusIcon } from "@phosphor-icons/react/dist/ssr"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/input/select"
-import InputSearch from "@/components/ui/input/input-search"
 
-import { useState } from "react"
 import { InputText } from "@/components/ui/input/input-text"
 
 export default function NewUser() {
