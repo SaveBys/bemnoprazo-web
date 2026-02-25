@@ -13,11 +13,9 @@ import {
 } from "@/components/ui/input/select";
 import InputSearch from "@/components/ui/input/input-search";
 
-import { useState } from "react";
 import { InputText } from "@/components/ui/input/input-text";
 
 export default function NewProductPage() {
-  const [page, setPage] = useState<number>(0);
 
   return (
     <main className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
