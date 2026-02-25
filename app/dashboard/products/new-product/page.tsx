@@ -16,19 +16,18 @@ import InputSearch from "@/components/ui/input/input-search";
 import { InputText } from "@/components/ui/input/input-text";
 
 export default function NewProductPage() {
-
   return (
     <main className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
       <div className="flex flex-col gap-8">
         <h1 className="text-title text-base-2">Novo produto</h1>
 
-        <div className="w-full flex flex-row justify-between gap-4">
+        <fieldset className="w-full flex flex-row justify-between gap-4">
           <InputSearch className="w-full" label="Código EAN" placeholder="000000" />
           <InputSearch className="w-full" label="Nome Comercial" placeholder="000000" />
           <InputSearch className="w-full" label="Lote do medicamento" placeholder="n° do lote" />
-        </div>
+        </fieldset>
 
-        <div className="w-full flex flex-row justify-between gap-4">
+        <fieldset className="w-full flex flex-row justify-between gap-4">
           <InputText
             className="w-full"
             label="Data de validade"
@@ -36,13 +35,7 @@ export default function NewProductPage() {
             mask="99/99/9999"
             name="min-expiration-date"
           />
-          <InputText
-            className="w-full"
-            label="Quantidade"
-            placeholder="0"
-            mask="99/99/9999"
-            name="min-expiration-date"
-          />
+          <InputText className="w-full" label="Quantidade" placeholder="0" name="quantity" />
           <div className="w-full flex flex-col gap-1">
             <label htmlFor="status" className="text-4/5 text-base-3">
               Status
@@ -64,7 +57,7 @@ export default function NewProductPage() {
 
             <p className="size-4"></p>
           </div>
-        </div>
+        </fieldset>
 
         <fieldset className="flex flex-col gap-4">
           <h2 className="text-title text-base-2">Especificações</h2>
@@ -74,20 +67,20 @@ export default function NewProductPage() {
               Necessita refrigeração
             </label>
 
-            <RadioGroup defaultValue="option-one" id="refrigeration">
+            <RadioGroup defaultValue="refrigeration-option-one" id="refrigeration">
               <div className="flex flex-row gap-3">
                 <RadioGroupItem
                   className="w-6 h-6 border-base-3"
-                  value="option-one"
-                  id="option-one"
+                  value="true"
+                  id="refrigeration-option-one"
                 />
-                <Label htmlFor="option-one">Sim</Label>
+                <Label htmlFor="refrigeration-option-one">Sim</Label>
                 <RadioGroupItem
                   className="w-6 h-6 border-base-3"
-                  value="option-two"
-                  id="option-two"
+                  value="false"
+                  id="refrigeration-option-two"
                 />
-                <Label htmlFor="option-two">Não</Label>
+                <Label htmlFor="refrigeration-option-two">Não</Label>
               </div>
             </RadioGroup>
           </div>
@@ -150,20 +143,20 @@ export default function NewProductPage() {
               Preço dinâmico
             </label>
 
-            <RadioGroup defaultValue="option-one" id="dinamicPrice">
+            <RadioGroup defaultValue="dinamic-price-option-one" id="dinamicPrice">
               <div className="flex flex-row gap-3">
                 <RadioGroupItem
                   className="w-6 h-6 border-base-3"
-                  value="option-one"
-                  id="option-one"
+                  value="true"
+                  id="dinamic-price-option-one"
                 />
-                <Label htmlFor="option-one">Sim</Label>
+                <Label htmlFor="dinamic-price-option-one">Sim</Label>
                 <RadioGroupItem
                   className="w-6 h-6 border-base-3"
-                  value="option-two"
-                  id="option-two"
+                  value="false"
+                  id="dinamic-price-option-two"
                 />
-                <Label htmlFor="option-two">Não</Label>
+                <Label htmlFor="dinamic-price-option-two">Não</Label>
               </div>
             </RadioGroup>
 

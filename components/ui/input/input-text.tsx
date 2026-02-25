@@ -47,7 +47,7 @@ export function InputText({
         aria-invalid={!!errorMessage}
       />
 
-      <p className="h-[16px] text-red-500 text-sm">
+      <p className="h-4 text-red-500 text-sm">
         {errorMessage}
       </p>
     </div>

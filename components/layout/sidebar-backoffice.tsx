@@ -18,17 +18,17 @@ const data = {
   navMain: [
     {
       title: "Início",
-      url: "/",
+      url: "/products",
       icon: HouseIcon,
     },
     {
       title: "Gestão de produtos",
-      url: "/backoffice",
+      url: "/backoffice/products",
       icon: CurrencyDollarIcon,
     },
     {
       title: "Gestão de clientes",
-      url: "/backoffice/user",
+      url: "/backoffice/users",
       icon: UsersIcon,
     },
   ],

@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import { DataTable } from "../ui/data-table";
 
@@ -16,7 +16,7 @@ export const schema = z.object({
   ean: z.string(),
 });
 
-export type RowData = z.infer<typeof schema>
+export type RowData = z.infer<typeof schema>;
 
 export const columns: ColumnDef<RowData>[] = [
   {
@@ -42,8 +42,12 @@ export const columns: ColumnDef<RowData>[] = [
   {
     id: "actions",
     header: "Ações",
-    cell: () => (
-      <Button variant="secondary">
+    cell: ({ row }) => (
+      <Button
+        variant="secondary"
+        href={`/dashboard/products/edit-product/${row.original.id}`}
+        isLink
+      >
         <EyeIcon className="size-5" />
       </Button>
     ),
@@ -51,11 +55,9 @@ export const columns: ColumnDef<RowData>[] = [
 ];
 
 interface TabelaProdutosProps {
-  data: RowData[]
+  data: RowData[];
 }
 
 export function TabelaProdutos({ data }: TabelaProdutosProps) {
-  return (
-    <DataTable columns={columns} data={data} />
-  )
+  return <DataTable columns={columns} data={data} />;
 }

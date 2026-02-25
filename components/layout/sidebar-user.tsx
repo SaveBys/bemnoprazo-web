@@ -10,7 +10,7 @@ import {
   SidebarFooter,
   SidebarHeader,
 } from "@/components/ui/sidebar"
-import { CurrencyDollarIcon, HouseIcon, UserGearIcon, UsersIcon } from "@phosphor-icons/react/dist/ssr"
+import { CurrencyDollarIcon, HouseIcon, MoneyIcon, UserGearIcon, UsersIcon } from "@phosphor-icons/react/dist/ssr"
 import Image from "next/image"
 import Link from "next/link"
 
@@ -23,13 +23,18 @@ const data = {
     },
     {
       title: "Meus produtos",
-      url: "/dashboard",
+      url: "/dashboard/products",
       icon: CurrencyDollarIcon,
     },
     {
       title: "Gestão de usuários",
       url: "/dashboard/users",
       icon: UsersIcon,
+    },
+    {
+      title: "Minhas operações",
+      url: "/dashboard/operations",
+      icon: MoneyIcon,
     },
     {
       title: "Meu perfil",
