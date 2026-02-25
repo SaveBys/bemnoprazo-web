@@ -34,7 +34,7 @@ export default function BackofficePage() {
       <div className="flex flex-col gap-8">
         <div className="flex justify-between items-center">
           <h1 className="text-title text-base-2">Meus produtos</h1>
-          <Button variant="secondary">
+          <Button variant="secondary" href="/backoffice/new-product" isLink>
             <PlusIcon className="size-5" />
             <span>Novo produto</span>
           </Button>

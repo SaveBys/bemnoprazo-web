@@ -19,9 +19,10 @@ export default function DashboardPage() {
   const [pageData, setPageData] = useState<Page>();
 
   useEffect(() => {
+    const { category, ...rest } = filters;
     const payload = {
-      ...filters,
-      categories: filters.category ? [filters.category] : undefined,
+      ...rest,
+      categories: category ? [category] : undefined,
     };
     findAllMyAnnouncements({ ...payload, page }).then((res) => {
       setAnnouncements(res.content);
@@ -34,7 +35,7 @@ export default function DashboardPage() {
       <div className="flex flex-col gap-8">
         <div className="flex justify-between items-center">
           <h1 className="text-title text-base-2">Meus produtos</h1>
-          <Button variant="secondary">
+          <Button variant="secondary" href="/dashboard/new-product" isLink>
             <PlusIcon className="size-5" />
             <span>Novo produto</span>
           </Button>

@@ -28,7 +28,7 @@ const data = {
     },
     {
       title: "Gestão de clientes",
-      url: "/dashboard/users",
+      url: "/backoffice/user",
       icon: UsersIcon,
     },
   ],
