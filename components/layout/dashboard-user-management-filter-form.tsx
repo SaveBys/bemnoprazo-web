@@ -18,7 +18,7 @@ import { findAllAnnouncementsCategory } from "@/services/announcements-category.
 import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
 import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
 
-export function DashboardSalesForm({
+export function DashboardUsersManagementFilterForm({
   onSubmitFilters,
 }: {
   onSubmitFilters: (data: AnnouncementsFilterParams) => void;

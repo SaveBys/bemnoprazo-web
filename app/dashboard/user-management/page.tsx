@@ -6,13 +6,13 @@ import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
-import { DashboardSalesForm } from "@/components/layout/dashboard-management-form";
+import { DashboardUsersManagementFilterForm } from "@/components/layout/dashboard-user-management-filter-form";
 import { findAllMyAnnouncements } from "@/services/announcements.service";
 import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
 import { AnnouncementTableResponse } from "@/types/announcement-table.response";
 import { Page } from "@/types/page";
 
-export default function SalesManagementPage() {
+export default function UserManagementPage() {
   const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
   const [announcements, setAnnouncements] = useState<AnnouncementTableResponse[]>();
   const [page, setPage] = useState<number>(0);
@@ -28,15 +28,9 @@ export default function SalesManagementPage() {
   return (
     <div className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
       <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-center">
-          <h1 className="text-title text-base-2">Gestão de Vendedores</h1>
-          <Button variant="secondary">
-            <PlusIcon className="size-5" />
-            <span>Novo produto</span>
-          </Button>
-        </div>
+        <h1 className="text-title text-base-2">Gestão de usuários</h1>
 
-        <DashboardSalesForm onSubmitFilters={(filters) => setFilters(filters)} />
+        <DashboardUsersManagementFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
       </div>
 
       <div className="flex flex-col gap-8">
