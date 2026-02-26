@@ -64,23 +64,30 @@ export function DashboardAnnouncementsFilterForm({
         name="category"
         control={control}
         render={({ field }) => (
-          <Select
-            value={field.value ?? ""}
-            onValueChange={(value) => field.onChange(value === "none" ? undefined : value)}
-          >
-            <SelectTrigger className="w-full">
-              <SelectValue placeholder="Selecione" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectGroup placeholder="Selecione">
-                {categories?.map((category) => (
-                  <SelectItem key={category.id} value={category.id}>
-                    {category.name}
-                  </SelectItem>
-                ))}
-              </SelectGroup>
-            </SelectContent>
-          </Select>
+          <div className="w-full flex flex-col gap-1">
+            <label htmlFor="category" className="text-legend text-base-3">
+              Categoria
+            </label>
+
+            <Select
+              value={field.value ?? "none"}
+              onValueChange={(value) => field.onChange(value === "none" ? undefined : value)}
+            >
+              <SelectTrigger id="category" className="w-full">
+                <SelectValue placeholder="Selecione" />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectGroup placeholder="Selecione">
+                  {categories?.map((category) => (
+                    <SelectItem key={category.id} value={category.id}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
         )}
       />
 

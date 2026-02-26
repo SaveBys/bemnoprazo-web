@@ -15,11 +15,6 @@ import Image from "next/image"
 import Link from "next/link"
 
 const data = {
-  user: {
-    companyName: "BemNoPrazo LTDA",
-    name: "João silva",
-    email: "joão.silva@email.com.br",
-  },
   navMain: [
     {
       title: "Início",
@@ -28,21 +23,21 @@ const data = {
     },
     {
       title: "Meus produtos",
-      url: "products",
+      url: "/dashboard",
       icon: CurrencyDollarIcon,
     },
     {
       title: "Gestão de usuários",
-      url: "users",
+      url: "/dashboard/users",
       icon: UsersIcon,
     },
     {
       title: "Meu perfil",
-      url: "me",
+      url: "/dashboard/me",
       icon: UserGearIcon,
     },
   ],
-}
+};
 
 export function SidebarUser({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (

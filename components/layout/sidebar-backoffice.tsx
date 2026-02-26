@@ -15,11 +15,6 @@ import Image from "next/image"
 import Link from "next/link"
 
 const data = {
-  user: {
-    companyName: "BemNoPrazo LTDA",
-    name: "João silva",
-    email: "joão.silva@email.com.br",
-  },
   navMain: [
     {
       title: "Início",
@@ -28,16 +23,16 @@ const data = {
     },
     {
       title: "Gestão de produtos",
-      url: "products",
+      url: "/backoffice",
       icon: CurrencyDollarIcon,
     },
     {
       title: "Gestão de clientes",
-      url: "users",
+      url: "/backoffice/user",
       icon: UsersIcon,
     },
   ],
-}
+};
 
 export function SidebarBackoffice({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
