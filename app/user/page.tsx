@@ -1,5 +1,5 @@
 import { redirect } from "next/navigation";
 
 export default function Teste() {
-    redirect('user/login')
-  }
+  redirect("user/login");
+}

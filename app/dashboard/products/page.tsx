@@ -41,7 +41,12 @@ export default function DashboardPage() {
           </Button>
         </div>
 
-        <DashboardAnnouncementsFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
+        <DashboardAnnouncementsFilterForm
+          onSubmitFilters={(filters) => {
+            setPage(0);
+            setFilters(filters);
+          }}
+        />
       </div>
 
       <div className="flex flex-col gap-8">

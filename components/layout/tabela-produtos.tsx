@@ -45,7 +45,7 @@ export const columns: ColumnDef<RowData>[] = [
     cell: ({ row }) => (
       <Button
         variant="secondary"
-        href={`/dashboard/products/edit-product/${row.original.id}`}
+        href={`/dashboard/products/edit-product/${encodeURIComponent(row.original.id)}`}
         isLink
       >
         <EyeIcon className="size-5" />

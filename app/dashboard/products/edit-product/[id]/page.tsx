@@ -13,6 +13,8 @@ import {
 } from "@/components/ui/input/select";
 import InputSearch from "@/components/ui/input/input-search";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { InputText } from "@/components/ui/input/input-text";
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
 import { useEffect, useState } from "react";
@@ -21,6 +23,7 @@ import { UpdateAnnouncementRequest } from "@/types/update-announcement.request";
 import { Controller, useForm } from "react-hook-form";
 import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum";
 import { MedicationTypeEnum } from "@/types/enums/medication-type.enum";
+import { updateAnnouncementSchema } from "@/types/schemas/update-announcement.schema";
 
 export default function EditProductPage() {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
@@ -55,6 +58,7 @@ export default function EditProductPage() {
 
   const { register, handleSubmit, reset, control } = useForm<UpdateAnnouncementRequest>({
     defaultValues,
+    resolver: zodResolver(updateAnnouncementSchema),
   });
 
   function onSubmit(data: UpdateAnnouncementRequest) {
@@ -323,3 +327,4 @@ export default function EditProductPage() {
     </form>
   );
 }
+
