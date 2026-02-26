@@ -8,6 +8,7 @@ const CLIENT_SECRET = process.env.KEYCLOAK_CLIENT_SECRET!;
 const publicPaths = process.env.BFF_PUBLIC_ROUTES!.split(",");
 
 async function refreshAccessToken(refreshToken: string) {
+  console.log(`${KEYCLOAK_URL}/realms/${REALM}/protocol/openid-connect/token`)
   try {
     const res = await fetch(
       `${KEYCLOAK_URL}/realms/${REALM}/protocol/openid-connect/token`,
@@ -37,12 +38,20 @@ async function refreshAccessToken(refreshToken: string) {
 
 function redirectToLogin(req: NextRequest) {
   const loginUrl = new URL("/user/login", req.nextUrl.origin);
-  return NextResponse.redirect(loginUrl);
+  const res = NextResponse.redirect(loginUrl);
+
+  res.cookies.delete("access_token");
+  res.cookies.delete("refresh_token");
+
+  return res;
 }
 
 async function handleRefreshToken(req: NextRequest, refreshToken: string) {
   const newTokens = await refreshAccessToken(refreshToken);
-  if (!newTokens) return redirectToLogin(req);
+
+  if (!newTokens) {
+    return redirectToLogin(req);
+  }
 
   const res = NextResponse.next();
   const isProd = process.env.NODE_ENV === "production";

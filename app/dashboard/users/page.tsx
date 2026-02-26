@@ -12,7 +12,7 @@ import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.r
 import { AnnouncementTableResponse } from "@/types/announcement-table.response";
 import { Page } from "@/types/page";
 
-export default function UserManagementPage() {
+export default function UsersPage() {
   const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
   const [announcements, setAnnouncements] = useState<AnnouncementTableResponse[]>();
   const [page, setPage] = useState<number>(0);

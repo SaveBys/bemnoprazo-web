@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button"
 import { InputText } from "@/components/ui/input/input-text"
 import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/input/select"
 
-export default function EditUser() {
+export default function EditUserPage() {
   return (
     <>
       <main className="width-barrier w-full flex flex-col items-center">

@@ -50,16 +50,14 @@ function SelectTrigger({
           aria-invalid:ring-destructive/20
           aria-invalid:border-destructive
 
-          disabled:cursor-not-allowed
-          disabled:opacity-50
+          disabled:pointer-events-none disabled:bg-base-4 disabled:border-base-3
 
           border-2 border-primary-2 rounded-lg 
           focus-visible:ring-primary-2/25 
           focus-visible:border-primary-2 
         `,
-        className
+        className,
       )}
-
       {...props}
     >
       {children}
@@ -67,7 +65,7 @@ function SelectTrigger({
         <CaretDownIcon className="size-5 text-base-3" />
       </SelectPrimitive.Icon>
     </SelectPrimitive.Trigger>
-  )
+  );
 }
 
 function SelectContent({
@@ -196,10 +194,9 @@ function SelectItem({
         outline-hidden
         select-none
 
-        data-[disabled]:pointer-events-none
-        data-[disabled]:opacity-50
+        disabled:pointer-events-none disabled:bg-base-4 disabled:border-base-3
         `,
-        className
+        className,
       )}
       {...props}
     >
@@ -219,11 +216,9 @@ function SelectItem({
         </SelectPrimitive.ItemIndicator>
       </span>
 
-      <SelectPrimitive.ItemText>
-        {children}
-      </SelectPrimitive.ItemText>
+      <SelectPrimitive.ItemText>{children}</SelectPrimitive.ItemText>
     </SelectPrimitive.Item>
-  )
+  );
 }
 
 

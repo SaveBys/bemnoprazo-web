@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
 
-export default function ManagementPage() {
+export default function EditUserPage() {
   return (
     <main className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
       <div className="flex flex-col gap-12">
@@ -23,7 +23,7 @@ export default function ManagementPage() {
           </div>
 
           <div className="w-full flex flex-row justify-between gap-4">
-            <InputText label="CNPJ" placeholder="00.000.000/0001-00" mask="999.999.999-99" />
+            <InputText label="CNPJ" placeholder="00.000.000/0001-00" mask="99.999.999/9999-99" />
             <InputText label="E-mail" placeholder="Exemplo@gmail.com" />
           </div>
 
