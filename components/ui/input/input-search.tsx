@@ -20,19 +20,7 @@ export default function InputSearch({
   ...props
 }: InputSearchProps) {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    const nextValue = e.target.value;
-
-    onChange?.({
-      ...e,
-      target: {
-        ...e.target,
-        value: nextValue,
-      },
-      currentTarget: {
-        ...e.currentTarget,
-        value: nextValue,
-      },
-    });
+    onChange?.(e);
   }
 
   return (

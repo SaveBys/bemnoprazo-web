@@ -51,7 +51,11 @@ export default function NewProductPage() {
   const dynamicPrice = useWatch({ control, name: "dynamicPrice" });
 
   useEffect(() => {
-    findAllAnnouncementsCategory({ page: 0 }).then((res) => setCategories(res.content));
+    findAllAnnouncementsCategory({ page: 0 })
+      .then((res) => setCategories(res.content))
+      .catch((err) => {
+        console.error("Failed to fetch categories:", err);
+      });
   }, []);
 
   async function onSubmit(data: CreateAnnouncementFormData) {

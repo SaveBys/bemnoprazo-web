@@ -26,7 +26,7 @@ import {
   updateAnnouncementSchema,
 } from "@/types/schemas/update-announcement.schema";
 import z from "zod";
-import { getAnnouncementById, updateAnnouncement } from "@/services/announcements.service";
+import { getAnnouncementById, getMyAnnouncementById, updateAnnouncement } from "@/services/announcements.service";
 import React from "react";
 import { AnnouncementResponse } from "@/types/announcement-details.response";
 import { useRouter } from "next/navigation";
@@ -76,7 +76,7 @@ export default function EditProductPage({ params }: PageProps) {
     async function loadData() {
       const [categoryResponse, announcement] = await Promise.all([
         findAllAnnouncementsCategory({ page: 0 }),
-        getAnnouncementById(id),
+        getMyAnnouncementById(id),
       ]);
 
       setCategories(categoryResponse.content);
@@ -157,7 +157,7 @@ export default function EditProductPage({ params }: PageProps) {
                 value={field.value ?? "none"}
                 onValueChange={(value) => field.onChange(value === "none" ? undefined : value)}
               >
-                <SelectTrigger className="w-full" valid={!!errors.idCategory?.message}>
+                <SelectTrigger className="w-full" valid={!errors.idCategory?.message}>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
 
