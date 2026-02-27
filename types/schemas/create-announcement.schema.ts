@@ -21,7 +21,7 @@ export const createAnnouncementSchema = z.object({
   administrationRoute: z.string().optional(),
   usageInstructions: z.string().optional(),
   conservation: z.string().optional(),
-  idCategory: z.string("A Categoria deve ser informada."),
+  idCategory: z.string().min(1, "A Categoria deve ser informada."),
   price: z.coerce.number().min(1, "Preço deve ser maior informado."),
   basePrice: z.coerce.number().optional(),
   dynamicPrice: z.boolean().optional(),
