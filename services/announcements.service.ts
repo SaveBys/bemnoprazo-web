@@ -45,8 +45,7 @@ export async function getMyAnnouncementById(id: string): Promise<AnnouncementRes
 }
 
 export async function updateAnnouncement(payload: UpdateAnnouncementFormData): Promise<void> {
-  const { data } = await api.put("/announcements", payload);
-  return data;
+  await api.put("/announcements", payload);
 }
 
 export async function createAnnouncement(payload: CreateAnnouncementFormData): Promise<void> {
