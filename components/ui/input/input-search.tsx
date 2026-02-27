@@ -15,14 +15,12 @@ export default function InputSearch({
   label,
   errorMessage,
   srOnly = false,
+  value,
   onChange,
   ...props
 }: InputSearchProps) {
-  const [value, setValue] = useState<string>("");
-
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
     const nextValue = e.target.value;
-    setValue(nextValue);
 
     onChange?.({
       ...e,
@@ -39,28 +37,21 @@ export default function InputSearch({
 
   return (
     <div className={cn("flex flex-col gap-1 relative", props.className)}>
-      <label className={srOnly ? "sr-only" : "text-legend text-base-3"}>
-        {label}
-      </label>
+      <label className={srOnly ? "sr-only" : "text-legend text-base-3"}>{label}</label>
 
       <div className="relative">
         <InputBase
           {...props}
+          {...(value !== undefined ? { value } : {})}
           type="text"
-          value={value}
+          aria-invalid={!!errorMessage}
           onChange={handleChange}
           className="w-full pr-10"
         />
 
-        <MagnifyingGlassIcon
-          className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-base-3"
-        />
-
+        <MagnifyingGlassIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-base-3" />
       </div>
-      {
-        errorMessage &&
-        <p className="text-red-500 text-sm">{errorMessage}</p>
-      }
+      {errorMessage && <p className="min-h-5 text-red-600 text-sm">{errorMessage}</p>}
     </div>
   );
 }

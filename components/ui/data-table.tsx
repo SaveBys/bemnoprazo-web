@@ -17,7 +17,6 @@ import {
   TableRow,
 } from "@/components/ui/table"
 import { useMemo } from "react"
-import { Paginator } from "../layout/paginator"
 
 interface DataTableProps<TData> {
   data: TData[]
@@ -34,7 +33,6 @@ export function DataTable<TData>({
     data: memoData,
     columns,
     getCoreRowModel: getCoreRowModel(),
-    getPaginationRowModel: getPaginationRowModel(),
   })
 
   return (

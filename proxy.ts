@@ -8,7 +8,6 @@ const CLIENT_SECRET = process.env.KEYCLOAK_CLIENT_SECRET!;
 const publicPaths = process.env.BFF_PUBLIC_ROUTES!.split(",");
 
 async function refreshAccessToken(refreshToken: string) {
-  console.log(`${KEYCLOAK_URL}/realms/${REALM}/protocol/openid-connect/token`)
   try {
     const res = await fetch(
       `${KEYCLOAK_URL}/realms/${REALM}/protocol/openid-connect/token`,

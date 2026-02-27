@@ -1,10 +1,9 @@
-import { z } from "zod";
+import { expirationDateValidator } from "@/lib/utils";
+import z from "zod";
 import { AnnouncementStatusEnum } from "../enums/announcement-status.enum";
 import { MedicationTypeEnum } from "../enums/medication-type.enum";
-import { expirationDateValidator } from "@/lib/utils";
 
-export const updateAnnouncementSchema = z.object({
-  id: z.string(),
+export const createAnnouncementSchema = z.object({
   ean: z.string().optional(),
   name: z.string().min(1, "Nome deve ser informado."),
   batch: z.string().min(1, "Lote deve ser informado."),
@@ -12,9 +11,9 @@ export const updateAnnouncementSchema = z.object({
     message: "A data deve ser pelo menos 90 dias no futuro",
   }),
   quantity: z.coerce.number().min(1, "Quantidade deve ser maior que 0."),
-  status: z.enum(AnnouncementStatusEnum),
+  status: z.enum(AnnouncementStatusEnum, "Status do produto tem q ser selecionado."),
   requiresRefrigeration: z.boolean().optional(),
-  medicationType: z.union([z.enum(MedicationTypeEnum), z.enum(["none"])]),
+  medicationType: z.union([z.enum(MedicationTypeEnum), z.enum(["none"])]).optional(),
   activeIngredient: z.string().optional(),
   contentDescription: z.string().optional(),
   classification: z.string().optional(),
@@ -32,5 +31,4 @@ export const updateAnnouncementSchema = z.object({
   dynamicTotalPrice: z.coerce.number().nullable().optional(),
 });
 
-export type UpdateAnnouncementFormData = z.infer<typeof updateAnnouncementSchema>;
-
+export type CreateAnnouncementFormData = z.infer<typeof createAnnouncementSchema>;

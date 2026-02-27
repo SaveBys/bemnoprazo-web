@@ -5,7 +5,7 @@ import Image from "next/image";
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 import Accordion from "@/components/layout/accordion";
 import { useEffect, useState } from "react";
-import { getById } from "@/services/announcements.service";
+import { getAnnouncementById } from "@/services/announcements.service";
 import { useRouter, useSearchParams } from "next/navigation";
 import { AnnouncementResponse } from "@/types/announcement-details.response";
 
@@ -20,7 +20,7 @@ export default function Detail() {
 
     if (!pid) return;
 
-    getById(pid).then((res) => setAnnouncement(res));
+    getAnnouncementById(pid).then((res) => setAnnouncement(res));
   }, [searchParams]);
 
   const navigateToProducts = () => {
