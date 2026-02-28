@@ -8,22 +8,24 @@ interface AccordionProps {
 
 export default function Accordion({ ...props }: AccordionProps) {
   return (
-    <div className="w-full h-fit flex flex-col border-1 border-base-3 rounded-md px-4">
+    <div className="w-full h-fit flex flex-col border border-base-3 rounded-md px-4">
       <AccordionBase type="single" collapsible defaultValue="item-1" className="max-w-lg">
         <AccordionItem key={props.id} value={props.title}>
           <AccordionTrigger>
             <h2 className="text-subtitle text-base-2 mx-4">{props.title}</h2>
           </AccordionTrigger>
-          {props.data.map((item) =>
-            item.value ? (
-              <AccordionContent key={item.key}>
-                <div className="w-full flex justify-between">
+          <AccordionContent>
+            <div className="flex flex-col gap-2">
+              {props.data.map((item) => (
+                <div className="w-full flex justify-between" key={item.key}>
                   <p className="w-full text-legend text-base-2 truncate">{item.key}</p>
-                  <p className="w-full text-legend text-base-2 truncate">{item.value}</p>
+                  {item.value && (
+                    <p className="w-full text-legend text-base-2 truncate">{item.value}</p>
+                  )}
                 </div>
-              </AccordionContent>
-            ) : null,
-          )}
+              ))}
+            </div>
+          </AccordionContent>
         </AccordionItem>
       </AccordionBase>
     </div>

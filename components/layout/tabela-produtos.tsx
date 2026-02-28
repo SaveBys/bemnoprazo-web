@@ -6,7 +6,6 @@ import { Button } from "../ui/button";
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
 import { ColumnDef } from "@tanstack/react-table";
 import z from "zod";
-import { Span } from "next/dist/trace";
 import { announcementStatusEnumValue } from "@/types/enums/announcement-status.enum";
 
 export const schema = z.object({
