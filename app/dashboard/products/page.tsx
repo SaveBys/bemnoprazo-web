@@ -24,7 +24,7 @@ export default function DashboardPage() {
       ...rest,
       categories: category ? [category] : undefined,
     };
-    findAllMyAnnouncements({ ...payload, page }).then((res) => {
+    findAllMyAnnouncements({ ...payload, page, size: 9 }).then((res) => {
       setAnnouncements(res.content);
       setPageData(res.page);
     });

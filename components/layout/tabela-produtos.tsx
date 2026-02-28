@@ -6,6 +6,7 @@ import { Button } from "../ui/button";
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
 import { ColumnDef } from "@tanstack/react-table";
 import z from "zod";
+import { announcementStatusEnumValue } from "@/types/enums/announcement-status.enum";
 
 export const schema = z.object({
   id: z.string(),
@@ -26,6 +27,9 @@ export const columns: ColumnDef<RowData>[] = [
   {
     accessorKey: "name",
     header: "Nome",
+    cell: ({ row }) => (
+      <div className="w-3xs overflow-hidden text-ellipsis">{row.original.name}</div>
+    ),
   },
   {
     accessorKey: "category",
@@ -38,6 +42,7 @@ export const columns: ColumnDef<RowData>[] = [
   {
     accessorKey: "status",
     header: "Status",
+    cell: ({ row }) => <span>{announcementStatusEnumValue(row.original.status).label}</span>,
   },
   {
     id: "actions",

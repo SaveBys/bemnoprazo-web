@@ -20,15 +20,14 @@ const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
 
     return (
       <div className="flex flex-col gap-1 relative">
-        <label className={srOnly ? "sr-only" : "text-legend text-base-3"}>
-          {label}
-        </label>
+        <label className={srOnly ? "sr-only" : "text-legend text-base-3"}>{label}</label>
 
         <InputBase
           ref={ref}
           {...props}
           type={showPassword ? "text" : "password"}
           onChange={handleChange}
+          aria-invalid={!!errorMessage}
           className="pr-10"
         />
 
@@ -37,16 +36,12 @@ const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
           onClick={() => setShowPassword((p) => !p)}
           className="absolute right-3 bottom-1/2 translate-y-1/2 text-primary-1"
         >
-          {showPassword ? (
-            <EyeIcon className="size-6" />
-          ) : (
-            <EyeSlashIcon className="size-6" />
-          )}
+          {showPassword ? <EyeIcon className="size-6" /> : <EyeSlashIcon className="size-6" />}
         </button>
 
-        <p className="h-[16px] text-red-500 text-sm">{errorMessage}</p>
+        <p className="min-h-5 text-red-600 text-sm">{errorMessage}</p>
       </div>
-    )
+    );
   }
 )
 

@@ -15,85 +15,135 @@ import InputSearch from "@/components/ui/input/input-search";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
-import { InputText } from "@/components/ui/input/input-text";
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
 import { useEffect, useState } from "react";
 import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
-import { UpdateAnnouncementRequest } from "@/types/update-announcement.request";
-import { Controller, useForm } from "react-hook-form";
+import { Controller, Resolver, useForm, useWatch } from "react-hook-form";
 import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum";
 import { MedicationTypeEnum } from "@/types/enums/medication-type.enum";
-import { updateAnnouncementSchema } from "@/types/schemas/update-announcement.schema";
+import {
+  UpdateAnnouncementFormData,
+  updateAnnouncementSchema,
+} from "@/types/schemas/update-announcement.schema";
+import { getMyAnnouncementById, updateAnnouncement } from "@/services/announcements.service";
+import React from "react";
+import { AnnouncementResponse } from "@/types/announcement-details.response";
+import { useRouter } from "next/navigation";
+import { formatDate } from "@/lib/utils";
+import { InputText } from "@/components/ui/input/input-text";
 
-export default function EditProductPage() {
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default function EditProductPage({ params }: PageProps) {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
-  const [pageCategory, setPageCategory] = useState<number>(0);
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const { id } = React.use(params);
 
-  const defaultValues: UpdateAnnouncementRequest = {
-    id: "",
-    ean: "",
-    name: "",
-    batch: "",
-    expirationDate: "",
-    quantity: 0,
-    status: AnnouncementStatusEnum.AWAITING_APPROVAL,
-    requiresRefrigeration: false,
-    medicationType: "none",
-    activeIngredient: "",
-    contentDescription: "",
-    classification: "",
-    requiresPrescription: false,
-    administrationRoute: "",
-    usageInstructions: "",
-    conservation: "",
-    idCategory: "",
-    price: 0,
-    basePrice: 0,
-    dynamicPrice: false,
-    dynamicPriceUnit: 0,
-    dynamicPriceUnitValue: 0,
-    dynamicPricePercent: 0,
-    dynamicTotalPrice: 0,
-  };
-
-  const { register, handleSubmit, reset, control } = useForm<UpdateAnnouncementRequest>({
-    defaultValues,
-    resolver: zodResolver(updateAnnouncementSchema),
+  const {
+    register,
+    handleSubmit,
+    control,
+    reset,
+    formState: { errors },
+  } = useForm<UpdateAnnouncementFormData>({
+    resolver: zodResolver(updateAnnouncementSchema) as Resolver<UpdateAnnouncementFormData>,
   });
 
-  function onSubmit(data: UpdateAnnouncementRequest) {
-    console.log(data);
+  const dynamicPrice = useWatch({
+    control,
+    name: "dynamicPrice",
+  });
+
+  async function onSubmit(data: UpdateAnnouncementFormData) {
+    try {
+      setLoading(true);
+      await updateAnnouncement({ ...data, id });
+      router.push("/dashboard/products");
+    } finally {
+      setLoading(false);
+    }
   }
 
+  const [announcementData, setAnnouncementData] = useState<AnnouncementResponse | null>(null);
+
   useEffect(() => {
-    findAllAnnouncementsCategory({ page: pageCategory }).then((res) => {
-      setCategories(res.content);
-      setPageCategory(res.page.number);
+    async function loadData() {
+      const [categoryResponse, announcement] = await Promise.all([
+        findAllAnnouncementsCategory({ page: 0 }),
+        getMyAnnouncementById(id),
+      ]);
+
+      setCategories(categoryResponse.content);
+      setAnnouncementData(announcement);
+    }
+
+    loadData();
+  }, [id]);
+
+  useEffect(() => {
+    if (!categories || !announcementData) return;
+
+    reset({
+      ...announcementData,
+      expirationDate: formatDate(announcementData.expirationDate),
+      idCategory: announcementData.category?.id ?? "",
     });
-  }, [pageCategory]);
+  }, [categories, announcementData, reset]);
 
   return (
     <form
       className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation errors:", errors))}
     >
       <h1 className="text-title text-base-2">Editar Anúncio</h1>
 
       <fieldset className="w-full flex flex-row justify-between gap-4">
-        <InputSearch className="w-full" label="Código EAN" placeholder="000000" />
-        <InputSearch className="w-full" label="Nome Comercial" placeholder="000000" />
-        <InputSearch className="w-full" label="Lote do medicamento" placeholder="n° do lote" />
+        <InputSearch
+          {...register("ean")}
+          errorMessage={errors.ean?.message}
+          className="w-full"
+          label="Código EAN"
+          placeholder="000000"
+        />
+
+        <InputSearch
+          {...register("name")}
+          errorMessage={errors.name?.message}
+          className="w-full"
+          label="Nome Comercial"
+        />
+
+        <InputSearch
+          {...register("batch")}
+          errorMessage={errors.batch?.message}
+          className="w-full"
+          label="Lote do medicamento"
+          placeholder="n° do lote"
+        />
       </fieldset>
 
       <fieldset className="w-full grid grid-cols-4 justify-between gap-4">
         <InputText
+          {...register("expirationDate")}
+          errorMessage={errors.expirationDate?.message}
           className="w-full"
           label="Data de validade"
           placeholder="00/00/00"
           mask="99/99/9999"
-          name="min-expiration-date"
         />
-        <InputText className="w-full" label="Quantidade" placeholder="0" name="quantity" />
+
+        <InputText
+          {...register("quantity")}
+          errorMessage={errors.quantity?.message}
+          className="w-full"
+          label="Quantidade"
+          placeholder="0"
+        />
 
         <Controller
           name="idCategory"
@@ -106,7 +156,7 @@ export default function EditProductPage() {
                 value={field.value ?? "none"}
                 onValueChange={(value) => field.onChange(value === "none" ? undefined : value)}
               >
-                <SelectTrigger className="w-full">
+                <SelectTrigger className="w-full" valid={!errors.idCategory?.message}>
                   <SelectValue placeholder="Selecione" />
                 </SelectTrigger>
 
@@ -225,22 +275,46 @@ export default function EditProductPage() {
               )}
             />
 
-            <InputText className="w-full" label="Classificação" />
+            <InputText
+              {...register("classification")}
+              errorMessage={errors.batch?.message}
+              className="w-full"
+              label="Classificação"
+            />
           </div>
 
           <div className="flex justify-between items-center gap-4">
-            <InputText label="Principio ativo" />
-            <InputText label="Conteúdo" />
+            <InputText
+              {...register("activeIngredient")}
+              errorMessage={errors.batch?.message}
+              label="Principio ativo"
+            />
+            <InputText
+              {...register("contentDescription")}
+              errorMessage={errors.batch?.message}
+              label="Conteúdo"
+            />
           </div>
 
           <div className="flex justify-between items-center gap-4">
-            <InputText label="Conservação" />
-            <InputText label="Prescrição médica" />
+            <InputText
+              {...register("conservation")}
+              errorMessage={errors.conservation?.message}
+              label="Conservação"
+            />
           </div>
 
           <div className="flex justify-between items-center gap-4">
-            <InputText label="Formas de administração" />
-            <InputText label="Modo de uso" />
+            <InputText
+              {...register("administrationRoute")}
+              errorMessage={errors.administrationRoute?.message}
+              label="Formas de administração"
+            />
+            <InputText
+              {...register("usageInstructions")}
+              errorMessage={errors.usageInstructions?.message}
+              label="Modo de uso"
+            />
           </div>
         </div>
       </fieldset>
@@ -249,9 +323,20 @@ export default function EditProductPage() {
         <h2 className="text-title text-base-2">Preços</h2>
 
         <div className="flex items-end gap-4">
-          <InputText label="Preço de mercado" placeholder="R$ 00,00" disabled />
+          <InputText
+            {...register("basePrice")}
+            errorMessage={errors.basePrice?.message}
+            label="Preço de mercado"
+            placeholder="R$ 00,00"
+            disabled
+          />
 
-          <InputText label="Preço ofertado" placeholder="R$ 00,00" />
+          <InputText
+            {...register("price")}
+            errorMessage={errors.price?.message}
+            label="Preço ofertado"
+            placeholder="R$ 00,00"
+          />
         </div>
 
         <div className="w-full flex flex-col gap-1">
@@ -290,31 +375,49 @@ export default function EditProductPage() {
         </div>
 
         <div className="w-full flex flex-row justify-between gap-4">
-          <div className="w-full flex flex-col gap-1">
-            <label htmlFor="unidade" className="text-4/5 text-base-3">
-              Unidade
-            </label>
+          <Controller
+            name="dynamicPriceUnit"
+            control={control}
+            render={({ field }) => (
+              <div className="w-full flex flex-col gap-1">
+                <label className="text-4/5 text-base-3">Unidade</label>
 
-            <Select>
-              <SelectTrigger id="status">
-                <SelectValue placeholder="Dia" />
-              </SelectTrigger>
+                <Select
+                  value={field.value ?? "none"}
+                  onValueChange={(value) => field.onChange(value === "none" ? undefined : value)}
+                >
+                  <SelectTrigger className="w-full" disabled={!dynamicPrice}>
+                    <SelectValue placeholder="Selecione" />
+                  </SelectTrigger>
 
-              <SelectContent>
-                <SelectGroup placeholder="Dia">
-                  <SelectItem value="Referência">Referência</SelectItem>
-                  <SelectItem value="Genérico">Genérico</SelectItem>
-                  <SelectItem value="Similar">Similar</SelectItem>
-                </SelectGroup>
-              </SelectContent>
-            </Select>
+                  <SelectContent>
+                    <SelectGroup placeholder="Selecione">
+                      <SelectItem value="DAY">Dia</SelectItem>
+                      <SelectItem value="MONTH">Mês</SelectItem>
+                    </SelectGroup>
+                  </SelectContent>
+                </Select>
 
-            <p className="size-4"></p>
-          </div>
+                <p className="size-4"></p>
+              </div>
+            )}
+          />
 
-          <InputText label="Quantidade" placeholder="5" />
+          <InputText
+            {...register("dynamicPriceUnitValue")}
+            errorMessage={errors.dynamicPriceUnitValue?.message}
+            label="Valor"
+            placeholder="5"
+            disabled={!dynamicPrice}
+          />
 
-          <InputText label="Percentual desconto" placeholder="15%" />
+          <InputText
+            {...register("dynamicPricePercent")}
+            errorMessage={errors.dynamicPricePercent?.message}
+            label="Percentual desconto"
+            placeholder="00.0%"
+            disabled={!dynamicPrice}
+          />
         </div>
       </fieldset>
 
@@ -322,9 +425,8 @@ export default function EditProductPage() {
         <Button variant="secondary" type="button" href="/dashboard/products" isLink>
           Cancelar
         </Button>
-        <Button type="submit">Salvar</Button>
+        <Button disabled={loading}>Salvar</Button>
       </div>
     </form>
   );
 }
-
