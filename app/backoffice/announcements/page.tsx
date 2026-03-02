@@ -25,7 +25,7 @@ export default function UsersPage() {
   return (
     <div className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
       <div className="flex flex-col gap-8">
-        <h1 className="text-title text-base-2">Gestão de usuários</h1>
+        <h1 className="text-title text-base-2">Gestão de pedidos</h1>
 
         <DashboardUsersManagementFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
       </div>
