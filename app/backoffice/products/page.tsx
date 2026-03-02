@@ -7,8 +7,8 @@ import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
 import { DashboardAnnouncementsFilterForm } from "@/components/layout/dashboard-produtcs-filter-form";
 import { findAllAnnouncementsBackoffice } from "@/services/announcements.service";
-import { AnnouncementTableResponse } from "@/types/announcement-table.response";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Page } from "@/types/page";
 import { PlusIcon } from "lucide-react";
 

@@ -19,7 +19,7 @@ import { Controller, Resolver, useForm, useWatch } from "react-hook-form";
 import { useEffect, useState } from "react";
 
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
 import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum";
 import { MedicationTypeEnum } from "@/types/enums/medication-type.enum";
 import { useRouter } from "next/navigation";

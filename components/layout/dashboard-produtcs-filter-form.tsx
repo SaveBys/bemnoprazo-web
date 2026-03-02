@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/input/select";
 
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 
 export function DashboardAnnouncementsFilterForm({
   onSubmitFilters,

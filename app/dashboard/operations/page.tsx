@@ -8,8 +8,8 @@ import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
 import { DashboardSellerOperationsFilterForm } from "@/components/layout/dashboard-seller-operations-filter-form";
 import { findAllMyAnnouncements } from "@/services/announcements.service";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
-import { AnnouncementTableResponse } from "@/types/announcement-table.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
+import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
 import { Page } from "@/types/page";
 
 export default function OperationsPage() {

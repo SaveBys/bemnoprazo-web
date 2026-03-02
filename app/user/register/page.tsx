@@ -7,7 +7,7 @@ import { useForm, useWatch } from "react-hook-form"
 import { Dialog, Message } from "@/components/layout/dialog"
 import { Button } from "@/components/ui/button"
 import { registerUser as registerUser } from "@/services/user.service"
-import { CreateUserRequest } from "@/types/create-user.request"
+import { CreateUserRequest } from "@/types/request/create-user.request"
 
 import InputPassword from "@/components/ui/input/input-password"
 import { InputText } from "@/components/ui/input/input-text"

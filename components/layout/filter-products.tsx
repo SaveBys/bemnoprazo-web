@@ -5,13 +5,13 @@ import { Controller, useForm, useWatch } from "react-hook-form";
 import { Button } from "../ui/button";
 import InputSearch from "../ui/input/input-search";
 import { InputText } from "../ui/input/input-text";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Checkbox } from "../ui/input/checkbox";
 import { CheckboxGroup } from "../ui/input/checkbox-group";
 import { Slider } from "../ui/slider";
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
 import { useEffect, useState } from "react";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
 
 type Props = {
   onSubmitFilters: (data: AnnouncementsFilterParams) => void;

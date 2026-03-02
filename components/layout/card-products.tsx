@@ -1,7 +1,7 @@
 import Image from "next/image";
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "../ui/button";
-import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
+import { AnnouncementResumeResponse } from "@/types/response/annoucement-resume.response";
 import { useRouter } from "next/navigation";
 
 interface CardProductsProps {

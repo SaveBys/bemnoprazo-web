@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
 import { useEffect, useState } from "react";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
 import { Controller, Resolver, useForm, useWatch } from "react-hook-form";
 import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum";
 import { MedicationTypeEnum } from "@/types/enums/medication-type.enum";
@@ -27,7 +27,7 @@ import {
 } from "@/types/schemas/update-announcement.schema";
 import { getMyAnnouncementById, updateAnnouncement } from "@/services/announcements.service";
 import React from "react";
-import { AnnouncementResponse } from "@/types/announcement-details.response";
+import { AnnouncementResponse } from "@/types/response/announcement-details.response";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import { InputText } from "@/components/ui/input/input-text";

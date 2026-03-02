@@ -7,7 +7,7 @@ import Accordion from "@/components/layout/accordion";
 import { useEffect, useState } from "react";
 import { getAnnouncementById } from "@/services/announcements.service";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AnnouncementResponse } from "@/types/announcement-details.response";
+import { AnnouncementResponse } from "@/types/response/announcement-details.response";
 
 export default function Detail() {
   const [announcement, setAnnouncement] = useState<AnnouncementResponse>();

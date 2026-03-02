@@ -1,6 +1,6 @@
 import { api } from "@/lib/axios";
-import { AnnouncementCategoryFilterRequest } from "@/types/announcement-category-filter.request";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
+import { AnnouncementCategoryFilterRequest } from "@/types/request/announcement-category-filter.request";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
 import { Pageable } from "@/types/pageable";
 
 export async function findAllAnnouncementsCategory(

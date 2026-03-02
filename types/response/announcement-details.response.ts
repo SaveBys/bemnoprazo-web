@@ -1,28 +1,33 @@
-import { AnnouncementStatusEnum } from "./enums/announcement-status.enum";
-import { MedicationTypeEnum } from "./enums/medication-type.enum";
+import { AnnouncementStatusEnum } from "../enums/announcement-status.enum";
+import { MedicationTypeEnum } from "../enums/medication-type.enum";
 
-export interface CreateAnnouncementRequest {
+export interface AnnouncementResponse {
   id: string;
   ean: string;
   name: string;
-  batch: string;
+  manufacturer: string;
+  description: string;
   expirationDate: string;
   quantity: number;
+  usageInstructions: string;
+  contentDescription: string;
+  batch: string;
   status: AnnouncementStatusEnum;
   requiresRefrigeration: boolean;
   medicationType: MedicationTypeEnum;
   activeIngredient: string;
-  contentDescription: string;
   classification: string;
   requiresPrescription: boolean;
   administrationRoute: string;
-  usageInstructions: string;
   conservation: string;
-  idCategory: string;
+  category?: {
+    id: string;
+    name: string;
+  };
   price: number;
   basePrice: number;
   dynamicPrice: boolean;
-  dynamicPriceUnit: number;
+  dynamicPriceUnit: string;
   dynamicPriceUnitValue: number;
   dynamicPricePercent: number;
   dynamicTotalPrice: number;
