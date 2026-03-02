@@ -1,6 +1,5 @@
 import Footer from "@/components/layout/footer"
 import { Button } from "@/components/ui/button"
-import { FishIcon, InstagramLogoIcon } from "@phosphor-icons/react/ssr"
 import Image from "next/image"
 
 export default function Home() {

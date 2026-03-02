@@ -1,7 +1,5 @@
 "use client"
 
-import { TabelaProdutos } from "@/components/layout/tabela-produtos"
-
 import { Paginator } from "@/components/layout/paginator"
 import { useEffect, useState } from "react"
 import { DashboardUsersManagementFilterForm } from "@/components/layout/dashboard-user-management-filter-form"

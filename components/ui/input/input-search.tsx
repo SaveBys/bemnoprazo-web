@@ -1,6 +1,6 @@
 "use client"
 
-import { useState, ChangeEvent } from "react"
+import { ChangeEvent } from "react"
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr"
 import { cn } from "@/lib/utils"
 import { InputBase } from "./input-base"

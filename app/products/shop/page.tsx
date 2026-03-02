@@ -1,7 +1,6 @@
 import { CardShop } from "@/components/layout/card-shop"
 import { Button } from "@/components/ui/button"
 import { InputText } from "@/components/ui/input/input-text"
-import { Trash, TrashIcon } from "@phosphor-icons/react/dist/ssr"
 
 export default function Shop() {
   return (

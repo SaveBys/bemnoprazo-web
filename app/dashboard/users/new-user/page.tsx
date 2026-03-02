@@ -2,30 +2,16 @@
 
 import { Button } from "@/components/ui/button"
 import { InputText } from "@/components/ui/input/input-text"
-import {
-  createUserEmployee,
-  getByIdCompanyUser,
-  getUserData,
-  updateProfileCompanyUser,
-} from "@/services/user.service"
-import { CreateAnnouncementFormData } from "@/types/schemas/create-announcement.schema"
+import { createUserEmployee } from "@/services/user.service"
 import {
   createUserEmployeeSchema,
   CreateUserEmployeeSchemaFormData,
 } from "@/types/schemas/create-user-employee.schema"
-import {
-  UpdateAnnouncementFormData,
-  updateAnnouncementSchema,
-} from "@/types/schemas/update-announcement.schema"
-import {
-  updateCompanyUserSchema,
-  UpdateCompanyUserSchemaFormData,
-} from "@/types/schemas/update-company-user.schema"
-import { UserDataResponse } from "@/types/user-data.response"
+
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { Resolver, useForm } from "react-hook-form"
 
 export default function EditUserPage() {

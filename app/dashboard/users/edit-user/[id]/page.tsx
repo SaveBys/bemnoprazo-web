@@ -2,16 +2,12 @@
 
 import { Button } from "@/components/ui/button"
 import { InputText } from "@/components/ui/input/input-text"
-import { getByIdCompanyUser, getUserData, updateProfileCompanyUser } from "@/services/user.service"
-import {
-  UpdateAnnouncementFormData,
-  updateAnnouncementSchema,
-} from "@/types/schemas/update-announcement.schema"
+import { getByIdCompanyUser, updateProfileCompanyUser } from "@/services/user.service"
+
 import {
   updateCompanyUserSchema,
   UpdateCompanyUserSchemaFormData,
 } from "@/types/schemas/update-company-user.schema"
-import { UserDataResponse } from "@/types/user-data.response"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
 
