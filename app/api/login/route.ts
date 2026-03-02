@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-      }
+      },
     )
 
     const { access_token, refresh_token, expires_in } = response.data
@@ -46,11 +46,8 @@ export async function POST(req: NextRequest) {
 
     return res
   } catch (error) {
-    console.error("Erro login:", error);
+    console.error("Erro login:", error)
 
-    return NextResponse.json(
-      { error: "Credenciais inválidas" },
-      { status: 401 }
-    )
+    return NextResponse.json({ error: "Credenciais inválidas" }, { status: 401 })
   }
 }

@@ -1,41 +1,41 @@
-"use client";
+"use client"
 
-import { Button } from "@/components/ui/button";
-import { InputText } from "@/components/ui/input/input-text";
-import { getByIdCompanyUser, getUserData, updateProfileCompanyUser } from "@/services/user.service";
+import { Button } from "@/components/ui/button"
+import { InputText } from "@/components/ui/input/input-text"
+import { getByIdCompanyUser, getUserData, updateProfileCompanyUser } from "@/services/user.service"
 import {
   UpdateAnnouncementFormData,
   updateAnnouncementSchema,
-} from "@/types/schemas/update-announcement.schema";
+} from "@/types/schemas/update-announcement.schema"
 import {
   updateCompanyUserSchema,
   UpdateCompanyUserSchemaFormData,
-} from "@/types/schemas/update-company-user.schema";
-import { UserDataResponse } from "@/types/user-data.response";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+} from "@/types/schemas/update-company-user.schema"
+import { UserDataResponse } from "@/types/user-data.response"
+import { zodResolver } from "@hookform/resolvers/zod"
+import { useRouter } from "next/navigation"
 
-import React, { useEffect, useState } from "react";
-import { Resolver, useForm } from "react-hook-form";
+import React, { useEffect, useState } from "react"
+import { Resolver, useForm } from "react-hook-form"
 
 interface PageProps {
   params: Promise<{
-    id: string;
-  }>;
+    id: string
+  }>
 }
 
 export default function EditUserPage({ params }: PageProps) {
-  const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
-  const { id } = React.use(params);
+  const [loading, setLoading] = useState<boolean>(false)
+  const router = useRouter()
+  const { id } = React.use(params)
 
   const { register, reset, handleSubmit } = useForm<UpdateCompanyUserSchemaFormData>({
     resolver: zodResolver(updateCompanyUserSchema) as Resolver<UpdateCompanyUserSchemaFormData>,
-  });
+  })
 
   useEffect(() => {
     async function loadData() {
-      setLoading(true);
+      setLoading(true)
       getByIdCompanyUser(id)
         .then((res) => {
           reset({
@@ -43,28 +43,28 @@ export default function EditUserPage({ params }: PageProps) {
             position: res.position,
             contactNumber: res.contactNumber,
             email: res.email,
-          });
+          })
         })
-        .finally(() => setLoading(false));
+        .finally(() => setLoading(false))
     }
 
-    loadData();
-  }, [id, reset]);
+    loadData()
+  }, [id, reset])
 
   async function onSubmit(data: UpdateCompanyUserSchemaFormData) {
     try {
-      setLoading(true);
+      setLoading(true)
       if (data.email) {
-        await updateProfileCompanyUser({ ...data, id }, data.email);
-        router.push("/dashboard/users");
+        await updateProfileCompanyUser({ ...data, id }, data.email)
+        router.push("/dashboard/users")
       }
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   return (
-    <main className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
+    <main className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4">
       <div className="flex flex-col gap-12">
         <h1 className="text-title text-base-2">Editar usuário</h1>
 
@@ -74,13 +74,13 @@ export default function EditUserPage({ params }: PageProps) {
         >
           <h2 className="text-subtitle text-base-2">Dados do usuário</h2>
 
-          <div className="w-full flex flex-row justify-between gap-4">
+          <div className="flex w-full flex-row justify-between gap-4">
             <InputText {...register("name")} className="w-full" label="Nome" />
 
             <InputText {...register("position")} className="w-full" label="Cargo" />
           </div>
 
-          <div className="w-full flex flex-row justify-between gap-4">
+          <div className="flex w-full flex-row justify-between gap-4">
             <InputText
               {...register("contactNumber")}
               className="w-full"
@@ -91,11 +91,11 @@ export default function EditUserPage({ params }: PageProps) {
             <InputText {...register("email")} label="E-mail" placeholder="Exemplo@gmail.com" />
           </div>
 
-          <Button className="w-fit mx-auto" disabled={loading}>
+          <Button className="mx-auto w-fit" disabled={loading}>
             Salvar
           </Button>
         </form>
       </div>
     </main>
-  );
+  )
 }

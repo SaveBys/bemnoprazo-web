@@ -1,5 +1,13 @@
-import { Page } from "@/types/page";
-import { Pagination, PaginationContent, PaginationItem, PaginationPrevious, PaginationLink, PaginationEllipsis, PaginationNext } from "../ui/pagination";
+import { Page } from "@/types/page"
+import {
+  Pagination,
+  PaginationContent,
+  PaginationItem,
+  PaginationPrevious,
+  PaginationLink,
+  PaginationEllipsis,
+  PaginationNext,
+} from "../ui/pagination"
 
 interface PaginatorProps {
   pageData: Page | undefined
@@ -7,17 +15,13 @@ interface PaginatorProps {
   onPageChange: (page: number) => void
 }
 
-export function Paginator({
-  pageData,
-  currentPage,
-  onPageChange,
-}: PaginatorProps) {
+export function Paginator({ pageData, currentPage, onPageChange }: PaginatorProps) {
   const totalPages = pageData?.totalPages || 0
   const maxVisiblePages = 5
 
   const visiblePages = Array.from(
     { length: Math.min(totalPages, maxVisiblePages) },
-    (_, index) => index + 1
+    (_, index) => index + 1,
   )
 
   const handlePageClick = (pageUi: number) => {
@@ -26,7 +30,7 @@ export function Paginator({
     window.scrollTo({
       top: 0,
       behavior: "smooth",
-    });
+    })
   }
 
   return (
@@ -42,7 +46,7 @@ export function Paginator({
                 window.scrollTo({
                   top: 0,
                   behavior: "smooth",
-                });
+                })
               }
             }}
           />
@@ -83,7 +87,7 @@ export function Paginator({
                 window.scrollTo({
                   top: 0,
                   behavior: "smooth",
-                });
+                })
               }
             }}
           />

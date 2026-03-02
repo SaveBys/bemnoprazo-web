@@ -1,6 +1,5 @@
-import { redirect } from "next/navigation";
+import { redirect } from "next/navigation"
 
 export default function BackofficePage() {
-
-  return redirect('/backoffice/products')
+  return redirect("/backoffice/products")
 }

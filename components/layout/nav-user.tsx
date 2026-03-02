@@ -1,9 +1,6 @@
 "use client"
 
-import {
-  SidebarMenu,
-  SidebarMenuItem,
-} from "@/components/ui/sidebar"
+import { SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar"
 import { Button } from "../ui/button"
 import { useRouter } from "next/navigation"
 import { logout } from "@/lib/auth"
@@ -16,22 +13,22 @@ export function NavUser() {
   const router = useRouter()
 
   useEffect(() => {
-    getUserData().then(res => setUserData(res));
+    getUserData().then((res) => setUserData(res))
   }, [])
 
   async function handleLogout() {
-    logout().then(() => router.push("/user/login"));
+    logout().then(() => router.push("/user/login"))
   }
 
   return (
     <SidebarMenu>
       <SidebarMenuItem>
-        <hr className='w-full border-primary-2 border-2' />
-        <div className="flex flex-col gap-8 mt-4">
+        <hr className="border-primary-2 w-full border-2" />
+        <div className="mt-4 flex flex-col gap-8">
           <div className="flex flex-col gap-1 leading-tight">
-            <span className="truncate text-subtitle text-base-2">{userData?.companyName}</span>
-            <span className="truncate text-content text-base-2">{userData?.name}</span>
-            <span className="truncate text-content text-base-2">{userData?.email}</span>
+            <span className="text-subtitle text-base-2 truncate">{userData?.companyName}</span>
+            <span className="text-content text-base-2 truncate">{userData?.name}</span>
+            <span className="text-content text-base-2 truncate">{userData?.email}</span>
           </div>
 
           <Button onClick={handleLogout} className="w-fit" variant="secondary">

@@ -1,4 +1,4 @@
-import z from "zod";
+import z from "zod"
 
 export const updateCompanyUserSchema = z.object({
   id: z.string().optional(),
@@ -6,6 +6,6 @@ export const updateCompanyUserSchema = z.object({
   position: z.string().optional(),
   contactNumber: z.string().optional(),
   email: z.string().optional(),
-});
+})
 
-export type UpdateCompanyUserSchemaFormData = z.infer<typeof updateCompanyUserSchema>;
+export type UpdateCompanyUserSchemaFormData = z.infer<typeof updateCompanyUserSchema>

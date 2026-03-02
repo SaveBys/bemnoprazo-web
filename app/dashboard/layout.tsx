@@ -4,11 +4,11 @@ import { SidebarProvider } from "@/components/ui/sidebar"
 export default function UserLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <SidebarProvider>
-      <div className="w-full flex gap-4">
+      <div className="flex w-full gap-4">
         <div className="w-[320px] shrink-0">
           <SidebarUser variant="inset" />
         </div>
@@ -16,5 +16,5 @@ export default function UserLayout({
         {children}
       </div>
     </SidebarProvider>
-  );
+  )
 }

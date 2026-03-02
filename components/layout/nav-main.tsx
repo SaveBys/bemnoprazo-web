@@ -20,15 +20,15 @@ export function NavMain({
     icon?: Icon
   }[]
 }) {
-  const pathname = usePathname();
-  
+  const pathname = usePathname()
+
   return (
     <SidebarGroup>
       <SidebarGroupContent className="flex flex-col gap-2">
         <SidebarMenu>
           {items.map((item) => {
             const isActive =
-              item.url === "/" ? pathname === item.url : pathname.startsWith(`${item.url}`);
+              item.url === "/" ? pathname === item.url : pathname.startsWith(`${item.url}`)
 
             return (
               <SidebarMenuItem key={item.title}>
@@ -39,10 +39,10 @@ export function NavMain({
                   </Link>
                 </SidebarMenuButton>
               </SidebarMenuItem>
-            );
+            )
           })}
         </SidebarMenu>
       </SidebarGroupContent>
     </SidebarGroup>
-  );
+  )
 }

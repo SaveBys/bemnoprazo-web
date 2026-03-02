@@ -1,9 +1,5 @@
 import * as React from "react"
-import {
-  ChevronLeftIcon,
-  ChevronRightIcon,
-  MoreHorizontalIcon,
-} from "lucide-react"
+import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react"
 
 import { cn } from "@/lib/utils"
 import { Button } from "./button"
@@ -20,10 +16,7 @@ function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   )
 }
 
-function PaginationContent({
-  className,
-  ...props
-}: React.ComponentProps<"ul">) {
+function PaginationContent({ className, ...props }: React.ComponentProps<"ul">) {
   return (
     <ul
       data-slot="pagination-content"
@@ -33,13 +26,18 @@ function PaginationContent({
   )
 }
 
-function PaginationItem({  isActive, ...props }: React.ComponentProps<"li"> & { isActive?: boolean }) {
-  return <li
-    data-slot="pagination-item"
-    data-active={isActive}
-    className="size-8 flex justify-center items-center border-2 border-base-3 text-base-2 hover:text-primary-3 hover:border-primary-3 data-[active=true]:border-primary-2 rounded-md p-1"
-    {...props} >
-  </li>
+function PaginationItem({
+  isActive,
+  ...props
+}: React.ComponentProps<"li"> & { isActive?: boolean }) {
+  return (
+    <li
+      data-slot="pagination-item"
+      data-active={isActive}
+      className="border-base-3 text-base-2 hover:text-primary-3 hover:border-primary-3 data-[active=true]:border-primary-2 flex size-8 items-center justify-center rounded-md border-2 p-1"
+      {...props}
+    ></li>
+  )
 }
 
 type PaginationLinkProps = {
@@ -47,59 +45,37 @@ type PaginationLinkProps = {
 } & Pick<React.ComponentProps<typeof Button>, "size"> &
   React.ComponentProps<"a">
 
-function PaginationLink({
-  isActive,
-  ...props
-}: PaginationLinkProps) {
+function PaginationLink({ isActive, ...props }: PaginationLinkProps) {
   return (
     <a
       aria-current={isActive ? "page" : undefined}
       data-slot="pagination-link"
       data-active={isActive}
-      className="text-sm font-bold hover:border-primary-3 data-[active=true]:text-primary-2"
+      className="hover:border-primary-3 data-[active=true]:text-primary-2 text-sm font-bold"
       {...props}
     />
   )
 }
 
-function PaginationPrevious({
-  className,
-  ...props
-}: React.ComponentProps<typeof PaginationLink>) {
+function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink
-      aria-label="Página anterior"
-      size="default"
-      className={className}
-      {...props}
-    >
+    <PaginationLink aria-label="Página anterior" size="default" className={className} {...props}>
       <ChevronLeftIcon />
       <span className="hidden sm:block"></span>
     </PaginationLink>
   )
 }
 
-function PaginationNext({
-  className,
-  ...props
-}: React.ComponentProps<typeof PaginationLink>) {
+function PaginationNext({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
-    <PaginationLink
-      aria-label="Próxima página"
-      size="default"
-      className={className}
-      {...props}
-    >
+    <PaginationLink aria-label="Próxima página" size="default" className={className} {...props}>
       <span className="hidden sm:block"></span>
       <ChevronRightIcon />
     </PaginationLink>
   )
 }
 
-function PaginationEllipsis({
-  className,
-  ...props
-}: React.ComponentProps<"span">) {
+function PaginationEllipsis({ className, ...props }: React.ComponentProps<"span">) {
   return (
     <span
       aria-hidden

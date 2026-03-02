@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { DataTable } from "../ui/data-table";
+import { DataTable } from "../ui/data-table"
 
-import { Button } from "../ui/button";
-import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
-import { ColumnDef } from "@tanstack/react-table";
-import z from "zod";
-import { announcementStatusEnumValue } from "@/types/enums/announcement-status.enum";
+import { Button } from "../ui/button"
+import { EyeIcon } from "@phosphor-icons/react/dist/ssr"
+import { ColumnDef } from "@tanstack/react-table"
+import z from "zod"
+import { announcementStatusEnumValue } from "@/types/enums/announcement-status.enum"
 
 export const schema = z.object({
   id: z.string(),
@@ -15,9 +15,9 @@ export const schema = z.object({
   expirationDate: z.string(),
   status: z.string(),
   ean: z.string(),
-});
+})
 
-export type RowData = z.infer<typeof schema>;
+export type RowData = z.infer<typeof schema>
 
 export const columns: ColumnDef<RowData>[] = [
   {
@@ -57,12 +57,12 @@ export const columns: ColumnDef<RowData>[] = [
       </Button>
     ),
   },
-];
+]
 
 interface TabelaProdutosProps {
-  data: RowData[];
+  data: RowData[]
 }
 
 export function TabelaProdutos({ data }: TabelaProdutosProps) {
-  return <DataTable columns={columns} data={data} />;
+  return <DataTable columns={columns} data={data} />
 }

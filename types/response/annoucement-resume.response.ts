@@ -1,5 +1,5 @@
 export interface AnnouncementResumeResponse {
-  id: string;
+  id: string
   name: string
   ean: string
   basePrice: number

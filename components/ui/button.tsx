@@ -9,8 +9,7 @@ const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
-          "bg-primary-2 hover:bg-primary-1 active:bg-primary-3 text-base-5",
+        default: "bg-primary-2 hover:bg-primary-1 active:bg-primary-3 text-base-5",
         secondary:
           "border-1 border-primary-2 hover:border-primary-1 active:border-primary-3 text-primary-2 hover:text-primary-1 active:text-primary-3",
         text: "text-primary-2 hover:text-primary-1 active:text-primary-3",
@@ -23,7 +22,7 @@ const buttonVariants = cva(
       variant: "default",
       size: "default",
     },
-  }
+  },
 )
 
 interface ButtonBaseProps {
@@ -31,15 +30,13 @@ interface ButtonBaseProps {
   iconInverse?: boolean
 }
 
-type ButtonAsButtonProps =
-  React.ButtonHTMLAttributes<HTMLButtonElement> &
+type ButtonAsButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> &
   ButtonBaseProps & {
     isLink?: false
   }
 
-type ButtonAsLinkProps =
-  Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> &
+type ButtonAsLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> &
   VariantProps<typeof buttonVariants> &
   ButtonBaseProps & {
     isLink: true
@@ -49,7 +46,6 @@ type ButtonAsLinkProps =
 type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps
 
 export function Button(rawProps: ButtonProps) {
-
   const {
     isLink,
     className,
@@ -62,11 +58,7 @@ export function Button(rawProps: ButtonProps) {
   } = rawProps
 
   const content = (
-    <span
-      className={`flex items-center gap-2 ${
-        iconInverse ? "flex-row-reverse" : "flex-row"
-      }`}
-    >
+    <span className={`flex items-center gap-2 ${iconInverse ? "flex-row-reverse" : "flex-row"}`}>
       {icon}
       {children}
     </span>
@@ -75,10 +67,7 @@ export function Button(rawProps: ButtonProps) {
   const classes = cn(buttonVariants({ variant, size, className }))
 
   if (isLink) {
-    const { href, ...linkProps } = rest as Omit<
-      ButtonAsLinkProps,
-      "isLink"
-    >
+    const { href, ...linkProps } = rest as Omit<ButtonAsLinkProps, "isLink">
 
     return (
       <Link
@@ -87,7 +76,7 @@ export function Button(rawProps: ButtonProps) {
         data-variant={variant}
         data-size={size}
         className={classes}
-        {...linkProps}  
+        {...linkProps}
       >
         {content}
       </Link>
@@ -100,7 +89,7 @@ export function Button(rawProps: ButtonProps) {
       data-variant={variant}
       data-size={size}
       className={classes}
-      {...(rest as Omit<ButtonAsButtonProps, "isLink">)} 
+      {...(rest as Omit<ButtonAsButtonProps, "isLink">)}
     >
       {content}
     </button>

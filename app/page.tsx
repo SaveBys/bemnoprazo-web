@@ -1,14 +1,14 @@
-import Footer from "@/components/layout/footer";
-import { Button } from "@/components/ui/button";
-import { FishIcon, InstagramLogoIcon } from "@phosphor-icons/react/ssr";
-import Image from "next/image";
+import Footer from "@/components/layout/footer"
+import { Button } from "@/components/ui/button"
+import { FishIcon, InstagramLogoIcon } from "@phosphor-icons/react/ssr"
+import Image from "next/image"
 
 export default function Home() {
   return (
     <>
-      <main className="w-full flex flex-col items-center" >
-        <section className="width-barrier w-full flex flex-col items-center gap-16 py-8">
-          <figure className="w-full flex justify-center items center">
+      <main className="flex w-full flex-col items-center">
+        <section className="width-barrier flex w-full flex-col items-center gap-16 py-8">
+          <figure className="items center flex w-full justify-center">
             <Image
               src="/img/LogoBemnoprazo.png"
               width={400}
@@ -18,7 +18,7 @@ export default function Home() {
             />
           </figure>
 
-          <h1 className="text-secondary-2 text-5xl font-bold text-center py-8">
+          <h1 className="text-secondary-2 py-8 text-center text-5xl font-bold">
             Transformando prazos em saúde para todos.
           </h1>
 
@@ -33,21 +33,21 @@ export default function Home() {
         </section>
 
         <section className="w-full">
-          <div className="bg-secondary-2 w-full flex flex-col-reverse sm:flex-row">
-            <figure className="w-[380px] sm:w-[595px] h-auto">
+          <div className="bg-secondary-2 flex w-full flex-col-reverse sm:flex-row">
+            <figure className="h-auto w-[380px] sm:w-[595px]">
               <Image
                 src="/img/banner.png"
                 width={380}
                 height={200}
                 alt="Logo da marca SaveBys"
-                className="w-[380px] sm:w-[595px] relative"
+                className="relative w-[380px] sm:w-[595px]"
               />
             </figure>
-            <div className="flex-1 flex items-center px-4 sm:px-0">
-              <p className="w-[591px] text-3xl font-medium text-base-5 text-center">
-                Conectamos farmácias e distribuidoras a consumidores — pessoas físicas,
-                hospitais e clínicas — oferecendo produtos próximos ao vencimento, com
-                preços reduzidos e garantia de qualidade e segurança.
+            <div className="flex flex-1 items-center px-4 sm:px-0">
+              <p className="text-base-5 w-[591px] text-center text-3xl font-medium">
+                Conectamos farmácias e distribuidoras a consumidores — pessoas físicas, hospitais e
+                clínicas — oferecendo produtos próximos ao vencimento, com preços reduzidos e
+                garantia de qualidade e segurança.
               </p>
             </div>
           </div>
@@ -55,5 +55,5 @@ export default function Home() {
       </main>
       <Footer />
     </>
-  );
+  )
 }

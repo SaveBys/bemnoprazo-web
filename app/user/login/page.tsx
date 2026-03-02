@@ -16,34 +16,38 @@ type LoginFormData = {
 }
 
 export default function LoginPage() {
-  const { register, handleSubmit, formState: { errors, isSubmitting, isValid } } = useForm<LoginFormData>({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting, isValid },
+  } = useForm<LoginFormData>({
     mode: "onChange",
   })
   const router = useRouter()
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState<Message>();
+  const [open, setOpen] = useState(false)
+  const [message, setMessage] = useState<Message>()
 
   function onSubmit(data: LoginFormData) {
-    login(data.email, data.password).then(() => {
-      router.push("/dashboard")
-    }).catch((error) => {
-      setMessage({
-        title: "Ocorreu um erro"
+    login(data.email, data.password)
+      .then(() => {
+        router.push("/dashboard")
       })
-      setOpen(true);
-    });
+      .catch((error) => {
+        setMessage({
+          title: "Ocorreu um erro",
+        })
+        setOpen(true)
+      })
   }
 
   return (
-    <div className="w-fit flex flex-col items-center gap-8 p-12">
+    <div className="flex w-fit flex-col items-center gap-8 p-12">
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-title text-primary-2">Login</h1>
-        <h2 className="text-subtitle text-base-3">
-          Informe os seus dados de acesso.
-        </h2>
+        <h2 className="text-subtitle text-base-3">Informe os seus dados de acesso.</h2>
       </div>
 
-      <form onSubmit={handleSubmit(onSubmit)} className="flex flex-col gap-8 w-md">
+      <form onSubmit={handleSubmit(onSubmit)} className="flex w-md flex-col gap-8">
         <InputText
           label="E-mail"
           type="email"

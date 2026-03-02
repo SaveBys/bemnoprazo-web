@@ -1,12 +1,12 @@
-"use client";
+"use client"
 
-import { DataTable } from "../ui/data-table";
+import { DataTable } from "../ui/data-table"
 
-import { Button } from "../ui/button";
-import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
-import { ColumnDef } from "@tanstack/react-table";
-import z from "zod";
-import { userRoleEnumValue } from "@/types/enums/user-role.enum";
+import { Button } from "../ui/button"
+import { EyeIcon } from "@phosphor-icons/react/dist/ssr"
+import { ColumnDef } from "@tanstack/react-table"
+import z from "zod"
+import { userRoleEnumValue } from "@/types/enums/user-role.enum"
 
 export const schema = z.object({
   id: z.string(),
@@ -14,9 +14,9 @@ export const schema = z.object({
   userRole: z.string(),
   contactNumber: z.string(),
   email: z.string(),
-});
+})
 
-export type RowData = z.infer<typeof schema>;
+export type RowData = z.infer<typeof schema>
 
 export const columns: ColumnDef<RowData>[] = [
   {
@@ -49,12 +49,12 @@ export const columns: ColumnDef<RowData>[] = [
       </Button>
     ),
   },
-];
+]
 
 interface TableDashboardUsersProps {
-  data: RowData[];
+  data: RowData[]
 }
 
 export function TableDashboardUsers({ data }: TableDashboardUsersProps) {
-  return <DataTable columns={columns} data={data} />;
+  return <DataTable columns={columns} data={data} />
 }

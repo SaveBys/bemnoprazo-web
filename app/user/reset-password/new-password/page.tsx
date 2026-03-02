@@ -25,15 +25,15 @@ export default function ResetPasswordPage() {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid, isSubmitting }
+    formState: { errors, isValid, isSubmitting },
   } = useForm<FormData>({
-    mode: "onChange"
+    mode: "onChange",
   })
 
   const password = useWatch({
     control,
     name: "password",
-    defaultValue: ""
+    defaultValue: "",
   })
 
   function onSubmit(data: FormData) {
@@ -44,34 +44,28 @@ export default function ResetPasswordPage() {
         setMessage({
           title: "Sucesso!",
           description: "Senha alterada com sucesso, você será redirecionado ao login.",
-          callback: () => router.push("/user/login")
+          callback: () => router.push("/user/login"),
         })
       })
       .catch((error) => {
-        const errorMessage =
-          error?.response?.data?.message || "Erro ao alterar senha"
+        const errorMessage = error?.response?.data?.message || "Erro ao alterar senha"
 
         setMessage({
           title: "Ocorreu um erro",
-          description: errorMessage
+          description: errorMessage,
         })
       })
       .finally(() => setOpen(true))
   }
 
   return (
-    <div className="w-fit flex flex-col items-center gap-8 p-12">
+    <div className="flex w-fit flex-col items-center gap-8 p-12">
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-title text-primary-2">Nova senha</h1>
-        <h2 className="text-subtitle text-base-3">
-          Informe a nova senha
-        </h2>
+        <h2 className="text-subtitle text-base-3">Informe a nova senha</h2>
       </div>
 
-      <form
-        className="flex flex-col gap-8 w-md"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="flex w-md flex-col gap-8" onSubmit={handleSubmit(onSubmit)}>
         <InputPassword
           label="Senha"
           placeholder="Mínimo de 8 caracteres"
@@ -79,8 +73,8 @@ export default function ResetPasswordPage() {
             required: "Campo obrigatório",
             minLength: {
               value: 8,
-              message: "A senha deve ter no mínimo 8 caracteres"
-            }
+              message: "A senha deve ter no mínimo 8 caracteres",
+            },
           })}
           errorMessage={errors.password?.message}
         />
@@ -90,17 +84,13 @@ export default function ResetPasswordPage() {
           placeholder="Repita a senha"
           {...register("confirmPassword", {
             required: "Campo obrigatório",
-            validate: value =>
-              value === password || "As senhas não coincidem"
+            validate: (value) => value === password || "As senhas não coincidem",
           })}
           errorMessage={errors.confirmPassword?.message}
         />
 
         <div className="flex flex-col items-center gap-8">
-          <Button
-            type="submit"
-            disabled={!isValid || isSubmitting}
-          >
+          <Button type="submit" disabled={!isValid || isSubmitting}>
             {isSubmitting ? "Salvando..." : "Salvar"}
           </Button>
 

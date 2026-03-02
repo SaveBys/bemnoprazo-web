@@ -1,28 +1,28 @@
-"use client";
+"use client"
 
-import { Controller, useForm, useWatch } from "react-hook-form";
+import { Controller, useForm, useWatch } from "react-hook-form"
 
-import { Button } from "../ui/button";
-import InputSearch from "../ui/input/input-search";
-import { InputText } from "../ui/input/input-text";
-import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
-import { Checkbox } from "../ui/input/checkbox";
-import { CheckboxGroup } from "../ui/input/checkbox-group";
-import { Slider } from "../ui/slider";
-import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
-import { useEffect, useState } from "react";
-import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
+import { Button } from "../ui/button"
+import InputSearch from "../ui/input/input-search"
+import { InputText } from "../ui/input/input-text"
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request"
+import { Checkbox } from "../ui/input/checkbox"
+import { CheckboxGroup } from "../ui/input/checkbox-group"
+import { Slider } from "../ui/slider"
+import { findAllAnnouncementsCategory } from "@/services/announcements-category.service"
+import { useEffect, useState } from "react"
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response"
 
 type Props = {
-  onSubmitFilters: (data: AnnouncementsFilterParams) => void;
-};
+  onSubmitFilters: (data: AnnouncementsFilterParams) => void
+}
 
 type FilterFormParams = Omit<AnnouncementsFilterParams, "minPrice" | "maxPrice"> & {
-  rangePrice?: number[];
-};
+  rangePrice?: number[]
+}
 
 export function FilterProducts({ onSubmitFilters }: Props) {
-  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
+  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>()
 
   const defaultFilters: FilterFormParams = {
     categories: [],
@@ -30,40 +30,40 @@ export function FilterProducts({ onSubmitFilters }: Props) {
     expirationSoon: false,
     minExpirationDate: "",
     maxExpirationDate: "",
-  };
+  }
 
   const { register, handleSubmit, reset, control } = useForm<FilterFormParams>({
     defaultValues: defaultFilters,
-  });
+  })
 
   const rangePrice = useWatch({
     control,
     name: "rangePrice",
-  });
+  })
 
   useEffect(() => {
     findAllAnnouncementsCategory({ page: 0 }).then((res) => {
-      setCategories(res.content);
-    });
-  }, []);
+      setCategories(res.content)
+    })
+  }, [])
 
   function onSubmit(data: FilterFormParams) {
-    const { rangePrice, ...rest } = data;
+    const { rangePrice, ...rest } = data
     const payload: AnnouncementsFilterParams = {
       ...rest,
       minPrice: rangePrice?.[0],
       maxPrice: rangePrice?.[1],
-    };
-    onSubmitFilters(payload);
+    }
+    onSubmitFilters(payload)
   }
 
   function handleClear() {
-    reset(defaultFilters);
-    onSubmitFilters(defaultFilters);
+    reset(defaultFilters)
+    onSubmitFilters(defaultFilters)
   }
 
   return (
-    <div className="w-75 flex flex-col gap-8">
+    <div className="flex w-75 flex-col gap-8">
       <h1 className="text-title text-base-2">Filtros</h1>
 
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
@@ -83,7 +83,7 @@ export function FilterProducts({ onSubmitFilters }: Props) {
           />
         )}
 
-        <hr className="w-full border-base-3 border" />
+        <hr className="border-base-3 w-full border" />
 
         <h2 className="text-subtitle text-base-2">Valor</h2>
 
@@ -102,11 +102,11 @@ export function FilterProducts({ onSubmitFilters }: Props) {
           )}
         />
 
-        <span className="font-medium text-base-2">
+        <span className="text-base-2 font-medium">
           R$ {rangePrice?.[0]} — R$ {rangePrice?.[1]}
         </span>
 
-        <hr className="w-full border-base-3 border" />
+        <hr className="border-base-3 w-full border" />
 
         <h2 className="text-subtitle text-base-2">Validade</h2>
 
@@ -147,5 +147,5 @@ export function FilterProducts({ onSubmitFilters }: Props) {
         </div>
       </form>
     </div>
-  );
+  )
 }

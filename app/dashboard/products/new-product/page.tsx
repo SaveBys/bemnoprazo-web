@@ -1,8 +1,8 @@
-"use client";
+"use client"
 
-import { Label } from "@/components/ui/label";
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
-import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label"
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
+import { Button } from "@/components/ui/button"
 import {
   Select,
   SelectContent,
@@ -10,29 +10,29 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/input/select";
-import InputSearch from "@/components/ui/input/input-search";
-import { InputText } from "@/components/ui/input/input-text";
+} from "@/components/ui/input/select"
+import InputSearch from "@/components/ui/input/input-search"
+import { InputText } from "@/components/ui/input/input-text"
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Controller, Resolver, useForm, useWatch } from "react-hook-form";
-import { useEffect, useState } from "react";
+import { zodResolver } from "@hookform/resolvers/zod"
+import { Controller, Resolver, useForm, useWatch } from "react-hook-form"
+import { useEffect, useState } from "react"
 
-import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
-import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
-import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum";
-import { MedicationTypeEnum } from "@/types/enums/medication-type.enum";
-import { useRouter } from "next/navigation";
+import { findAllAnnouncementsCategory } from "@/services/announcements-category.service"
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response"
+import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum"
+import { MedicationTypeEnum } from "@/types/enums/medication-type.enum"
+import { useRouter } from "next/navigation"
 import {
   CreateAnnouncementFormData,
   createAnnouncementSchema,
-} from "@/types/schemas/create-announcement.schema";
-import { createAnnouncement } from "@/services/announcements.service";
+} from "@/types/schemas/create-announcement.schema"
+import { createAnnouncement } from "@/services/announcements.service"
 
 export default function NewProductPage() {
-  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
-  const [loading, setLoading] = useState<boolean>(false);
-  const router = useRouter();
+  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>()
+  const [loading, setLoading] = useState<boolean>(false)
+  const router = useRouter()
 
   const {
     register,
@@ -46,36 +46,36 @@ export default function NewProductPage() {
       requiresRefrigeration: false,
       dynamicPrice: false,
     },
-  });
+  })
 
-  const dynamicPrice = useWatch({ control, name: "dynamicPrice" });
+  const dynamicPrice = useWatch({ control, name: "dynamicPrice" })
 
   useEffect(() => {
     findAllAnnouncementsCategory({ page: 0 })
       .then((res) => setCategories(res.content))
       .catch((err) => {
-        console.error("Failed to fetch categories:", err);
-      });
-  }, []);
+        console.error("Failed to fetch categories:", err)
+      })
+  }, [])
 
   async function onSubmit(data: CreateAnnouncementFormData) {
     try {
-      setLoading(true);
-      await createAnnouncement(data);
-      router.push("/dashboard/products");
+      setLoading(true)
+      await createAnnouncement(data)
+      router.push("/dashboard/products")
     } finally {
-      setLoading(false);
+      setLoading(false)
     }
   }
 
   return (
     <form
-      className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll"
+      className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4"
       onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation errors:", errors))}
     >
       <h1 className="text-title text-base-2">Novo produto</h1>
 
-      <fieldset className="w-full flex flex-row justify-between gap-4">
+      <fieldset className="flex w-full flex-row justify-between gap-4">
         <InputSearch
           {...register("ean")}
           errorMessage={errors.ean?.message}
@@ -98,7 +98,7 @@ export default function NewProductPage() {
         />
       </fieldset>
 
-      <fieldset className="w-full grid grid-cols-4 justify-between gap-4">
+      <fieldset className="grid w-full grid-cols-4 justify-between gap-4">
         <InputText
           {...register("expirationDate")}
           errorMessage={errors.expirationDate?.message}
@@ -120,7 +120,7 @@ export default function NewProductPage() {
           name="idCategory"
           control={control}
           render={({ field }) => (
-            <div className="w-full flex flex-col gap-1">
+            <div className="flex w-full flex-col gap-1">
               <label className="text-4/5 text-base-3">Categoria</label>
               <Select
                 value={field.value ?? "none"}
@@ -139,7 +139,7 @@ export default function NewProductPage() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <p className="min-h-5 text-red-600 text-sm">{errors.idCategory?.message}</p>
+              <p className="min-h-5 text-sm text-red-600">{errors.idCategory?.message}</p>
             </div>
           )}
         />
@@ -148,7 +148,7 @@ export default function NewProductPage() {
           name="status"
           control={control}
           render={({ field }) => (
-            <div className="w-full flex flex-col gap-1">
+            <div className="flex w-full flex-col gap-1">
               <label className="text-4/5 text-base-3">Status</label>
               <Select
                 value={field.value ?? "none"}
@@ -167,7 +167,7 @@ export default function NewProductPage() {
                   </SelectGroup>
                 </SelectContent>
               </Select>
-              <p className="min-h-5 text-red-600 text-sm">{errors.status?.message}</p>
+              <p className="min-h-5 text-sm text-red-600">{errors.status?.message}</p>
             </div>
           )}
         />
@@ -180,21 +180,21 @@ export default function NewProductPage() {
           name="requiresRefrigeration"
           control={control}
           render={({ field }) => (
-            <div className="w-full flex flex-col gap-1">
+            <div className="flex w-full flex-col gap-1">
               <label className="text-4/5 text-base-3">Necessita refrigeração</label>
               <RadioGroup
                 value={field.value?.toString()}
                 onValueChange={(value) => field.onChange(value === "true")}
               >
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row items-center gap-3">
                   <RadioGroupItem
-                    className="w-6 h-6 border-base-3"
+                    className="border-base-3 h-6 w-6"
                     value="true"
                     id="refrigeration-yes"
                   />
                   <Label htmlFor="refrigeration-yes">Sim</Label>
                   <RadioGroupItem
-                    className="w-6 h-6 border-base-3"
+                    className="border-base-3 h-6 w-6"
                     value="false"
                     id="refrigeration-no"
                   />
@@ -206,12 +206,12 @@ export default function NewProductPage() {
         />
 
         <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <Controller
               name="medicationType"
               control={control}
               render={({ field }) => (
-                <div className="w-full flex flex-col gap-1">
+                <div className="flex w-full flex-col gap-1">
                   <label className="text-4/5 text-base-3">Tipo</label>
                   <Select
                     value={field.value ?? "none"}
@@ -228,7 +228,7 @@ export default function NewProductPage() {
                       </SelectGroup>
                     </SelectContent>
                   </Select>
-                  <p className="min-h-5 text-red-600 text-sm"></p>
+                  <p className="min-h-5 text-sm text-red-600"></p>
                 </div>
               )}
             />
@@ -240,7 +240,7 @@ export default function NewProductPage() {
             />
           </div>
 
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <InputText
               {...register("activeIngredient")}
               errorMessage={errors.activeIngredient?.message}
@@ -253,7 +253,7 @@ export default function NewProductPage() {
             />
           </div>
 
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <InputText
               {...register("conservation")}
               errorMessage={errors.conservation?.message}
@@ -261,7 +261,7 @@ export default function NewProductPage() {
             />
           </div>
 
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <InputText
               {...register("administrationRoute")}
               errorMessage={errors.administrationRoute?.message}
@@ -299,21 +299,21 @@ export default function NewProductPage() {
           name="dynamicPrice"
           control={control}
           render={({ field }) => (
-            <div className="w-full flex flex-col gap-1">
+            <div className="flex w-full flex-col gap-1">
               <label className="text-4/5 text-base-3">Preço dinâmico</label>
               <RadioGroup
                 value={field.value?.toString()}
                 onValueChange={(value) => field.onChange(value === "true")}
               >
-                <div className="flex flex-row gap-3 items-center">
+                <div className="flex flex-row items-center gap-3">
                   <RadioGroupItem
-                    className="w-6 h-6 border-base-3"
+                    className="border-base-3 h-6 w-6"
                     value="true"
                     id="dynamicPrice-yes"
                   />
                   <Label htmlFor="dynamicPrice-yes">Sim</Label>
                   <RadioGroupItem
-                    className="w-6 h-6 border-base-3"
+                    className="border-base-3 h-6 w-6"
                     value="false"
                     id="dynamicPrice-no"
                   />
@@ -324,12 +324,12 @@ export default function NewProductPage() {
           )}
         />
 
-        <div className="w-full flex flex-row justify-between gap-4">
+        <div className="flex w-full flex-row justify-between gap-4">
           <Controller
             name="dynamicPriceUnit"
             control={control}
             render={({ field }) => (
-              <div className="w-full flex flex-col gap-1">
+              <div className="flex w-full flex-col gap-1">
                 <label className="text-4/5 text-base-3">Unidade</label>
                 <Select
                   value={field.value ?? "none"}
@@ -345,7 +345,7 @@ export default function NewProductPage() {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                <p className="min-h-5 text-red-600 text-sm"></p>
+                <p className="min-h-5 text-sm text-red-600"></p>
               </div>
             )}
           />
@@ -367,12 +367,12 @@ export default function NewProductPage() {
         </div>
       </fieldset>
 
-      <div className="w-full flex justify-between">
+      <div className="flex w-full justify-between">
         <Button variant="secondary" type="button" href="/dashboard/products" isLink>
           Cancelar
         </Button>
         <Button disabled={loading}>Salvar</Button>
       </div>
     </form>
-  );
+  )
 }

@@ -1,4 +1,4 @@
-import z from "zod";
+import z from "zod"
 
 export const createUserEmployeeSchema = z.object({
   name: z.string().min(1, "Nome deve ser informado."),
@@ -6,7 +6,6 @@ export const createUserEmployeeSchema = z.object({
   contactNumber: z.string().min(1, "Número de contato deve ser informado."),
   document: z.string().min(1, "CPF deve ser informado."),
   email: z.string().min(1, "E-mail deve ser informado."),
-});
+})
 
-
-export type CreateUserEmployeeSchemaFormData = z.infer<typeof createUserEmployeeSchema>;
+export type CreateUserEmployeeSchemaFormData = z.infer<typeof createUserEmployeeSchema>

@@ -1,15 +1,15 @@
-"use client";
+"use client"
 
-import { ChangeEvent, forwardRef } from "react";
-import { applyMask } from "@/lib/apply-mask.function";
-import { cn } from "@/lib/utils";
-import { InputBase } from "./input-base";
+import { ChangeEvent, forwardRef } from "react"
+import { applyMask } from "@/lib/apply-mask.function"
+import { cn } from "@/lib/utils"
+import { InputBase } from "./input-base"
 
 interface InputTextProps extends React.ComponentProps<"input"> {
-  label: string;
-  errorMessage?: string;
-  mask?: string | string[];
-  srOnly?: boolean;
+  label: string
+  errorMessage?: string
+  mask?: string | string[]
+  srOnly?: boolean
 }
 
 export const InputText = forwardRef<HTMLInputElement, InputTextProps>(function InputText(
@@ -17,16 +17,16 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(function I
   ref,
 ) {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    const inputValue = e.target.value;
-    const nextValue = mask ? applyMask(inputValue, mask) : inputValue;
+    const inputValue = e.target.value
+    const nextValue = mask ? applyMask(inputValue, mask) : inputValue
 
-    e.target.value = nextValue;
+    e.target.value = nextValue
 
-    onChange?.(e);
+    onChange?.(e)
   }
 
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className="flex w-full flex-col gap-1">
       <label className={cn(srOnly && "sr-only", "text-legend text-base-3")}>{label}</label>
 
       <InputBase
@@ -38,7 +38,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(function I
         className="w-full pr-10"
       />
 
-      <p className="min-h-5 text-red-600 text-sm">{errorMessage}</p>
+      <p className="min-h-5 text-sm text-red-600">{errorMessage}</p>
     </div>
-  );
-});
+  )
+})

@@ -17,7 +17,7 @@ export async function POST(req: NextRequest) {
             client_secret: process.env.KEYCLOAK_CLIENT_SECRET!,
             refresh_token: refreshToken,
           }),
-        }
+        },
       )
     }
 
@@ -39,9 +39,6 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Erro logout:", error)
 
-    return NextResponse.json(
-      { error: "Erro ao fazer logout" },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: "Erro ao fazer logout" }, { status: 500 })
   }
 }

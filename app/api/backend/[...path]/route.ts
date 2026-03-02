@@ -31,7 +31,7 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
   let accessToken = req.cookies.get("access_token")?.value
   const refreshToken = req.cookies.get("refresh_token")?.value
 
-  const rawBody = ["GET", "HEAD"].includes(req.method) ? undefined : await req.text();
+  const rawBody = ["GET", "HEAD"].includes(req.method) ? undefined : await req.text()
 
   const makeRequest = async (token?: string) =>
     fetch(url, {
@@ -41,28 +41,28 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
         ...(token ? { Authorization: `Bearer ${token}` } : {}),
       },
       body: rawBody,
-    });
-    
-    let response = await makeRequest(accessToken)
+    })
+
+  let response = await makeRequest(accessToken)
 
   if ((response.status === 401 || response.status === 403) && refreshToken) {
-    const newTokens = await refreshAccessToken(refreshToken);
+    const newTokens = await refreshAccessToken(refreshToken)
 
     if (!newTokens) {
-      const res = NextResponse.json({ error: "Unauthorized" }, { status: 401 });
-      res.cookies.delete("access_token");
-      res.cookies.delete("refresh_token");
-      return res;
+      const res = NextResponse.json({ error: "Unauthorized" }, { status: 401 })
+      res.cookies.delete("access_token")
+      res.cookies.delete("refresh_token")
+      return res
     }
 
-    accessToken = newTokens.access_token;
+    accessToken = newTokens.access_token
 
-    response = await makeRequest(accessToken);
+    response = await makeRequest(accessToken)
 
     const res = new NextResponse(response.body, {
       status: response.status,
       headers: response.headers,
-    });
+    })
 
     res.cookies.set("access_token", newTokens.access_token, {
       httpOnly: true,
@@ -70,7 +70,7 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
       sameSite: "lax",
       path: "/",
       maxAge: newTokens.expires_in,
-    });
+    })
 
     if (newTokens.refresh_token) {
       res.cookies.set("refresh_token", newTokens.refresh_token, {
@@ -78,10 +78,10 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
         secure: process.env.NODE_ENV === "production",
         sameSite: "lax",
         path: "/",
-      });
+      })
     }
 
-    return res;
+    return res
   }
 
   return new NextResponse(response.body, {

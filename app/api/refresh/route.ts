@@ -21,7 +21,7 @@ export async function POST(req: NextRequest) {
         headers: {
           "Content-Type": "application/x-www-form-urlencoded",
         },
-      }
+      },
     )
 
     const { access_token, refresh_token } = response.data

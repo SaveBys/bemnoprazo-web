@@ -1,4 +1,4 @@
 export interface AnnouncementCategoryResponse {
-  id: string;
-  name: string;
+  id: string
+  name: string
 }

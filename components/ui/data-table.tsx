@@ -23,10 +23,7 @@ interface DataTableProps<TData> {
   columns: ColumnDef<TData>[]
 }
 
-export function DataTable<TData>({
-  data,
-  columns
-}: DataTableProps<TData>) {
+export function DataTable<TData>({ data, columns }: DataTableProps<TData>) {
   const memoData = useMemo(() => data, [data])
 
   const table = useReactTable({
@@ -46,10 +43,7 @@ export function DataTable<TData>({
                   <TableHead key={header.id}>
                     {header.isPlaceholder
                       ? null
-                      : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
               </TableRow>
@@ -61,10 +55,7 @@ export function DataTable<TData>({
               <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
-                    {flexRender(
-                      cell.column.columnDef.cell,
-                      cell.getContext()
-                    )}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
               </TableRow>

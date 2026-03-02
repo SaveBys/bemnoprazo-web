@@ -4,12 +4,7 @@ import * as React from "react"
 
 import { NavMain } from "@/components/layout/nav-main"
 import { NavUser } from "@/components/layout/nav-user"
-import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-} from "@/components/ui/sidebar"
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/components/ui/sidebar"
 import { CurrencyDollarIcon, HouseIcon, UsersIcon } from "@phosphor-icons/react/dist/ssr"
 import Image from "next/image"
 import Link from "next/link"
@@ -32,13 +27,13 @@ const data = {
       icon: UsersIcon,
     },
   ],
-};
+}
 
 export function SidebarBackoffice({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <Link href="/" className="w-fit m-auto">
+        <Link href="/" className="m-auto w-fit">
           <Image src="/img/LogoBemnoprazo.png" alt="logo" width={200} height={88} />
         </Link>
       </SidebarHeader>

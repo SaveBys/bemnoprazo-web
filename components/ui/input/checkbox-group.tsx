@@ -19,15 +19,13 @@ export function CheckboxGroup<T extends FieldValues>({
   name,
   control,
   options,
-  className
+  className,
 }: CheckboxGroupProps<T>) {
-
   return (
     <Controller
       name={name}
       control={control}
       render={({ field }) => {
-
         const toggle = (value: string, checked: boolean) => {
           if (checked) {
             field.onChange([...(field.value ?? []), value])
@@ -38,14 +36,12 @@ export function CheckboxGroup<T extends FieldValues>({
 
         return (
           <div className={className}>
-            {options.map(option => (
+            {options.map((option) => (
               <Checkbox
                 key={option.value}
                 label={option.label}
                 checked={field.value?.includes(option.value)}
-                onCheckedChange={(checked) =>
-                  toggle(option.value, !!checked)
-                }
+                onCheckedChange={(checked) => toggle(option.value, !!checked)}
               />
             ))}
           </div>
