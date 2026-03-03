@@ -20,25 +20,23 @@ export async function POST(req: NextRequest) {
         },
       );
     }
-
-    const res = NextResponse.json({ success: true });
-
-    res.cookies.set("access_token", "", {
-      httpOnly: true,
-      path: "/",
-      expires: new Date(0),
-    });
-
-    res.cookies.set("refresh_token", "", {
-      httpOnly: true,
-      path: "/",
-      expires: new Date(0),
-    });
-
-    return res;
   } catch (error) {
     console.error("Erro logout:", error);
-
-    return NextResponse.json({ error: "Erro ao fazer logout" }, { status: 500 });
   }
+
+  const res = NextResponse.json({ success: true });
+
+  res.cookies.set("access_token", "", {
+    httpOnly: true,
+    path: "/",
+    expires: new Date(0),
+  });
+
+  res.cookies.set("refresh_token", "", {
+    httpOnly: true,
+    path: "/",
+    expires: new Date(0),
+  });
+
+  return res;
 }

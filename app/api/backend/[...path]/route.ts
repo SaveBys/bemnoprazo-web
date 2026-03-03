@@ -31,17 +31,24 @@ async function handler(req: NextRequest, { params }: { params: Promise<{ path: s
   let accessToken = req.cookies.get("access_token")?.value;
   const refreshToken = req.cookies.get("refresh_token")?.value;
 
-  const rawBody = ["GET", "HEAD"].includes(req.method) ? undefined : await req.text();
+  const body = ["GET", "HEAD"].includes(req.method) ? undefined : await req.blob();
 
-  const makeRequest = async (token?: string) =>
-    fetch(url, {
+  const makeRequest = async (token?: string) => {
+    const headers = new Headers();
+    const contentType = req.headers.get("Content-Type");
+    if (contentType) {
+      headers.set("Content-Type", contentType);
+    }
+    if (token) {
+      headers.set("Authorization", `Bearer ${token}`);
+    }
+
+    return fetch(url, {
       method: req.method,
-      headers: {
-        "Content-Type": "application/json",
-        ...(token ? { Authorization: `Bearer ${token}` } : {}),
-      },
-      body: rawBody,
+      headers,
+      body,
     });
+  };
 
   let response = await makeRequest(accessToken);
 

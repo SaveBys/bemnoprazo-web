@@ -19,10 +19,13 @@ export function Paginator({ pageData, currentPage, onPageChange }: PaginatorProp
   const totalPages = pageData?.totalPages || 0;
   const maxVisiblePages = 5;
 
-  const visiblePages = Array.from(
-    { length: Math.min(totalPages, maxVisiblePages) },
-    (_, index) => index + 1,
-  );
+  const pageCount = Math.min(totalPages, maxVisiblePages);
+  const startPage =
+    totalPages <= maxVisiblePages
+      ? 0
+      : Math.max(0, Math.min(currentPage - Math.floor(pageCount / 2), totalPages - pageCount));
+
+  const visiblePages = Array.from({ length: pageCount }, (_, index) => startPage + index + 1);
 
   const handlePageClick = (pageUi: number) => {
     const pageZeroBased = pageUi - 1;

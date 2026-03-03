@@ -69,6 +69,12 @@ export function Button(rawProps: ButtonProps) {
   if (isLink) {
     const { href, ...linkProps } = rest as Omit<ButtonAsLinkProps, "isLink">;
 
+    if (typeof href !== "string") {
+      throw new Error(
+        'Button: "href" property is required and must be a string when "isLink" is true.',
+      );
+    }
+
     return (
       <Link
         href={href}

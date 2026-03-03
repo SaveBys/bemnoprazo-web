@@ -43,7 +43,9 @@ export default function RegisterPage() {
         });
       })
       .catch((error) => {
-        const errorMessage = error.response.data.message;
+        const errorMessage =
+          error?.response?.data?.message ||
+          "Não foi possível concluir o cadastro. Verifique sua conexão e tente novamente.";
         setMessage({
           title: "Ocorreu um erro",
           description: errorMessage,

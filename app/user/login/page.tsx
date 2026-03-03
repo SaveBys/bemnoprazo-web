@@ -32,7 +32,7 @@ export default function LoginPage() {
       .then(() => {
         router.push("/dashboard");
       })
-      .catch((error) => {
+      .catch(() => {
         setMessage({
           title: "Ocorreu um erro",
         });

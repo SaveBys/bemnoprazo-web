@@ -26,7 +26,9 @@ export const columns: ColumnDef<RowData>[] = [
   {
     accessorKey: "userRole",
     header: "Cargo",
-    cell: ({ row }) => <span>{userRoleEnumValue(row.original.userRole).label}</span>,
+    cell: ({ row }) => (
+      <span>{userRoleEnumValue(row.original.userRole)?.label || row.original.userRole}</span>
+    ),
   },
   {
     accessorKey: "contactNumber",

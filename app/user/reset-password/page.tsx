@@ -20,7 +20,9 @@ export default function ResetPasswordPage() {
         });
       })
       .catch((error) => {
-        const errorMessage = error.response.data.message;
+        const errorMessage =
+          error.response?.data?.message ||
+          "Não foi possível processar a sua solicitação. Tente novamente mais tarde.";
         setMessage({
           title: "Ocorreu um erro",
           description: errorMessage,

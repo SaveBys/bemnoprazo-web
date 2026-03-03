@@ -50,10 +50,8 @@ export default function EditUserPage({ params }: PageProps) {
   async function onSubmit(data: UpdateCompanyUserFormData) {
     try {
       setLoading(true);
-      if (data.email) {
-        await updateProfileCompanyUser({ ...data, id }, data.email);
-        router.push("/dashboard/users");
-      }
+      await updateProfileCompanyUser({ ...data, id }, data.email!);
+      router.push("/dashboard/users");
     } finally {
       setLoading(false);
     }
