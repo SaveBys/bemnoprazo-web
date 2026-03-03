@@ -19,7 +19,7 @@ export async function getUserDataDetails(): Promise<UserDataDetailsResponse> {
 }
 
 export async function getByIdCompanyUser(id: string): Promise<UserDataResponse> {
-  const { data } = await api.get("/users/company-users/" + id);
+  const { data } = await api.get(`/users/company-users/${encodeURIComponent(id)}`);
   return data;
 }
 
