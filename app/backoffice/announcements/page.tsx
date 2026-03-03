@@ -5,9 +5,9 @@ import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
 import { DashboardUsersManagementFilterForm } from "@/components/layout/dashboard-user-management-filter-form";
 import { findAllMyAnnouncements } from "@/services/announcements.service";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
-import { AnnouncementTableResponse } from "@/types/announcement-table.response";
 import { Page } from "@/types/page";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
+import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
 
 export default function UsersPage() {
   const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
