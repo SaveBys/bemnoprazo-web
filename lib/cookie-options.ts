@@ -8,7 +8,7 @@ export const getAuthCookieOptions = (maxAge?: number): Partial<ResponseCookie> =
     sameSite: "lax",
     path: "/",
   };
-  if (maxAge) {
+  if (typeof maxAge === "number") {
     options.maxAge = maxAge;
   }
   return options;
