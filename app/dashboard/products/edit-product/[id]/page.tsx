@@ -17,7 +17,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
 import { useEffect, useState } from "react";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
 import { Controller, Resolver, useForm, useWatch } from "react-hook-form";
 import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum";
 import { MedicationTypeEnum } from "@/types/enums/medication-type.enum";
@@ -27,7 +27,7 @@ import {
 } from "@/types/schemas/update-announcement.schema";
 import { getMyAnnouncementById, updateAnnouncement } from "@/services/announcements.service";
 import React from "react";
-import { AnnouncementResponse } from "@/types/announcement-details.response";
+import { AnnouncementResponse } from "@/types/response/announcement-details.response";
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import { InputText } from "@/components/ui/input/input-text";
@@ -97,12 +97,12 @@ export default function EditProductPage({ params }: PageProps) {
 
   return (
     <form
-      className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll"
-      onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation errors:", errors))}
+      className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4"
+      onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="text-title text-base-2">Editar Anúncio</h1>
 
-      <fieldset className="w-full flex flex-row justify-between gap-4">
+      <fieldset className="flex w-full flex-row justify-between gap-4">
         <InputSearch
           {...register("ean")}
           errorMessage={errors.ean?.message}
@@ -127,7 +127,7 @@ export default function EditProductPage({ params }: PageProps) {
         />
       </fieldset>
 
-      <fieldset className="w-full grid grid-cols-4 justify-between gap-4">
+      <fieldset className="grid w-full grid-cols-4 justify-between gap-4">
         <InputText
           {...register("expirationDate")}
           errorMessage={errors.expirationDate?.message}
@@ -149,7 +149,7 @@ export default function EditProductPage({ params }: PageProps) {
           name="idCategory"
           control={control}
           render={({ field }) => (
-            <div className="w-full flex flex-col gap-1">
+            <div className="flex w-full flex-col gap-1">
               <label className="text-4/5 text-base-3">Categoria</label>
 
               <Select
@@ -180,7 +180,7 @@ export default function EditProductPage({ params }: PageProps) {
           name="status"
           control={control}
           render={({ field }) => (
-            <div className="w-full flex flex-col gap-1">
+            <div className="flex w-full flex-col gap-1">
               <label className="text-4/5 text-base-3">Status</label>
 
               <Select
@@ -211,28 +211,28 @@ export default function EditProductPage({ params }: PageProps) {
       <fieldset className="flex flex-col gap-4">
         <h2 className="text-title text-base-2">Especificações</h2>
 
-        <div className="w-full flex flex-col gap-1">
+        <div className="flex w-full flex-col gap-1">
           <Controller
             name="requiresRefrigeration"
             control={control}
             render={({ field }) => (
-              <div className="w-full flex flex-col gap-1">
+              <div className="flex w-full flex-col gap-1">
                 <label className="text-4/5 text-base-3">Necessita refrigeração</label>
 
                 <RadioGroup
                   value={field.value?.toString()}
                   onValueChange={(value) => field.onChange(value === "true")}
                 >
-                  <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-row items-center gap-3">
                     <RadioGroupItem
-                      className="w-6 h-6 border-base-3"
+                      className="border-base-3 h-6 w-6"
                       value="true"
                       id="refrigeration-yes"
                     />
                     <Label htmlFor="refrigeration-yes">Sim</Label>
 
                     <RadioGroupItem
-                      className="w-6 h-6 border-base-3"
+                      className="border-base-3 h-6 w-6"
                       value="false"
                       id="refrigeration-no"
                     />
@@ -245,12 +245,12 @@ export default function EditProductPage({ params }: PageProps) {
         </div>
 
         <div className="flex flex-col gap-4">
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <Controller
               name="medicationType"
               control={control}
               render={({ field }) => (
-                <div className="w-full flex flex-col gap-1">
+                <div className="flex w-full flex-col gap-1">
                   <label className="text-4/5 text-base-3">Tipo</label>
 
                   <Select
@@ -283,7 +283,7 @@ export default function EditProductPage({ params }: PageProps) {
             />
           </div>
 
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <InputText
               {...register("activeIngredient")}
               errorMessage={errors.batch?.message}
@@ -296,7 +296,7 @@ export default function EditProductPage({ params }: PageProps) {
             />
           </div>
 
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <InputText
               {...register("conservation")}
               errorMessage={errors.conservation?.message}
@@ -304,7 +304,7 @@ export default function EditProductPage({ params }: PageProps) {
             />
           </div>
 
-          <div className="flex justify-between items-center gap-4">
+          <div className="flex items-center justify-between gap-4">
             <InputText
               {...register("administrationRoute")}
               errorMessage={errors.administrationRoute?.message}
@@ -339,12 +339,12 @@ export default function EditProductPage({ params }: PageProps) {
           />
         </div>
 
-        <div className="w-full flex flex-col gap-1">
+        <div className="flex w-full flex-col gap-1">
           <Controller
             name="dynamicPrice"
             control={control}
             render={({ field }) => (
-              <div className="w-full flex flex-col gap-1">
+              <div className="flex w-full flex-col gap-1">
                 <label htmlFor="dinamicPrice" className="text-4/5 text-base-3">
                   Preço dinâmico
                 </label>
@@ -353,16 +353,16 @@ export default function EditProductPage({ params }: PageProps) {
                   value={field.value?.toString()}
                   onValueChange={(value) => field.onChange(value === "true")}
                 >
-                  <div className="flex flex-row gap-3 items-center">
+                  <div className="flex flex-row items-center gap-3">
                     <RadioGroupItem
-                      className="w-6 h-6 border-base-3"
+                      className="border-base-3 h-6 w-6"
                       value="true"
                       id="dynamicPrice-yes"
                     />
                     <Label htmlFor="dynamicPrice-yes">Sim</Label>
 
                     <RadioGroupItem
-                      className="w-6 h-6 border-base-3"
+                      className="border-base-3 h-6 w-6"
                       value="false"
                       id="dynamicPrice-no"
                     />
@@ -374,12 +374,12 @@ export default function EditProductPage({ params }: PageProps) {
           />
         </div>
 
-        <div className="w-full flex flex-row justify-between gap-4">
+        <div className="flex w-full flex-row justify-between gap-4">
           <Controller
             name="dynamicPriceUnit"
             control={control}
             render={({ field }) => (
-              <div className="w-full flex flex-col gap-1">
+              <div className="flex w-full flex-col gap-1">
                 <label className="text-4/5 text-base-3">Unidade</label>
 
                 <Select
@@ -421,7 +421,7 @@ export default function EditProductPage({ params }: PageProps) {
         </div>
       </fieldset>
 
-      <div className="w-full flex justify-between">
+      <div className="flex w-full justify-between">
         <Button variant="secondary" type="button" href="/dashboard/products" isLink>
           Cancelar
         </Button>

@@ -9,19 +9,16 @@ const publicPaths = process.env.BFF_PUBLIC_ROUTES!.split(",");
 
 async function refreshAccessToken(refreshToken: string) {
   try {
-    const res = await fetch(
-      `${KEYCLOAK_URL}/realms/${REALM}/protocol/openid-connect/token`,
-      {
-        method: "POST",
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        body: new URLSearchParams({
-          client_id: CLIENT_ID,
-          client_secret: CLIENT_SECRET,
-          grant_type: "refresh_token",
-          refresh_token: refreshToken,
-        }),
-      }
-    );
+    const res = await fetch(`${KEYCLOAK_URL}/realms/${REALM}/protocol/openid-connect/token`, {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({
+        client_id: CLIENT_ID,
+        client_secret: CLIENT_SECRET,
+        grant_type: "refresh_token",
+        refresh_token: refreshToken,
+      }),
+    });
 
     if (!res.ok) {
       console.error("[Middleware] Erro no refresh:", res.status);
@@ -99,7 +96,7 @@ export async function proxy(req: NextRequest) {
     try {
       const [, payloadBase64] = accessToken.split(".");
       const payloadJson = new TextDecoder().decode(
-        Uint8Array.from(atob(payloadBase64), (c) => c.charCodeAt(0))
+        Uint8Array.from(atob(payloadBase64), (c) => c.charCodeAt(0)),
       );
       const payload = JSON.parse(payloadJson);
       const exp = payload.exp * 1000;

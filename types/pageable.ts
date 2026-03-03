@@ -1,6 +1,6 @@
-import { Page } from "./page"
+import { Page } from "./page";
 
 export interface Pageable<T> {
-  content: T[]
-  page: Page
+  content: T[];
+  page: Page;
 }

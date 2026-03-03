@@ -1,9 +1,9 @@
 import { api } from "@/lib/axios";
-import { AnnouncementResponse } from "@/types/announcement-details.response";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementResponse } from "@/types/response/announcement-details.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Pageable } from "@/types/pageable";
-import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
-import { AnnouncementTableResponse } from "@/types/announcement-table.response";
+import { AnnouncementResumeResponse } from "@/types/response/annoucement-resume.response";
+import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
 import { UpdateAnnouncementFormData } from "@/types/schemas/update-announcement.schema";
 import { CreateAnnouncementFormData } from "@/types/schemas/create-announcement.schema";
 

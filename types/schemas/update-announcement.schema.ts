@@ -33,4 +33,3 @@ export const updateAnnouncementSchema = z.object({
 });
 
 export type UpdateAnnouncementFormData = z.infer<typeof updateAnnouncementSchema>;
-

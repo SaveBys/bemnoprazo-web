@@ -1,5 +1,5 @@
-import { AnnouncementStatusEnum } from "./enums/announcement-status.enum";
-import { MedicationTypeEnum } from "./enums/medication-type.enum";
+import { AnnouncementStatusEnum } from "../enums/announcement-status.enum";
+import { MedicationTypeEnum } from "../enums/medication-type.enum";
 
 export interface CreateAnnouncementRequest {
   id: string;

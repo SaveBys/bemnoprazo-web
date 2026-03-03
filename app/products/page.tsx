@@ -4,9 +4,9 @@ import { CardProducts } from "@/components/layout/card-products";
 import { FilterProducts } from "@/components/layout/filter-products";
 import { Paginator } from "@/components/layout/paginator";
 import { Page } from "@/types/page";
-import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
+import { AnnouncementResumeResponse } from "@/types/response/annoucement-resume.response";
 import { useEffect, useState } from "react";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { findAllAnnouncements } from "@/services/announcements.service";
 
 export default function Produtos() {
@@ -28,11 +28,11 @@ export default function Produtos() {
   };
 
   return (
-    <main className="width-barrier flex gap-8 px-11 py-16 m-auto">
+    <main className="width-barrier m-auto flex gap-8 px-11 py-16">
       <FilterProducts onSubmitFilters={(data) => handleFilter(data)} />
 
-      <div className="w-full flex flex-col gap-8">
-        <div className="w-full grid grid-cols-3 grid-rows-3 gap-4">
+      <div className="flex w-full flex-col gap-8">
+        <div className="grid w-full grid-cols-3 grid-rows-3 gap-4">
           {announcements.map((announcement) => {
             return <CardProducts key={announcement.id} data={announcement} />;
           })}

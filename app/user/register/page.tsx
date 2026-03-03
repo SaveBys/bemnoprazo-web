@@ -1,55 +1,59 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { useForm, useWatch } from "react-hook-form"
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 
-import { Dialog, Message } from "@/components/layout/dialog"
-import { Button } from "@/components/ui/button"
-import { registerUser as registerUser } from "@/services/user.service"
-import { CreateUserRequest } from "@/types/create-user.request"
+import { Dialog, Message } from "@/components/layout/dialog";
+import { Button } from "@/components/ui/button";
+import { registerUser as registerUser } from "@/services/user.service";
+import { CreateUserRequest } from "@/types/request/create-user.request";
 
-import InputPassword from "@/components/ui/input/input-password"
-import { InputText } from "@/components/ui/input/input-text"
+import InputPassword from "@/components/ui/input/input-password";
+import { InputText } from "@/components/ui/input/input-text";
 
 export default function RegisterPage() {
-  const router = useRouter()
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState<Message>()
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
 
   const {
     register,
     handleSubmit,
     control,
-    formState: { errors, isValid, isSubmitting }
+    formState: { errors, isValid, isSubmitting },
   } = useForm<CreateUserRequest>({
-    mode: "onChange"
-  })
+    mode: "onChange",
+  });
 
   const password = useWatch({
     control,
     name: "password",
-    defaultValue: ""
-  })
+    defaultValue: "",
+  });
 
   function onSubmit(data: CreateUserRequest) {
-    registerUser(data).then(() => {
-      setMessage({
-        title: "Sucesso!",
-        description: "Recebemos seu cadastro e ele já está em análise. Em breve entraremos em contato.",
-        callback: () => router.push("/user/login")
-      });
-    }).catch((error) => {
-      const errorMessage = error.response.data.message;
-      setMessage({
-        title: "Ocorreu um erro",
-        description: errorMessage,
+    registerUser(data)
+      .then(() => {
+        setMessage({
+          title: "Sucesso!",
+          description:
+            "Recebemos seu cadastro e ele já está em análise. Em breve entraremos em contato.",
+          callback: () => router.push("/user/login"),
+        });
       })
-    }).finally(() => setOpen(true));
+      .catch((error) => {
+        const errorMessage = error.response.data.message;
+        setMessage({
+          title: "Ocorreu um erro",
+          description: errorMessage,
+        });
+      })
+      .finally(() => setOpen(true));
   }
 
   return (
-    <div className="w-fit flex flex-col items-center gap-8 p-12">
+    <div className="flex w-fit flex-col items-center gap-8 p-12">
       <div className="flex flex-col items-center gap-4">
         <h1 className="text-title text-primary-2">Cadastro</h1>
         <h2 className="text-subtitle text-base-3">
@@ -57,10 +61,7 @@ export default function RegisterPage() {
         </h2>
       </div>
 
-      <form
-        className="flex flex-col gap-4 w-md"
-        onSubmit={handleSubmit(onSubmit)}
-      >
+      <form className="flex w-md flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
         <InputText
           label="Nome da Empresa"
           placeholder="Bem no Prazo Tecnologia LTDA"
@@ -96,7 +97,7 @@ export default function RegisterPage() {
           type="email"
           placeholder="exemplo@gmail.com"
           {...register("email", {
-            required: "Campo obrigatório"
+            required: "Campo obrigatório",
           })}
           errorMessage={errors.email?.message}
         />
@@ -108,8 +109,8 @@ export default function RegisterPage() {
             required: "Campo obrigatório",
             minLength: {
               value: 8,
-              message: "Mínimo de 8 caracteres"
-            }
+              message: "Mínimo de 8 caracteres",
+            },
           })}
           errorMessage={errors.password?.message}
         />
@@ -119,17 +120,13 @@ export default function RegisterPage() {
           placeholder="Repita a senha"
           {...register("confirmPassword", {
             required: "Campo obrigatório",
-            validate: value =>
-              value === password || "As senhas não coincidem"
+            validate: (value) => value === password || "As senhas não coincidem",
           })}
           errorMessage={errors.confirmPassword?.message}
         />
 
-        <div className="flex flex-col items-center gap-8 mt-4">
-          <Button
-            type="submit"
-            disabled={!isValid || isSubmitting}
-          >
+        <div className="mt-4 flex flex-col items-center gap-8">
+          <Button type="submit" disabled={!isValid || isSubmitting}>
             Cadastrar
           </Button>
 
@@ -147,5 +144,5 @@ export default function RegisterPage() {
         onActionClick={message?.callback}
       />
     </div>
-  )
+  );
 }
