@@ -1,23 +1,23 @@
-"use client"
+"use client";
 
-import { SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar"
-import { Button } from "../ui/button"
-import { useRouter } from "next/navigation"
-import { logout } from "@/lib/auth"
-import { useEffect, useState } from "react"
-import { getUserData } from "@/services/user.service"
-import { UserDataResponse } from "@/types/response/user-data.response"
+import { SidebarMenu, SidebarMenuItem } from "@/components/ui/sidebar";
+import { Button } from "../ui/button";
+import { useRouter } from "next/navigation";
+import { logout } from "@/lib/auth";
+import { useEffect, useState } from "react";
+import { getUserData } from "@/services/user.service";
+import { UserDataResponse } from "@/types/response/user-data.response";
 
 export function NavUser() {
-  const [userData, setUserData] = useState<UserDataResponse>()
-  const router = useRouter()
+  const [userData, setUserData] = useState<UserDataResponse>();
+  const router = useRouter();
 
   useEffect(() => {
-    getUserData().then((res) => setUserData(res))
-  }, [])
+    getUserData().then((res) => setUserData(res));
+  }, []);
 
   async function handleLogout() {
-    logout().then(() => router.push("/user/login"))
+    logout().then(() => router.push("/user/login"));
   }
 
   return (
@@ -37,5 +37,5 @@ export function NavUser() {
         </div>
       </SidebarMenuItem>
     </SidebarMenu>
-  )
+  );
 }

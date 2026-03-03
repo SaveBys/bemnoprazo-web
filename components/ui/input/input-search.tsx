@@ -1,14 +1,14 @@
-"use client"
+"use client";
 
-import { ChangeEvent } from "react"
-import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr"
-import { cn } from "@/lib/utils"
-import { InputBase } from "./input-base"
+import { ChangeEvent } from "react";
+import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
+import { cn } from "@/lib/utils";
+import { InputBase } from "./input-base";
 
 interface InputSearchProps extends React.ComponentProps<"input"> {
-  label: string
-  errorMessage?: string
-  srOnly?: boolean
+  label: string;
+  errorMessage?: string;
+  srOnly?: boolean;
 }
 
 export default function InputSearch({
@@ -20,7 +20,7 @@ export default function InputSearch({
   ...props
 }: InputSearchProps) {
   function handleChange(e: ChangeEvent<HTMLInputElement>) {
-    onChange?.(e)
+    onChange?.(e);
   }
 
   return (
@@ -41,5 +41,5 @@ export default function InputSearch({
       </div>
       {errorMessage && <p className="min-h-5 text-sm text-red-600">{errorMessage}</p>}
     </div>
-  )
+  );
 }

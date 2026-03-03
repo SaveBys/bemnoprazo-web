@@ -1,25 +1,25 @@
-"use client"
+"use client";
 
-import { Dialog, Message } from "@/components/layout/dialog"
-import { Button } from "@/components/ui/button"
-import InputPassword from "@/components/ui/input/input-password"
-import { updatePassword } from "@/services/user.service"
-import { useRouter, useSearchParams } from "next/navigation"
-import { useState } from "react"
-import { useForm, useWatch } from "react-hook-form"
+import { Dialog, Message } from "@/components/layout/dialog";
+import { Button } from "@/components/ui/button";
+import InputPassword from "@/components/ui/input/input-password";
+import { updatePassword } from "@/services/user.service";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 
 type FormData = {
-  password: string
-  confirmPassword: string
-}
+  password: string;
+  confirmPassword: string;
+};
 
 export default function ResetPasswordPage() {
-  const searchParams = useSearchParams()
-  const token = searchParams.get("token")
+  const searchParams = useSearchParams();
+  const token = searchParams.get("token");
 
-  const router = useRouter()
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState<Message>()
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
 
   const {
     register,
@@ -28,16 +28,16 @@ export default function ResetPasswordPage() {
     formState: { errors, isValid, isSubmitting },
   } = useForm<FormData>({
     mode: "onChange",
-  })
+  });
 
   const password = useWatch({
     control,
     name: "password",
     defaultValue: "",
-  })
+  });
 
   function onSubmit(data: FormData) {
-    if (!token) return
+    if (!token) return;
 
     updatePassword(token, data.password)
       .then(() => {
@@ -45,17 +45,17 @@ export default function ResetPasswordPage() {
           title: "Sucesso!",
           description: "Senha alterada com sucesso, você será redirecionado ao login.",
           callback: () => router.push("/user/login"),
-        })
+        });
       })
       .catch((error) => {
-        const errorMessage = error?.response?.data?.message || "Erro ao alterar senha"
+        const errorMessage = error?.response?.data?.message || "Erro ao alterar senha";
 
         setMessage({
           title: "Ocorreu um erro",
           description: errorMessage,
-        })
+        });
       })
-      .finally(() => setOpen(true))
+      .finally(() => setOpen(true));
   }
 
   return (
@@ -108,5 +108,5 @@ export default function ResetPasswordPage() {
         onActionClick={message?.callback}
       />
     </div>
-  )
+  );
 }

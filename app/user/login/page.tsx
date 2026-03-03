@@ -1,19 +1,19 @@
-"use client"
+"use client";
 
-import { Dialog, Message } from "@/components/layout/dialog"
-import { Button } from "@/components/ui/button"
-import InputPassword from "@/components/ui/input/input-password"
-import { InputText } from "@/components/ui/input/input-text"
-import { login } from "@/lib/auth"
-import { useRouter } from "next/navigation"
-import { useState } from "react"
+import { Dialog, Message } from "@/components/layout/dialog";
+import { Button } from "@/components/ui/button";
+import InputPassword from "@/components/ui/input/input-password";
+import { InputText } from "@/components/ui/input/input-text";
+import { login } from "@/lib/auth";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
 type LoginFormData = {
-  email: string
-  password: string
-}
+  email: string;
+  password: string;
+};
 
 export default function LoginPage() {
   const {
@@ -22,22 +22,22 @@ export default function LoginPage() {
     formState: { errors, isSubmitting, isValid },
   } = useForm<LoginFormData>({
     mode: "onChange",
-  })
-  const router = useRouter()
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState<Message>()
+  });
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
 
   function onSubmit(data: LoginFormData) {
     login(data.email, data.password)
       .then(() => {
-        router.push("/dashboard")
+        router.push("/dashboard");
       })
       .catch((error) => {
         setMessage({
           title: "Ocorreu um erro",
-        })
-        setOpen(true)
-      })
+        });
+        setOpen(true);
+      });
   }
 
   return (
@@ -94,5 +94,5 @@ export default function LoginPage() {
         onActionClick={message?.callback}
       />
     </div>
-  )
+  );
 }

@@ -15,6 +15,6 @@ export function userRoleEnumValue(key: userRoleEnum | string) {
     [userRoleEnum.USER_EMPLOYEE]: {
       label: "Colaborador",
     },
-  }
-  return enumValue[key as userRoleEnum] ?? { label: "Desconhecido" }
+  };
+  return enumValue[key as userRoleEnum] ?? { label: "Desconhecido" };
 }

@@ -1,9 +1,9 @@
-import { AccordionBase, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion"
+import { AccordionBase, AccordionContent, AccordionItem, AccordionTrigger } from "../ui/accordion";
 
 interface AccordionProps {
-  title: string
-  id: string
-  data: { key: string; value?: string }[]
+  title: string;
+  id: string;
+  data: { key: string; value?: string }[];
 }
 
 export default function Accordion({ ...props }: AccordionProps) {
@@ -29,5 +29,5 @@ export default function Accordion({ ...props }: AccordionProps) {
         </AccordionItem>
       </AccordionBase>
     </div>
-  )
+  );
 }

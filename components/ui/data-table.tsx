@@ -1,6 +1,6 @@
-"use client"
+"use client";
 
-import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table"
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 
 import {
   Table,
@@ -9,22 +9,22 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { useMemo } from "react"
+} from "@/components/ui/table";
+import { useMemo } from "react";
 
 interface DataTableProps<TData> {
-  data: TData[]
-  columns: ColumnDef<TData>[]
+  data: TData[];
+  columns: ColumnDef<TData>[];
 }
 
 export function DataTable<TData>({ data, columns }: DataTableProps<TData>) {
-  const memoData = useMemo(() => data, [data])
+  const memoData = useMemo(() => data, [data]);
 
   const table = useReactTable({
     data: memoData,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
 
   return (
     <div className="w-full space-y-4">
@@ -58,5 +58,5 @@ export function DataTable<TData>({ data, columns }: DataTableProps<TData>) {
         </Table>
       </div>
     </div>
-  )
+  );
 }

@@ -1,5 +1,5 @@
-import { PaginationRequest } from "./pagination.request"
+import { PaginationRequest } from "./pagination.request";
 
 export interface UserFilterRequest extends PaginationRequest {
-  search?: string
+  search?: string;
 }

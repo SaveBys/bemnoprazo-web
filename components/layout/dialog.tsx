@@ -1,5 +1,5 @@
 // Dialog.tsx
-"use client"
+"use client";
 
 import {
   AlertDialog,
@@ -9,29 +9,29 @@ import {
   AlertDialogFooter,
   AlertDialogHeader,
   AlertDialogTitle,
-} from "../ui/alert-dialog"
+} from "../ui/alert-dialog";
 
 export interface Message {
-  title: string
-  description?: string
-  callback?: () => void
+  title: string;
+  description?: string;
+  callback?: () => void;
 }
 
 interface DialogProps {
-  open: boolean
-  setOpen: (value: boolean) => void
-  title?: string
-  description?: string
-  onActionClick?: () => void
+  open: boolean;
+  setOpen: (value: boolean) => void;
+  title?: string;
+  description?: string;
+  onActionClick?: () => void;
 }
 
 export function Dialog({ open, setOpen, title, description, onActionClick }: DialogProps) {
   const handleAction = () => {
-    setOpen(false)
+    setOpen(false);
     if (onActionClick) {
-      onActionClick()
+      onActionClick();
     }
-  }
+  };
 
   return (
     <AlertDialog open={open} onOpenChange={setOpen}>
@@ -45,5 +45,5 @@ export function Dialog({ open, setOpen, title, description, onActionClick }: Dia
         </AlertDialogFooter>
       </AlertDialogContent>
     </AlertDialog>
-  )
+  );
 }

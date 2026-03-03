@@ -1,8 +1,8 @@
-import * as React from "react"
-import { cva, type VariantProps } from "class-variance-authority"
-import Link from "next/link"
+import * as React from "react";
+import { cva, type VariantProps } from "class-variance-authority";
+import Link from "next/link";
 
-import { cn } from "@/lib/utils"
+import { cn } from "@/lib/utils";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg transition-all disabled:pointer-events-none disabled:opacity-50 shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
@@ -23,27 +23,27 @@ const buttonVariants = cva(
       size: "default",
     },
   },
-)
+);
 
 interface ButtonBaseProps {
-  icon?: React.ReactNode
-  iconInverse?: boolean
+  icon?: React.ReactNode;
+  iconInverse?: boolean;
 }
 
 type ButtonAsButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
   VariantProps<typeof buttonVariants> &
   ButtonBaseProps & {
-    isLink?: false
-  }
+    isLink?: false;
+  };
 
 type ButtonAsLinkProps = Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, "href"> &
   VariantProps<typeof buttonVariants> &
   ButtonBaseProps & {
-    isLink: true
-    href: string
-  }
+    isLink: true;
+    href: string;
+  };
 
-type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps
+type ButtonProps = ButtonAsButtonProps | ButtonAsLinkProps;
 
 export function Button(rawProps: ButtonProps) {
   const {
@@ -55,19 +55,19 @@ export function Button(rawProps: ButtonProps) {
     iconInverse,
     children,
     ...rest
-  } = rawProps
+  } = rawProps;
 
   const content = (
     <span className={`flex items-center gap-2 ${iconInverse ? "flex-row-reverse" : "flex-row"}`}>
       {icon}
       {children}
     </span>
-  )
+  );
 
-  const classes = cn(buttonVariants({ variant, size, className }))
+  const classes = cn(buttonVariants({ variant, size, className }));
 
   if (isLink) {
-    const { href, ...linkProps } = rest as Omit<ButtonAsLinkProps, "isLink">
+    const { href, ...linkProps } = rest as Omit<ButtonAsLinkProps, "isLink">;
 
     return (
       <Link
@@ -80,7 +80,7 @@ export function Button(rawProps: ButtonProps) {
       >
         {content}
       </Link>
-    )
+    );
   }
 
   return (
@@ -93,5 +93,5 @@ export function Button(rawProps: ButtonProps) {
     >
       {content}
     </button>
-  )
+  );
 }

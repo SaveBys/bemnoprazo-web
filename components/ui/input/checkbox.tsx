@@ -1,7 +1,7 @@
-import React from "react"
-import { Field, FieldLabel } from "../field"
-import { Checkbox as CheckboxPrimitive } from "radix-ui"
-import { CheckboxBase } from "./checkbox-base"
+import React from "react";
+import { Field, FieldLabel } from "../field";
+import { Checkbox as CheckboxPrimitive } from "radix-ui";
+import { CheckboxBase } from "./checkbox-base";
 
 export const Checkbox = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
@@ -13,7 +13,7 @@ export const Checkbox = React.forwardRef<
 
       <FieldLabel>{label}</FieldLabel>
     </Field>
-  )
-})
+  );
+});
 
-Checkbox.displayName = "Checkbox"
+Checkbox.displayName = "Checkbox";

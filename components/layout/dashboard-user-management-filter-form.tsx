@@ -1,31 +1,31 @@
-"use client"
+"use client";
 
-import { useForm } from "react-hook-form"
+import { useForm } from "react-hook-form";
 
-import InputSearch from "@/components/ui/input/input-search"
-import { Button } from "@/components/ui/button"
-import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request"
+import InputSearch from "@/components/ui/input/input-search";
+import { Button } from "@/components/ui/button";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 
 export function DashboardUsersManagementFilterForm({
   onSubmitFilters,
 }: {
-  onSubmitFilters: (data: AnnouncementsFilterParams) => void
+  onSubmitFilters: (data: AnnouncementsFilterParams) => void;
 }) {
   const defaultFilters: AnnouncementsFilterParams = {
     search: "",
-  }
+  };
 
   const { register, handleSubmit, reset } = useForm<AnnouncementsFilterParams>({
     defaultValues: defaultFilters,
-  })
+  });
 
   function onSubmit(data: AnnouncementsFilterParams) {
-    onSubmitFilters(data)
+    onSubmitFilters(data);
   }
 
   function handleClear() {
-    reset(defaultFilters)
-    onSubmitFilters(defaultFilters)
+    reset(defaultFilters);
+    onSubmitFilters(defaultFilters);
   }
 
   return (
@@ -43,5 +43,5 @@ export function DashboardUsersManagementFilterForm({
 
       <Button type="submit">Buscar</Button>
     </form>
-  )
+  );
 }

@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -10,29 +10,29 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/input/select"
-import InputSearch from "@/components/ui/input/input-search"
-import { InputText } from "@/components/ui/input/input-text"
+} from "@/components/ui/input/select";
+import InputSearch from "@/components/ui/input/input-search";
+import { InputText } from "@/components/ui/input/input-text";
 
-import { zodResolver } from "@hookform/resolvers/zod"
-import { Controller, Resolver, useForm, useWatch } from "react-hook-form"
-import { useEffect, useState } from "react"
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Controller, Resolver, useForm, useWatch } from "react-hook-form";
+import { useEffect, useState } from "react";
 
-import { findAllAnnouncementsCategory } from "@/services/announcements-category.service"
-import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response"
-import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum"
-import { MedicationTypeEnum } from "@/types/enums/medication-type.enum"
-import { useRouter } from "next/navigation"
+import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
+import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum";
+import { MedicationTypeEnum } from "@/types/enums/medication-type.enum";
+import { useRouter } from "next/navigation";
 import {
   CreateAnnouncementFormData,
   createAnnouncementSchema,
-} from "@/types/schemas/create-announcement.schema"
-import { createAnnouncement } from "@/services/announcements.service"
+} from "@/types/schemas/create-announcement.schema";
+import { createAnnouncement } from "@/services/announcements.service";
 
 export default function NewProductPage() {
-  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>()
-  const [loading, setLoading] = useState<boolean>(false)
-  const router = useRouter()
+  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
 
   const {
     register,
@@ -46,25 +46,25 @@ export default function NewProductPage() {
       requiresRefrigeration: false,
       dynamicPrice: false,
     },
-  })
+  });
 
-  const dynamicPrice = useWatch({ control, name: "dynamicPrice" })
+  const dynamicPrice = useWatch({ control, name: "dynamicPrice" });
 
   useEffect(() => {
     findAllAnnouncementsCategory({ page: 0 })
       .then((res) => setCategories(res.content))
       .catch((err) => {
-        console.error("Failed to fetch categories:", err)
-      })
-  }, [])
+        console.error("Failed to fetch categories:", err);
+      });
+  }, []);
 
   async function onSubmit(data: CreateAnnouncementFormData) {
     try {
-      setLoading(true)
-      await createAnnouncement(data)
-      router.push("/dashboard/products")
+      setLoading(true);
+      await createAnnouncement(data);
+      router.push("/dashboard/products");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
@@ -374,5 +374,5 @@ export default function NewProductPage() {
         <Button disabled={loading}>Salvar</Button>
       </div>
     </form>
-  )
+  );
 }

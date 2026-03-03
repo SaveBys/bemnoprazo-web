@@ -1,5 +1,5 @@
-import { MinusIcon, PlusIcon, TrashIcon } from "@phosphor-icons/react/dist/ssr"
-import { Button } from "../ui/button"
+import { MinusIcon, PlusIcon, TrashIcon } from "@phosphor-icons/react/dist/ssr";
+import { Button } from "../ui/button";
 
 export function CardShop() {
   return (
@@ -57,5 +57,5 @@ export function CardShop() {
         </p>
       </div>
     </div>
-  )
+  );
 }

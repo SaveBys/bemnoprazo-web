@@ -1,5 +1,5 @@
-import Image from "next/image"
-import { FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react/ssr"
+import Image from "next/image";
+import { FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react/ssr";
 
 export default function Footer() {
   return (
@@ -46,5 +46,5 @@ export default function Footer() {
         </div>
       </div>
     </footer>
-  )
+  );
 }

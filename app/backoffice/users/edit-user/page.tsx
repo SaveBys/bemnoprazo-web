@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 
-import { InputText } from "@/components/ui/input/input-text"
+import { InputText } from "@/components/ui/input/input-text";
 import {
   Select,
   SelectContent,
@@ -10,7 +10,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/input/select"
+} from "@/components/ui/input/select";
 
 export default function EditUserPage() {
   return (
@@ -70,5 +70,5 @@ export default function EditUserPage() {
         </div>
       </main>
     </>
-  )
+  );
 }

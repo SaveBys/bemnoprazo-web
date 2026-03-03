@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useRouter } from "next/navigation"
-import { useState } from "react"
-import { useForm, useWatch } from "react-hook-form"
+import { useRouter } from "next/navigation";
+import { useState } from "react";
+import { useForm, useWatch } from "react-hook-form";
 
-import { Dialog, Message } from "@/components/layout/dialog"
-import { Button } from "@/components/ui/button"
-import { registerUser as registerUser } from "@/services/user.service"
-import { CreateUserRequest } from "@/types/request/create-user.request"
+import { Dialog, Message } from "@/components/layout/dialog";
+import { Button } from "@/components/ui/button";
+import { registerUser as registerUser } from "@/services/user.service";
+import { CreateUserRequest } from "@/types/request/create-user.request";
 
-import InputPassword from "@/components/ui/input/input-password"
-import { InputText } from "@/components/ui/input/input-text"
+import InputPassword from "@/components/ui/input/input-password";
+import { InputText } from "@/components/ui/input/input-text";
 
 export default function RegisterPage() {
-  const router = useRouter()
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState<Message>()
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
 
   const {
     register,
@@ -24,13 +24,13 @@ export default function RegisterPage() {
     formState: { errors, isValid, isSubmitting },
   } = useForm<CreateUserRequest>({
     mode: "onChange",
-  })
+  });
 
   const password = useWatch({
     control,
     name: "password",
     defaultValue: "",
-  })
+  });
 
   function onSubmit(data: CreateUserRequest) {
     registerUser(data)
@@ -40,16 +40,16 @@ export default function RegisterPage() {
           description:
             "Recebemos seu cadastro e ele já está em análise. Em breve entraremos em contato.",
           callback: () => router.push("/user/login"),
-        })
+        });
       })
       .catch((error) => {
-        const errorMessage = error.response.data.message
+        const errorMessage = error.response.data.message;
         setMessage({
           title: "Ocorreu um erro",
           description: errorMessage,
-        })
+        });
       })
-      .finally(() => setOpen(true))
+      .finally(() => setOpen(true));
   }
 
   return (
@@ -144,5 +144,5 @@ export default function RegisterPage() {
         onActionClick={message?.callback}
       />
     </div>
-  )
+  );
 }

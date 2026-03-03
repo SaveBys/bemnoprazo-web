@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Button } from "@/components/ui/button"
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -10,39 +10,39 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/input/select"
-import InputSearch from "@/components/ui/input/input-search"
+} from "@/components/ui/input/select";
+import InputSearch from "@/components/ui/input/input-search";
 
-import { zodResolver } from "@hookform/resolvers/zod"
+import { zodResolver } from "@hookform/resolvers/zod";
 
-import { findAllAnnouncementsCategory } from "@/services/announcements-category.service"
-import { useEffect, useState } from "react"
-import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response"
-import { Controller, Resolver, useForm, useWatch } from "react-hook-form"
-import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum"
-import { MedicationTypeEnum } from "@/types/enums/medication-type.enum"
+import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
+import { useEffect, useState } from "react";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
+import { Controller, Resolver, useForm, useWatch } from "react-hook-form";
+import { AnnouncementStatusEnum } from "@/types/enums/announcement-status.enum";
+import { MedicationTypeEnum } from "@/types/enums/medication-type.enum";
 import {
   UpdateAnnouncementFormData,
   updateAnnouncementSchema,
-} from "@/types/schemas/update-announcement.schema"
-import { getMyAnnouncementById, updateAnnouncement } from "@/services/announcements.service"
-import React from "react"
-import { AnnouncementResponse } from "@/types/response/announcement-details.response"
-import { useRouter } from "next/navigation"
-import { formatDate } from "@/lib/utils"
-import { InputText } from "@/components/ui/input/input-text"
+} from "@/types/schemas/update-announcement.schema";
+import { getMyAnnouncementById, updateAnnouncement } from "@/services/announcements.service";
+import React from "react";
+import { AnnouncementResponse } from "@/types/response/announcement-details.response";
+import { useRouter } from "next/navigation";
+import { formatDate } from "@/lib/utils";
+import { InputText } from "@/components/ui/input/input-text";
 
 interface PageProps {
   params: Promise<{
-    id: string
-  }>
+    id: string;
+  }>;
 }
 
 export default function EditProductPage({ params }: PageProps) {
-  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>()
-  const [loading, setLoading] = useState<boolean>(false)
-  const router = useRouter()
-  const { id } = React.use(params)
+  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
+  const [loading, setLoading] = useState<boolean>(false);
+  const router = useRouter();
+  const { id } = React.use(params);
 
   const {
     register,
@@ -52,48 +52,48 @@ export default function EditProductPage({ params }: PageProps) {
     formState: { errors },
   } = useForm<UpdateAnnouncementFormData>({
     resolver: zodResolver(updateAnnouncementSchema) as Resolver<UpdateAnnouncementFormData>,
-  })
+  });
 
   const dynamicPrice = useWatch({
     control,
     name: "dynamicPrice",
-  })
+  });
 
   async function onSubmit(data: UpdateAnnouncementFormData) {
     try {
-      setLoading(true)
-      await updateAnnouncement({ ...data, id })
-      router.push("/dashboard/products")
+      setLoading(true);
+      await updateAnnouncement({ ...data, id });
+      router.push("/dashboard/products");
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
   }
 
-  const [announcementData, setAnnouncementData] = useState<AnnouncementResponse | null>(null)
+  const [announcementData, setAnnouncementData] = useState<AnnouncementResponse | null>(null);
 
   useEffect(() => {
     async function loadData() {
       const [categoryResponse, announcement] = await Promise.all([
         findAllAnnouncementsCategory({ page: 0 }),
         getMyAnnouncementById(id),
-      ])
+      ]);
 
-      setCategories(categoryResponse.content)
-      setAnnouncementData(announcement)
+      setCategories(categoryResponse.content);
+      setAnnouncementData(announcement);
     }
 
-    loadData()
-  }, [id])
+    loadData();
+  }, [id]);
 
   useEffect(() => {
-    if (!categories || !announcementData) return
+    if (!categories || !announcementData) return;
 
     reset({
       ...announcementData,
       expirationDate: formatDate(announcementData.expirationDate),
       idCategory: announcementData.category?.id ?? "",
-    })
-  }, [categories, announcementData, reset])
+    });
+  }, [categories, announcementData, reset]);
 
   return (
     <form
@@ -428,5 +428,5 @@ export default function EditProductPage({ params }: PageProps) {
         <Button disabled={loading}>Salvar</Button>
       </div>
     </form>
-  )
+  );
 }

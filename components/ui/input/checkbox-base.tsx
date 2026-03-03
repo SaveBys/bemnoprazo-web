@@ -1,8 +1,8 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { CheckIcon } from "lucide-react"
-import { Checkbox as CheckboxPrimitive } from "radix-ui"
+import * as React from "react";
+import { CheckIcon } from "lucide-react";
+import { Checkbox as CheckboxPrimitive } from "radix-ui";
 
 export const CheckboxBase = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
@@ -22,7 +22,7 @@ export const CheckboxBase = React.forwardRef<
         <CheckIcon className="size-4" />
       </CheckboxPrimitive.Indicator>
     </CheckboxPrimitive.Root>
-  )
-})
+  );
+});
 
-CheckboxBase.displayName = "CheckboxBase"
+CheckboxBase.displayName = "CheckboxBase";

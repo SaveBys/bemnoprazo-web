@@ -1,21 +1,21 @@
-"use client"
+"use client";
 
-import { useState, forwardRef, ChangeEvent } from "react"
-import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react/dist/ssr"
-import { InputBase } from "./input-base"
+import { useState, forwardRef, ChangeEvent } from "react";
+import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react/dist/ssr";
+import { InputBase } from "./input-base";
 
 interface InputPasswordProps extends React.ComponentProps<"input"> {
-  label: string
-  errorMessage?: string
-  srOnly?: boolean
+  label: string;
+  errorMessage?: string;
+  srOnly?: boolean;
 }
 
 const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
   ({ label, errorMessage, srOnly = false, onChange, ...props }, ref) => {
-    const [showPassword, setShowPassword] = useState(false)
+    const [showPassword, setShowPassword] = useState(false);
 
     function handleChange(e: ChangeEvent<HTMLInputElement>) {
-      onChange?.(e)
+      onChange?.(e);
     }
 
     return (
@@ -41,10 +41,10 @@ const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
 
         <p className="min-h-5 text-sm text-red-600">{errorMessage}</p>
       </div>
-    )
+    );
   },
-)
+);
 
-InputPassword.displayName = "InputPassword"
+InputPassword.displayName = "InputPassword";
 
-export default InputPassword
+export default InputPassword;

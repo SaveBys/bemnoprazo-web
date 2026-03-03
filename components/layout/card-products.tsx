@@ -1,34 +1,34 @@
-import Image from "next/image"
-import { EyeIcon } from "@phosphor-icons/react/dist/ssr"
-import { Button } from "../ui/button"
-import { AnnouncementResumeResponse } from "@/types/response/annoucement-resume.response"
-import { useRouter } from "next/navigation"
+import Image from "next/image";
+import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
+import { Button } from "../ui/button";
+import { AnnouncementResumeResponse } from "@/types/response/annoucement-resume.response";
+import { useRouter } from "next/navigation";
 
 interface CardProductsProps {
-  data?: AnnouncementResumeResponse
+  data?: AnnouncementResumeResponse;
 }
 
 export function CardProducts(props: CardProductsProps) {
-  const router = useRouter()
+  const router = useRouter();
 
   const formatCurrency = (amount: number | undefined, locale = "pt-BR", currency = "BRL") => {
-    if (!amount) return
+    if (!amount) return;
 
     return new Intl.NumberFormat(locale, {
       style: "currency",
       currency: currency,
-    }).format(amount)
-  }
+    }).format(amount);
+  };
 
   const formatDate = (date: string | undefined) => {
-    if (!date) return
+    if (!date) return;
 
-    return date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1")
-  }
+    return date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1");
+  };
 
   const navigateToDatails = (pid: string) => {
-    router.push(`/products/details?pid=${pid}`)
-  }
+    router.push(`/products/details?pid=${pid}`);
+  };
 
   return (
     <div className="custom-shadow-sm flex h-129 w-75 flex-col gap-6 rounded-md p-6">
@@ -70,5 +70,5 @@ export function CardProducts(props: CardProductsProps) {
         </Button>
       </div>
     </div>
-  )
+  );
 }

@@ -1,10 +1,10 @@
-import { ShoppingCartIcon } from "lucide-react"
-import Image from "next/image"
-import { Button } from "../ui/button"
-import { SquaresFourIcon } from "@phosphor-icons/react/dist/ssr"
+import { ShoppingCartIcon } from "lucide-react";
+import Image from "next/image";
+import { Button } from "../ui/button";
+import { SquaresFourIcon } from "@phosphor-icons/react/dist/ssr";
 
 interface HeaderProps {
-  isAuthenticated?: boolean
+  isAuthenticated?: boolean;
 }
 
 export default function Header({ isAuthenticated = false }: HeaderProps) {
@@ -28,5 +28,5 @@ export default function Header({ isAuthenticated = false }: HeaderProps) {
         )}
       </div>
     </header>
-  )
+  );
 }

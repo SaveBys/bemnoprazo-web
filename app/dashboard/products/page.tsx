@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import { TabelaProdutos } from "@/components/layout/tabela-produtos"
+import { TabelaProdutos } from "@/components/layout/tabela-produtos";
 
-import { Button } from "@/components/ui/button"
-import { PlusIcon } from "@phosphor-icons/react/dist/ssr"
-import { Paginator } from "@/components/layout/paginator"
-import { useEffect, useState } from "react"
-import { DashboardAnnouncementsFilterForm } from "@/components/layout/dashboard-produtcs-filter-form"
-import { findAllMyAnnouncements } from "@/services/announcements.service"
-import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request"
-import { AnnouncementTableResponse } from "@/types/response/announcement-table.response"
-import { Page } from "@/types/page"
+import { Button } from "@/components/ui/button";
+import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
+import { Paginator } from "@/components/layout/paginator";
+import { useEffect, useState } from "react";
+import { DashboardAnnouncementsFilterForm } from "@/components/layout/dashboard-produtcs-filter-form";
+import { findAllMyAnnouncements } from "@/services/announcements.service";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
+import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
+import { Page } from "@/types/page";
 
 export default function DashboardPage() {
-  const [filters, setFilters] = useState<AnnouncementsFilterParams>({})
-  const [announcements, setAnnouncements] = useState<AnnouncementTableResponse[]>()
-  const [page, setPage] = useState<number>(0)
-  const [pageData, setPageData] = useState<Page>()
+  const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
+  const [announcements, setAnnouncements] = useState<AnnouncementTableResponse[]>();
+  const [page, setPage] = useState<number>(0);
+  const [pageData, setPageData] = useState<Page>();
 
   useEffect(() => {
-    const { category, ...rest } = filters
+    const { category, ...rest } = filters;
     const payload = {
       ...rest,
       categories: category ? [category] : undefined,
-    }
+    };
     findAllMyAnnouncements({ ...payload, page, size: 9 }).then((res) => {
-      setAnnouncements(res.content)
-      setPageData(res.page)
-    })
-  }, [filters, page])
+      setAnnouncements(res.content);
+      setPageData(res.page);
+    });
+  }, [filters, page]);
 
   return (
     <div className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4">
@@ -43,8 +43,8 @@ export default function DashboardPage() {
 
         <DashboardAnnouncementsFilterForm
           onSubmitFilters={(filters) => {
-            setPage(0)
-            setFilters(filters)
+            setPage(0);
+            setFilters(filters);
           }}
         />
       </div>
@@ -57,12 +57,12 @@ export default function DashboardPage() {
               pageData={pageData}
               currentPage={page}
               onPageChange={(newPage) => {
-                setPage(newPage)
+                setPage(newPage);
               }}
             />
           </>
         )}
       </div>
     </div>
-  )
+  );
 }

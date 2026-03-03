@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 export default function UserPage() {
   return (
@@ -9,5 +9,5 @@ export default function UserPage() {
         </div>
       </div>
     </div>
-  )
+  );
 }

@@ -1,15 +1,15 @@
-"use client"
+"use client";
 
-import { Dialog, Message } from "@/components/layout/dialog"
-import { Button } from "@/components/ui/button"
-import { InputText } from "@/components/ui/input/input-text"
-import { resetPassword } from "@/services/user.service"
-import { useState } from "react"
+import { Dialog, Message } from "@/components/layout/dialog";
+import { Button } from "@/components/ui/button";
+import { InputText } from "@/components/ui/input/input-text";
+import { resetPassword } from "@/services/user.service";
+import { useState } from "react";
 
 export default function ResetPasswordPage() {
-  const [email, setEmail] = useState<string>("")
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState<Message>()
+  const [email, setEmail] = useState<string>("");
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
 
   const handleResetPassword = () => {
     resetPassword(email)
@@ -17,17 +17,17 @@ export default function ResetPasswordPage() {
         setMessage({
           title: "Sucesso!",
           description: "Em breve receberá um e-mail com os próximos passos.",
-        })
+        });
       })
       .catch((error) => {
-        const errorMessage = error.response.data.message
+        const errorMessage = error.response.data.message;
         setMessage({
           title: "Ocorreu um erro",
           description: errorMessage,
-        })
+        });
       })
-      .finally(() => setOpen(true))
-  }
+      .finally(() => setOpen(true));
+  };
 
   return (
     <div className="flex w-fit flex-col items-center gap-8 p-12">
@@ -66,5 +66,5 @@ export default function ResetPasswordPage() {
         description={message?.description}
       ></Dialog>
     </div>
-  )
+  );
 }

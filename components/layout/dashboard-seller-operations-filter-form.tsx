@@ -1,9 +1,9 @@
-"use client"
+"use client";
 
-import { useEffect, useState } from "react"
-import { Controller, useForm } from "react-hook-form"
+import { useEffect, useState } from "react";
+import { Controller, useForm } from "react-hook-form";
 
-import { Button } from "@/components/ui/button"
+import { Button } from "@/components/ui/button";
 import {
   Select,
   SelectContent,
@@ -11,43 +11,43 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "@/components/ui/input/select"
+} from "@/components/ui/input/select";
 
-import { findAllAnnouncementsCategory } from "@/services/announcements-category.service"
-import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response"
-import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request"
+import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 
 export function DashboardSellerOperationsFilterForm({
   onSubmitFilters,
 }: {
-  onSubmitFilters: (data: AnnouncementsFilterParams) => void
+  onSubmitFilters: (data: AnnouncementsFilterParams) => void;
 }) {
-  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>()
-  const [pageCategory, setPageCategory] = useState<number>(0)
+  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
+  const [pageCategory, setPageCategory] = useState<number>(0);
 
   const defaultFilters: AnnouncementsFilterParams = {
     search: "",
     category: undefined,
-  }
+  };
 
   const { register, handleSubmit, reset, control } = useForm<AnnouncementsFilterParams>({
     defaultValues: defaultFilters,
-  })
+  });
 
   useEffect(() => {
     findAllAnnouncementsCategory({ page: pageCategory }).then((res) => {
-      setCategories(res.content)
-      setPageCategory(res.page.number)
-    })
-  }, [pageCategory])
+      setCategories(res.content);
+      setPageCategory(res.page.number);
+    });
+  }, [pageCategory]);
 
   function onSubmit(data: AnnouncementsFilterParams) {
-    onSubmitFilters(data)
+    onSubmitFilters(data);
   }
 
   function handleClear() {
-    reset(defaultFilters)
-    onSubmitFilters(defaultFilters)
+    reset(defaultFilters);
+    onSubmitFilters(defaultFilters);
   }
 
   return (
@@ -116,5 +116,5 @@ export function DashboardSellerOperationsFilterForm({
 
       <Button type="submit">Buscar</Button>
     </form>
-  )
+  );
 }

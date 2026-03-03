@@ -1,11 +1,11 @@
-import { NextRequest, NextResponse } from "next/server"
-import axios from "axios"
+import { NextRequest, NextResponse } from "next/server";
+import axios from "axios";
 
 export async function POST(req: NextRequest) {
-  const refreshToken = req.cookies.get("refresh_token")?.value
+  const refreshToken = req.cookies.get("refresh_token")?.value;
 
   if (!refreshToken) {
-    return NextResponse.json({}, { status: 401 })
+    return NextResponse.json({}, { status: 401 });
   }
 
   try {
@@ -22,26 +22,26 @@ export async function POST(req: NextRequest) {
           "Content-Type": "application/x-www-form-urlencoded",
         },
       },
-    )
+    );
 
-    const { access_token, refresh_token } = response.data
+    const { access_token, refresh_token } = response.data;
 
-    const res = NextResponse.json({ success: true })
+    const res = NextResponse.json({ success: true });
 
     res.cookies.set("access_token", access_token, {
       httpOnly: true,
       secure: true,
       path: "/",
-    })
+    });
 
     res.cookies.set("refresh_token", refresh_token, {
       httpOnly: true,
       secure: true,
       path: "/",
-    })
+    });
 
-    return res
+    return res;
   } catch {
-    return NextResponse.json({}, { status: 401 })
+    return NextResponse.json({}, { status: 401 });
   }
 }

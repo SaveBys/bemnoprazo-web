@@ -1,34 +1,34 @@
-"use client"
+"use client";
 
-import { Dialog, Message } from "@/components/layout/dialog"
-import { Button } from "@/components/ui/button"
+import { Dialog, Message } from "@/components/layout/dialog";
+import { Button } from "@/components/ui/button";
 
-import { InputText } from "@/components/ui/input/input-text"
-import { getUserDataDetails, updateProfileUserAdm } from "@/services/user.service"
+import { InputText } from "@/components/ui/input/input-text";
+import { getUserDataDetails, updateProfileUserAdm } from "@/services/user.service";
 import {
   UpdataUserProfileFormData,
   updateUserProfileSchema,
-} from "@/types/schemas/update-user-profile.schema"
-import { zodResolver } from "@hookform/resolvers/zod"
-import axios from "axios"
-import { useRouter } from "next/navigation"
+} from "@/types/schemas/update-user-profile.schema";
+import { zodResolver } from "@hookform/resolvers/zod";
+import axios from "axios";
+import { useRouter } from "next/navigation";
 
-import { useState, useEffect } from "react"
-import { Resolver, useForm } from "react-hook-form"
+import { useState, useEffect } from "react";
+import { Resolver, useForm } from "react-hook-form";
 
 export default function MePage() {
-  const router = useRouter()
-  const [open, setOpen] = useState(false)
-  const [message, setMessage] = useState<Message>()
-  const [loading, setLoading] = useState<boolean>(false)
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
+  const [loading, setLoading] = useState<boolean>(false);
 
   const { register, reset, handleSubmit } = useForm<UpdataUserProfileFormData>({
     resolver: zodResolver(updateUserProfileSchema) as Resolver<UpdataUserProfileFormData>,
-  })
+  });
 
   useEffect(() => {
     async function loadData() {
-      setLoading(true)
+      setLoading(true);
       getUserDataDetails()
         .then((res) => {
           reset({
@@ -36,41 +36,41 @@ export default function MePage() {
             document: res.document,
             contactNumber: res.contactNumber,
             email: res.email,
-          })
+          });
         })
-        .finally(() => setLoading(false))
+        .finally(() => setLoading(false));
     }
 
-    loadData()
-  }, [reset])
+    loadData();
+  }, [reset]);
 
   async function onSubmit(data: UpdataUserProfileFormData) {
     try {
-      setLoading(true)
+      setLoading(true);
 
-      await updateProfileUserAdm(data)
+      await updateProfileUserAdm(data);
 
       setMessage({
         title: "Sucesso!",
         description: "Entraremos em contato para dar continuidade com a atualização",
         callback() {
-          router.push("/dashboard/products")
+          router.push("/dashboard/products");
         },
-      })
+      });
     } catch (err: unknown) {
-      let message = "Erro inesperado"
+      let message = "Erro inesperado";
 
       if (axios.isAxiosError(err)) {
-        message = err.response?.data?.message ?? message
+        message = err.response?.data?.message ?? message;
       }
 
       setMessage({
         title: "Ocorreu um erro na solicitação.",
         description: message,
-      })
+      });
     } finally {
-      setOpen(true)
-      setLoading(false)
+      setOpen(true);
+      setLoading(false);
     }
   }
 
@@ -120,5 +120,5 @@ export default function MePage() {
         onActionClick={message?.callback}
       />
     </main>
-  )
+  );
 }

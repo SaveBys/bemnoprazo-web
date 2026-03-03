@@ -1,10 +1,10 @@
-import { SidebarUser } from "@/components/layout/sidebar-user"
-import { SidebarProvider } from "@/components/ui/sidebar"
+import { SidebarUser } from "@/components/layout/sidebar-user";
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function UserLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode
+  children: React.ReactNode;
 }>) {
   return (
     <SidebarProvider>
@@ -16,5 +16,5 @@ export default function UserLayout({
         {children}
       </div>
     </SidebarProvider>
-  )
+  );
 }

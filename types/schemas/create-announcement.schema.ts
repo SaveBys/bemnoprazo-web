@@ -1,7 +1,7 @@
-import { expirationDateValidator } from "@/lib/utils"
-import z from "zod"
-import { AnnouncementStatusEnum } from "../enums/announcement-status.enum"
-import { MedicationTypeEnum } from "../enums/medication-type.enum"
+import { expirationDateValidator } from "@/lib/utils";
+import z from "zod";
+import { AnnouncementStatusEnum } from "../enums/announcement-status.enum";
+import { MedicationTypeEnum } from "../enums/medication-type.enum";
 
 export const createAnnouncementSchema = z.object({
   ean: z.string().optional(),
@@ -29,6 +29,6 @@ export const createAnnouncementSchema = z.object({
   dynamicPriceUnitValue: z.coerce.number().nullable().optional(),
   dynamicPricePercent: z.coerce.number().nullable().optional(),
   dynamicTotalPrice: z.coerce.number().nullable().optional(),
-})
+});
 
-export type CreateAnnouncementFormData = z.infer<typeof createAnnouncementSchema>
+export type CreateAnnouncementFormData = z.infer<typeof createAnnouncementSchema>;

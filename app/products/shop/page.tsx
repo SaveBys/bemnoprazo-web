@@ -1,6 +1,6 @@
-import { CardShop } from "@/components/layout/card-shop"
-import { Button } from "@/components/ui/button"
-import { InputText } from "@/components/ui/input/input-text"
+import { CardShop } from "@/components/layout/card-shop";
+import { Button } from "@/components/ui/button";
+import { InputText } from "@/components/ui/input/input-text";
 
 export default function Shop() {
   return (
@@ -60,5 +60,5 @@ export default function Shop() {
         </div>
       </div>
     </main>
-  )
+  );
 }

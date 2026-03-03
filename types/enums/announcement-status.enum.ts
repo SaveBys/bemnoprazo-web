@@ -15,6 +15,6 @@ export function announcementStatusEnumValue(key: AnnouncementStatusEnum | string
     [AnnouncementStatusEnum.INACTIVE]: {
       label: "Inativo",
     },
-  }
-  return enumValue[key as AnnouncementStatusEnum] ?? { label: "Desconhecido" }
+  };
+  return enumValue[key as AnnouncementStatusEnum] ?? { label: "Desconhecido" };
 }
