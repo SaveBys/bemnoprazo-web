@@ -1,9 +1,11 @@
 import { api } from "@/lib/axios";
-import { AnnouncementResponse } from "@/types/announcement-details.response";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementResponse } from "@/types/response/announcement-details.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Pageable } from "@/types/pageable";
-import { AnnouncementResumeResponse } from "@/types/annoucement-resume.response";
-import { AnnouncementTableResponse } from "@/types/announcement-table.response";
+import { AnnouncementResumeResponse } from "@/types/response/announcement-resume.response";
+import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
+import { UpdateAnnouncementFormData } from "@/types/schemas/update-announcement.schema";
+import { CreateAnnouncementFormData } from "@/types/schemas/create-announcement.schema";
 
 export async function findAllAnnouncements(
   params: AnnouncementsFilterParams,
@@ -23,12 +25,29 @@ export async function findAllMyAnnouncements(
   return data;
 }
 
-export async function getById(id: string): Promise<AnnouncementResponse> {
+export async function findAllAnnouncementsBackoffice(
+  params: AnnouncementsFilterParams,
+): Promise<Pageable<AnnouncementTableResponse>> {
+  const { data } = await api.get("/announcements/backoffice", {
+    params: params,
+  });
+  return data;
+}
+
+export async function getAnnouncementById(id: string): Promise<AnnouncementResponse> {
   const { data } = await api.get(`/announcements/${id}`);
   return data;
 }
 
-export async function getMyById(id: string): Promise<AnnouncementResponse> {
+export async function getMyAnnouncementById(id: string): Promise<AnnouncementResponse> {
   const { data } = await api.get(`/announcements/my-announcements/${id}`);
   return data;
+}
+
+export async function updateAnnouncement(payload: UpdateAnnouncementFormData): Promise<void> {
+  await api.put("/announcements", payload);
+}
+
+export async function createAnnouncement(payload: CreateAnnouncementFormData): Promise<void> {
+  await api.post("/announcements", payload);
 }

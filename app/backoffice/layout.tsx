@@ -1,5 +1,5 @@
 import { SidebarBackoffice } from "@/components/layout/sidebar-backoffice";
-import { SidebarProvider } from "@/components/ui/sidebar"
+import { SidebarProvider } from "@/components/ui/sidebar";
 
 export default function UserLayout({
   children,
@@ -8,7 +8,7 @@ export default function UserLayout({
 }>) {
   return (
     <SidebarProvider>
-      <div className="w-full flex gap-4">
+      <div className="flex w-full gap-4">
         <div className="w-[320px] shrink-0">
           <SidebarBackoffice variant="inset" />
         </div>

@@ -1,6 +1,6 @@
 export interface AnnouncementsFilterParams {
   search?: string;
-  categories?: string[];
+  categories?: string[] | string;
   category?: string;
   minPrice?: number;
   maxPrice?: number;

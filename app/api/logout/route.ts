@@ -1,8 +1,8 @@
-import { NextRequest, NextResponse } from "next/server"
+import { NextRequest, NextResponse } from "next/server";
 
 export async function POST(req: NextRequest) {
   try {
-    const refreshToken = req.cookies.get("refresh_token")?.value
+    const refreshToken = req.cookies.get("refresh_token")?.value;
 
     if (refreshToken) {
       await fetch(
@@ -17,31 +17,26 @@ export async function POST(req: NextRequest) {
             client_secret: process.env.KEYCLOAK_CLIENT_SECRET!,
             refresh_token: refreshToken,
           }),
-        }
-      )
+        },
+      );
     }
-
-    const res = NextResponse.json({ success: true })
-
-    res.cookies.set("access_token", "", {
-      httpOnly: true,
-      path: "/",
-      expires: new Date(0),
-    })
-
-    res.cookies.set("refresh_token", "", {
-      httpOnly: true,
-      path: "/",
-      expires: new Date(0),
-    })
-
-    return res
   } catch (error) {
-    console.error("Erro logout:", error)
-
-    return NextResponse.json(
-      { error: "Erro ao fazer logout" },
-      { status: 500 }
-    )
+    console.error("Erro logout:", error);
   }
+
+  const res = NextResponse.json({ success: true });
+
+  res.cookies.set("access_token", "", {
+    httpOnly: true,
+    path: "/",
+    expires: new Date(0),
+  });
+
+  res.cookies.set("refresh_token", "", {
+    httpOnly: true,
+    path: "/",
+    expires: new Date(0),
+  });
+
+  return res;
 }
