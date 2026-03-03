@@ -49,6 +49,5 @@ export async function updateAnnouncement(payload: UpdateAnnouncementFormData): P
 }
 
 export async function createAnnouncement(payload: CreateAnnouncementFormData): Promise<void> {
-  const { data } = await api.post("/announcements", payload);
-  return data;
+  await api.post("/announcements", payload);
 }
