@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation"
 import { logout } from "@/lib/auth"
 import { useEffect, useState } from "react"
 import { getUserData } from "@/services/user.service"
-import { UserDataResponse } from "@/types/user-data.response"
+import { UserDataResponse } from "@/types/response/user-data.response"
 
 export function NavUser() {
   const [userData, setUserData] = useState<UserDataResponse>()

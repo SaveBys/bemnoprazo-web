@@ -71,7 +71,7 @@ export default function NewProductPage() {
   return (
     <form
       className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4"
-      onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation errors:", errors))}
+      onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="text-title text-base-2">Novo produto</h1>
 

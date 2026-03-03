@@ -5,7 +5,7 @@ import { InputText } from "@/components/ui/input/input-text"
 import { createUserEmployee } from "@/services/user.service"
 import {
   createUserEmployeeSchema,
-  CreateUserEmployeeSchemaFormData,
+  CreateUserEmployeeFormData,
 } from "@/types/schemas/create-user-employee.schema"
 
 import { zodResolver } from "@hookform/resolvers/zod"
@@ -22,11 +22,11 @@ export default function EditUserPage() {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateUserEmployeeSchemaFormData>({
-    resolver: zodResolver(createUserEmployeeSchema) as Resolver<CreateUserEmployeeSchemaFormData>,
+  } = useForm<CreateUserEmployeeFormData>({
+    resolver: zodResolver(createUserEmployeeSchema) as Resolver<CreateUserEmployeeFormData>,
   })
 
-  async function onSubmit(data: CreateUserEmployeeSchemaFormData) {
+  async function onSubmit(data: CreateUserEmployeeFormData) {
     try {
       setLoading(true)
       await createUserEmployee(data)
@@ -43,7 +43,7 @@ export default function EditUserPage() {
 
         <form
           className="flex flex-col gap-4"
-          onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation errors:", errors))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <h2 className="text-subtitle text-base-2">Dados do usuário</h2>
 

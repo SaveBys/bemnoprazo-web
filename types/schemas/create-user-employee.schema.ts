@@ -8,4 +8,4 @@ export const createUserEmployeeSchema = z.object({
   email: z.string().min(1, "E-mail deve ser informado."),
 })
 
-export type CreateUserEmployeeSchemaFormData = z.infer<typeof createUserEmployeeSchema>
+export type CreateUserEmployeeFormData = z.infer<typeof createUserEmployeeSchema>

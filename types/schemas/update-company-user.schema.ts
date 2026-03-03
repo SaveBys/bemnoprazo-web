@@ -8,4 +8,4 @@ export const updateCompanyUserSchema = z.object({
   email: z.string().optional(),
 })
 
-export type UpdateCompanyUserSchemaFormData = z.infer<typeof updateCompanyUserSchema>
+export type UpdateCompanyUserFormData = z.infer<typeof updateCompanyUserSchema>

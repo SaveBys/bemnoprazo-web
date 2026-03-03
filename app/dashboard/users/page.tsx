@@ -7,7 +7,7 @@ import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-
 import { Page } from "@/types/page"
 import { TableDashboardUsers } from "@/components/layout/table-dashboard-users"
 import { getAllCompanyUsers } from "@/services/user.service"
-import { UserDataResponse } from "@/types/user-data.response"
+import { UserDataResponse } from "@/types/response/user-data.response"
 import { Button } from "@/components/ui/button"
 import { PlusIcon } from "lucide-react"
 
@@ -18,7 +18,6 @@ export default function UsersPage() {
   const [pageData, setPageData] = useState<Page>()
 
   useEffect(() => {
-    console.log(filters)
     getAllCompanyUsers({ page, size: 10, ...filters }).then((res) => {
       setAnnouncements(res.content)
       setPageData(res.page)

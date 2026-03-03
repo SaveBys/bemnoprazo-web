@@ -75,7 +75,7 @@ function AlertDialogTitle({ ...props }: React.ComponentProps<typeof AlertDialogP
   return (
     <AlertDialogPrimitive.Title
       data-slot="alert-dialog-title"
-      className="text-title text-base-2"
+      className="text-title text-base-2 text-center"
       {...props}
     />
   )

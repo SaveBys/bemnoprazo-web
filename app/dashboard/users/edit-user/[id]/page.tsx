@@ -6,7 +6,7 @@ import { getByIdCompanyUser, updateProfileCompanyUser } from "@/services/user.se
 
 import {
   updateCompanyUserSchema,
-  UpdateCompanyUserSchemaFormData,
+  UpdateCompanyUserFormData,
 } from "@/types/schemas/update-company-user.schema"
 import { zodResolver } from "@hookform/resolvers/zod"
 import { useRouter } from "next/navigation"
@@ -25,8 +25,8 @@ export default function EditUserPage({ params }: PageProps) {
   const router = useRouter()
   const { id } = React.use(params)
 
-  const { register, reset, handleSubmit } = useForm<UpdateCompanyUserSchemaFormData>({
-    resolver: zodResolver(updateCompanyUserSchema) as Resolver<UpdateCompanyUserSchemaFormData>,
+  const { register, reset, handleSubmit } = useForm<UpdateCompanyUserFormData>({
+    resolver: zodResolver(updateCompanyUserSchema) as Resolver<UpdateCompanyUserFormData>,
   })
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function EditUserPage({ params }: PageProps) {
     loadData()
   }, [id, reset])
 
-  async function onSubmit(data: UpdateCompanyUserSchemaFormData) {
+  async function onSubmit(data: UpdateCompanyUserFormData) {
     try {
       setLoading(true)
       if (data.email) {
@@ -66,7 +66,7 @@ export default function EditUserPage({ params }: PageProps) {
 
         <form
           className="flex flex-col gap-4"
-          onSubmit={handleSubmit(onSubmit, (errors) => console.log("Validation errors:", errors))}
+          onSubmit={handleSubmit(onSubmit)}
         >
           <h2 className="text-subtitle text-base-2">Dados do usuário</h2>
 
