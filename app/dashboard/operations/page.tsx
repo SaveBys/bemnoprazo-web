@@ -2,14 +2,12 @@
 
 import { TabelaProdutos } from "@/components/layout/tabela-produtos";
 
-import { Button } from "@/components/ui/button";
-import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
 import { DashboardSellerOperationsFilterForm } from "@/components/layout/dashboard-seller-operations-filter-form";
 import { findAllMyAnnouncements } from "@/services/announcements.service";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
-import { AnnouncementTableResponse } from "@/types/announcement-table.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
+import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
 import { Page } from "@/types/page";
 
 export default function OperationsPage() {
@@ -26,11 +24,10 @@ export default function OperationsPage() {
   }, [filters, page]);
 
   return (
-    <div className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
+    <div className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4">
       <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <h1 className="text-title text-base-2">Minhas operações</h1>
-          
         </div>
 
         <DashboardSellerOperationsFilterForm onSubmitFilters={(filters) => setFilters(filters)} />

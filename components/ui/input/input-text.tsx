@@ -26,7 +26,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(function I
   }
 
   return (
-    <div className="w-full flex flex-col gap-1">
+    <div className="flex w-full flex-col gap-1">
       <label className={cn(srOnly && "sr-only", "text-legend text-base-3")}>{label}</label>
 
       <InputBase
@@ -38,7 +38,7 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(function I
         className="w-full pr-10"
       />
 
-      <p className="min-h-5 text-red-600 text-sm">{errorMessage}</p>
+      <p className="min-h-5 text-sm text-red-600">{errorMessage}</p>
     </div>
   );
 });

@@ -1,12 +1,6 @@
-"use client"
+"use client";
 
-import {
-  ColumnDef,
-  flexRender,
-  getCoreRowModel,
-  getPaginationRowModel,
-  useReactTable,
-} from "@tanstack/react-table"
+import { ColumnDef, flexRender, getCoreRowModel, useReactTable } from "@tanstack/react-table";
 
 import {
   Table,
@@ -15,25 +9,22 @@ import {
   TableHead,
   TableHeader,
   TableRow,
-} from "@/components/ui/table"
-import { useMemo } from "react"
+} from "@/components/ui/table";
+import { useMemo } from "react";
 
 interface DataTableProps<TData> {
-  data: TData[]
-  columns: ColumnDef<TData>[]
+  data: TData[];
+  columns: ColumnDef<TData>[];
 }
 
-export function DataTable<TData>({
-  data,
-  columns
-}: DataTableProps<TData>) {
-  const memoData = useMemo(() => data, [data])
+export function DataTable<TData>({ data, columns }: DataTableProps<TData>) {
+  const memoData = useMemo(() => data, [data]);
 
   const table = useReactTable({
     data: memoData,
     columns,
     getCoreRowModel: getCoreRowModel(),
-  })
+  });
 
   return (
     <div className="w-full space-y-4">
@@ -46,10 +37,7 @@ export function DataTable<TData>({
                   <TableHead key={header.id}>
                     {header.isPlaceholder
                       ? null
-                      : flexRender(
-                        header.column.columnDef.header,
-                        header.getContext()
-                      )}
+                      : flexRender(header.column.columnDef.header, header.getContext())}
                   </TableHead>
                 ))}
               </TableRow>
@@ -61,10 +49,7 @@ export function DataTable<TData>({
               <TableRow key={row.id}>
                 {row.getVisibleCells().map((cell) => (
                   <TableCell key={cell.id}>
-                    {flexRender(
-                      cell.column.columnDef.cell,
-                      cell.getContext()
-                    )}
+                    {flexRender(cell.column.columnDef.cell, cell.getContext())}
                   </TableCell>
                 ))}
               </TableRow>
@@ -73,5 +58,5 @@ export function DataTable<TData>({
         </Table>
       </div>
     </div>
-  )
+  );
 }

@@ -15,8 +15,8 @@ import {
 } from "@/components/ui/input/select";
 
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 
 export function DashboardAnnouncementsFilterForm({
   onSubmitFilters,
@@ -64,7 +64,7 @@ export function DashboardAnnouncementsFilterForm({
         name="category"
         control={control}
         render={({ field }) => (
-          <div className="w-full flex flex-col gap-1">
+          <div className="flex w-full flex-col gap-1">
             <label htmlFor="category" className="text-legend text-base-3">
               Categoria
             </label>

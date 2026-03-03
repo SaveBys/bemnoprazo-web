@@ -3,7 +3,6 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
-import InputSearch from "@/components/ui/input/input-search";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -15,8 +14,8 @@ import {
 } from "@/components/ui/input/select";
 
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 
 export function DashboardSellerOperationsFilterForm({
   onSubmitFilters,
@@ -57,11 +56,8 @@ export function DashboardSellerOperationsFilterForm({
         name="category"
         control={control}
         render={({ field }) => (
-          <div className="w-full flex flex-col gap-1">
-            <label
-              htmlFor="tipo"
-              className="text-4/5 text-base-3"
-            >
+          <div className="flex w-full flex-col gap-1">
+            <label htmlFor="tipo" className="text-4/5 text-base-3">
               Tipo
             </label>
             <Select
@@ -89,11 +85,8 @@ export function DashboardSellerOperationsFilterForm({
         name="category"
         control={control}
         render={({ field }) => (
-          <div className="w-full flex flex-col gap-1">
-            <label
-              htmlFor="status"
-              className="text-4/5 text-base-3"
-            >
+          <div className="flex w-full flex-col gap-1">
+            <label htmlFor="status" className="text-4/5 text-base-3">
               Status
             </label>
             <Select
@@ -115,7 +108,6 @@ export function DashboardSellerOperationsFilterForm({
             </Select>
           </div>
         )}
-
       />
 
       <Button type="button" variant="secondary" onClick={handleClear}>

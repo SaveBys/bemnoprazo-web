@@ -8,8 +8,8 @@ import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
 import { DashboardAnnouncementsFilterForm } from "@/components/layout/dashboard-produtcs-filter-form";
 import { findAllMyAnnouncements } from "@/services/announcements.service";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
-import { AnnouncementTableResponse } from "@/types/announcement-table.response";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
+import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
 import { Page } from "@/types/page";
 
 export default function DashboardPage() {
@@ -31,9 +31,9 @@ export default function DashboardPage() {
   }, [filters, page]);
 
   return (
-    <div className="w-full flex flex-col gap-8 pr-4 py-8 overflow-x-scroll">
+    <div className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4">
       <div className="flex flex-col gap-8">
-        <div className="flex justify-between items-center">
+        <div className="flex items-center justify-between">
           <h1 className="text-title text-base-2">Meus produtos</h1>
           <Button variant="secondary" href="/dashboard/products/new-product" isLink>
             <PlusIcon className="size-5" />

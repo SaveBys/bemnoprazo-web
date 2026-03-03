@@ -7,7 +7,7 @@ import Accordion from "@/components/layout/accordion";
 import { useEffect, useState } from "react";
 import { getAnnouncementById } from "@/services/announcements.service";
 import { useRouter, useSearchParams } from "next/navigation";
-import { AnnouncementResponse } from "@/types/announcement-details.response";
+import { AnnouncementResponse } from "@/types/response/announcement-details.response";
 
 export default function Detail() {
   const [announcement, setAnnouncement] = useState<AnnouncementResponse>();
@@ -56,10 +56,10 @@ export default function Detail() {
   };
 
   return (
-    <main className="width-barrier flex flex-col items-center mx-auto py-16 px-11">
-      <div className="w-full flex flex-col gap-16">
+    <main className="width-barrier mx-auto flex flex-col items-center px-11 py-16">
+      <div className="flex w-full flex-col gap-16">
         <div className="grid grid-cols-2 gap-8">
-          <div className="w-full flex flex-col items-start gap-6">
+          <div className="flex w-full flex-col items-start gap-6">
             <Button onClick={navigateToProducts} variant="secondary">
               Voltar
             </Button>
@@ -72,7 +72,7 @@ export default function Detail() {
             </div>
 
             {announcement?.manufacturer && (
-              <p className="flex gap-2 text-subtitle text-base-2">
+              <p className="text-subtitle text-base-2 flex gap-2">
                 <span>Fabricante:</span>
                 <span className="underline">{announcement.manufacturer}</span>
               </p>
@@ -83,12 +83,12 @@ export default function Detail() {
             )}
 
             {announcement?.contentDescription && (
-              <p className="text-base font-medium text-base-2">
+              <p className="text-base-2 text-base font-medium">
                 Informações: {announcement.contentDescription}
               </p>
             )}
 
-            <p className="text-base font-medium text-base-2">
+            <p className="text-base-2 text-base font-medium">
               Quantidade disponível: {announcement?.quantity ?? 0}
             </p>
 
@@ -98,7 +98,7 @@ export default function Detail() {
             </Button>
           </div>
 
-          <figure className="w-full flex flex-col items-center">
+          <figure className="flex w-full flex-col items-center">
             <Image src="/img/Produtos.png" alt="produtos" width={400} height={300} />
           </figure>
         </div>

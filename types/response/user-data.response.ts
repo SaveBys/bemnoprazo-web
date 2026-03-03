@@ -3,5 +3,7 @@ export interface UserDataResponse {
   name: string;
   email: string;
   userRole: string;
+  position: string;
+  contactNumber: string;
   companyName: string;
 }

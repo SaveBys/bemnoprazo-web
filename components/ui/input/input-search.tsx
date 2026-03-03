@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, ChangeEvent } from "react";
+import { ChangeEvent } from "react";
 import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { InputBase } from "./input-base";
@@ -24,7 +24,7 @@ export default function InputSearch({
   }
 
   return (
-    <div className={cn("flex flex-col gap-1 relative", props.className)}>
+    <div className={cn("relative flex flex-col gap-1", props.className)}>
       <label className={srOnly ? "sr-only" : "text-legend text-base-3"}>{label}</label>
 
       <div className="relative">
@@ -37,9 +37,9 @@ export default function InputSearch({
           className="w-full pr-10"
         />
 
-        <MagnifyingGlassIcon className="absolute right-3 top-1/2 -translate-y-1/2 size-5 text-base-3" />
+        <MagnifyingGlassIcon className="text-base-3 absolute top-1/2 right-3 size-5 -translate-y-1/2" />
       </div>
-      {errorMessage && <p className="min-h-5 text-red-600 text-sm">{errorMessage}</p>}
+      {errorMessage && <p className="min-h-5 text-sm text-red-600">{errorMessage}</p>}
     </div>
   );
 }

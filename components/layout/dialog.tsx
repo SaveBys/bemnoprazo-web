@@ -1,5 +1,5 @@
 // Dialog.tsx
-"use client"
+"use client";
 
 import {
   AlertDialog,
@@ -14,7 +14,7 @@ import {
 export interface Message {
   title: string;
   description?: string;
-  callback?: () => void
+  callback?: () => void;
 }
 
 interface DialogProps {
