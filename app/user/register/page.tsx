@@ -74,7 +74,7 @@ export default function RegisterPage() {
         <InputText
           label="CNPJ"
           placeholder="00.000.000/0001-00"
-          mask="99.9999.999/9999-99"
+          mask="99.999.999/9999-99"
           {...register("companyDocument", { required: "Campo obrigatório" })}
           errorMessage={errors.companyDocument?.message}
         />
