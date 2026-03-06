@@ -27,7 +27,7 @@ export function CardProducts(props: CardProductsProps) {
   };
 
   const navigateToDatails = (pid: string) => {
-    router.push(`/products/details?pid=${pid}`);
+    router.push(`/products/details/${pid}`);
   };
 
   return (
