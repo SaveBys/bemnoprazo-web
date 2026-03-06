@@ -3,7 +3,7 @@
 import { CardShop } from "@/components/layout/card-shop";
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
-import { useCart } from "@/hooks/cart-context";
+import { useCart } from "@/context/cart-context";
 
 export default function Shop() {
   const { cart, increaseQuantity, decreaseQuantity, removeItem } = useCart();

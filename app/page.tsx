@@ -1,6 +1,7 @@
 import Footer from "@/components/layout/footer";
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function Home() {
   return (
@@ -8,13 +9,17 @@ export default function Home() {
       <main className="flex w-full flex-col items-center">
         <section className="width-barrier flex w-full flex-col items-center gap-16 py-8">
           <figure className="items center flex w-full justify-center">
-            <Image
-              src="/img/LogoBemnoprazo.png"
-              width={400}
-              height={180}
-              alt="Logo da marca SaveBys"
-              className="h-auto"
-            />
+            <nav>
+              <Link href="/" className="m-auto w-fit">
+                <Image
+                  src="/img/LogoBemnoprazo.png"
+                  width={400}
+                  height={180}
+                  alt="Logo da marca SaveBys"
+                  className="h-auto"
+                />
+              </Link>
+            </nav>
           </figure>
 
           <h1 className="text-secondary-2 py-8 text-center text-5xl font-bold">

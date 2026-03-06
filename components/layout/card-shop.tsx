@@ -2,7 +2,7 @@
 
 import { MinusIcon, PlusIcon, TrashIcon } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "../ui/button";
-import { CartItem } from "@/hooks/cart-context";
+import { CartItem } from "@/context/cart-context";
 
 interface CardShopProps {
   data: CartItem;

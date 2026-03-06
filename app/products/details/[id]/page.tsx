@@ -11,7 +11,7 @@ import { getAnnouncementById } from "@/services/announcements.service";
 import { useRouter } from "next/navigation";
 import { AnnouncementResponse } from "@/types/response/announcement-details.response";
 import React from "react";
-import { useCart } from "@/hooks/cart-context";
+import { useCart } from "@/context/cart-context";
 
 interface PageProps {
   params: Promise<{
