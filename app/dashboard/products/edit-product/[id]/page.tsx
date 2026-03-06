@@ -98,7 +98,9 @@ export default function EditProductPage({ params }: PageProps) {
   return (
     <form
       className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4"
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, (errors) => {
+        console.log("Erros do formulário:", errors);
+      })}
     >
       <h1 className="text-title text-base-2">Editar Anúncio</h1>
 
