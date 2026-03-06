@@ -19,11 +19,11 @@ interface PageProps {
   }>;
 }
 
-export default function Detail({ params }: PageProps) {
+export default function ProductsDetailPage({ params }: PageProps) {
   const [announcement, setAnnouncement] = useState<AnnouncementResponse>();
   const [specs, setSpecs] = useState<{ key: string; value: string }[]>();
   const [usage, setUsage] = useState<{ key: string; value: string }[]>();
-  const { cart, addItem } = useCart();
+  const { addItem } = useCart();
   const { id } = React.use(params);
   const router = useRouter();
 

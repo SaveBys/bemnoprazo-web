@@ -38,17 +38,17 @@ export default function Home() {
 
         <section className="w-full">
           <div className="bg-secondary-2 flex w-full flex-col-reverse sm:flex-row">
-            <figure className="h-auto w-[380px] sm:w-[595px]">
+            <figure className="h-auto w-95 sm:w-148.75">
               <Image
                 src="/img/banner.png"
                 width={380}
                 height={200}
                 alt="Logo da marca SaveBys"
-                className="relative w-[380px] sm:w-[595px]"
+                className="relative w-95 sm:w-148.75"
               />
             </figure>
             <div className="flex flex-1 items-center px-4 sm:px-0">
-              <p className="text-base-5 w-[591px] text-center text-3xl font-medium">
+              <p className="text-base-5 w-147.75 text-center text-3xl font-medium">
                 Conectamos farmácias e distribuidoras a consumidores — pessoas físicas, hospitais e
                 clínicas — oferecendo produtos próximos ao vencimento, com preços reduzidos e
                 garantia de qualidade e segurança.

@@ -30,7 +30,7 @@ export function DashboardSellerOperationsFilterForm({
     category: undefined,
   };
 
-  const { register, handleSubmit, reset, control } = useForm<AnnouncementsFilterParams>({
+  const { handleSubmit, reset, control } = useForm<AnnouncementsFilterParams>({
     defaultValues: defaultFilters,
   });
 

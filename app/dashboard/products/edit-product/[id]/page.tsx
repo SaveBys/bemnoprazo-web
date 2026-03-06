@@ -31,6 +31,7 @@ import { AnnouncementResponse } from "@/types/response/announcement-details.resp
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import { InputText } from "@/components/ui/input/input-text";
+import { Dialog, Message } from "@/components/layout/dialog";
 
 interface PageProps {
   params: Promise<{
@@ -41,6 +42,8 @@ interface PageProps {
 export default function EditProductPage({ params }: PageProps) {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
   const router = useRouter();
   const { id } = React.use(params);
 
@@ -63,8 +66,14 @@ export default function EditProductPage({ params }: PageProps) {
     try {
       setLoading(true);
       await updateAnnouncement({ ...data, id });
-      router.push("/dashboard/products");
+      setMessage({
+        title: "Sucesso!",
+        callback() {
+          router.push("/dashboard/products");
+        },
+      });
     } finally {
+      setOpen(true);
       setLoading(false);
     }
   }
@@ -454,6 +463,14 @@ export default function EditProductPage({ params }: PageProps) {
         </Button>
         <Button loading={loading}>Salvar</Button>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </form>
   );
 }

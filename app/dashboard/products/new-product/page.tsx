@@ -28,10 +28,13 @@ import {
   createAnnouncementSchema,
 } from "@/types/schemas/create-announcement.schema";
 import { createAnnouncement } from "@/services/announcements.service";
+import { Dialog, Message } from "@/components/layout/dialog";
 
 export default function NewProductPage() {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
   const router = useRouter();
 
   const {
@@ -59,8 +62,14 @@ export default function NewProductPage() {
     try {
       setLoading(true);
       await createAnnouncement(data);
-      router.push("/dashboard/products");
+      setMessage({
+        title: "Sucesso!",
+        callback() {
+          router.push("/dashboard/products");
+        },
+      });
     } finally {
+      setOpen(true);
       setLoading(false);
     }
   }
@@ -401,6 +410,14 @@ export default function NewProductPage() {
         </Button>
         <Button loading={loading}>Salvar</Button>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </form>
   );
 }

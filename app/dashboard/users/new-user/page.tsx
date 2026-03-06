@@ -1,5 +1,6 @@
 "use client";
 
+import { Dialog, Message } from "@/components/layout/dialog";
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
 import { createUserEmployee } from "@/services/user.service";
@@ -16,6 +17,8 @@ import { Resolver, useForm } from "react-hook-form";
 
 export default function EditUserPage() {
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
   const router = useRouter();
 
   const {
@@ -30,8 +33,14 @@ export default function EditUserPage() {
     try {
       setLoading(true);
       await createUserEmployee(data);
-      router.push("/dashboard/users");
+      setMessage({
+        title: "Sucesso!",
+        callback() {
+          router.push("/dashboard/users");
+        },
+      });
     } finally {
+      setOpen(true);
       setLoading(false);
     }
   }
@@ -90,6 +99,14 @@ export default function EditUserPage() {
           </Button>
         </form>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </main>
   );
 }
