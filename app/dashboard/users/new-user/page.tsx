@@ -85,7 +85,7 @@ export default function EditUserPage() {
             />
           </div>
 
-          <Button className="mx-auto w-fit" disabled={loading}>
+          <Button className="mx-auto w-fit" loading={loading}>
             Salvar
           </Button>
         </form>

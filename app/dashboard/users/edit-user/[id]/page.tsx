@@ -82,7 +82,7 @@ export default function EditUserPage({ params }: PageProps) {
             <InputText {...register("email")} label="E-mail" placeholder="Exemplo@gmail.com" />
           </div>
 
-          <Button className="mx-auto w-fit" disabled={loading}>
+          <Button className="mx-auto w-fit" loading={loading}>
             Salvar
           </Button>
         </form>

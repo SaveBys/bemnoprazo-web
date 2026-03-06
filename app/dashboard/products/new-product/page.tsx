@@ -403,7 +403,7 @@ export default function NewProductPage() {
         <Button variant="secondary" type="button" href="/dashboard/products" isLink>
           Cancelar
         </Button>
-        <Button disabled={loading}>Salvar</Button>
+        <Button loading={loading}>Salvar</Button>
       </div>
     </form>
   );

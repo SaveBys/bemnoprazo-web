@@ -107,7 +107,7 @@ export default function MePage() {
           />
         </div>
 
-        <Button className="mx-auto w-fit" disabled={loading}>
+        <Button className="mx-auto w-fit" loading={loading}>
           Solicitar alteração dos dados
         </Button>
       </form>
