@@ -211,14 +211,13 @@ export default function EditProductPage({ params }: PageProps) {
       <fieldset className="flex flex-col gap-4">
         <h2 className="text-title text-base-2">Especificações</h2>
 
-        <div className="flex w-full flex-col gap-1">
+        <div className="flex items-center gap-4">
           <Controller
             name="requiresRefrigeration"
             control={control}
             render={({ field }) => (
               <div className="flex w-full flex-col gap-1">
                 <label className="text-4/5 text-base-3">Necessita refrigeração</label>
-
                 <RadioGroup
                   value={field.value?.toString()}
                   onValueChange={(value) => field.onChange(value === "true")}
@@ -230,13 +229,41 @@ export default function EditProductPage({ params }: PageProps) {
                       id="refrigeration-yes"
                     />
                     <Label htmlFor="refrigeration-yes">Sim</Label>
-
                     <RadioGroupItem
                       className="border-base-3 h-6 w-6"
                       value="false"
                       id="refrigeration-no"
                     />
                     <Label htmlFor="refrigeration-no">Não</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
+          />
+
+          <Controller
+            name="requiresPrescription"
+            control={control}
+            render={({ field }) => (
+              <div className="flex w-full flex-col gap-1">
+                <label className="text-4/5 text-base-3">Necessita prescrição</label>
+                <RadioGroup
+                  value={field.value?.toString()}
+                  onValueChange={(value) => field.onChange(value === "true")}
+                >
+                  <div className="flex flex-row items-center gap-3">
+                    <RadioGroupItem
+                      className="border-base-3 h-6 w-6"
+                      value="true"
+                      id="prescription-yes"
+                    />
+                    <Label htmlFor="prescription-yes">Sim</Label>
+                    <RadioGroupItem
+                      className="border-base-3 h-6 w-6"
+                      value="false"
+                      id="prescription-no"
+                    />
+                    <Label htmlFor="prescription-no">Não</Label>
                   </div>
                 </RadioGroup>
               </div>
