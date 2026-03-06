@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Open_Sans } from "next/font/google";
 import "./globals.css";
+import { CartProvider } from "@/hooks/cart-context";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -19,7 +20,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body className={`${openSans.variable} antialiased`}>{children}</body>
+      <CartProvider>
+        <body className={`${openSans.variable} antialiased`}>{children}</body>
+      </CartProvider>
     </html>
   );
 }

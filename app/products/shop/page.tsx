@@ -1,12 +1,27 @@
+"use client";
+
 import { CardShop } from "@/components/layout/card-shop";
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
+import { useCart } from "@/hooks/cart-context";
 
 export default function Shop() {
+  const { cart, increaseQuantity, decreaseQuantity, removeItem } = useCart();
+
   return (
     <main className="width-barrier mx-auto my-16 px-11">
       <div className="grid w-full grid-cols-4 gap-8">
-        <CardShop />
+        <div className="col-span-3">
+          {cart.map((item) => (
+            <CardShop
+              key={item.id}
+              data={item}
+              onIncrease={increaseQuantity}
+              onDecrease={decreaseQuantity}
+              onRemove={removeItem}
+            />
+          ))}
+        </div>
 
         <div className="flex w-full flex-col gap-4">
           <div className="custom-shadow-sm rounded-md p-6">

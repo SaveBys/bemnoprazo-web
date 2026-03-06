@@ -31,7 +31,7 @@ export function CardProducts(props: CardProductsProps) {
   };
 
   return (
-    <div className="custom-shadow-sm flex h-129 w-75 flex-col gap-6 rounded-md p-6">
+    <div className="custom-shadow-sm flex h-129 w-75 flex-col justify-between gap-6 rounded-md p-6">
       <figure className="flex h-55 w-63 flex-col items-center overflow-hidden">
         <Image
           className="h-full w-full"
