@@ -3,6 +3,7 @@
 import { MinusIcon, PlusIcon, TrashIcon } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "../ui/button";
 import { CartItem } from "@/context/cart-context";
+import { formatCurrency } from "@/lib/utils";
 
 interface CardShopProps {
   data: CartItem;
@@ -31,7 +32,9 @@ export function CardShop({ data, ...props }: CardShopProps) {
           </p>
         )}
 
-        <p className="text-content text-base-2">Quantidade disponível: {data.quantity}</p>
+        <p className="text-content text-base-2">
+          Quantidade disponível: {data.announcementQuantity}
+        </p>
       </div>
 
       <div className="flex items-center">
@@ -76,8 +79,7 @@ export function CardShop({ data, ...props }: CardShopProps) {
       <div className="flex w-48 flex-col gap-2">
         <p className="text-content text-base-3">Total</p>
         <p className="text-base-3 flex items-center gap-1">
-          <span className="text-subtitle">R$</span>
-          <span className="text-title">{data.price * data.quantity}</span>
+          <span className="text-title">{formatCurrency(data.price * data.quantity)}</span>
         </p>
       </div>
     </div>

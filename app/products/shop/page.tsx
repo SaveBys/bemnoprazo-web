@@ -3,10 +3,23 @@
 import { CardShop } from "@/components/layout/card-shop";
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
-import { useCart } from "@/context/cart-context";
+import { CartItem, useCart } from "@/context/cart-context";
+import { formatCurrency } from "@/lib/utils";
+import { useState } from "react";
 
 export default function Shop() {
-  const { cart, increaseQuantity, decreaseQuantity, removeItem } = useCart();
+  const { cart, increaseQuantity, decreaseQuantity, removeItem, totalPrice, clearCart } = useCart();
+  const [loading, setLoading] = useState(false);
+
+  async function onSubmit(data: CartItem[]) {
+    setLoading(true);
+    try {
+      console.log(data);
+    } finally {
+      clearCart();
+      setLoading(false);
+    }
+  }
 
   return (
     <main className="width-barrier mx-auto my-16 px-11">
@@ -42,29 +55,29 @@ export default function Shop() {
             <div className="flex flex-col gap-5 p-6">
               <h2 className="text-subtitle text-base-2">Resumo</h2>
 
-              <hr className="w-full border-1 bg-gray-300"></hr>
+              <hr className="w-full border bg-gray-300" />
 
               <div>
                 <p className="text-content text-base-3">Valor total dos produtos:</p>
-                <p className="text-subtitle text-base-2">R$ 200,00</p>
+                <p className="text-subtitle text-base-2">{formatCurrency(totalPrice)}</p>
               </div>
 
-              <hr className="w-full border-1 bg-gray-300"></hr>
+              <hr className="w-full border bg-gray-300" />
 
               <div>
                 <p className="text-content text-base-3">Frete:</p>
                 <p className="text-subtitle text-base-2">R$ 15,00</p>
               </div>
 
-              <hr className="w-full border-1 bg-gray-300"></hr>
+              <hr className="w-full border bg-gray-300" />
 
               <div>
                 <p className="text-content text-base-3">Total da compra:</p>
-                <p className="text-subtitle text-base-2">R$ 215,00</p>
+                <p className="text-subtitle text-base-2">{formatCurrency(totalPrice)}</p>
               </div>
 
               <div className="flex flex-col gap-4 pt-6">
-                <Button>Finalizar a reserva</Button>
+                <Button onClick={() => onSubmit(cart)}>Finalizar a reserva</Button>
 
                 <Button variant="secondary" href="/products" isLink>
                   Continuar escolhendo

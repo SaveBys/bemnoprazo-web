@@ -49,6 +49,11 @@ export async function getAllCompanyUsers(
   return data;
 }
 
+export async function getAllUsers(params: UserFilterRequest): Promise<Pageable<UserDataResponse>> {
+  const { data } = await api.get("/users", { params });
+  return data;
+}
+
 export async function updateProfileCompanyUser(
   payload: UpdateCompanyUserFormData,
   email: string,

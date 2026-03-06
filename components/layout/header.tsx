@@ -1,9 +1,8 @@
 "use client";
 
-import { ShoppingCartIcon } from "lucide-react";
 import Image from "next/image";
 import { Button } from "../ui/button";
-import { SquaresFourIcon } from "@phosphor-icons/react/dist/ssr";
+import { ShoppingCartIcon, SquaresFourIcon } from "@phosphor-icons/react/dist/ssr";
 import { Badge } from "../ui/badge";
 import { useCart } from "@/context/cart-context";
 import { useAuth } from "@/context/auth-context";

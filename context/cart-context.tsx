@@ -23,6 +23,7 @@ type CartContextType = {
   increaseQuantity: (id: string) => void;
   decreaseQuantity: (id: string) => void;
   removeItem: (id: string) => void;
+  clearCart: () => void;
 };
 
 const CartContext = createContext<CartContextType | null>(null);
@@ -62,6 +63,10 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     });
   }
 
+  function clearCart() {
+    setCart([]);
+  }
+
   function increaseQuantity(id: string) {
     setCart((prev) =>
       prev.map((item) => (item.id === id ? { ...item, quantity: item.quantity + 1 } : item)),
@@ -80,10 +85,8 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     setCart((prev) => prev.filter((item) => item.id !== id));
   }
 
-  // 🔹 quantidade total de itens
   const totalItems = cart.reduce((acc, item) => acc + item.quantity, 0);
 
-  // 🔹 valor total
   const totalPrice = cart.reduce((acc, item) => acc + item.quantity * item.price, 0);
 
   return (
@@ -96,6 +99,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
         increaseQuantity,
         decreaseQuantity,
         removeItem,
+        clearCart,
       }}
     >
       {children}

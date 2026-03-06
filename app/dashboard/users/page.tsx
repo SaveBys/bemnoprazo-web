@@ -3,16 +3,16 @@
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
 import { DashboardUsersManagementFilterForm } from "@/components/layout/dashboard-user-management-filter-form";
-import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Page } from "@/types/page";
 import { TableDashboardUsers } from "@/components/layout/table-dashboard-users";
 import { getAllCompanyUsers } from "@/services/user.service";
 import { UserDataResponse } from "@/types/response/user-data.response";
 import { Button } from "@/components/ui/button";
-import { PlusIcon } from "lucide-react";
+import { UserFilterRequest } from "@/types/request/user-filter-params.request";
+import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 
 export default function UsersPage() {
-  const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
+  const [filters, setFilters] = useState<UserFilterRequest>({});
   const [announcements, setAnnouncements] = useState<UserDataResponse[]>();
   const [page, setPage] = useState<number>(0);
   const [pageData, setPageData] = useState<Page>();

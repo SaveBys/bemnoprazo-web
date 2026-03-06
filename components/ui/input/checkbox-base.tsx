@@ -1,8 +1,8 @@
 "use client";
 
 import * as React from "react";
-import { CheckIcon } from "lucide-react";
 import { Checkbox as CheckboxPrimitive } from "radix-ui";
+import { CheckIcon } from "@phosphor-icons/react/dist/ssr";
 
 export const CheckboxBase = React.forwardRef<
   React.ElementRef<typeof CheckboxPrimitive.Root>,
