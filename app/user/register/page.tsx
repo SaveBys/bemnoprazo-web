@@ -42,15 +42,6 @@ export default function RegisterPage() {
           callback: () => router.push("/user/login"),
         });
       })
-      .catch((error) => {
-        const errorMessage =
-          error?.response?.data?.message ||
-          "Não foi possível concluir o cadastro. Verifique sua conexão e tente novamente.";
-        setMessage({
-          title: "Ocorreu um erro",
-          description: errorMessage,
-        });
-      })
       .finally(() => setOpen(true));
   }
 

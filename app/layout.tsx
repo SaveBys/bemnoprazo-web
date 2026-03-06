@@ -3,6 +3,8 @@ import { Open_Sans } from "next/font/google";
 import "./globals.css";
 import { CartProvider } from "@/context/cart-context";
 import { AuthProvider } from "@/context/auth-context";
+import { ErrorProvider } from "@/context/error-context";
+import { ApiProvider } from "@/providers/api-provider";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -21,11 +23,15 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <AuthProvider>
-        <CartProvider>
-          <body className={`${openSans.variable} antialiased`}>{children}</body>
-        </CartProvider>
-      </AuthProvider>
+      <ErrorProvider>
+        <ApiProvider>
+          <AuthProvider>
+            <CartProvider>
+              <body className={`${openSans.variable} antialiased`}>{children}</body>
+            </CartProvider>
+          </AuthProvider>
+        </ApiProvider>
+      </ErrorProvider>
     </html>
   );
 }

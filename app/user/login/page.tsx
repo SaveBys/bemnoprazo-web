@@ -1,12 +1,10 @@
 "use client";
 
-import { Dialog, Message } from "@/components/layout/dialog";
 import { Button } from "@/components/ui/button";
 import InputPassword from "@/components/ui/input/input-password";
 import { InputText } from "@/components/ui/input/input-text";
 import { login } from "@/lib/auth";
 import { useRouter } from "next/navigation";
-import { useState } from "react";
 
 import { useForm } from "react-hook-form";
 
@@ -24,20 +22,11 @@ export default function LoginPage() {
     mode: "onChange",
   });
   const router = useRouter();
-  const [open, setOpen] = useState(false);
-  const [message, setMessage] = useState<Message>();
 
   function onSubmit(data: LoginFormData) {
-    login(data.email, data.password)
-      .then(() => {
-        router.push("/dashboard");
-      })
-      .catch(() => {
-        setMessage({
-          title: "Ocorreu um erro",
-        });
-        setOpen(true);
-      });
+    login(data.email, data.password).then(() => {
+      router.push("/dashboard");
+    });
   }
 
   return (
@@ -85,14 +74,6 @@ export default function LoginPage() {
           Esqueci minha senha
         </Button>
       </div>
-
-      <Dialog
-        open={open}
-        setOpen={setOpen}
-        title={message?.title}
-        description={message?.description}
-        onActionClick={message?.callback}
-      />
     </div>
   );
 }

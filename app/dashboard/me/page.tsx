@@ -10,7 +10,6 @@ import {
   updateUserProfileSchema,
 } from "@/types/schemas/update-user-profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { useState, useEffect } from "react";
@@ -56,17 +55,6 @@ export default function MePage() {
         callback() {
           router.push("/dashboard/products");
         },
-      });
-    } catch (err: unknown) {
-      let message = "Erro inesperado";
-
-      if (axios.isAxiosError(err)) {
-        message = err.response?.data?.message ?? message;
-      }
-
-      setMessage({
-        title: "Ocorreu um erro na solicitação.",
-        description: message,
       });
     } finally {
       setOpen(true);

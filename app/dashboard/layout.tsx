@@ -15,7 +15,6 @@ export default function UserLayout({
   const router = useRouter();
 
   useEffect(() => {
-    console.log(isADM);
     if (isADM) {
       router.replace("/backoffice");
     }

@@ -47,14 +47,6 @@ export default function ResetPasswordClient() {
           callback: () => router.push("/user/login"),
         });
       })
-      .catch((error) => {
-        const errorMessage = error?.response?.data?.message || "Erro ao alterar senha";
-
-        setMessage({
-          title: "Ocorreu um erro",
-          description: errorMessage,
-        });
-      })
       .finally(() => setOpen(true));
   }
 
