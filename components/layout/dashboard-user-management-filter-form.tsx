@@ -4,22 +4,22 @@ import { useForm } from "react-hook-form";
 
 import InputSearch from "@/components/ui/input/input-search";
 import { Button } from "@/components/ui/button";
-import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
+import { UserFilterRequest } from "@/types/request/user-filter-params.request";
 
 export function DashboardUsersManagementFilterForm({
   onSubmitFilters,
 }: {
-  onSubmitFilters: (data: AnnouncementsFilterParams) => void;
+  onSubmitFilters: (data: UserFilterRequest) => void;
 }) {
-  const defaultFilters: AnnouncementsFilterParams = {
+  const defaultFilters: UserFilterRequest = {
     search: "",
   };
 
-  const { register, handleSubmit, reset } = useForm<AnnouncementsFilterParams>({
+  const { register, handleSubmit, reset } = useForm<UserFilterRequest>({
     defaultValues: defaultFilters,
   });
 
-  function onSubmit(data: AnnouncementsFilterParams) {
+  function onSubmit(data: UserFilterRequest) {
     onSubmitFilters(data);
   }
 

@@ -1,8 +1,12 @@
 import * as React from "react";
-import { ChevronLeftIcon, ChevronRightIcon, MoreHorizontalIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Button } from "./button";
+import {
+  ArrowsHorizontalIcon,
+  CaretLeftIcon,
+  CaretRightIcon,
+} from "@phosphor-icons/react/dist/ssr";
 
 function Pagination({ className, ...props }: React.ComponentProps<"nav">) {
   return (
@@ -60,7 +64,7 @@ function PaginationLink({ isActive, ...props }: PaginationLinkProps) {
 function PaginationPrevious({ className, ...props }: React.ComponentProps<typeof PaginationLink>) {
   return (
     <PaginationLink aria-label="Página anterior" size="default" className={className} {...props}>
-      <ChevronLeftIcon />
+      <CaretLeftIcon />
       <span className="hidden sm:block"></span>
     </PaginationLink>
   );
@@ -70,7 +74,7 @@ function PaginationNext({ className, ...props }: React.ComponentProps<typeof Pag
   return (
     <PaginationLink aria-label="Próxima página" size="default" className={className} {...props}>
       <span className="hidden sm:block"></span>
-      <ChevronRightIcon />
+      <CaretRightIcon />
     </PaginationLink>
   );
 }
@@ -83,7 +87,7 @@ function PaginationEllipsis({ className, ...props }: React.ComponentProps<"span"
       className={cn("flex size-9 items-center justify-center", className)}
       {...props}
     >
-      <MoreHorizontalIcon className="size-4" />
+      <ArrowsHorizontalIcon className="size-4" />
       <span className="sr-only">More pages</span>
     </span>
   );

@@ -19,24 +19,29 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isValid },
   } = useForm<LoginFormData>({
     mode: "onChange",
   });
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState<Message>();
+  const [loading, setLoading] = useState(false);
+  const router = useRouter();
 
   function onSubmit(data: LoginFormData) {
     login(data.email, data.password)
       .then(() => {
-        router.push("/dashboard");
-      })
-      .catch(() => {
+        setLoading(true);
         setMessage({
-          title: "Ocorreu um erro",
+          title: "Sucesso!",
+          callback() {
+            router.push("/dashboard");
+          },
         });
+      })
+      .finally(() => {
         setOpen(true);
+        setLoading(false);
       });
   }
 
@@ -71,7 +76,7 @@ export default function LoginPage() {
           })}
         />
 
-        <Button type="submit" disabled={!isValid || isSubmitting}>
+        <Button type="submit" disabled={!isValid} loading={loading}>
           Entrar
         </Button>
       </form>

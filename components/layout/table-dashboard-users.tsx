@@ -6,12 +6,11 @@ import { Button } from "../ui/button";
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
 import { ColumnDef } from "@tanstack/react-table";
 import z from "zod";
-import { userRoleEnumValue } from "@/types/enums/user-role.enum";
 
 export const schema = z.object({
   id: z.string(),
   name: z.string(),
-  userRole: z.string(),
+  position: z.string(),
   contactNumber: z.string(),
   email: z.string(),
 });
@@ -26,9 +25,7 @@ export const columns: ColumnDef<RowData>[] = [
   {
     accessorKey: "userRole",
     header: "Cargo",
-    cell: ({ row }) => (
-      <span>{userRoleEnumValue(row.original.userRole)?.label || row.original.userRole}</span>
-    ),
+    cell: ({ row }) => <span>{row.original.position}</span>,
   },
   {
     accessorKey: "contactNumber",

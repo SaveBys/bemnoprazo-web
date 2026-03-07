@@ -11,6 +11,7 @@ import { getAnnouncementById } from "@/services/announcements.service";
 import { useRouter } from "next/navigation";
 import { AnnouncementResponse } from "@/types/response/announcement-details.response";
 import React from "react";
+import { useCart } from "@/context/cart-context";
 
 interface PageProps {
   params: Promise<{
@@ -18,10 +19,11 @@ interface PageProps {
   }>;
 }
 
-export default function Detail({ params }: PageProps) {
+export default function ProductsDetailPage({ params }: PageProps) {
   const [announcement, setAnnouncement] = useState<AnnouncementResponse>();
   const [specs, setSpecs] = useState<{ key: string; value: string }[]>();
   const [usage, setUsage] = useState<{ key: string; value: string }[]>();
+  const { addItem } = useCart();
   const { id } = React.use(params);
   const router = useRouter();
 
@@ -56,6 +58,13 @@ export default function Detail({ params }: PageProps) {
       ]);
     });
   }, [id]);
+
+  async function addToCart() {
+    if (announcement) {
+      addItem({ ...announcement, announcementQuantity: announcement.quantity });
+      router.push("/products/shop");
+    }
+  }
 
   const navigateToProducts = () => {
     router.push("/products");
@@ -98,7 +107,7 @@ export default function Detail({ params }: PageProps) {
               Quantidade disponível: {announcement?.quantity ?? 0}
             </p>
 
-            <Button className="w-full">
+            <Button className="w-full" onClick={() => addToCart()}>
               <PlusIcon className="size-5" />
               <span>Reservar item</span>
             </Button>

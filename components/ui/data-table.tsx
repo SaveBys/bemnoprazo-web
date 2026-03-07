@@ -20,6 +20,7 @@ interface DataTableProps<TData> {
 export function DataTable<TData>({ data, columns }: DataTableProps<TData>) {
   const memoData = useMemo(() => data, [data]);
 
+  // eslint-disable-next-line react-hooks/incompatible-library
   const table = useReactTable({
     data: memoData,
     columns,

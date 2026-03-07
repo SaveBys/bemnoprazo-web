@@ -31,6 +31,7 @@ import { AnnouncementResponse } from "@/types/response/announcement-details.resp
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import { InputText } from "@/components/ui/input/input-text";
+import { Dialog, Message } from "@/components/layout/dialog";
 
 interface PageProps {
   params: Promise<{
@@ -41,6 +42,8 @@ interface PageProps {
 export default function EditProductPage({ params }: PageProps) {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
   const router = useRouter();
   const { id } = React.use(params);
 
@@ -63,7 +66,13 @@ export default function EditProductPage({ params }: PageProps) {
     try {
       setLoading(true);
       await updateAnnouncement({ ...data, id });
-      router.push("/dashboard/products");
+      setMessage({
+        title: "Sucesso!",
+        callback() {
+          router.push("/dashboard/products");
+        },
+      });
+      setOpen(true);
     } finally {
       setLoading(false);
     }
@@ -211,14 +220,13 @@ export default function EditProductPage({ params }: PageProps) {
       <fieldset className="flex flex-col gap-4">
         <h2 className="text-title text-base-2">Especificações</h2>
 
-        <div className="flex w-full flex-col gap-1">
+        <div className="flex items-center gap-4">
           <Controller
             name="requiresRefrigeration"
             control={control}
             render={({ field }) => (
               <div className="flex w-full flex-col gap-1">
                 <label className="text-4/5 text-base-3">Necessita refrigeração</label>
-
                 <RadioGroup
                   value={field.value?.toString()}
                   onValueChange={(value) => field.onChange(value === "true")}
@@ -230,13 +238,41 @@ export default function EditProductPage({ params }: PageProps) {
                       id="refrigeration-yes"
                     />
                     <Label htmlFor="refrigeration-yes">Sim</Label>
-
                     <RadioGroupItem
                       className="border-base-3 h-6 w-6"
                       value="false"
                       id="refrigeration-no"
                     />
                     <Label htmlFor="refrigeration-no">Não</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
+          />
+
+          <Controller
+            name="requiresPrescription"
+            control={control}
+            render={({ field }) => (
+              <div className="flex w-full flex-col gap-1">
+                <label className="text-4/5 text-base-3">Necessita prescrição</label>
+                <RadioGroup
+                  value={field.value?.toString()}
+                  onValueChange={(value) => field.onChange(value === "true")}
+                >
+                  <div className="flex flex-row items-center gap-3">
+                    <RadioGroupItem
+                      className="border-base-3 h-6 w-6"
+                      value="true"
+                      id="prescription-yes"
+                    />
+                    <Label htmlFor="prescription-yes">Sim</Label>
+                    <RadioGroupItem
+                      className="border-base-3 h-6 w-6"
+                      value="false"
+                      id="prescription-no"
+                    />
+                    <Label htmlFor="prescription-no">Não</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -425,8 +461,16 @@ export default function EditProductPage({ params }: PageProps) {
         <Button variant="secondary" type="button" href="/dashboard/products" isLink>
           Cancelar
         </Button>
-        <Button disabled={loading}>Salvar</Button>
+        <Button loading={loading}>Salvar</Button>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </form>
   );
 }
