@@ -11,14 +11,16 @@ export default function UserLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isADM } = useAuth();
+  const { isUserAdm, isEmployee, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (isADM) {
+    if (!loading || !isUserAdm || !isEmployee) {
       router.replace("/backoffice");
     }
-  }, [isADM, router]);
+  }, [isUserAdm, isEmployee, router, loading]);
+
+  if (loading) return null;
 
   return (
     <SidebarProvider>

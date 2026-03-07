@@ -56,8 +56,8 @@ export default function MePage() {
           router.push("/dashboard/products");
         },
       });
-    } finally {
       setOpen(true);
+    } finally {
       setLoading(false);
     }
   }

@@ -68,8 +68,8 @@ export default function NewProductPage() {
           router.push("/dashboard/products");
         },
       });
-    } finally {
       setOpen(true);
+    } finally {
       setLoading(false);
     }
   }

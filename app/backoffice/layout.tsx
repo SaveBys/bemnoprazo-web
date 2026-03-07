@@ -11,14 +11,14 @@ export default function UserLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  const { isUserAdm, isEmployee, loading } = useAuth();
+  const { isADM, loading } = useAuth();
   const router = useRouter();
 
   useEffect(() => {
-    if (isUserAdm || isEmployee) {
+    if (!loading && !isADM) {
       router.replace("/dashboard");
     }
-  }, [isEmployee, isUserAdm, router]);
+  }, [isADM, loading, router]);
 
   if (loading) return null;
 

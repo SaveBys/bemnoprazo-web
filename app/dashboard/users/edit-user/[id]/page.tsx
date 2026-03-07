@@ -60,8 +60,8 @@ export default function EditUserPage({ params }: PageProps) {
           router.push("/dashboard/users");
         },
       });
-    } finally {
       setOpen(true);
+    } finally {
       setLoading(false);
     }
   }

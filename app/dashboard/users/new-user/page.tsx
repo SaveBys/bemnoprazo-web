@@ -39,8 +39,8 @@ export default function EditUserPage() {
           router.push("/dashboard/users");
         },
       });
-    } finally {
       setOpen(true);
+    } finally {
       setLoading(false);
     }
   }

@@ -72,8 +72,8 @@ export default function EditProductPage({ params }: PageProps) {
           router.push("/dashboard/products");
         },
       });
-    } finally {
       setOpen(true);
+    } finally {
       setLoading(false);
     }
   }
