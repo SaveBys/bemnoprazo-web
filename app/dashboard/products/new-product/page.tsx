@@ -79,7 +79,8 @@ export default function NewProductPage() {
       className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="text-title text-base-2">Novo produto</h1>
+      <h1 className="text-title text-base-2">Novo anúncio</h1>
+      <h1 className="text-subtitle text-base-2">Dados do produto</h1>
 
       <fieldset className="flex w-full flex-row justify-between gap-4">
         <InputSearch
