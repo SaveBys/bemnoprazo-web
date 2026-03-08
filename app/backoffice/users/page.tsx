@@ -2,12 +2,12 @@
 
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
-import { DashboardUsersManagementFilterForm } from "@/components/layout/dashboard-user-management-filter-form";
 import { Page } from "@/types/page";
 import { getAllUsers } from "@/services/user.service";
 import { UserFilterRequest } from "@/types/request/user-filter-params.request";
 import { UserDataResponse } from "@/types/response/user-data.response";
 import { TableDashboardUsers } from "@/components/layout/table-dashboard-users";
+import { BackofficeClientFilterForm } from "@/components/layout/backoffice-client-management-filter-form";
 
 export default function UsersPage() {
   const [filters, setFilters] = useState<UserFilterRequest>();
@@ -27,7 +27,7 @@ export default function UsersPage() {
       <div className="flex flex-col gap-8">
         <h1 className="text-title text-base-2">Gestão de clientes</h1>
 
-        <DashboardUsersManagementFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
+        <BackofficeClientFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
       </div>
 
       <div className="flex flex-col gap-8">

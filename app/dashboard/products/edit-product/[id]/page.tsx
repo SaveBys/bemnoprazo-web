@@ -110,6 +110,7 @@ export default function EditProductPage({ params }: PageProps) {
       onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="text-title text-base-2">Editar Anúncio</h1>
+      <h1 className="text-subtitle text-base-2">Dados do produto</h1>
 
       <fieldset className="flex w-full flex-row justify-between gap-4">
         <InputSearch

@@ -2,11 +2,12 @@
 
 import { useForm } from "react-hook-form";
 
-import InputSearch from "@/components/ui/input/input-search";
 import { Button } from "@/components/ui/button";
 import { UserFilterRequest } from "@/types/request/user-filter-params.request";
 
-export function DashboardUsersManagementFilterForm({
+import InputSearch from "../ui/input/input-search";
+
+export function DashboardUsersFilterForm({
   onSubmitFilters,
 }: {
   onSubmitFilters: (data: UserFilterRequest) => void;
