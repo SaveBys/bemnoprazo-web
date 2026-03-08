@@ -1,48 +1,26 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { Controller, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/input/select";
+import { UserFilterRequest } from "@/types/request/user-filter-params.request";
 
-import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
-import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
-import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import InputSearch from "../ui/input/input-search";
 
 export function DashboardUsersFilterForm({
   onSubmitFilters,
 }: {
-  onSubmitFilters: (data: AnnouncementsFilterParams) => void;
+  onSubmitFilters: (data: UserFilterRequest) => void;
 }) {
-  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
-  const [pageCategory, setPageCategory] = useState<number>(0);
-
-  const defaultFilters: AnnouncementsFilterParams = {
+  const defaultFilters: UserFilterRequest = {
     search: "",
-    category: undefined,
   };
 
-  const { register, handleSubmit, reset, control } = useForm<AnnouncementsFilterParams>({
+  const { register, handleSubmit, reset } = useForm<UserFilterRequest>({
     defaultValues: defaultFilters,
   });
 
-  useEffect(() => {
-    findAllAnnouncementsCategory({ page: pageCategory }).then((res) => {
-      setCategories(res.content);
-      setPageCategory(res.page.number);
-    });
-  }, [pageCategory]);
-
-  function onSubmit(data: AnnouncementsFilterParams) {
+  function onSubmit(data: UserFilterRequest) {
     onSubmitFilters(data);
   }
 
@@ -54,11 +32,11 @@ export function DashboardUsersFilterForm({
   return (
     <form className="flex items-end gap-4" onSubmit={handleSubmit(onSubmit)}>
       <InputSearch
-              className="w-full"
-              label="Busca"
-              placeholder="Informe nome ou documento"
-              {...register("search")}
-            />
+        className="w-full"
+        label="Busca"
+        placeholder="Informe nome ou documento"
+        {...register("search")}
+      />
 
       <Button type="button" variant="secondary" onClick={handleClear}>
         Limpar filtro

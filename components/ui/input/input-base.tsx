@@ -16,7 +16,7 @@ const inputVariantes = cva(
         focus-visible:ring-primary-2/25 focus-visible:border-primary-2 focus-visible:ring-[3px]
         disabled:pointer-events-none disabled:bg-base-4 disabled:border-base-3
         aria-[invalid=true]:border-red-600 aria-[invalid=true]:focus-visible:border-red-600 aria-[invalid=true]:focus-visible:ring-red-600/25
-        `
+        `,
       },
     },
     defaultVariants: {

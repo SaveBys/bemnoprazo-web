@@ -1,6 +1,9 @@
 export function applyMask(value: string, mask: string | string[]) {
+  if (Array.isArray(mask)) {
+    mask = resolveMask(value, mask);
+  }
+
   if (!mask) return value;
-  if (Array.isArray(mask)) mask = resolveMask(value, mask);
 
   const cleanValue = value.replace(/\D/g, "");
   let result = "";

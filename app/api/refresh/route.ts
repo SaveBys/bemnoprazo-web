@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+import { getAuthCookieOptions } from "@/lib/cookie-options";
 import axios from "axios";
 
 export async function POST(req: NextRequest) {
@@ -24,21 +25,11 @@ export async function POST(req: NextRequest) {
       },
     );
 
-    const { access_token, refresh_token } = response.data;
-
+    const { access_token, refresh_token, expires_in } = response.data;
     const res = NextResponse.json({ success: true });
 
-    res.cookies.set("access_token", access_token, {
-      httpOnly: true,
-      secure: true,
-      path: "/",
-    });
-
-    res.cookies.set("refresh_token", refresh_token, {
-      httpOnly: true,
-      secure: true,
-      path: "/",
-    });
+    res.cookies.set("access_token", access_token, getAuthCookieOptions(expires_in));
+    res.cookies.set("refresh_token", refresh_token, getAuthCookieOptions());
 
     return res;
   } catch {

@@ -28,10 +28,13 @@ import {
   createAnnouncementSchema,
 } from "@/types/schemas/create-announcement.schema";
 import { createAnnouncement } from "@/services/announcements.service";
+import { Dialog, Message } from "@/components/layout/dialog";
 
 export default function NewProductPage() {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
   const router = useRouter();
 
   const {
@@ -44,6 +47,7 @@ export default function NewProductPage() {
     defaultValues: {
       status: AnnouncementStatusEnum.AWAITING_APPROVAL,
       requiresRefrigeration: false,
+      requiresPrescription: false,
       dynamicPrice: false,
     },
   });
@@ -51,18 +55,20 @@ export default function NewProductPage() {
   const dynamicPrice = useWatch({ control, name: "dynamicPrice" });
 
   useEffect(() => {
-    findAllAnnouncementsCategory({ page: 0 })
-      .then((res) => setCategories(res.content))
-      .catch((err) => {
-        console.error("Failed to fetch categories:", err);
-      });
+    findAllAnnouncementsCategory({ page: 0 }).then((res) => setCategories(res.content));
   }, []);
 
   async function onSubmit(data: CreateAnnouncementFormData) {
     try {
       setLoading(true);
       await createAnnouncement(data);
-      router.push("/dashboard/products");
+      setMessage({
+        title: "Sucesso!",
+        callback() {
+          router.push("/dashboard/products");
+        },
+      });
+      setOpen(true);
     } finally {
       setLoading(false);
     }
@@ -177,34 +183,65 @@ export default function NewProductPage() {
       <fieldset className="flex flex-col gap-4">
         <h2 className="text-title text-base-2">Especificações</h2>
 
-        <Controller
-          name="requiresRefrigeration"
-          control={control}
-          render={({ field }) => (
-            <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Necessita refrigeração</label>
-              <RadioGroup
-                value={field.value?.toString()}
-                onValueChange={(value) => field.onChange(value === "true")}
-              >
-                <div className="flex flex-row items-center gap-3">
-                  <RadioGroupItem
-                    className="border-base-3 h-6 w-6"
-                    value="true"
-                    id="refrigeration-yes"
-                  />
-                  <Label htmlFor="refrigeration-yes">Sim</Label>
-                  <RadioGroupItem
-                    className="border-base-3 h-6 w-6"
-                    value="false"
-                    id="refrigeration-no"
-                  />
-                  <Label htmlFor="refrigeration-no">Não</Label>
-                </div>
-              </RadioGroup>
-            </div>
-          )}
-        />
+        <div className="flex items-center gap-4">
+          <Controller
+            name="requiresRefrigeration"
+            control={control}
+            render={({ field }) => (
+              <div className="flex w-full flex-col gap-1">
+                <label className="text-4/5 text-base-3">Necessita refrigeração</label>
+                <RadioGroup
+                  value={field.value?.toString()}
+                  onValueChange={(value) => field.onChange(value === "true")}
+                >
+                  <div className="flex flex-row items-center gap-3">
+                    <RadioGroupItem
+                      className="border-base-3 h-6 w-6"
+                      value="true"
+                      id="refrigeration-yes"
+                    />
+                    <Label htmlFor="refrigeration-yes">Sim</Label>
+                    <RadioGroupItem
+                      className="border-base-3 h-6 w-6"
+                      value="false"
+                      id="refrigeration-no"
+                    />
+                    <Label htmlFor="refrigeration-no">Não</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
+          />
+
+          <Controller
+            name="requiresPrescription"
+            control={control}
+            render={({ field }) => (
+              <div className="flex w-full flex-col gap-1">
+                <label className="text-4/5 text-base-3">Necessita prescrição</label>
+                <RadioGroup
+                  value={field.value?.toString()}
+                  onValueChange={(value) => field.onChange(value === "true")}
+                >
+                  <div className="flex flex-row items-center gap-3">
+                    <RadioGroupItem
+                      className="border-base-3 h-6 w-6"
+                      value="true"
+                      id="prescription-yes"
+                    />
+                    <Label htmlFor="prescription-yes">Sim</Label>
+                    <RadioGroupItem
+                      className="border-base-3 h-6 w-6"
+                      value="false"
+                      id="prescription-no"
+                    />
+                    <Label htmlFor="prescription-no">Não</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
+          />
+        </div>
 
         <div className="flex flex-col gap-4">
           <div className="flex items-center justify-between gap-4">
@@ -372,8 +409,16 @@ export default function NewProductPage() {
         <Button variant="secondary" type="button" href="/dashboard/products" isLink>
           Cancelar
         </Button>
-        <Button disabled={loading}>Salvar</Button>
+        <Button loading={loading}>Salvar</Button>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </form>
   );
 }

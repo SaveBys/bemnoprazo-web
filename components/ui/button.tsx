@@ -3,6 +3,7 @@ import { cva, type VariantProps } from "class-variance-authority";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
+import { Spinner } from "./spinner";
 
 const buttonVariants = cva(
   "inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-lg transition-all disabled:pointer-events-none disabled:opacity-50 shrink-0 outline-none focus-visible:border-ring focus-visible:ring-ring/50 focus-visible:ring-[3px]",
@@ -28,6 +29,7 @@ const buttonVariants = cva(
 interface ButtonBaseProps {
   icon?: React.ReactNode;
   iconInverse?: boolean;
+  loading?: boolean;
 }
 
 type ButtonAsButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> &
@@ -54,6 +56,7 @@ export function Button(rawProps: ButtonProps) {
     icon,
     iconInverse,
     children,
+    loading,
     ...rest
   } = rawProps;
 
@@ -68,6 +71,12 @@ export function Button(rawProps: ButtonProps) {
 
   if (isLink) {
     const { href, ...linkProps } = rest as Omit<ButtonAsLinkProps, "isLink">;
+
+    if (typeof href !== "string") {
+      throw new Error(
+        'Button: "href" property is required and must be a string when "isLink" is true.',
+      );
+    }
 
     return (
       <Link
@@ -89,9 +98,10 @@ export function Button(rawProps: ButtonProps) {
       data-variant={variant}
       data-size={size}
       className={classes}
+      disabled={loading || (rest as ButtonAsButtonProps).disabled}
       {...(rest as Omit<ButtonAsButtonProps, "isLink">)}
     >
-      {content}
+      {loading ? <Spinner /> : content}
     </button>
   );
 }

@@ -1,17 +1,23 @@
-"use client"
+"use client";
 
-import { Label } from "@/components/ui/label"
-import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group"
-import { Button } from "@/components/ui/button"
-import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/input/select"
-import InputSearch from "@/components/ui/input/input-search"
-import { InputText } from "@/components/ui/input/input-text"
+import { Label } from "@/components/ui/label";
+import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
+import { Button } from "@/components/ui/button";
+import {
+  Select,
+  SelectContent,
+  SelectGroup,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/input/select";
+import InputSearch from "@/components/ui/input/input-search";
+import { InputText } from "@/components/ui/input/input-text";
 
 export default function AnalysisProductPage() {
-
   return (
-    <main className="width-barrier w-full flex flex-col items-center">
-      <div className="w-full flex flex-col gap-8 py-8">
+    <main className="width-barrier flex w-full flex-col items-center">
+      <div className="flex w-full flex-col gap-8 py-8">
         <div className="flex flex-col gap-8">
           <div className="flex items-center">
             <h1 className="text-title text-base-2">Analise do Produto</h1>
@@ -19,22 +25,39 @@ export default function AnalysisProductPage() {
           <div className="flex items-center">
             <h1 className="text-subtitle text-base-2">Dados do produto</h1>
           </div>
-          <div className="w-full flex flex-row justify-between gap-4">
-            <InputSearch className="w-full " label="Código EAN" placeholder="000000" disabled />
+          <div className="flex w-full flex-row justify-between gap-4">
+            <InputSearch className="w-full" label="Código EAN" placeholder="000000" disabled />
             <InputSearch className="w-full" label="Nome Comercial" placeholder="000000" disabled />
-            <InputSearch className="w-full" label="Lote do medicamento" placeholder="n° do lote" disabled />
+            <InputSearch
+              className="w-full"
+              label="Lote do medicamento"
+              placeholder="n° do lote"
+              disabled
+            />
           </div>
-          <div className="w-full flex flex-row justify-between gap-4">
-            <InputText className="w-full" label="Data de validade" placeholder="00/00/00" mask="99/99/9999" name="min-expiration-date" disabled />
-            <InputText className="w-full" label="Quantidade" placeholder="0" mask="99/99/9999" name="min-expiration-date" disabled />
-            <div className="w-full flex flex-col gap-1">
-              <label
-                htmlFor="status"
-                className="text-4/5 text-base-3">
+          <div className="flex w-full flex-row justify-between gap-4">
+            <InputText
+              className="w-full"
+              label="Data de validade"
+              placeholder="00/00/00"
+              mask="99/99/9999"
+              name="min-expiration-date"
+              disabled
+            />
+            <InputText
+              className="w-full"
+              label="Quantidade"
+              placeholder="0"
+              mask="99/99/9999"
+              name="min-expiration-date"
+              disabled
+            />
+            <div className="flex w-full flex-col gap-1">
+              <label htmlFor="status" className="text-4/5 text-base-3">
                 Status
               </label>
               <Select>
-                <SelectTrigger id="status" disabled >
+                <SelectTrigger id="status" disabled>
                   <SelectValue placeholder="Aguardando aprovação" />
                 </SelectTrigger>
                 <SelectContent>
@@ -55,25 +78,31 @@ export default function AnalysisProductPage() {
             <div className="flex flex-col">
               <h1 className="text-content text-base-2 mb-4">Necessita Refrigeração</h1>
             </div>
-            <RadioGroup defaultValue="option-one" disabled >
+            <RadioGroup defaultValue="option-one" disabled>
               <div className="flex flex-row gap-3">
-                <RadioGroupItem className="w-6 h-6 border-1 border-base-3" value="option-one" id="option-one" />
+                <RadioGroupItem
+                  className="border-base-3 h-6 w-6 border-1"
+                  value="option-one"
+                  id="option-one"
+                />
                 <Label htmlFor="option-one">Sim</Label>
-                <RadioGroupItem className="w-6 h-6 border-1 border-base-3" value="option-two" id="option-two" />
+                <RadioGroupItem
+                  className="border-base-3 h-6 w-6 border-1"
+                  value="option-two"
+                  id="option-two"
+                />
                 <Label htmlFor="option-two">Não</Label>
               </div>
             </RadioGroup>
           </div>
           <div className="flex flex-col gap-4">
-            <div className="w-full flex flex-row gap-4 justify-between items-center">
-              <div className="w-full flex flex-col gap-1">
-                <label
-                  htmlFor="tipo"
-                  className="text-4/5 text-base-3">
+            <div className="flex w-full flex-row items-center justify-between gap-4">
+              <div className="flex w-full flex-col gap-1">
+                <label htmlFor="tipo" className="text-4/5 text-base-3">
                   Tipo
                 </label>
                 <Select>
-                  <SelectTrigger id="status" disabled >
+                  <SelectTrigger id="status" disabled>
                     <SelectValue placeholder="Referência, Genérico, Similar" />
                   </SelectTrigger>
                   <SelectContent>
@@ -93,7 +122,7 @@ export default function AnalysisProductPage() {
               <InputText className="w-169" label="Conteúdo" disabled />
             </div>
             <div className="flex items-end gap-4">
-              <InputText className="w-169 full" label="Conservação" disabled />
+              <InputText className="full w-169" label="Conservação" disabled />
               <InputText className="w-169" label="Prescrição médica" disabled />
             </div>
             <div className="flex items-end gap-4">
@@ -101,12 +130,17 @@ export default function AnalysisProductPage() {
               <InputText className="w-169" label="Modo de uso" disabled />
             </div>
           </div>
-          <div className="flex justify-between items-center">
+          <div className="flex items-center justify-between">
             <h1 className="text-title text-base-2">Preços</h1>
           </div>
           <div className="flex flex-col gap-8">
             <div className="flex items-end gap-4">
-              <InputText className="bg-base-4 border-base-3 border-1 w-169" label="Preço de mercado" placeholder="R$ 00,00" disabled />
+              <InputText
+                className="bg-base-4 border-base-3 w-169 border-1"
+                label="Preço de mercado"
+                placeholder="R$ 00,00"
+                disabled
+              />
               <InputText className="w-169" label="Preço ofertado" placeholder="R$ 00,00" disabled />
             </div>
           </div>
@@ -114,25 +148,31 @@ export default function AnalysisProductPage() {
             <div className="flex flex-col">
               <h1 className="text-content text-base-2 mb-4">Preço dinâmico</h1>
             </div>
-            <RadioGroup defaultValue="option-one"disabled >
+            <RadioGroup defaultValue="option-one" disabled>
               <div className="flex flex-row gap-3">
-                <RadioGroupItem className="w-6 h-6 border-1 border-base-3" value="option-one" id="option-one" />
+                <RadioGroupItem
+                  className="border-base-3 h-6 w-6 border-1"
+                  value="option-one"
+                  id="option-one"
+                />
                 <Label htmlFor="option-one">Sim</Label>
-                <RadioGroupItem className="w-6 h-6 border-1 border-base-3" value="option-two" id="option-two" />
+                <RadioGroupItem
+                  className="border-base-3 h-6 w-6 border-1"
+                  value="option-two"
+                  id="option-two"
+                />
                 <Label htmlFor="option-two">Não</Label>
               </div>
             </RadioGroup>
           </div>
           <div className="flex flex-col gap-8">
-            <div className="w-full flex flex-row justify-between gap-4">
-              <div className="w-full flex flex-col gap-1">
-                <label
-                  htmlFor="unidade"
-                  className="text-4/5 text-base-3">
+            <div className="flex w-full flex-row justify-between gap-4">
+              <div className="flex w-full flex-col gap-1">
+                <label htmlFor="unidade" className="text-4/5 text-base-3">
                   Unidade
                 </label>
                 <Select>
-                  <SelectTrigger id="status" disabled >
+                  <SelectTrigger id="status" disabled>
                     <SelectValue placeholder="Dia" />
                   </SelectTrigger>
                   <SelectContent>
@@ -149,13 +189,13 @@ export default function AnalysisProductPage() {
               <InputText className="" label="Percentual desconto" placeholder="15%" disabled />
             </div>
           </div>
-          <div className="w-full flex flex-col items-end gap-8 mt-8">
-            <div className="w-full flex flex-col items-center gap-4">
+          <div className="mt-8 flex w-full flex-col items-end gap-8">
+            <div className="flex w-full flex-col items-center gap-4">
               <Button>Aprovar</Button>
             </div>
           </div>
         </div>
       </div>
     </main>
-  )
+  );
 }

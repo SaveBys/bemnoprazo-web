@@ -1,5 +1,6 @@
 "use client";
 
+import { Dialog, Message } from "@/components/layout/dialog";
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
 import { getByIdCompanyUser, updateProfileCompanyUser } from "@/services/user.service";
@@ -22,6 +23,8 @@ interface PageProps {
 
 export default function EditUserPage({ params }: PageProps) {
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
   const router = useRouter();
   const { id } = React.use(params);
 
@@ -50,10 +53,14 @@ export default function EditUserPage({ params }: PageProps) {
   async function onSubmit(data: UpdateCompanyUserFormData) {
     try {
       setLoading(true);
-      if (data.email) {
-        await updateProfileCompanyUser({ ...data, id }, data.email);
-        router.push("/dashboard/users");
-      }
+      await updateProfileCompanyUser({ ...data, id }, data.email!);
+      setMessage({
+        title: "Sucesso!",
+        callback() {
+          router.push("/dashboard/users");
+        },
+      });
+      setOpen(true);
     } finally {
       setLoading(false);
     }
@@ -84,11 +91,19 @@ export default function EditUserPage({ params }: PageProps) {
             <InputText {...register("email")} label="E-mail" placeholder="Exemplo@gmail.com" />
           </div>
 
-          <Button className="mx-auto w-fit" disabled={loading}>
+          <Button className="mx-auto w-fit" loading={loading}>
             Salvar
           </Button>
         </form>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </main>
   );
 }

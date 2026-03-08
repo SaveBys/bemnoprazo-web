@@ -42,13 +42,6 @@ export default function RegisterPage() {
           callback: () => router.push("/user/login"),
         });
       })
-      .catch((error) => {
-        const errorMessage = error.response.data.message;
-        setMessage({
-          title: "Ocorreu um erro",
-          description: errorMessage,
-        });
-      })
       .finally(() => setOpen(true));
   }
 
@@ -72,7 +65,7 @@ export default function RegisterPage() {
         <InputText
           label="CNPJ"
           placeholder="00.000.000/0001-00"
-          mask="99.9999.999/9999-99"
+          mask="99.999.999/9999-99"
           {...register("companyDocument", { required: "Campo obrigatório" })}
           errorMessage={errors.companyDocument?.message}
         />

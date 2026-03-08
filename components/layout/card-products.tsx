@@ -1,8 +1,11 @@
 import Image from "next/image";
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
 import { Button } from "../ui/button";
-import { AnnouncementResumeResponse } from "@/types/response/annoucement-resume.response";
+import { AnnouncementResumeResponse } from "@/types/response/announcement-resume.response";
 import { useRouter } from "next/navigation";
+import { Badge } from "../ui/badge";
+import { expirationDateRangeEnumValue } from "@/types/enums/expiration-date-range.enum";
+import { formatCurrency, formatDate } from "@/lib/utils";
 
 interface CardProductsProps {
   data?: AnnouncementResumeResponse;
@@ -11,27 +14,24 @@ interface CardProductsProps {
 export function CardProducts(props: CardProductsProps) {
   const router = useRouter();
 
-  const formatCurrency = (amount: number | undefined, locale = "pt-BR", currency = "BRL") => {
-    if (!amount) return;
-
-    return new Intl.NumberFormat(locale, {
-      style: "currency",
-      currency: currency,
-    }).format(amount);
-  };
-
-  const formatDate = (date: string | undefined) => {
-    if (!date) return;
-
-    return date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1");
-  };
-
   const navigateToDatails = (pid: string) => {
-    router.push(`/products/details?pid=${pid}`);
+    router.push(`/products/details/${pid}`);
+  };
+
+  const hasLabel = () => {
+    return (
+      props.data?.expirationDateRange &&
+      expirationDateRangeEnumValue(props.data?.expirationDateRange).label
+    );
   };
 
   return (
-    <div className="custom-shadow-sm flex h-129 w-75 flex-col gap-6 rounded-md p-6">
+    <div className="custom-shadow-sm flex h-129 w-75 flex-col justify-between gap-6 rounded-md p-6">
+      {hasLabel() && (
+        <Badge variant="secondary" className="absolute">
+          {expirationDateRangeEnumValue(props.data!.expirationDateRange).label}
+        </Badge>
+      )}
       <figure className="flex h-55 w-63 flex-col items-center overflow-hidden">
         <Image
           className="h-full w-full"

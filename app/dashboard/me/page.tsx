@@ -10,7 +10,6 @@ import {
   updateUserProfileSchema,
 } from "@/types/schemas/update-user-profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
-import axios from "axios";
 import { useRouter } from "next/navigation";
 
 import { useState, useEffect } from "react";
@@ -57,19 +56,8 @@ export default function MePage() {
           router.push("/dashboard/products");
         },
       });
-    } catch (err: unknown) {
-      let message = "Erro inesperado";
-
-      if (axios.isAxiosError(err)) {
-        message = err.response?.data?.message ?? message;
-      }
-
-      setMessage({
-        title: "Ocorreu um erro na solicitação.",
-        description: message,
-      });
-    } finally {
       setOpen(true);
+    } finally {
       setLoading(false);
     }
   }
@@ -107,7 +95,7 @@ export default function MePage() {
           />
         </div>
 
-        <Button className="mx-auto w-fit" disabled={loading}>
+        <Button className="mx-auto w-fit" loading={loading}>
           Solicitar alteração dos dados
         </Button>
       </form>

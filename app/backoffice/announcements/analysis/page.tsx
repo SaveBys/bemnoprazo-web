@@ -7,8 +7,7 @@ import {
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion"
-
+} from "@/components/ui/accordion";
 
 const items = [
   {
@@ -16,16 +15,16 @@ const items = [
     trigger: {
       title: "Proposta N° 00003",
       comprador: "Comprador:",
-      status: "Status:"
+      status: "Status:",
     },
     content: {
       quantidade: "10",
       preco: "R$ 100,00",
       nome: "Lucas Augusto",
-      status: "Processando"
+      status: "Processando",
     },
   },
-]
+];
 
 export default function AnalysisPage() {
   return (
@@ -34,25 +33,26 @@ export default function AnalysisPage() {
         <div className="flex items-center justify-between">
           <h1 className="text-title text-base-2">Analisar proposta</h1>
         </div>
-        <div className="flex flex row gap-2 items-center">
-          <h1 className="text-subtitle text-primary-2">Dipirona</h1><EyeIcon size={32} color="#ff8d28" />
+        <div className="row flex items-center gap-2">
+          <h1 className="text-subtitle text-primary-2">Dipirona</h1>
+          <EyeIcon size={32} color="#ff8d28" />
         </div>
         <div className="flex flex-col gap-4">
-          <div className="flex flex row gap-2 items-center">
+          <div className="row flex items-center gap-2">
             <h1 className="text-subtitle text-base-2">Propostas</h1>
           </div>
           <div>
             <Accordion
               type="single"
               collapsible
-              className="w-full flex flex-col gap-4"
+              className="flex w-full flex-col gap-4"
               defaultValue="billing"
             >
               {items.map((item) => (
                 <AccordionItem
                   key={item.value}
                   value={item.value}
-                  className="border-1 rounded-md border-base-2 px-4 "
+                  className="border-base-2 rounded-md border-1 px-4"
                 >
                   <div className="flex flex-col gap-3">
                     <AccordionTrigger>
@@ -79,8 +79,8 @@ export default function AnalysisPage() {
                           <span className="text-legend text-base-2">{item.content.preco}</span>
                         </span>
                       </div>
-                      <hr className="border-1 border-base-3 mt-4 mb-3" />
-                      <div className="flex flex-items-center justify-between pt-2 pb-2">
+                      <hr className="border-base-3 mt-4 mb-3 border-1" />
+                      <div className="flex-items-center flex justify-between pt-2 pb-2">
                         <Button variant="secondary">Recusar</Button>
                         <Button>Aprovar</Button>
                       </div>

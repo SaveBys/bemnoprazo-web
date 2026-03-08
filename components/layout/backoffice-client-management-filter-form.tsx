@@ -54,11 +54,11 @@ export function BackofficeClientFilterForm({
   return (
     <form className="flex items-end gap-4" onSubmit={handleSubmit(onSubmit)}>
       <InputSearch
-              className="w-full"
-              label="Busca"
-              placeholder="Informe nome ou documento"
-              {...register("search")}
-            />
+        className="w-full"
+        label="Busca"
+        placeholder="Informe nome ou documento"
+        {...register("search")}
+      />
 
       <Controller
         name="category"

@@ -26,11 +26,13 @@ export function CheckboxGroup<T extends FieldValues>({
       name={name}
       control={control}
       render={({ field }) => {
+        const fieldValue = Array.isArray(field.value) ? field.value : [];
+
         const toggle = (value: string, checked: boolean) => {
           if (checked) {
-            field.onChange([...(field.value ?? []), value]);
+            field.onChange([...fieldValue, value]);
           } else {
-            field.onChange(field.value?.filter((v: string) => v !== value));
+            field.onChange(fieldValue.filter((v: string) => v !== value));
           }
         };
 
@@ -40,7 +42,7 @@ export function CheckboxGroup<T extends FieldValues>({
               <Checkbox
                 key={option.value}
                 label={option.label}
-                checked={field.value?.includes(option.value)}
+                checked={fieldValue.includes(option.value as never)}
                 onCheckedChange={(checked) => toggle(option.value, !!checked)}
               />
             ))}

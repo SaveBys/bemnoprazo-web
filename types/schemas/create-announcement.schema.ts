@@ -13,7 +13,10 @@ export const createAnnouncementSchema = z.object({
   quantity: z.coerce.number().min(1, "Quantidade deve ser maior que 0."),
   status: z.enum(AnnouncementStatusEnum, "Status do produto tem q ser selecionado."),
   requiresRefrigeration: z.boolean().optional(),
-  medicationType: z.union([z.enum(MedicationTypeEnum), z.enum(["none"])]).optional(),
+  medicationType: z
+    .union([z.enum(MedicationTypeEnum), z.enum(["none"])])
+    .nullable()
+    .optional(),
   activeIngredient: z.string().optional(),
   contentDescription: z.string().optional(),
   classification: z.string().optional(),

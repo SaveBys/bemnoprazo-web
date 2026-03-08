@@ -19,7 +19,7 @@ export async function getUserDataDetails(): Promise<UserDataDetailsResponse> {
 }
 
 export async function getByIdCompanyUser(id: string): Promise<UserDataResponse> {
-  const { data } = await api.get("/users/company-users/" + id);
+  const { data } = await api.get(`/users/company-users/${encodeURIComponent(id)}`);
   return data;
 }
 
@@ -46,6 +46,11 @@ export async function getAllCompanyUsers(
   params: UserFilterRequest,
 ): Promise<Pageable<UserDataResponse>> {
   const { data } = await api.get("/users/company-users", { params });
+  return data;
+}
+
+export async function getAllUsers(params: UserFilterRequest): Promise<Pageable<UserDataResponse>> {
+  const { data } = await api.get("/users", { params });
   return data;
 }
 

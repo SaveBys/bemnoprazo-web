@@ -4,7 +4,7 @@ import { CardProducts } from "@/components/layout/card-products";
 import { FilterProducts } from "@/components/layout/filter-products";
 import { Paginator } from "@/components/layout/paginator";
 import { Page } from "@/types/page";
-import { AnnouncementResumeResponse } from "@/types/response/annoucement-resume.response";
+import { AnnouncementResumeResponse } from "@/types/response/announcement-resume.response";
 import { useEffect, useState } from "react";
 import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { findAllAnnouncements } from "@/services/announcements.service";

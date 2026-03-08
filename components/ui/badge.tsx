@@ -9,25 +9,20 @@ const badgeVariants = cva(
   {
     variants: {
       variant: {
-        default: "bg-primary text-primary-foreground [a&]:hover:bg-primary/90",
-        secondary: "bg-secondary text-secondary-foreground [a&]:hover:bg-secondary/90",
-        destructive:
-          "bg-destructive text-white [a&]:hover:bg-destructive/90 focus-visible:ring-destructive/20 dark:focus-visible:ring-destructive/40 dark:bg-destructive/60",
-        outline:
-          "border-border text-foreground [a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
-        ghost: "[a&]:hover:bg-accent [a&]:hover:text-accent-foreground",
-        link: "text-primary underline-offset-4 [a&]:hover:underline",
+        primary:
+          "bg-base-5 border-1 border-primary-2 hover:border-primary-1 text-primary-2 hover:text-primary-1 active:text-primary-3",
+        secondary: "bg-secondary-1 hover:bg-secondary-2 text-base-5",
       },
     },
     defaultVariants: {
-      variant: "default",
+      variant: "primary",
     },
   },
 );
 
 function Badge({
   className,
-  variant = "default",
+  variant = "primary",
   asChild = false,
   ...props
 }: React.ComponentProps<"span"> & VariantProps<typeof badgeVariants> & { asChild?: boolean }) {

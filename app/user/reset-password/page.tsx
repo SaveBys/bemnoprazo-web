@@ -19,13 +19,6 @@ export default function ResetPasswordPage() {
           description: "Em breve receberá um e-mail com os próximos passos.",
         });
       })
-      .catch((error) => {
-        const errorMessage = error.response.data.message;
-        setMessage({
-          title: "Ocorreu um erro",
-          description: errorMessage,
-        });
-      })
       .finally(() => setOpen(true));
   };
 

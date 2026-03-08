@@ -95,9 +95,7 @@ export async function proxy(req: NextRequest) {
   if (accessToken) {
     try {
       const [, payloadBase64] = accessToken.split(".");
-      const payloadJson = new TextDecoder().decode(
-        Uint8Array.from(atob(payloadBase64), (c) => c.charCodeAt(0)),
-      );
+      const payloadJson = Buffer.from(payloadBase64, "base64url").toString("utf8");
       const payload = JSON.parse(payloadJson);
       const exp = payload.exp * 1000;
       const now = Date.now();
