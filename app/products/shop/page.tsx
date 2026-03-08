@@ -1,22 +1,36 @@
 "use client";
 
 import { CardShop } from "@/components/layout/card-shop";
+import { Dialog, Message } from "@/components/layout/dialog";
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
-import { CartItem, useCart } from "@/context/cart-context";
+import { useCart } from "@/context/cart-context";
 import { formatCurrency } from "@/lib/utils";
+import { createOperation } from "@/services/operation.service";
+import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 export default function Shop() {
   const { cart, increaseQuantity, decreaseQuantity, removeItem, totalPrice, clearCart } = useCart();
   const [loading, setLoading] = useState(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
+  const router = useRouter();
 
-  async function onSubmit(data: CartItem[]) {
+  async function onSubmit() {
     setLoading(true);
     try {
-      console.log(data);
+      await createOperation();
+      setMessage({
+        title: "Sucesso!",
+        description: "Entraremos em contato para dar continuidade.",
+        callback() {
+          clearCart();
+          router.push("/products");
+        },
+      });
+      setOpen(true);
     } finally {
-      clearCart();
       setLoading(false);
     }
   }
@@ -25,9 +39,9 @@ export default function Shop() {
     <main className="width-barrier mx-auto my-16 px-11">
       <div className="grid w-full grid-cols-4 gap-8">
         <div className="col-span-3">
-          {cart.map((item) => (
+          {cart?.items?.map((item) => (
             <CardShop
-              key={item.id}
+              key={item.announcement.id}
               data={item}
               onIncrease={increaseQuantity}
               onDecrease={decreaseQuantity}
@@ -55,21 +69,21 @@ export default function Shop() {
             <div className="flex flex-col gap-5 p-6">
               <h2 className="text-subtitle text-base-2">Resumo</h2>
 
-              <hr className="w-full border bg-gray-300" />
+              <hr className="bg-base-4 w-full border" />
 
               <div>
                 <p className="text-content text-base-3">Valor total dos produtos:</p>
                 <p className="text-subtitle text-base-2">{formatCurrency(totalPrice)}</p>
               </div>
 
-              <hr className="w-full border bg-gray-300" />
+              <hr className="bg-base-4 w-full border" />
 
               <div>
                 <p className="text-content text-base-3">Frete:</p>
                 <p className="text-subtitle text-base-2">R$ 15,00</p>
               </div>
 
-              <hr className="w-full border bg-gray-300" />
+              <hr className="bg-base-4 w-full border" />
 
               <div>
                 <p className="text-content text-base-3">Total da compra:</p>
@@ -77,7 +91,7 @@ export default function Shop() {
               </div>
 
               <div className="flex flex-col gap-4 pt-6">
-                <Button onClick={() => onSubmit(cart)} loading={loading}>
+                <Button onClick={() => onSubmit()} loading={loading}>
                   Finalizar a reserva
                 </Button>
 
@@ -89,6 +103,14 @@ export default function Shop() {
           </div>
         </div>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </main>
   );
 }

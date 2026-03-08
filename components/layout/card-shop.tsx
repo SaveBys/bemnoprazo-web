@@ -18,22 +18,26 @@ export function CardShop({ data, ...props }: CardShopProps) {
       <div className="flex flex-col gap-4">
         <div className="flex flex-col gap-2">
           <h2 className="text-title text-base-2">{data.name}</h2>
-          {data.ean && <p className="text-legend text-base-2">Código EAN: {data.ean}</p>}
+          {data.announcement.ean && (
+            <p className="text-legend text-base-2">Código EAN: {data.announcement.ean}</p>
+          )}
         </div>
 
-        {data.contentDescription && (
-          <p className="text-legend text-base-2">Informações: {data.contentDescription}</p>
+        {data.announcement.contentDescription && (
+          <p className="text-legend text-base-2">
+            Informações: {data.announcement.contentDescription}
+          </p>
         )}
 
-        {data.manufacturer && (
+        {data.announcement.manufacturer && (
           <p className="text-base-2 text-base font-bold">
             <span>Produto disponibilizado por:</span>
-            <span className="ml-2 font-normal underline">{data.manufacturer}</span>
+            <span className="ml-2 font-normal underline">{data.announcement.manufacturer}</span>
           </p>
         )}
 
         <p className="text-content text-base-2">
-          Quantidade disponível: {data.announcementQuantity}
+          Quantidade disponível: {data.announcement.announcementQuantity}
         </p>
       </div>
 
@@ -50,7 +54,7 @@ export function CardShop({ data, ...props }: CardShopProps) {
           <Button
             className="flex-1"
             variant="secondary"
-            onClick={() => props.onDecrease(data.id)}
+            onClick={() => props.onDecrease(data.announcement.id)}
             disabled={data.quantity <= 1}
           >
             <MinusIcon className="size-5" />
@@ -59,14 +63,14 @@ export function CardShop({ data, ...props }: CardShopProps) {
           <Button
             className="flex-1"
             variant="secondary"
-            onClick={() => props.onIncrease(data.id)}
-            disabled={data.quantity >= data.announcementQuantity}
+            onClick={() => props.onIncrease(data.announcement.id)}
+            disabled={data.quantity >= data.announcement.announcementQuantity}
           >
             <PlusIcon className="size-5" />
           </Button>
         </div>
 
-        <Button variant="secondary" onClick={() => props.onRemove(data.id)}>
+        <Button variant="secondary" onClick={() => props.onRemove(data.announcement.id)}>
           <TrashIcon className="size-5" />
           <span>Remover</span>
         </Button>
@@ -79,7 +83,9 @@ export function CardShop({ data, ...props }: CardShopProps) {
       <div className="flex w-48 flex-col gap-2">
         <p className="text-content text-base-3">Total</p>
         <p className="text-base-3 flex items-center gap-1">
-          <span className="text-title">{formatCurrency(data.price * data.quantity)}</span>
+          <span className="text-title">
+            {formatCurrency(data.announcement.price * data.quantity)}
+          </span>
         </p>
       </div>
     </div>

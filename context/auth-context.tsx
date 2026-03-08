@@ -4,6 +4,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import { getUserData } from "@/services/user.service";
 import { userRoleEnum } from "@/types/enums/user-role.enum";
 import { UserDataResponse } from "@/types/response/user-data.response";
+import { usePathname } from "next/navigation";
 
 type AuthContextType = {
   user: UserDataResponse | null;
@@ -15,6 +16,7 @@ type AuthContextType = {
   isAuthenticated: boolean;
 
   hasRole: (role: userRoleEnum) => boolean;
+  setUsarData: () => Promise<void>;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -22,9 +24,31 @@ const AuthContext = createContext<AuthContextType | null>(null);
 export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [user, setUser] = useState<UserDataResponse | null>(null);
   const [loading, setLoading] = useState(true);
+  const pathname = usePathname();
+
+  const setUsarData = async () => {
+    try {
+      const data = await getUserData();
+      setUser(data);
+    } catch {
+      setUser(null);
+    }
+  };
+
+  const hasRole = (role: userRoleEnum) => user?.userRole === role;
+
+  const isAuthenticated = Boolean(user);
+  const isADM = user?.userRole === userRoleEnum.ADM && isAuthenticated;
+  const isUserAdm = user?.userRole === userRoleEnum.USER_ADM && isAuthenticated;
+  const isEmployee = user?.userRole === userRoleEnum.USER_EMPLOYEE && isAuthenticated;
 
   useEffect(() => {
     async function loadUser() {
+      if (pathname.startsWith("/user")) {
+        setLoading(false);
+        return;
+      }
+
       try {
         const data = await getUserData();
         setUser(data);
@@ -36,14 +60,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     }
 
     loadUser();
-  }, []);
-
-  const hasRole = (role: userRoleEnum) => user?.userRole === role;
-
-  const isADM = user?.userRole === userRoleEnum.ADM;
-  const isUserAdm = user?.userRole === userRoleEnum.USER_ADM;
-  const isEmployee = user?.userRole === userRoleEnum.USER_EMPLOYEE;
-  const isAuthenticated = Boolean(user && user?.userRole);
+  }, [pathname]);
 
   return (
     <AuthContext.Provider
@@ -53,8 +70,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isADM,
         isUserAdm,
         isEmployee,
-        hasRole,
         isAuthenticated,
+        hasRole,
+        setUsarData,
       }}
     >
       {children}

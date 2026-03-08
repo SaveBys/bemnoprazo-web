@@ -49,9 +49,9 @@ export default function Home() {
             </figure>
             <div className="flex flex-1 items-center px-4 sm:px-0">
               <p className="text-base-5 w-147.75 text-center text-3xl font-medium">
-                Conectamos farmácias e distribuidoras a consumidores — pessoas físicas, hospitais e
-                clínicas — oferecendo produtos próximos ao vencimento, com preços reduzidos e
-                garantia de qualidade e segurança.
+                Conectamos indústrias, distribuidoras e farmácias a empresas — hospitais e clínicas
+                ou entre instituições de saúde, oferecendo produtos próximos ao vencimento, com
+                preços reduzidos de até 70% desconto com garantia de qualidade e segurança.
               </p>
             </div>
           </div>

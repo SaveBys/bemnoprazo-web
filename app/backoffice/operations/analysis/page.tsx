@@ -52,7 +52,7 @@ export default function AnalysisPage() {
                 <AccordionItem
                   key={item.value}
                   value={item.value}
-                  className="border-base-2 rounded-md border-1 px-4"
+                  className="border-base-2 rounded-md border px-4"
                 >
                   <div className="flex flex-col gap-3">
                     <AccordionTrigger>
@@ -79,7 +79,7 @@ export default function AnalysisPage() {
                           <span className="text-legend text-base-2">{item.content.preco}</span>
                         </span>
                       </div>
-                      <hr className="border-base-3 mt-4 mb-3 border-1" />
+                      <hr className="border-base-3 mt-4 mb-3 border" />
                       <div className="flex-items-center flex justify-between pt-2 pb-2">
                         <Button variant="secondary">Recusar</Button>
                         <Button>Aprovar</Button>

@@ -11,13 +11,13 @@ import { BackofficeClientFilterForm } from "@/components/layout/backoffice-clien
 
 export default function UsersPage() {
   const [filters, setFilters] = useState<UserFilterRequest>();
-  const [announcements, setAnnouncements] = useState<UserDataResponse[]>();
+  const [users, setUsers] = useState<UserDataResponse[]>();
   const [page, setPage] = useState<number>(0);
   const [pageData, setPageData] = useState<Page>();
 
   useEffect(() => {
     getAllUsers({ ...filters, page }).then((res) => {
-      setAnnouncements(res.content);
+      setUsers(res.content);
       setPageData(res.page);
     });
   }, [filters, page]);
@@ -31,9 +31,9 @@ export default function UsersPage() {
       </div>
 
       <div className="flex flex-col gap-8">
-        {announcements && pageData && (
+        {users && pageData && (
           <>
-            <TableDashboardUsers data={announcements} />
+            <TableDashboardUsers data={users} />
             <Paginator
               pageData={pageData}
               currentPage={page}

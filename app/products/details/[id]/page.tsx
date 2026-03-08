@@ -61,7 +61,11 @@ export default function ProductsDetailPage({ params }: PageProps) {
 
   async function addToCart() {
     if (announcement) {
-      addItem({ ...announcement, announcementQuantity: announcement.quantity });
+      addItem({
+        name: announcement.name,
+        quantity: 1,
+        announcement: { ...announcement, announcementQuantity: announcement.quantity },
+      });
       router.push("/products/shop");
     }
   }
