@@ -2,7 +2,7 @@
 
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
-import { DashboardUsersManagementFilterForm } from "@/components/layout/dashboard-user-management-filter-form";
+import { DashboardUsersFilterForm } from "@/components/layout/dashboard-user-management-filter-form";
 import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Page } from "@/types/page";
 import { TableDashboardUsers } from "@/components/layout/table-dashboard-users";
@@ -36,7 +36,7 @@ export default function UsersPage() {
           </Button>
         </div>
 
-        <DashboardUsersManagementFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
+        <DashboardUsersFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
       </div>
 
       <div className="flex flex-col gap-8">

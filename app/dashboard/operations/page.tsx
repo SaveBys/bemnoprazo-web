@@ -1,6 +1,6 @@
 "use client";
 
-import { TabelaProdutos } from "@/components/layout/tabela-produtos";
+import { TabelaOperations } from "@/components/layout/tabela-operations";
 
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
@@ -36,7 +36,7 @@ export default function OperationsPage() {
       <div className="flex flex-col gap-8">
         {announcements && pageData && (
           <>
-            <TabelaProdutos data={announcements} />
+            <TabelaOperations data={{} as any} />
             <Paginator
               pageData={pageData}
               currentPage={page}

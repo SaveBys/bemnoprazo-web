@@ -14,7 +14,7 @@ import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 import { Resolver, useForm } from "react-hook-form";
 
-export default function EditUserPage() {
+export default function NewUserPage() {
   const [loading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
@@ -39,10 +39,10 @@ export default function EditUserPage() {
   return (
     <main className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4">
       <div className="flex flex-col gap-12">
-        <h1 className="text-title text-base-2">Editar usuário</h1>
+        <h1 className="text-title text-base-2">Novo usuário</h1>
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-          <h2 className="text-subtitle text-base-2">Dados do usuário</h2>
+          <h2 className="text-subtitle text-base-2">Meus dados</h2>
 
           <div className="flex w-full flex-row justify-between gap-4">
             <InputText
@@ -86,7 +86,7 @@ export default function EditUserPage() {
           </div>
 
           <Button className="mx-auto w-fit" disabled={loading}>
-            Salvar
+            Cadastrar
           </Button>
         </form>
       </div>

@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
+import InputSearch from "@/components/ui/input/input-search";
 import { Button } from "@/components/ui/button";
 import {
   Select,
@@ -16,9 +17,8 @@ import {
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
 import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
 import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
-import InputSearch from "../ui/input/input-search";
 
-export function DashboardUsersFilterForm({
+export function BackofficeAnnouncementsFilterForm({
   onSubmitFilters,
 }: {
   onSubmitFilters: (data: AnnouncementsFilterParams) => void;
@@ -54,11 +54,42 @@ export function DashboardUsersFilterForm({
   return (
     <form className="flex items-end gap-4" onSubmit={handleSubmit(onSubmit)}>
       <InputSearch
-              className="w-full"
-              label="Busca"
-              placeholder="Informe nome ou documento"
-              {...register("search")}
-            />
+        className="w-full"
+        label="Busca"
+        placeholder="Informe nome ou documento"
+        {...register("search")}
+      />
+
+      <Controller
+        name="category"
+        control={control}
+        render={({ field }) => (
+          <div className="flex w-full flex-col gap-1">
+            <label htmlFor="category" className="text-legend text-base-3">
+              Status
+            </label>
+
+            <Select
+              value={field.value ?? "none"}
+              onValueChange={(value) => field.onChange(value === "none" ? undefined : value)}
+            >
+              <SelectTrigger id="category" className="w-full">
+                <SelectValue placeholder="Selecione" />
+              </SelectTrigger>
+
+              <SelectContent>
+                <SelectGroup placeholder="Selecione">
+                  {categories?.map((category) => (
+                    <SelectItem key={category.id} value={category.id}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+      />
 
       <Button type="button" variant="secondary" onClick={handleClear}>
         Limpar filtro

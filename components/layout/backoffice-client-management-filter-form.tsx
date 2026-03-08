@@ -18,7 +18,7 @@ import { AnnouncementCategoryResponse } from "@/types/response/announcement-cate
 import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import InputSearch from "../ui/input/input-search";
 
-export function DashboardUsersFilterForm({
+export function BackofficeClientFilterForm({
   onSubmitFilters,
 }: {
   onSubmitFilters: (data: AnnouncementsFilterParams) => void;
@@ -59,6 +59,35 @@ export function DashboardUsersFilterForm({
               placeholder="Informe nome ou documento"
               {...register("search")}
             />
+
+      <Controller
+        name="category"
+        control={control}
+        render={({ field }) => (
+          <div className="flex w-full flex-col gap-1">
+            <label htmlFor="status" className="text-4/5 text-base-3">
+              Status
+            </label>
+            <Select
+              value={field.value ?? ""}
+              onValueChange={(value) => field.onChange(value === "none" ? undefined : value)}
+            >
+              <SelectTrigger className="w-full">
+                <SelectValue placeholder="Selecione" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectGroup placeholder="Selecione">
+                  {categories?.map((category) => (
+                    <SelectItem key={category.id} value={category.id}>
+                      {category.name}
+                    </SelectItem>
+                  ))}
+                </SelectGroup>
+              </SelectContent>
+            </Select>
+          </div>
+        )}
+      />
 
       <Button type="button" variant="secondary" onClick={handleClear}>
         Limpar filtro

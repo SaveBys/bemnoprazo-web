@@ -5,12 +5,12 @@ import { TabelaProdutos } from "@/components/layout/tabela-produtos";
 import { Button } from "@/components/ui/button";
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
-import { DashboardAnnouncementsFilterForm } from "@/components/layout/dashboard-produtcs-filter-form";
 import { findAllAnnouncementsBackoffice } from "@/services/announcements.service";
 import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
 import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Page } from "@/types/page";
 import { PlusIcon } from "lucide-react";
+import { BackofficeProductsFilterForm } from "@/components/layout/backoffice-products-filter-form";
 
 export default function ProductsPage() {
   const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
@@ -28,21 +28,18 @@ export default function ProductsPage() {
       setPageData(res.page);
     });
   }, [filters, page]);
-
   return (
     <div className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4">
       <div className="flex flex-col gap-8">
         <div className="flex items-center justify-between">
-          <h1 className="text-title text-base-2">Meus produtos</h1>
+          <h1 className="text-title text-base-2">Produtos</h1>
           <Button variant="secondary" href="/backoffice/new-product" isLink>
             <PlusIcon className="size-5" />
             <span>Novo produto</span>
           </Button>
         </div>
-
-        <DashboardAnnouncementsFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
+        <BackofficeProductsFilterForm onSubmitFilters={(filters) => setFilters(filters)} />
       </div>
-
       <div className="flex flex-col gap-8">
         {announcements && pageData && (
           <>
