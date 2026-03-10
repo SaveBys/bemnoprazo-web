@@ -9,33 +9,31 @@ import z from "zod";
 
 export const schema = z.object({
   id: z.string(),
-  tipo: z.string(),
-  valor_total: z.string(),
-  data: z.string(),
-  status: z.string(),
+  name: z.string(),
+  position: z.string(),
+  contactNumber: z.string(),
+  email: z.string(),
 });
 
 export type RowData = z.infer<typeof schema>;
 
 export const columns: ColumnDef<RowData>[] = [
   {
-    accessorKey: "Tipo",
-    header: "Tipo",
-    cell: ({ row }) => (
-      <div className="w-3xs overflow-hidden text-ellipsis">{row.original.tipo}</div>
-    ),
+    accessorKey: "name",
+    header: "Nome",
   },
   {
-    accessorKey: "valor_total",
-    header: "Valor Total",
+    accessorKey: "userRole",
+    header: "Cargo",
+    cell: ({ row }) => <span>{row.original.position}</span>,
   },
   {
-    accessorKey: "data",
-    header: "Data",
+    accessorKey: "contactNumber",
+    header: "Contato",
   },
   {
-    accessorKey: "status",
-    header: "Status",
+    accessorKey: "email",
+    header: "E-mail",
   },
   {
     id: "actions",
@@ -43,7 +41,7 @@ export const columns: ColumnDef<RowData>[] = [
     cell: ({ row }) => (
       <Button
         variant="secondary"
-        href={`/dashboard/products/edit-product/${encodeURIComponent(row.original.id)}`}
+        href={`/backoffice/users/edit-user/${encodeURIComponent(row.original.id)}`}
         isLink
       >
         <EyeIcon className="size-5" />
@@ -52,10 +50,10 @@ export const columns: ColumnDef<RowData>[] = [
   },
 ];
 
-interface TabelaOperationsProps {
+interface TableBackofficeUsersProps {
   data: RowData[];
 }
 
-export function TabelaOperations({ data }: TabelaOperationsProps) {
+export function TableBackofficeUsers({ data }: TableBackofficeUsersProps) {
   return <DataTable columns={columns} data={data} />;
 }

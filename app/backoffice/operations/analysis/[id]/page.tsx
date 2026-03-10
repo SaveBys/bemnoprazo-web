@@ -3,7 +3,7 @@
 import { Button } from "@/components/ui/button";
 import { EyeIcon } from "@phosphor-icons/react/dist/ssr";
 import {
-  Accordion,
+  AccordionBase,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
@@ -42,7 +42,7 @@ export default function AnalysisPage() {
             <h1 className="text-subtitle text-base-2">Propostas</h1>
           </div>
           <div>
-            <Accordion
+            <AccordionBase
               type="single"
               collapsible
               className="flex w-full flex-col gap-4"
@@ -88,7 +88,7 @@ export default function AnalysisPage() {
                   </div>
                 </AccordionItem>
               ))}
-            </Accordion>
+            </AccordionBase>
           </div>
         </div>
       </div>

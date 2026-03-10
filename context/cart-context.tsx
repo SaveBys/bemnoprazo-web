@@ -85,7 +85,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
     }
 
     loadCart();
-  }, []);
+  }, [pathname]);
 
   useEffect(() => {
     if (!mounted) return;

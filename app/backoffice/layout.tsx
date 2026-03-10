@@ -18,6 +18,10 @@ export default function UserLayout({
     if (!loading && !isADM) {
       router.replace("/dashboard");
     }
+
+    if (!loading && isADM) {
+      router.replace("/backoffice/products");
+    }
   }, [isADM, loading, router]);
 
   if (loading) return null;

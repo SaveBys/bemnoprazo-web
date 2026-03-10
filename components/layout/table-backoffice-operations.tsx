@@ -8,29 +8,29 @@ import { ColumnDef } from "@tanstack/react-table";
 import z from "zod";
 
 export const schema = z.object({
-  id: z.string(),
-  nome: z.string(),
-  contato: z.string(),
-  email: z.string(),
+  announcementId: z.string(),
+  announcementName: z.string(),
+  companyName: z.string(),
+  operations: z.string(),
 });
 
 export type RowData = z.infer<typeof schema>;
 
 export const columns: ColumnDef<RowData>[] = [
   {
-    accessorKey: "nome",
-    header: "Nome",
+    accessorKey: "announcementName",
+    header: "Produto",
+  },
+  {
+    accessorKey: "companyName",
+    header: "Anunciante",
     cell: ({ row }) => (
-      <div className="w-3xs overflow-hidden text-ellipsis">{row.original.nome}</div>
+      <div className="w-3xs overflow-hidden text-ellipsis">{row.original.companyName}</div>
     ),
   },
   {
-    accessorKey: "contato",
-    header: "Contato",
-  },
-  {
-    accessorKey: "email",
-    header: "E-mail",
+    accessorKey: "operations",
+    header: "Propostas",
   },
   {
     id: "actions",
@@ -38,7 +38,7 @@ export const columns: ColumnDef<RowData>[] = [
     cell: ({ row }) => (
       <Button
         variant="secondary"
-        href={`/dashboard/products/edit-product/${encodeURIComponent(row.original.id)}`}
+        href={`/backoffice/operations/analysis/${encodeURIComponent(row.original.announcementId)}`}
         isLink
       >
         <EyeIcon className="size-5" />
@@ -47,10 +47,10 @@ export const columns: ColumnDef<RowData>[] = [
   },
 ];
 
-interface TabelaUsersProps {
+interface TableBackofficeOperationsProps {
   data: RowData[];
 }
 
-export function TabelaUsers({ data }: TabelaUsersProps) {
+export function TableBackofficeOperations({ data }: TableBackofficeOperationsProps) {
   return <DataTable columns={columns} data={data} />;
 }

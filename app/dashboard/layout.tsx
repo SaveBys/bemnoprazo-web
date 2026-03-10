@@ -15,8 +15,12 @@ export default function UserLayout({
   const router = useRouter();
 
   useEffect(() => {
-    if (!loading || !isUserAdm || !isEmployee) {
+    if (!loading && !isUserAdm && !isEmployee) {
       router.replace("/backoffice");
+    }
+
+    if (!loading && (isUserAdm || isEmployee)) {
+      router.replace("/dashboard/products");
     }
   }, [isUserAdm, isEmployee, router, loading]);
 

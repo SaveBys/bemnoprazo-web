@@ -51,3 +51,7 @@ export async function updateAnnouncement(payload: UpdateAnnouncementFormData): P
 export async function createAnnouncement(payload: CreateAnnouncementFormData): Promise<void> {
   await api.post("/announcements", payload);
 }
+
+export async function changeStatus(id: string, status: string): Promise<void> {
+  await api.patch("/announcements/change-status", null, { params: { id, status } });
+}

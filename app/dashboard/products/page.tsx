@@ -1,6 +1,6 @@
 "use client";
 
-import { TabelaProdutos } from "@/components/layout/tabela-produtos";
+import { TableDashboardAnnouncements } from "@/components/layout/table-dashboard-announcements";
 
 import { Button } from "@/components/ui/button";
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
@@ -52,7 +52,7 @@ export default function DashboardPage() {
       <div className="flex flex-col gap-8">
         {announcements && pageData && (
           <>
-            <TabelaProdutos data={announcements} />
+            <TableDashboardAnnouncements data={announcements} />
             <Paginator
               pageData={pageData}
               currentPage={page}
