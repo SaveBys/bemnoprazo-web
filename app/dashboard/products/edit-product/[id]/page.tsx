@@ -233,17 +233,10 @@ export default function EditProductPage({ params }: PageProps) {
                   onValueChange={(value) => field.onChange(value === "true")}
                 >
                   <div className="flex flex-row items-center gap-3">
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="true"
-                      id="refrigeration-yes"
-                    />
+                    <RadioGroupItem value="true" id="refrigeration-yes" />
                     <Label htmlFor="refrigeration-yes">Sim</Label>
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="false"
-                      id="refrigeration-no"
-                    />
+
+                    <RadioGroupItem value="false" id="refrigeration-no" />
                     <Label htmlFor="refrigeration-no">Não</Label>
                   </div>
                 </RadioGroup>
@@ -262,17 +255,9 @@ export default function EditProductPage({ params }: PageProps) {
                   onValueChange={(value) => field.onChange(value === "true")}
                 >
                   <div className="flex flex-row items-center gap-3">
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="true"
-                      id="prescription-yes"
-                    />
+                    <RadioGroupItem value="true" id="prescription-yes" />
                     <Label htmlFor="prescription-yes">Sim</Label>
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="false"
-                      id="prescription-no"
-                    />
+                    <RadioGroupItem value="false" id="prescription-no" />
                     <Label htmlFor="prescription-no">Não</Label>
                   </div>
                 </RadioGroup>
@@ -391,18 +376,10 @@ export default function EditProductPage({ params }: PageProps) {
                   onValueChange={(value) => field.onChange(value === "true")}
                 >
                   <div className="flex flex-row items-center gap-3">
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="true"
-                      id="dynamicPrice-yes"
-                    />
+                    <RadioGroupItem value="true" id="dynamicPrice-yes" />
                     <Label htmlFor="dynamicPrice-yes">Sim</Label>
 
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="false"
-                      id="dynamicPrice-no"
-                    />
+                    <RadioGroupItem value="false" id="dynamicPrice-no" />
                     <Label htmlFor="dynamicPrice-no">Não</Label>
                   </div>
                 </RadioGroup>
@@ -452,7 +429,7 @@ export default function EditProductPage({ params }: PageProps) {
             {...register("dynamicPricePercent")}
             errorMessage={errors.dynamicPricePercent?.message}
             label="Percentual desconto"
-            placeholder="00.0%"
+            placeholder="000%"
             disabled={!dynamicPrice}
           />
         </div>

@@ -48,7 +48,7 @@ export default function NewProductPage() {
       status: AnnouncementStatusEnum.AWAITING_APPROVAL,
       requiresRefrigeration: false,
       requiresPrescription: false,
-      dynamicPrice: false,
+      dynamicPrice: true,
     },
   });
 
