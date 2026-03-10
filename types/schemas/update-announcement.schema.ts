@@ -18,6 +18,7 @@ export const updateAnnouncementSchema = z.object({
     .union([z.enum(MedicationTypeEnum), z.enum(["none"])])
     .nullable()
     .optional(),
+  description: z.string().min(1, "Descrição deve ser informado."),
   activeIngredient: z.string().optional(),
   contentDescription: z.string().optional(),
   classification: z.string().optional(),

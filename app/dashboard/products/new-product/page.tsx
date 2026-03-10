@@ -29,6 +29,7 @@ import {
 } from "@/types/schemas/create-announcement.schema";
 import { createAnnouncement } from "@/services/announcements.service";
 import { Dialog, Message } from "@/components/layout/dialog";
+import { Textarea } from "@/components/ui/textarea";
 
 export default function NewProductPage() {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
@@ -297,19 +298,38 @@ export default function NewProductPage() {
               errorMessage={errors.conservation?.message}
               label="Conservação"
             />
-          </div>
 
-          <div className="flex items-center justify-between gap-4">
             <InputText
               {...register("administrationRoute")}
               errorMessage={errors.administrationRoute?.message}
               label="Formas de administração"
             />
-            <InputText
-              {...register("usageInstructions")}
-              errorMessage={errors.usageInstructions?.message}
-              label="Modo de uso"
-            />
+          </div>
+
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex w-full flex-col gap-1">
+              <label className="text-4/5 text-base-3">Mode de uso</label>
+
+              <Textarea
+                {...register("usageInstructions")}
+                valid={!errors.usageInstructions?.message}
+                placeholder="Descrição"
+              />
+
+              <p className="min-h-5 text-sm text-red-600">{errors.usageInstructions?.message}</p>
+            </div>
+
+            <div className="flex w-full flex-col gap-1">
+              <label className="text-4/5 text-base-3">Descrição do produto</label>
+
+              <Textarea
+                {...register("description")}
+                valid={!errors.description?.message}
+                placeholder="Descrição"
+              />
+
+              <p className="min-h-5 text-sm text-red-600">{errors.description?.message}</p>
+            </div>
           </div>
         </div>
       </fieldset>
