@@ -105,8 +105,8 @@ export default function AnalysisProductPage({ params }: PageProps) {
       className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4"
       onSubmit={handleSubmit(onSubmit)}
     >
-      <h1 className="text-title text-base-2">Editar Anúncio</h1>
-      <h1 className="text-subtitle text-base-2">Dados do produto</h1>
+      <h1 className="text-title text-base-2">Analise do produto</h1>
+      <h2 className="text-subtitle text-base-2">Dados do produto</h2>
 
       <fieldset className="flex w-full flex-row justify-between gap-4">
         <InputSearch
@@ -363,6 +363,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
                 {...register("usageInstructions")}
                 valid={!errors.usageInstructions?.message}
                 placeholder="Descrição"
+                disabled
               />
 
               <p className="min-h-5 text-sm text-red-600">{errors.usageInstructions?.message}</p>
@@ -375,6 +376,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
                 {...register("description")}
                 valid={!errors.description?.message}
                 placeholder="Descrição"
+                disabled
               />
 
               <p className="min-h-5 text-sm text-red-600">{errors.description?.message}</p>
@@ -487,7 +489,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
       </fieldset>
 
       <div className="flex w-full justify-between">
-        <Button variant="secondary" type="button" href="/dashboard/products" isLink>
+        <Button variant="secondary" type="button" href="/backoffice/products" isLink>
           Cancelar
         </Button>
         <Button loading={loading}>Salvar</Button>

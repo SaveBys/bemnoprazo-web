@@ -3,6 +3,41 @@ import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import Link from "next/link";
 
+const Separator = () => (
+  <svg
+    viewBox="0 4 24 12"
+    className="text-secondary-2 h-16"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth={0.5}
+  >
+    <path d="M12 4v12" />
+    <path d="M10 14l2 2 2-2" />
+  </svg>
+);
+
+type TimelineProps = {
+  separator?: boolean;
+  outlined?: boolean;
+  label: string;
+};
+
+const Timeline = ({ separator, outlined, label }: TimelineProps) => (
+  <div className="flex w-125 flex-col items-center">
+    <div
+      className={`flex h-28 w-full items-center justify-center rounded-lg p-8 ${outlined ? "border-secondary-2 border-3" : "bg-secondary-2"} `}
+    >
+      <span
+        className={`text-base-5 text-center ${outlined ? "text-secondary-2 text-subtitle" : "text-title"}`}
+      >
+        {label}
+      </span>
+    </div>
+
+    {separator && <Separator />}
+  </div>
+);
+
 export default function Home() {
   return (
     <>
@@ -53,6 +88,56 @@ export default function Home() {
                 ou entre instituições de saúde, oferecendo produtos próximos ao vencimento, com
                 preços reduzidos de até 70% desconto com garantia de qualidade e segurança.
               </p>
+            </div>
+          </div>
+        </section>
+
+        <section className="width-barrier flex w-full flex-col items-center justify-center gap-16 py-8">
+          <h2 className="text-secondary-2 text-title">Como funciona</h2>
+          <div className="flex w-full justify-center gap-16">
+            <div className="flex flex-col items-center">
+              <Timeline separator={true} outlined={false} label="Vendedor" />
+              <Timeline separator={true} outlined={true} label="Entre na plataforma" />
+              <Timeline
+                separator={true}
+                outlined={true}
+                label="Cadastre os produtos, com pouco tempo de validade, que deseja ofertar em nossa plataforma"
+              />
+              <Timeline
+                separator={true}
+                outlined={true}
+                label="Aguarde nosso contato com o pedido de compra"
+              />
+              <Timeline
+                separator={true}
+                outlined={true}
+                label="Recolhemos seu(s) produto(s) vendido para fazer a validação e logística de entrega"
+              />
+              <Timeline
+                separator={false}
+                outlined={true}
+                label="Repassamos os valores mediante pagamentos do comprador"
+              />
+            </div>
+
+            <div className="flex flex-col items-center">
+              <Timeline separator={true} outlined={false} label="Vendedor" />
+              <Timeline separator={true} outlined={true} label="Entre na plataforma" />
+              <Timeline
+                separator={true}
+                outlined={true}
+                label="Reserve os produtos de seu interesse"
+              />
+              <Timeline
+                separator={true}
+                outlined={true}
+                label="Aguarde nossa confirmação que os produtos estão disponíveis e em boas condições"
+              />
+              <Timeline
+                separator={false}
+                outlined={true}
+                label="Com o aceite do pedido, entregamos os produtos em seu estabelecimento"
+              />
             </div>
           </div>
         </section>

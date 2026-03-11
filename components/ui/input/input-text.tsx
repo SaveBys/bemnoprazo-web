@@ -27,7 +27,9 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(function I
 
   return (
     <div className="flex w-full flex-col gap-1">
-      <label className={cn(srOnly && "sr-only", "text-legend text-base-3")}>{label}</label>
+      <label className={cn(srOnly && "sr-only", "text-legend text-base-3")}>
+        <span>{label}</span>
+      </label>
 
       <InputBase
         {...props}

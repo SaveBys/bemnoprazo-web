@@ -21,7 +21,7 @@ export default function Footer() {
                 Redes Sociais
               </h3>
 
-              <div className="flex gap-4">
+              <div className="flex justify-center gap-4">
                 <a href="">
                   <InstagramLogoIcon className="bg-base-3 text-base-5 size-8 rounded-lg p-1" />
                 </a>

@@ -37,6 +37,7 @@ export async function POST(req: NextRequest) {
 
     if (refresh_token) {
       const REFRESH_TOKEN_MAX_AGE = 60 * 60 * 24 * 15;
+
       res.cookies.set("refresh_token", refresh_token, {
         httpOnly: true,
         secure: isProd,
@@ -50,6 +51,6 @@ export async function POST(req: NextRequest) {
   } catch (error) {
     console.error("Erro login:", error);
 
-    return NextResponse.json({ error: "Credenciais inválidas" }, { status: 401 });
+    return NextResponse.json({ message: "Credenciais inválidas" }, { status: 401 });
   }
 }

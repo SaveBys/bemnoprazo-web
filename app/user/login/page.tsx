@@ -6,7 +6,6 @@ import InputPassword from "@/components/ui/input/input-password";
 import { InputText } from "@/components/ui/input/input-text";
 import { useAuth } from "@/context/auth-context";
 import { login } from "@/lib/auth";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { useForm } from "react-hook-form";
@@ -27,24 +26,20 @@ export default function LoginPage() {
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState<Message>();
   const [loading, setLoading] = useState(false);
-  const router = useRouter();
   const { setUsarData } = useAuth();
 
   function onSubmit(data: LoginFormData) {
     login(data.email, data.password)
       .then(() => {
-        setUsarData();
-        setLoading(true);
-        setMessage({
-          title: "Sucesso!",
-          callback() {
-            setUsarData();
-            router.push("/dashboard");
-          },
+        setUsarData().then(() => {
+          setLoading(true);
+          setMessage({
+            title: "Sucesso!",
+          });
+          setOpen(true);
         });
       })
       .finally(() => {
-        setOpen(true);
         setLoading(false);
       });
   }

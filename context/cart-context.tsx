@@ -55,7 +55,7 @@ export function CartProvider({ children }: { children: React.ReactNode }) {
 
   useEffect(() => {
     async function loadCart() {
-      if (pathname.includes("/user/")) return;
+      if (pathname && pathname.includes("/user/")) return;
 
       try {
         const stored = localStorage.getItem(CART_KEY);

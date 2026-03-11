@@ -7,11 +7,14 @@ import { logout } from "@/lib/auth";
 import { useAuth } from "@/context/auth-context";
 
 export function NavUser() {
-  const { user } = useAuth();
+  const { user, clearUserData } = useAuth();
   const router = useRouter();
 
   async function handleLogout() {
-    logout().then(() => router.push("/user/login"));
+    logout().then(() => {
+      clearUserData();
+      router.push("/user/login");
+    });
   }
 
   return (
