@@ -147,6 +147,7 @@ body {
   .width-barrier {
     max-width: 1366px;
   }
+
   .width-barrier-2 {
     max-width: 1190px;
   }
@@ -155,6 +156,11 @@ body {
     box-shadow:
       2px 2px 4px rgba(0, 0, 0, 0.15),
       -2px -2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  .required::after {
+    content: " * ";
+    color: red
   }
 }
 

@@ -60,6 +60,7 @@ export default function RegisterPage() {
           placeholder="Bem no Prazo Tecnologia LTDA"
           {...register("companyName", { required: "Campo obrigatório" })}
           errorMessage={errors.companyName?.message}
+          required
         />
 
         <InputText
@@ -68,6 +69,7 @@ export default function RegisterPage() {
           mask="99.999.999/9999-99"
           {...register("companyDocument", { required: "Campo obrigatório" })}
           errorMessage={errors.companyDocument?.message}
+          required
         />
 
         <InputText
@@ -75,6 +77,7 @@ export default function RegisterPage() {
           placeholder="João Silva"
           {...register("accountResponsible", { required: "Campo obrigatório" })}
           errorMessage={errors.accountResponsible?.message}
+          required
         />
 
         <InputText
@@ -83,6 +86,7 @@ export default function RegisterPage() {
           mask={["(99) 9999-9999", "(99) 9 9999-9999"]}
           {...register("contactNumber", { required: "Campo obrigatório" })}
           errorMessage={errors.contactNumber?.message}
+          required
         />
 
         <InputText
@@ -93,6 +97,7 @@ export default function RegisterPage() {
             required: "Campo obrigatório",
           })}
           errorMessage={errors.email?.message}
+          required
         />
 
         <InputPassword
@@ -106,6 +111,7 @@ export default function RegisterPage() {
             },
           })}
           errorMessage={errors.password?.message}
+          required
         />
 
         <InputPassword
@@ -116,6 +122,7 @@ export default function RegisterPage() {
             validate: (value) => value === password || "As senhas não coincidem",
           })}
           errorMessage={errors.confirmPassword?.message}
+          required
         />
 
         <div className="mt-4 flex flex-col items-center gap-8">

@@ -96,6 +96,7 @@ export default function NewProductPage() {
           errorMessage={errors.name?.message}
           className="w-full"
           label="Nome Comercial"
+          required
         />
         <InputSearch
           {...register("batch")}
@@ -103,6 +104,7 @@ export default function NewProductPage() {
           className="w-full"
           label="Lote do medicamento"
           placeholder="n° do lote"
+          required
         />
       </fieldset>
 
@@ -114,6 +116,7 @@ export default function NewProductPage() {
           label="Data de validade"
           placeholder="00/00/00"
           mask="99/99/9999"
+          required
         />
 
         <InputText
@@ -122,6 +125,7 @@ export default function NewProductPage() {
           className="w-full"
           label="Quantidade"
           placeholder="0"
+          required
         />
 
         <Controller
@@ -129,7 +133,7 @@ export default function NewProductPage() {
           control={control}
           render={({ field }) => (
             <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Categoria</label>
+              <label className="text-4/5 text-base-3 required">Categoria</label>
               <Select
                 value={field.value ?? "none"}
                 onValueChange={(value) => field.onChange(value === "none" ? undefined : value)}
@@ -313,14 +317,14 @@ export default function NewProductPage() {
               <Textarea
                 {...register("usageInstructions")}
                 valid={!errors.usageInstructions?.message}
-                placeholder="Descrição"
+                placeholder="Mode de uso"
               />
 
               <p className="min-h-5 text-sm text-red-600">{errors.usageInstructions?.message}</p>
             </div>
 
             <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Descrição do produto</label>
+              <label className="text-4/5 text-base-3 required">Descrição do produto</label>
 
               <Textarea
                 {...register("description")}
@@ -350,6 +354,7 @@ export default function NewProductPage() {
             errorMessage={errors.price?.message}
             label="Preço ofertado"
             placeholder="R$ 00,00"
+            required
           />
         </div>
 

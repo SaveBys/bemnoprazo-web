@@ -4,12 +4,16 @@ import { ChangeEvent, forwardRef } from "react";
 import { applyMask } from "@/lib/apply-mask.function";
 import { cn } from "@/lib/utils";
 import { InputBase } from "./input-base";
+import { TooltipTrigger, TooltipContent, Tooltip } from "../tooltip";
+import { InfoIcon } from "@phosphor-icons/react/dist/ssr";
 
 interface InputTextProps extends React.ComponentProps<"input"> {
   label: string;
   errorMessage?: string;
   mask?: string | string[];
   srOnly?: boolean;
+  tooltip?: string;
+  required?: boolean;
 }
 
 export const InputText = forwardRef<HTMLInputElement, InputTextProps>(function InputText(
@@ -28,7 +32,19 @@ export const InputText = forwardRef<HTMLInputElement, InputTextProps>(function I
   return (
     <div className="flex w-full flex-col gap-1">
       <label className={cn(srOnly && "sr-only", "text-legend text-base-3")}>
-        <span>{label}</span>
+        <div className="flex gap-4">
+          <span className={props.required ? "required" : ""}>{label}</span>
+          {props.tooltip && (
+            <Tooltip>
+              <TooltipTrigger>
+                <InfoIcon weight="fill" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{props.tooltip}</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
+        </div>
       </label>
 
       <InputBase

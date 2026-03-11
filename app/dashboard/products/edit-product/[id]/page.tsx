@@ -127,6 +127,7 @@ export default function EditProductPage({ params }: PageProps) {
           errorMessage={errors.name?.message}
           className="w-full"
           label="Nome Comercial"
+          required
         />
 
         <InputSearch
@@ -135,6 +136,7 @@ export default function EditProductPage({ params }: PageProps) {
           className="w-full"
           label="Lote do medicamento"
           placeholder="n° do lote"
+          required
         />
       </fieldset>
 
@@ -146,6 +148,7 @@ export default function EditProductPage({ params }: PageProps) {
           label="Data de validade"
           placeholder="00/00/00"
           mask="99/99/9999"
+          required
         />
 
         <InputText
@@ -154,6 +157,7 @@ export default function EditProductPage({ params }: PageProps) {
           className="w-full"
           label="Quantidade"
           placeholder="0"
+          required
         />
 
         <Controller
@@ -161,7 +165,7 @@ export default function EditProductPage({ params }: PageProps) {
           control={control}
           render={({ field }) => (
             <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Categoria</label>
+              <label className="text-4/5 text-base-3 required">Categoria</label>
 
               <Select
                 value={field.value ?? "none"}
@@ -192,7 +196,7 @@ export default function EditProductPage({ params }: PageProps) {
           control={control}
           render={({ field }) => (
             <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Status</label>
+              <label className="text-4/5 text-base-3 required">Status</label>
 
               <Select
                 value={field.value ?? "none"}
@@ -339,14 +343,14 @@ export default function EditProductPage({ params }: PageProps) {
               <Textarea
                 {...register("usageInstructions")}
                 valid={!errors.usageInstructions?.message}
-                placeholder="Descrição"
+                placeholder="Modo de uso"
               />
 
               <p className="min-h-5 text-sm text-red-600">{errors.usageInstructions?.message}</p>
             </div>
 
             <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Descrição do produto</label>
+              <label className="text-4/5 text-base-3 required">Descrição do produto</label>
 
               <Textarea
                 {...register("description")}
@@ -377,6 +381,7 @@ export default function EditProductPage({ params }: PageProps) {
             errorMessage={errors.price?.message}
             label="Preço ofertado"
             placeholder="R$ 00,00"
+            required
           />
         </div>
 

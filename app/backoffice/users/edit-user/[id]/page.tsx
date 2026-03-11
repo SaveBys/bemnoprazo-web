@@ -26,7 +26,12 @@ export default function EditUserPage({ params }: PageProps) {
   const router = useRouter();
   const { id } = React.use(params);
 
-  const { register, reset, handleSubmit } = useForm<UpdateProfileFormData>({
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UpdateProfileFormData>({
     resolver: zodResolver(updateProfileSchema) as Resolver<UpdateProfileFormData>,
   });
 
@@ -73,20 +78,40 @@ export default function EditUserPage({ params }: PageProps) {
           <h2 className="text-subtitle text-base-2">Dados do usuário</h2>
 
           <div className="flex w-full flex-row justify-between gap-4">
-            <InputText {...register("companyName")} className="w-full" label="Empresa" />
+            <InputText
+              {...register("companyName")}
+              errorMessage={errors.companyName?.message}
+              className="w-full"
+              label="Empresa"
+              required
+            />
 
-            <InputText {...register("accountResponsible")} className="w-full" label="Reponsável" />
+            <InputText
+              {...register("accountResponsible")}
+              errorMessage={errors.accountResponsible?.message}
+              className="w-full"
+              label="Reponsável"
+              required
+            />
           </div>
 
           <div className="flex w-full flex-row justify-between gap-4">
             <InputText
               {...register("contactNumber")}
+              errorMessage={errors.contactNumber?.message}
               className="w-full"
               label="Número para contato"
               mask="(99) 9 9999-9999"
+              required
             />
 
-            <InputText {...register("email")} label="E-mail" placeholder="Exemplo@gmail.com" />
+            <InputText
+              {...register("email")}
+              errorMessage={errors.email?.message}
+              label="E-mail"
+              placeholder="Exemplo@gmail.com"
+              required
+            />
           </div>
 
           <Button className="mx-auto w-fit" loading={loading}>

@@ -192,7 +192,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
           control={control}
           render={({ field }) => (
             <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Status</label>
+              <label className="required text-4/5 text-base-3">Status</label>
 
               <Select
                 value={field.value ?? "none"}
@@ -362,7 +362,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
               <Textarea
                 {...register("usageInstructions")}
                 valid={!errors.usageInstructions?.message}
-                placeholder="Descrição"
+                placeholder="Modo de uso"
                 disabled
               />
 
@@ -394,6 +394,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
             errorMessage={errors.basePrice?.message}
             label="Preço de mercado"
             placeholder="R$ 00,00"
+            required
           />
 
           <InputText

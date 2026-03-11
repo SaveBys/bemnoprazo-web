@@ -59,6 +59,7 @@ export default function NewUserPage() {
               errorMessage={errors.name?.message}
               className="w-full"
               label="Nome"
+              required
             />
 
             <InputText
@@ -66,6 +67,7 @@ export default function NewUserPage() {
               errorMessage={errors.position?.message}
               className="w-full"
               label="Cargo"
+              required
             />
 
             <InputText
@@ -74,6 +76,7 @@ export default function NewUserPage() {
               className="w-full"
               label="CPF"
               mask="999.999.999-99"
+              required
             />
           </div>
 
@@ -84,6 +87,7 @@ export default function NewUserPage() {
               className="w-full"
               label="Número para contato"
               mask="(99) 9 9999-9999"
+              required
             />
 
             <InputText
@@ -91,6 +95,7 @@ export default function NewUserPage() {
               errorMessage={errors.email?.message}
               label="E-mail"
               placeholder="Exemplo@gmail.com"
+              required
             />
           </div>
 

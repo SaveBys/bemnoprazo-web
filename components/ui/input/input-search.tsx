@@ -1,14 +1,17 @@
 "use client";
 
 import { ChangeEvent } from "react";
-import { MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
+import { InfoIcon, MagnifyingGlassIcon } from "@phosphor-icons/react/dist/ssr";
 import { cn } from "@/lib/utils";
 import { InputBase } from "./input-base";
+import { TooltipTrigger, TooltipContent, Tooltip } from "../tooltip";
 
 interface InputSearchProps extends React.ComponentProps<"input"> {
   label: string;
   errorMessage?: string;
   srOnly?: boolean;
+  tooltip?: string;
+  required?: boolean;
 }
 
 export default function InputSearch({
@@ -25,7 +28,21 @@ export default function InputSearch({
 
   return (
     <div className={cn("relative flex flex-col gap-1", props.className)}>
-      <label className={srOnly ? "sr-only" : "text-legend text-base-3"}>{label}</label>
+      <label className={cn(srOnly && "sr-only", "text-legend text-base-3")}>
+        <div className="flex gap-4">
+          <span className={props.required ? "required" : ""}>{label}</span>
+          {props.tooltip && (
+            <Tooltip>
+              <TooltipTrigger>
+                <InfoIcon weight="fill" />
+              </TooltipTrigger>
+              <TooltipContent>
+                <p>{props.tooltip}</p>
+              </TooltipContent>
+            </Tooltip>
+          )}
+        </div>
+      </label>
 
       <div className="relative">
         <InputBase
