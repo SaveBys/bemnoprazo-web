@@ -15,3 +15,11 @@ export async function findAllAnnouncementOperations(
   });
   return data;
 }
+
+export async function approveOperation(id: string): Promise<void> {
+  await api.patch(`/operations/approve/${encodeURIComponent(id)}`);
+}
+
+export async function cancelOperation(id: string): Promise<void> {
+  await api.patch(`/operations/cancel/${encodeURIComponent(id)}`);
+}

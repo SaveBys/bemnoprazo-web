@@ -33,6 +33,8 @@ import { formatDate } from "@/lib/utils";
 import { InputText } from "@/components/ui/input/input-text";
 import { Dialog, Message } from "@/components/layout/dialog";
 import { Textarea } from "@/components/ui/textarea";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { InfoIcon } from "@phosphor-icons/react/dist/ssr";
 
 interface PageProps {
   params: Promise<{
@@ -132,6 +134,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
           className="w-full"
           label="Lote do medicamento"
           placeholder="n° do lote"
+          tooltip="Informe o lote do produto anunciado."
           disabled
         />
       </fieldset>
@@ -144,6 +147,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
           label="Data de validade"
           placeholder="00/00/00"
           mask="99/99/9999"
+          tooltip="Data de validade deve ter prazo de no minimo 90 dias."
           disabled
         />
 
@@ -228,7 +232,19 @@ export default function AnalysisProductPage({ params }: PageProps) {
             control={control}
             render={({ field }) => (
               <div className="flex w-full flex-col gap-1">
-                <label className="text-4/5 text-base-3">Necessita refrigeração</label>
+                <label className="text-4/5 text-base-3">
+                  <div className="flex gap-4">
+                    <span>Necessita refrigeração</span>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <InfoIcon weight="fill" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Informe de o produto precisa estar refrigerado.</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </label>
                 <RadioGroup
                   value={field.value?.toString()}
                   onValueChange={(value) => field.onChange(value === "true")}
@@ -402,6 +418,7 @@ export default function AnalysisProductPage({ params }: PageProps) {
             errorMessage={errors.price?.message}
             label="Preço ofertado"
             placeholder="R$ 00,00"
+            tooltip="O preço que você como vendedor gostario que o produto fosse oferecido."
             disabled
           />
         </div>
@@ -413,7 +430,20 @@ export default function AnalysisProductPage({ params }: PageProps) {
             render={({ field }) => (
               <div className="flex w-full flex-col gap-1">
                 <label htmlFor="dinamicPrice" className="text-4/5 text-base-3">
-                  Preço dinâmico
+                  <div className="flex gap-4">
+                    <span>Preço dinâmico</span>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <InfoIcon weight="fill" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>
+                          Ao habilitar o preço dinâmico o produto sofre um desconto no preço
+                          ofertado a cada ciclo, podendo ser de dias, semanas ou mesês.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
                 </label>
 
                 <RadioGroup

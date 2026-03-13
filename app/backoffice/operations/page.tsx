@@ -7,7 +7,7 @@ import { Page } from "@/types/page";
 import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { BackofficeAnnouncementsFilterForm } from "@/components/layout/backoffice-orders-filter-form";
 import { AnnouncementOperationTable } from "@/types/response/announcement-operation-table.response";
-import { findAllAnnouncementOperationsBackoffice } from "@/services/announcement-operations.service";
+import { findAllOperationsBackoffice } from "@/services/announcement-operations.service";
 
 export default function OperationsPage() {
   const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
@@ -20,7 +20,7 @@ export default function OperationsPage() {
       ...filters,
       categories: filters.category ? [filters.category] : undefined,
     };
-    findAllAnnouncementOperationsBackoffice({ ...payload, page }).then((res) => {
+    findAllOperationsBackoffice({ ...payload, page }).then((res) => {
       setOperations(res.content);
       setPageData(res.page);
     });
