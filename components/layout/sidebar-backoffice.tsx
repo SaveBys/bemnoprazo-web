@@ -27,7 +27,7 @@ const data = {
       icon: CurrencyDollarIcon,
     },
     {
-      title: "Gestão de clientes",
+      title: "Gestão de pedidos",
       url: "/backoffice/operations",
       icon: MoneyIcon,
     },

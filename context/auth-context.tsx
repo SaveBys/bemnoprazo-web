@@ -17,6 +17,7 @@ type AuthContextType = {
 
   hasRole: (role: userRoleEnum) => boolean;
   setUsarData: () => Promise<void>;
+  clearUserData: () => void;
 };
 
 const AuthContext = createContext<AuthContextType | null>(null);
@@ -26,13 +27,17 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [loading, setLoading] = useState(true);
   const pathname = usePathname();
 
-  const setUsarData = async () => {
+  const setUserData = async () => {
     try {
       const data = await getUserData();
       setUser(data);
     } catch {
       setUser(null);
     }
+  };
+
+  const clearUserData = () => {
+    setUser(null);
   };
 
   const hasRole = (role: userRoleEnum) => user?.userRole === role;
@@ -72,7 +77,8 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         isEmployee,
         isAuthenticated,
         hasRole,
-        setUsarData,
+        setUsarData: setUserData,
+        clearUserData,
       }}
     >
       {children}

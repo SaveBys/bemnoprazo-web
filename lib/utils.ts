@@ -11,6 +11,20 @@ export const formatDate = (date: string | undefined) => {
   return date.replace(/(\d{4})-(\d{2})-(\d{2})/, "$3/$2/$1");
 };
 
+export const formatDateHour = (date?: string) => {
+  if (!date) return "";
+
+  return new Date(date)
+    .toLocaleString("pt-BR", {
+      day: "2-digit",
+      month: "2-digit",
+      year: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    })
+    .replace(",", " às");
+};
+
 export const formatCurrency = (amount: number | undefined, locale = "pt-BR", currency = "BRL") => {
   if (!amount) return;
 

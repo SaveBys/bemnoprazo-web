@@ -1,7 +1,5 @@
 "use client";
 
-import { TabelaProdutos } from "@/components/layout/tabela-produtos";
-
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
 import { findAllAnnouncementsBackoffice } from "@/services/announcements.service";
@@ -9,6 +7,7 @@ import { AnnouncementTableResponse } from "@/types/response/announcement-table.r
 import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Page } from "@/types/page";
 import { BackofficeProductsFilterForm } from "@/components/layout/backoffice-products-filter-form";
+import { TableBackofficeProducts } from "@/components/layout/table-backoffice-products";
 
 export default function ProductsPage() {
   const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
@@ -37,7 +36,7 @@ export default function ProductsPage() {
       <div className="flex flex-col gap-8">
         {announcements && pageData && (
           <>
-            <TabelaProdutos data={announcements} />
+            <TableBackofficeProducts data={announcements} />
             <Paginator
               pageData={pageData}
               currentPage={page}

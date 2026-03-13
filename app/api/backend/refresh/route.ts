@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { getAuthCookieOptions } from "@/lib/cookie-options";
-import axios from "axios";
+import { api } from "@/lib/axios";
 
 export async function POST(req: NextRequest) {
   const refreshToken = req.cookies.get("refresh_token")?.value;
@@ -10,7 +10,7 @@ export async function POST(req: NextRequest) {
   }
 
   try {
-    const response = await axios.post(
+    const response = await api.post(
       `${process.env.KEYCLOAK_URL}/realms/${process.env.KEYCLOAK_REALM}/protocol/openid-connect/token`,
       new URLSearchParams({
         client_id: process.env.KEYCLOAK_CLIENT_ID!,

@@ -3,40 +3,64 @@
 import { Dialog, Message } from "@/components/layout/dialog";
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
-import { createUserEmployee } from "@/services/user.service";
-import {
-  createUserEmployeeSchema,
-  CreateUserEmployeeFormData,
-} from "@/types/schemas/create-user-employee.schema";
+import { getById, updateProfile } from "@/services/user.service";
 
+import { UpdateCompanyUserFormData } from "@/types/schemas/update-company-user.schema";
+import { UpdateProfileFormData, updateProfileSchema } from "@/types/schemas/update-profile.schema";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Resolver, useForm } from "react-hook-form";
 
-export default function NewUserPage() {
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default function EditUserPage({ params }: PageProps) {
   const [loading, setLoading] = useState<boolean>(false);
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState<Message>();
   const router = useRouter();
+  const { id } = React.use(params);
 
   const {
     register,
+    reset,
     handleSubmit,
     formState: { errors },
-  } = useForm<CreateUserEmployeeFormData>({
-    resolver: zodResolver(createUserEmployeeSchema) as Resolver<CreateUserEmployeeFormData>,
+  } = useForm<UpdateProfileFormData>({
+    resolver: zodResolver(updateProfileSchema) as Resolver<UpdateProfileFormData>,
   });
 
-  async function onSubmit(data: CreateUserEmployeeFormData) {
+  useEffect(() => {
+    async function loadData() {
+      setLoading(true);
+      getById(id)
+        .then((res) => {
+          reset({
+            companyName: res.companyName,
+            accountResponsible: res.name,
+            contactNumber: res.contactNumber,
+            email: res.email,
+          });
+        })
+        .finally(() => setLoading(false));
+    }
+
+    loadData();
+  }, [id, reset]);
+
+  async function onSubmit(data: UpdateCompanyUserFormData) {
     try {
       setLoading(true);
-      await createUserEmployee(data);
+      await updateProfile({ ...data, id }, data.email!);
       setMessage({
         title: "Sucesso!",
         callback() {
-          router.push("/dashboard/users");
+          router.push("/backoffice/users");
         },
       });
       setOpen(true);
@@ -48,34 +72,25 @@ export default function NewUserPage() {
   return (
     <main className="flex w-full flex-col gap-8 overflow-x-scroll py-8 pr-4">
       <div className="flex flex-col gap-12">
-        <h1 className="text-title text-base-2">Novo usuário</h1>
+        <h1 className="text-title text-base-2">Editar usuário</h1>
 
         <form className="flex flex-col gap-4" onSubmit={handleSubmit(onSubmit)}>
-          <h2 className="text-subtitle text-base-2">Meus dados</h2>
+          <h2 className="text-subtitle text-base-2">Dados do usuário</h2>
 
           <div className="flex w-full flex-row justify-between gap-4">
             <InputText
-              {...register("name")}
-              errorMessage={errors.name?.message}
+              {...register("companyName")}
+              errorMessage={errors.companyName?.message}
               className="w-full"
-              label="Nome"
+              label="Empresa"
               required
             />
 
             <InputText
-              {...register("position")}
-              errorMessage={errors.position?.message}
+              {...register("accountResponsible")}
+              errorMessage={errors.accountResponsible?.message}
               className="w-full"
-              label="Cargo"
-              required
-            />
-
-            <InputText
-              {...register("document")}
-              errorMessage={errors.document?.message}
-              className="w-full"
-              label="CPF"
-              mask="999.999.999-99"
+              label="Reponsável"
               required
             />
           </div>

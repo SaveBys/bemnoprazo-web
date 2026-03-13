@@ -5,6 +5,7 @@ import { CartProvider } from "@/context/cart-context";
 import { AuthProvider } from "@/context/auth-context";
 import { ErrorProvider } from "@/context/error-context";
 import { ApiProvider } from "@/providers/api-provider";
+import { TooltipProvider } from "@/components/ui/tooltip";
 
 const openSans = Open_Sans({
   variable: "--font-open-sans",
@@ -27,7 +28,9 @@ export default function RootLayout({
         <ApiProvider>
           <AuthProvider>
             <CartProvider>
-              <body className={`${openSans.variable} antialiased`}>{children}</body>
+              <TooltipProvider>
+                <body className={`${openSans.variable} antialiased`}>{children}</body>
+              </TooltipProvider>
             </CartProvider>
           </AuthProvider>
         </ApiProvider>

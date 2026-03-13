@@ -28,7 +28,12 @@ export default function EditUserPage({ params }: PageProps) {
   const router = useRouter();
   const { id } = React.use(params);
 
-  const { register, reset, handleSubmit } = useForm<UpdateCompanyUserFormData>({
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UpdateCompanyUserFormData>({
     resolver: zodResolver(updateCompanyUserSchema) as Resolver<UpdateCompanyUserFormData>,
   });
 
@@ -75,20 +80,40 @@ export default function EditUserPage({ params }: PageProps) {
           <h2 className="text-subtitle text-base-2">Dados do usuário</h2>
 
           <div className="flex w-full flex-row justify-between gap-4">
-            <InputText {...register("name")} className="w-full" label="Nome" />
+            <InputText
+              {...register("name")}
+              errorMessage={errors.name?.message}
+              className="w-full"
+              label="Nome"
+              required
+            />
 
-            <InputText {...register("position")} className="w-full" label="Cargo" />
+            <InputText
+              {...register("position")}
+              errorMessage={errors.name?.message}
+              className="w-full"
+              label="Cargo"
+              required
+            />
           </div>
 
           <div className="flex w-full flex-row justify-between gap-4">
             <InputText
               {...register("contactNumber")}
+              errorMessage={errors.name?.message}
               className="w-full"
               label="Número para contato"
               mask="(99) 9 9999-9999"
+              required
             />
 
-            <InputText {...register("email")} label="E-mail" placeholder="Exemplo@gmail.com" />
+            <InputText
+              {...register("email")}
+              errorMessage={errors.name?.message}
+              label="E-mail"
+              placeholder="Exemplo@gmail.com"
+              required
+            />
           </div>
 
           <Button className="mx-auto w-fit" loading={loading}>

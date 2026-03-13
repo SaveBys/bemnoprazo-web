@@ -50,7 +50,7 @@ export const columns: ColumnDef<RowData>[] = [
     cell: ({ row }) => (
       <Button
         variant="secondary"
-        href={`/dashboard/products/edit-product/${encodeURIComponent(row.original.id)}`}
+        href={`/backoffice/products/analysis/${encodeURIComponent(row.original.id)}`}
         isLink
       >
         <EyeIcon className="size-5" />
@@ -59,10 +59,10 @@ export const columns: ColumnDef<RowData>[] = [
   },
 ];
 
-interface TabelaProdutosProps {
+interface TableBackofficeProducts {
   data: RowData[];
 }
 
-export function TabelaProdutos({ data }: TabelaProdutosProps) {
+export function TableBackofficeProducts({ data }: TableBackofficeProducts) {
   return <DataTable columns={columns} data={data} />;
 }

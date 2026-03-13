@@ -19,6 +19,7 @@ export const createAnnouncementSchema = z.object({
     .optional(),
   activeIngredient: z.string().optional(),
   contentDescription: z.string().optional(),
+  description: z.string().min(1, "Descrição deve ser informado."),
   classification: z.string().optional(),
   requiresPrescription: z.boolean().optional(),
   administrationRoute: z.string().optional(),

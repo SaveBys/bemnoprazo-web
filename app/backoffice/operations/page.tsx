@@ -1,17 +1,17 @@
 "use client";
 
-import { TabelaPedidos } from "@/components/layout/tabela-pedidos";
+import { TableBackofficeOperations } from "@/components/layout/table-backoffice-operations";
 import { Paginator } from "@/components/layout/paginator";
 import { useEffect, useState } from "react";
-import { findAllAnnouncementsBackoffice } from "@/services/announcements.service";
 import { Page } from "@/types/page";
 import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
-import { AnnouncementTableResponse } from "@/types/response/announcement-table.response";
 import { BackofficeAnnouncementsFilterForm } from "@/components/layout/backoffice-orders-filter-form";
+import { AnnouncementOperationTable } from "@/types/response/announcement-operation-table.response";
+import { findAllOperationsBackoffice } from "@/services/announcement-operations.service";
 
 export default function OperationsPage() {
   const [filters, setFilters] = useState<AnnouncementsFilterParams>({});
-  const [operations, setOperations] = useState<AnnouncementTableResponse[]>();
+  const [operations, setOperations] = useState<AnnouncementOperationTable[]>();
   const [page, setPage] = useState<number>(0);
   const [pageData, setPageData] = useState<Page>();
 
@@ -20,7 +20,7 @@ export default function OperationsPage() {
       ...filters,
       categories: filters.category ? [filters.category] : undefined,
     };
-    findAllAnnouncementsBackoffice({ ...payload, page }).then((res) => {
+    findAllOperationsBackoffice({ ...payload, page }).then((res) => {
       setOperations(res.content);
       setPageData(res.page);
     });
@@ -37,7 +37,7 @@ export default function OperationsPage() {
       <div className="flex flex-col gap-8">
         {operations && pageData && (
           <>
-            <TabelaPedidos data={{} as any} />
+            <TableBackofficeOperations data={operations} />
             <Paginator
               pageData={pageData}
               currentPage={page}

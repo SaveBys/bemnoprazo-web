@@ -1,5 +1,1 @@
-import { redirect } from "next/navigation";
-
-export default function DashboardPage() {
-  return redirect("/dashboard/products");
-}
+export default function DashboardPage() {}

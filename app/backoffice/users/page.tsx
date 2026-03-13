@@ -6,8 +6,8 @@ import { Page } from "@/types/page";
 import { getAllUsers } from "@/services/user.service";
 import { UserFilterRequest } from "@/types/request/user-filter-params.request";
 import { UserDataResponse } from "@/types/response/user-data.response";
-import { TableDashboardUsers } from "@/components/layout/table-dashboard-users";
 import { BackofficeClientFilterForm } from "@/components/layout/backoffice-client-management-filter-form";
+import { TableBackofficeUsers } from "@/components/layout/table-backoffice-users";
 
 export default function UsersPage() {
   const [filters, setFilters] = useState<UserFilterRequest>();
@@ -33,7 +33,7 @@ export default function UsersPage() {
       <div className="flex flex-col gap-8">
         {users && pageData && (
           <>
-            <TableDashboardUsers data={users} />
+            <TableBackofficeUsers data={users} />
             <Paginator
               pageData={pageData}
               currentPage={page}

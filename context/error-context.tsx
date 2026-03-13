@@ -14,8 +14,10 @@ export function ErrorProvider({ children }: { children: React.ReactNode }) {
   const [message, setMessage] = useState<Message>();
 
   function showError(msg: Message) {
-    setMessage(msg);
-    setOpen(true);
+    if (msg.title) {
+      setMessage(msg);
+      setOpen(true);
+    }
   }
 
   return (
