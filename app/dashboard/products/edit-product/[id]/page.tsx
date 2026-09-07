@@ -31,6 +31,10 @@ import { AnnouncementResponse } from "@/types/response/announcement-details.resp
 import { useRouter } from "next/navigation";
 import { formatDate } from "@/lib/utils";
 import { InputText } from "@/components/ui/input/input-text";
+import { Dialog, Message } from "@/components/layout/dialog";
+import { Textarea } from "@/components/ui/textarea";
+import { Tooltip, TooltipContent, TooltipTrigger } from "@/components/ui/tooltip";
+import { InfoIcon } from "@phosphor-icons/react/dist/ssr";
 
 interface PageProps {
   params: Promise<{
@@ -41,6 +45,8 @@ interface PageProps {
 export default function EditProductPage({ params }: PageProps) {
   const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
   const router = useRouter();
   const { id } = React.use(params);
 
@@ -63,7 +69,13 @@ export default function EditProductPage({ params }: PageProps) {
     try {
       setLoading(true);
       await updateAnnouncement({ ...data, id });
-      router.push("/dashboard/products");
+      setMessage({
+        title: "Sucesso!",
+        callback() {
+          router.push("/dashboard/products");
+        },
+      });
+      setOpen(true);
     } finally {
       setLoading(false);
     }
@@ -101,6 +113,7 @@ export default function EditProductPage({ params }: PageProps) {
       onSubmit={handleSubmit(onSubmit)}
     >
       <h1 className="text-title text-base-2">Editar Anúncio</h1>
+      <h1 className="text-subtitle text-base-2">Dados do produto</h1>
 
       <fieldset className="flex w-full flex-row justify-between gap-4">
         <InputSearch
@@ -116,6 +129,7 @@ export default function EditProductPage({ params }: PageProps) {
           errorMessage={errors.name?.message}
           className="w-full"
           label="Nome Comercial"
+          required
         />
 
         <InputSearch
@@ -124,6 +138,8 @@ export default function EditProductPage({ params }: PageProps) {
           className="w-full"
           label="Lote do medicamento"
           placeholder="n° do lote"
+          tooltip="Informe o lote do produto anunciado."
+          required
         />
       </fieldset>
 
@@ -135,6 +151,8 @@ export default function EditProductPage({ params }: PageProps) {
           label="Data de validade"
           placeholder="00/00/00"
           mask="99/99/9999"
+          tooltip="Data de validade deve ter prazo de no minimo 90 dias."
+          required
         />
 
         <InputText
@@ -143,6 +161,7 @@ export default function EditProductPage({ params }: PageProps) {
           className="w-full"
           label="Quantidade"
           placeholder="0"
+          required
         />
 
         <Controller
@@ -150,7 +169,7 @@ export default function EditProductPage({ params }: PageProps) {
           control={control}
           render={({ field }) => (
             <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Categoria</label>
+              <label className="text-4/5 text-base-3 required">Categoria</label>
 
               <Select
                 value={field.value ?? "none"}
@@ -181,7 +200,7 @@ export default function EditProductPage({ params }: PageProps) {
           control={control}
           render={({ field }) => (
             <div className="flex w-full flex-col gap-1">
-              <label className="text-4/5 text-base-3">Status</label>
+              <label className="text-4/5 text-base-3 required">Status</label>
 
               <Select
                 value={field.value ?? "none"}
@@ -211,32 +230,57 @@ export default function EditProductPage({ params }: PageProps) {
       <fieldset className="flex flex-col gap-4">
         <h2 className="text-title text-base-2">Especificações</h2>
 
-        <div className="flex w-full flex-col gap-1">
+        <div className="flex items-center gap-4">
           <Controller
             name="requiresRefrigeration"
             control={control}
             render={({ field }) => (
               <div className="flex w-full flex-col gap-1">
-                <label className="text-4/5 text-base-3">Necessita refrigeração</label>
+                <label className="text-4/5 text-base-3">
+                  <div className="flex gap-4">
+                    <span>Necessita refrigeração</span>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <InfoIcon weight="fill" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Informe de o produto precisa estar refrigerado.</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
+                </label>
 
                 <RadioGroup
                   value={field.value?.toString()}
                   onValueChange={(value) => field.onChange(value === "true")}
                 >
                   <div className="flex flex-row items-center gap-3">
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="true"
-                      id="refrigeration-yes"
-                    />
+                    <RadioGroupItem value="true" id="refrigeration-yes" />
                     <Label htmlFor="refrigeration-yes">Sim</Label>
 
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="false"
-                      id="refrigeration-no"
-                    />
+                    <RadioGroupItem value="false" id="refrigeration-no" />
                     <Label htmlFor="refrigeration-no">Não</Label>
+                  </div>
+                </RadioGroup>
+              </div>
+            )}
+          />
+
+          <Controller
+            name="requiresPrescription"
+            control={control}
+            render={({ field }) => (
+              <div className="flex w-full flex-col gap-1">
+                <label className="text-4/5 text-base-3">Necessita prescrição</label>
+                <RadioGroup
+                  value={field.value?.toString()}
+                  onValueChange={(value) => field.onChange(value === "true")}
+                >
+                  <div className="flex flex-row items-center gap-3">
+                    <RadioGroupItem value="true" id="prescription-yes" />
+                    <Label htmlFor="prescription-yes">Sim</Label>
+                    <RadioGroupItem value="false" id="prescription-no" />
+                    <Label htmlFor="prescription-no">Não</Label>
                   </div>
                 </RadioGroup>
               </div>
@@ -302,19 +346,37 @@ export default function EditProductPage({ params }: PageProps) {
               errorMessage={errors.conservation?.message}
               label="Conservação"
             />
-          </div>
-
-          <div className="flex items-center justify-between gap-4">
             <InputText
               {...register("administrationRoute")}
               errorMessage={errors.administrationRoute?.message}
               label="Formas de administração"
             />
-            <InputText
-              {...register("usageInstructions")}
-              errorMessage={errors.usageInstructions?.message}
-              label="Modo de uso"
-            />
+          </div>
+
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex w-full flex-col gap-1">
+              <label className="text-4/5 text-base-3">Mode de uso</label>
+
+              <Textarea
+                {...register("usageInstructions")}
+                valid={!errors.usageInstructions?.message}
+                placeholder="Modo de uso"
+              />
+
+              <p className="min-h-5 text-sm text-red-600">{errors.usageInstructions?.message}</p>
+            </div>
+
+            <div className="flex w-full flex-col gap-1">
+              <label className="text-4/5 text-base-3 required">Descrição do produto</label>
+
+              <Textarea
+                {...register("description")}
+                valid={!errors.description?.message}
+                placeholder="Descrição"
+              />
+
+              <p className="min-h-5 text-sm text-red-600">{errors.description?.message}</p>
+            </div>
           </div>
         </div>
       </fieldset>
@@ -336,6 +398,8 @@ export default function EditProductPage({ params }: PageProps) {
             errorMessage={errors.price?.message}
             label="Preço ofertado"
             placeholder="R$ 00,00"
+            tooltip="O preço que você como vendedor gostario que o produto fosse oferecido."
+            required
           />
         </div>
 
@@ -346,7 +410,20 @@ export default function EditProductPage({ params }: PageProps) {
             render={({ field }) => (
               <div className="flex w-full flex-col gap-1">
                 <label htmlFor="dinamicPrice" className="text-4/5 text-base-3">
-                  Preço dinâmico
+                  <div className="flex gap-4">
+                    <span>Preço dinâmico</span>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <InfoIcon weight="fill" />
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>
+                          Ao habilitar o preço dinâmico o produto sofre um desconto no preço
+                          ofertado a cada ciclo, podendo ser de dias, semanas ou mesês.
+                        </p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </div>
                 </label>
 
                 <RadioGroup
@@ -354,18 +431,10 @@ export default function EditProductPage({ params }: PageProps) {
                   onValueChange={(value) => field.onChange(value === "true")}
                 >
                   <div className="flex flex-row items-center gap-3">
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="true"
-                      id="dynamicPrice-yes"
-                    />
+                    <RadioGroupItem value="true" id="dynamicPrice-yes" />
                     <Label htmlFor="dynamicPrice-yes">Sim</Label>
 
-                    <RadioGroupItem
-                      className="border-base-3 h-6 w-6"
-                      value="false"
-                      id="dynamicPrice-no"
-                    />
+                    <RadioGroupItem value="false" id="dynamicPrice-no" />
                     <Label htmlFor="dynamicPrice-no">Não</Label>
                   </div>
                 </RadioGroup>
@@ -415,7 +484,7 @@ export default function EditProductPage({ params }: PageProps) {
             {...register("dynamicPricePercent")}
             errorMessage={errors.dynamicPricePercent?.message}
             label="Percentual desconto"
-            placeholder="00.0%"
+            placeholder="000%"
             disabled={!dynamicPrice}
           />
         </div>
@@ -425,8 +494,16 @@ export default function EditProductPage({ params }: PageProps) {
         <Button variant="secondary" type="button" href="/dashboard/products" isLink>
           Cancelar
         </Button>
-        <Button disabled={loading}>Salvar</Button>
+        <Button loading={loading}>Salvar</Button>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </form>
   );
 }

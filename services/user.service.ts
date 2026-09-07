@@ -23,6 +23,11 @@ export async function getByIdCompanyUser(id: string): Promise<UserDataResponse> 
   return data;
 }
 
+export async function getById(id: string): Promise<UserDataDetailsResponse> {
+  const { data } = await api.get(`/users/${encodeURIComponent(id)}`);
+  return data;
+}
+
 export async function resetPassword(email: string): Promise<UserDataResponse> {
   const { data } = await api.post("/users/reset-password", null, {
     params: { email },
@@ -49,11 +54,23 @@ export async function getAllCompanyUsers(
   return data;
 }
 
+export async function getAllUsers(params: UserFilterRequest): Promise<Pageable<UserDataResponse>> {
+  const { data } = await api.get("/users", { params });
+  return data;
+}
+
 export async function updateProfileCompanyUser(
   payload: UpdateCompanyUserFormData,
   email: string,
 ): Promise<void> {
   await api.put("/users/company-users/update-profile", payload, { params: { email } });
+}
+
+export async function updateProfile(
+  payload: UpdateCompanyUserFormData,
+  email: string,
+): Promise<void> {
+  await api.put("/users/update-profile", payload, { params: { email } });
 }
 
 export async function updateProfileUserAdm(payload: UpdataUserProfileFormData): Promise<void> {

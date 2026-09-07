@@ -4,8 +4,8 @@ import { Dialog, Message } from "@/components/layout/dialog";
 import { Button } from "@/components/ui/button";
 import InputPassword from "@/components/ui/input/input-password";
 import { InputText } from "@/components/ui/input/input-text";
+import { useAuth } from "@/context/auth-context";
 import { login } from "@/lib/auth";
-import { useRouter } from "next/navigation";
 import { useState } from "react";
 
 import { useForm } from "react-hook-form";
@@ -19,24 +19,28 @@ export default function LoginPage() {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting, isValid },
+    formState: { errors, isValid },
   } = useForm<LoginFormData>({
     mode: "onChange",
   });
-  const router = useRouter();
   const [open, setOpen] = useState(false);
   const [message, setMessage] = useState<Message>();
+  const [loading, setLoading] = useState(false);
+  const { setUsarData } = useAuth();
 
   function onSubmit(data: LoginFormData) {
     login(data.email, data.password)
       .then(() => {
-        router.push("/dashboard");
-      })
-      .catch(() => {
-        setMessage({
-          title: "Ocorreu um erro",
+        setUsarData().then(() => {
+          setLoading(true);
+          setMessage({
+            title: "Sucesso!",
+          });
+          setOpen(true);
         });
-        setOpen(true);
+      })
+      .finally(() => {
+        setLoading(false);
       });
   }
 
@@ -71,7 +75,7 @@ export default function LoginPage() {
           })}
         />
 
-        <Button type="submit" disabled={!isValid || isSubmitting}>
+        <Button type="submit" disabled={!isValid} loading={loading}>
           Entrar
         </Button>
       </form>

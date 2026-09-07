@@ -1,5 +1,6 @@
 import Image from "next/image";
-import { FacebookLogoIcon, InstagramLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react/ssr";
+import { InstagramLogoIcon, LinkedinLogoIcon } from "@phosphor-icons/react/ssr";
+import Link from "next/link";
 
 export default function Footer() {
   return (
@@ -9,17 +10,18 @@ export default function Footer() {
 
         <div className="flex flex-col items-center gap-16">
           <div className="flex justify-center gap-16">
-            <Image src="/img/LogoBemnoprazo.png" alt="logo" width={200} height={90} />
+            <nav>
+              <Link href="/" className="m-auto w-fit">
+                <Image src="/img/LogoBemnoprazo.png" alt="logo" width={200} height={88} />
+              </Link>
+            </nav>
 
             <div className="flex flex-col gap-4">
               <h3 className="text-subtitle text-base-2 flex flex-col items-center">
                 Redes Sociais
               </h3>
 
-              <div className="flex gap-4">
-                <a href="">
-                  <FacebookLogoIcon className="bg-base-3 text-base-5 size-8 rounded-lg p-1" />
-                </a>
+              <div className="flex justify-center gap-4">
                 <a href="">
                   <InstagramLogoIcon className="bg-base-3 text-base-5 size-8 rounded-lg p-1" />
                 </a>

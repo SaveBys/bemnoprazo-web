@@ -1,3 +1,5 @@
+import { expirationDateRangeEnum } from "../enums/expiration-date-range.enum";
+
 export interface AnnouncementResumeResponse {
   id: string;
   name: string;
@@ -5,4 +7,5 @@ export interface AnnouncementResumeResponse {
   basePrice: number;
   price: number;
   expirationDate: string;
+  expirationDateRange: expirationDateRangeEnum;
 }

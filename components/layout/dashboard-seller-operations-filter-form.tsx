@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import { Controller, useForm } from "react-hook-form";
 
 import { Button } from "@/components/ui/button";
@@ -13,35 +12,28 @@ import {
   SelectValue,
 } from "@/components/ui/input/select";
 
-import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
-import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
-import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
+import { OperationFilterRequest } from "@/types/request/operation-filter-request.request";
+import {
+  OperationParticipantRoleEnum,
+  OperationParticipantRoleEnumValue,
+} from "@/types/enums/operation-participant-role.enum";
+import { OperationStatusEnum, OperationStatusEnumValue } from "@/types/enums/operation-status.enum";
 
 export function DashboardSellerOperationsFilterForm({
   onSubmitFilters,
 }: {
-  onSubmitFilters: (data: AnnouncementsFilterParams) => void;
+  onSubmitFilters: (data: OperationFilterRequest) => void;
 }) {
-  const [categories, setCategories] = useState<AnnouncementCategoryResponse[]>();
-  const [pageCategory, setPageCategory] = useState<number>(0);
-
-  const defaultFilters: AnnouncementsFilterParams = {
-    search: "",
-    category: undefined,
+  const defaultFilters: OperationFilterRequest = {
+    type: "",
+    status: "",
   };
 
-  const { register, handleSubmit, reset, control } = useForm<AnnouncementsFilterParams>({
+  const { handleSubmit, reset, control } = useForm<OperationFilterRequest>({
     defaultValues: defaultFilters,
   });
 
-  useEffect(() => {
-    findAllAnnouncementsCategory({ page: pageCategory }).then((res) => {
-      setCategories(res.content);
-      setPageCategory(res.page.number);
-    });
-  }, [pageCategory]);
-
-  function onSubmit(data: AnnouncementsFilterParams) {
+  function onSubmit(data: OperationFilterRequest) {
     onSubmitFilters(data);
   }
 
@@ -53,7 +45,7 @@ export function DashboardSellerOperationsFilterForm({
   return (
     <form className="flex items-end gap-4" onSubmit={handleSubmit(onSubmit)}>
       <Controller
-        name="category"
+        name="type"
         control={control}
         render={({ field }) => (
           <div className="flex w-full flex-col gap-1">
@@ -69,11 +61,18 @@ export function DashboardSellerOperationsFilterForm({
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup placeholder="Selecione">
-                  {categories?.map((category) => (
-                    <SelectItem key={category.id} value={category.id}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
+                  <SelectItem
+                    key={OperationParticipantRoleEnum.BUYER}
+                    value={OperationParticipantRoleEnum.BUYER}
+                  >
+                    {OperationParticipantRoleEnumValue(OperationParticipantRoleEnum.BUYER).label}
+                  </SelectItem>
+                  <SelectItem
+                    key={OperationParticipantRoleEnum.SELLER}
+                    value={OperationParticipantRoleEnum.SELLER}
+                  >
+                    {OperationParticipantRoleEnumValue(OperationParticipantRoleEnum.SELLER).label}
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>
@@ -82,7 +81,7 @@ export function DashboardSellerOperationsFilterForm({
       />
 
       <Controller
-        name="category"
+        name="status"
         control={control}
         render={({ field }) => (
           <div className="flex w-full flex-col gap-1">
@@ -98,11 +97,27 @@ export function DashboardSellerOperationsFilterForm({
               </SelectTrigger>
               <SelectContent>
                 <SelectGroup placeholder="Selecione">
-                  {categories?.map((category) => (
-                    <SelectItem key={category.id} value={category.id}>
-                      {category.name}
-                    </SelectItem>
-                  ))}
+                  <SelectItem key={OperationStatusEnum.CREATED} value={OperationStatusEnum.CREATED}>
+                    {OperationStatusEnumValue(OperationStatusEnum.CREATED).label}
+                  </SelectItem>
+                  <SelectItem
+                    key={OperationStatusEnum.CONFIRMED}
+                    value={OperationStatusEnum.CONFIRMED}
+                  >
+                    {OperationStatusEnumValue(OperationStatusEnum.CONFIRMED).label}
+                  </SelectItem>
+                  <SelectItem
+                    key={OperationStatusEnum.CANCELLED}
+                    value={OperationStatusEnum.CANCELLED}
+                  >
+                    {OperationStatusEnumValue(OperationStatusEnum.CANCELLED).label}
+                  </SelectItem>
+                  <SelectItem
+                    key={OperationStatusEnum.FINISHED}
+                    value={OperationStatusEnum.FINISHED}
+                  >
+                    {OperationStatusEnumValue(OperationStatusEnum.FINISHED).label}
+                  </SelectItem>
                 </SelectGroup>
               </SelectContent>
             </Select>

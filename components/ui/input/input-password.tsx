@@ -1,13 +1,17 @@
 "use client";
 
 import { useState, forwardRef, ChangeEvent } from "react";
-import { EyeIcon, EyeSlashIcon } from "@phosphor-icons/react/dist/ssr";
+import { EyeIcon, EyeSlashIcon, InfoIcon } from "@phosphor-icons/react/dist/ssr";
 import { InputBase } from "./input-base";
+import { Tooltip, TooltipContent, TooltipTrigger } from "../tooltip";
+import { cn } from "@/lib/utils";
 
 interface InputPasswordProps extends React.ComponentProps<"input"> {
   label: string;
   errorMessage?: string;
   srOnly?: boolean;
+  tooltip?: string;
+  required?: boolean;
 }
 
 const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
@@ -20,7 +24,21 @@ const InputPassword = forwardRef<HTMLInputElement, InputPasswordProps>(
 
     return (
       <div className="relative flex flex-col gap-1">
-        <label className={srOnly ? "sr-only" : "text-legend text-base-3"}>{label}</label>
+        <label className={cn(srOnly && "sr-only", "text-legend text-base-3")}>
+          <div className="flex gap-4">
+            <span className={props.required ? "required" : ""}>{label}</span>
+            {props.tooltip && (
+              <Tooltip>
+                <TooltipTrigger>
+                  <InfoIcon weight="fill" />
+                </TooltipTrigger>
+                <TooltipContent>
+                  <p>{props.tooltip}</p>
+                </TooltipContent>
+              </Tooltip>
+            )}
+          </div>
+        </label>
 
         <InputBase
           ref={ref}

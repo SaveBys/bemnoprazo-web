@@ -1,28 +1,36 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { Button } from "@/components/ui/button";
 import Image from "next/image";
 import { PlusIcon } from "@phosphor-icons/react/dist/ssr";
 import Accordion from "@/components/layout/accordion";
 import { useEffect, useState } from "react";
 import { getAnnouncementById } from "@/services/announcements.service";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { AnnouncementResponse } from "@/types/response/announcement-details.response";
+import React from "react";
+import { useCart } from "@/context/cart-context";
 
-export default function Detail() {
+interface PageProps {
+  params: Promise<{
+    id: string;
+  }>;
+}
+
+export default function ProductsDetailPage({ params }: PageProps) {
   const [announcement, setAnnouncement] = useState<AnnouncementResponse>();
   const [specs, setSpecs] = useState<{ key: string; value: string }[]>();
   const [usage, setUsage] = useState<{ key: string; value: string }[]>();
-  const searchParams = useSearchParams();
+  const { addItem } = useCart();
+  const { id } = React.use(params);
   const router = useRouter();
 
   useEffect(() => {
-    if (!searchParams) return;
-    const pid = searchParams.get("pid");
+    if (!id) return;
 
-    if (!pid) return;
-
-    getAnnouncementById(pid).then((res) => {
+    getAnnouncementById(id).then((res) => {
       setAnnouncement(res);
 
       setSpecs([
@@ -49,7 +57,18 @@ export default function Detail() {
         { key: "Modo de uso", value: res.usageInstructions },
       ]);
     });
-  }, [searchParams]);
+  }, [id]);
+
+  async function addToCart() {
+    if (announcement) {
+      addItem({
+        name: announcement.name,
+        quantity: 1,
+        announcement: { ...announcement, announcementQuantity: announcement.quantity },
+      });
+      router.push("/products/shop");
+    }
+  }
 
   const navigateToProducts = () => {
     router.push("/products");
@@ -92,7 +111,7 @@ export default function Detail() {
               Quantidade disponível: {announcement?.quantity ?? 0}
             </p>
 
-            <Button className="w-full">
+            <Button className="w-full" onClick={() => addToCart()}>
               <PlusIcon className="size-5" />
               <span>Reservar item</span>
             </Button>

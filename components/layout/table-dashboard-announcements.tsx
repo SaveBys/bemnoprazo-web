@@ -59,10 +59,10 @@ export const columns: ColumnDef<RowData>[] = [
   },
 ];
 
-interface TabelaProdutosProps {
+interface TableDashboardAnnouncementsProps {
   data: RowData[];
 }
 
-export function TabelaProdutos({ data }: TabelaProdutosProps) {
+export function TableDashboardAnnouncements({ data }: TableDashboardAnnouncementsProps) {
   return <DataTable columns={columns} data={data} />;
 }

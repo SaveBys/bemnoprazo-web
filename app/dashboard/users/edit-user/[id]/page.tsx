@@ -1,5 +1,6 @@
 "use client";
 
+import { Dialog, Message } from "@/components/layout/dialog";
 import { Button } from "@/components/ui/button";
 import { InputText } from "@/components/ui/input/input-text";
 import { getByIdCompanyUser, updateProfileCompanyUser } from "@/services/user.service";
@@ -22,10 +23,17 @@ interface PageProps {
 
 export default function EditUserPage({ params }: PageProps) {
   const [loading, setLoading] = useState<boolean>(false);
+  const [open, setOpen] = useState(false);
+  const [message, setMessage] = useState<Message>();
   const router = useRouter();
   const { id } = React.use(params);
 
-  const { register, reset, handleSubmit } = useForm<UpdateCompanyUserFormData>({
+  const {
+    register,
+    reset,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<UpdateCompanyUserFormData>({
     resolver: zodResolver(updateCompanyUserSchema) as Resolver<UpdateCompanyUserFormData>,
   });
 
@@ -51,7 +59,13 @@ export default function EditUserPage({ params }: PageProps) {
     try {
       setLoading(true);
       await updateProfileCompanyUser({ ...data, id }, data.email!);
-      router.push("/dashboard/users");
+      setMessage({
+        title: "Sucesso!",
+        callback() {
+          router.push("/dashboard/users");
+        },
+      });
+      setOpen(true);
     } finally {
       setLoading(false);
     }
@@ -66,27 +80,55 @@ export default function EditUserPage({ params }: PageProps) {
           <h2 className="text-subtitle text-base-2">Dados do usuário</h2>
 
           <div className="flex w-full flex-row justify-between gap-4">
-            <InputText {...register("name")} className="w-full" label="Nome" />
+            <InputText
+              {...register("name")}
+              errorMessage={errors.name?.message}
+              className="w-full"
+              label="Nome"
+              required
+            />
 
-            <InputText {...register("position")} className="w-full" label="Cargo" />
+            <InputText
+              {...register("position")}
+              errorMessage={errors.name?.message}
+              className="w-full"
+              label="Cargo"
+              required
+            />
           </div>
 
           <div className="flex w-full flex-row justify-between gap-4">
             <InputText
               {...register("contactNumber")}
+              errorMessage={errors.name?.message}
               className="w-full"
               label="Número para contato"
               mask="(99) 9 9999-9999"
+              required
             />
 
-            <InputText {...register("email")} label="E-mail" placeholder="Exemplo@gmail.com" />
+            <InputText
+              {...register("email")}
+              errorMessage={errors.name?.message}
+              label="E-mail"
+              placeholder="Exemplo@gmail.com"
+              required
+            />
           </div>
 
-          <Button className="mx-auto w-fit" disabled={loading}>
+          <Button className="mx-auto w-fit" loading={loading}>
             Salvar
           </Button>
         </form>
       </div>
+
+      <Dialog
+        open={open}
+        setOpen={setOpen}
+        title={message?.title}
+        description={message?.description}
+        onActionClick={message?.callback}
+      />
     </main>
   );
 }

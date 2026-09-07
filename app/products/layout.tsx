@@ -8,7 +8,7 @@ export default function ProductsLayout({
 }>) {
   return (
     <>
-      <Header isAuthenticated={true} />
+      <Header />
       {children}
       <Footer />
     </>

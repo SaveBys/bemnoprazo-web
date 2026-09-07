@@ -19,15 +19,6 @@ export default function ResetPasswordPage() {
           description: "Em breve receberá um e-mail com os próximos passos.",
         });
       })
-      .catch((error) => {
-        const errorMessage =
-          error.response?.data?.message ||
-          "Não foi possível processar a sua solicitação. Tente novamente mais tarde.";
-        setMessage({
-          title: "Ocorreu um erro",
-          description: errorMessage,
-        });
-      })
       .finally(() => setOpen(true));
   };
 

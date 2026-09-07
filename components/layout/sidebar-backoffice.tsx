@@ -5,7 +5,12 @@ import * as React from "react";
 import { NavMain } from "@/components/layout/nav-main";
 import { NavUser } from "@/components/layout/nav-user";
 import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/components/ui/sidebar";
-import { CurrencyDollarIcon, HouseIcon, UsersIcon } from "@phosphor-icons/react/dist/ssr";
+import {
+  CurrencyDollarIcon,
+  HouseIcon,
+  MoneyIcon,
+  UsersIcon,
+} from "@phosphor-icons/react/dist/ssr";
 import Image from "next/image";
 import Link from "next/link";
 
@@ -20,6 +25,11 @@ const data = {
       title: "Gestão de produtos",
       url: "/backoffice/products",
       icon: CurrencyDollarIcon,
+    },
+    {
+      title: "Gestão de pedidos",
+      url: "/backoffice/operations",
+      icon: MoneyIcon,
     },
     {
       title: "Gestão de clientes",
