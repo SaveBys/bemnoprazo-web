@@ -3,11 +3,11 @@
 
 :root {
   --primary-1: #dd6a03;
-  --primary-2: #FF8D28;
+  --primary-2: #ff8d28;
   --primary-3: #ffb77a;
-  --secondary-1: #2B7A8B;
-  --secondary-2: #37A2BD;
-  --secondary-3: #44BDD9;
+  --secondary-1: #2b7a8b;
+  --secondary-2: #37a2bd;
+  --secondary-3: #44bdd9;
   --base-1: #030202;
   --base-2: #595959;
   --base-3: #8e8d8d;
@@ -148,10 +148,19 @@ body {
     max-width: 1366px;
   }
 
+  .width-barrier-2 {
+    max-width: 1190px;
+  }
+
   .custom-shadow-sm {
     box-shadow:
       2px 2px 4px rgba(0, 0, 0, 0.15),
       -2px -2px 4px rgba(0, 0, 0, 0.15);
+  }
+
+  .required::after {
+    content: " * ";
+    color: red
   }
 }
 

@@ -1,49 +1,49 @@
-"use client"
+"use client";
 
-import * as React from "react"
+import * as React from "react";
 
-import { NavMain } from "@/components/layout/nav-main"
-import { NavUser } from "@/components/layout/nav-user"
+import { NavMain } from "@/components/layout/nav-main";
+import { NavUser } from "@/components/layout/nav-user";
+import { Sidebar, SidebarContent, SidebarFooter, SidebarHeader } from "@/components/ui/sidebar";
 import {
-  Sidebar,
-  SidebarContent,
-  SidebarFooter,
-  SidebarHeader,
-} from "@/components/ui/sidebar"
-import { CurrencyDollarIcon, HouseIcon, UsersIcon } from "@phosphor-icons/react/dist/ssr"
-import Image from "next/image"
-import Link from "next/link"
+  CurrencyDollarIcon,
+  HouseIcon,
+  MoneyIcon,
+  UsersIcon,
+} from "@phosphor-icons/react/dist/ssr";
+import Image from "next/image";
+import Link from "next/link";
 
 const data = {
-  user: {
-    companyName: "BemNoPrazo LTDA",
-    name: "João silva",
-    email: "joão.silva@email.com.br",
-  },
   navMain: [
     {
       title: "Início",
-      url: "/",
+      url: "/products",
       icon: HouseIcon,
     },
     {
       title: "Gestão de produtos",
-      url: "products",
+      url: "/backoffice/products",
       icon: CurrencyDollarIcon,
     },
     {
+      title: "Gestão de pedidos",
+      url: "/backoffice/operations",
+      icon: MoneyIcon,
+    },
+    {
       title: "Gestão de clientes",
-      url: "users",
+      url: "/backoffice/users",
       icon: UsersIcon,
     },
   ],
-}
+};
 
 export function SidebarBackoffice({ ...props }: React.ComponentProps<typeof Sidebar>) {
   return (
     <Sidebar {...props}>
       <SidebarHeader>
-        <Link href="/" className="w-fit m-auto">
+        <Link href="/" className="m-auto w-fit">
           <Image src="/img/LogoBemnoprazo.png" alt="logo" width={200} height={88} />
         </Link>
       </SidebarHeader>
@@ -53,8 +53,8 @@ export function SidebarBackoffice({ ...props }: React.ComponentProps<typeof Side
       </SidebarContent>
 
       <SidebarFooter>
-        <NavUser user={data.user} />
+        <NavUser />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }

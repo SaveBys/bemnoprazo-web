@@ -1,4 +1,4 @@
-import axios from "axios"
+import axios from "axios";
 
 export const api = axios.create({
   baseURL: "/api/backend",
@@ -6,5 +6,4 @@ export const api = axios.create({
     "Content-Type": "application/json",
   },
   withCredentials: true,
-})
-
+});

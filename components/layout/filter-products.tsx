@@ -5,13 +5,13 @@ import { Controller, useForm, useWatch } from "react-hook-form";
 import { Button } from "../ui/button";
 import InputSearch from "../ui/input/input-search";
 import { InputText } from "../ui/input/input-text";
-import { AnnouncementsFilterParams } from "@/types/announcements-filter-params.request";
+import { AnnouncementsFilterParams } from "@/types/request/announcements-filter-params.request";
 import { Checkbox } from "../ui/input/checkbox";
 import { CheckboxGroup } from "../ui/input/checkbox-group";
 import { Slider } from "../ui/slider";
 import { findAllAnnouncementsCategory } from "@/services/announcements-category.service";
 import { useEffect, useState } from "react";
-import { AnnouncementCategoryResponse } from "@/types/announcement-category.response";
+import { AnnouncementCategoryResponse } from "@/types/response/announcement-category.response";
 
 type Props = {
   onSubmitFilters: (data: AnnouncementsFilterParams) => void;
@@ -63,7 +63,7 @@ export function FilterProducts({ onSubmitFilters }: Props) {
   }
 
   return (
-    <div className="w-75 flex flex-col gap-8">
+    <div className="flex w-75 flex-col gap-8">
       <h1 className="text-title text-base-2">Filtros</h1>
 
       <form className="flex flex-col gap-5" onSubmit={handleSubmit(onSubmit)}>
@@ -83,7 +83,7 @@ export function FilterProducts({ onSubmitFilters }: Props) {
           />
         )}
 
-        <hr className="w-full border-base-3 border" />
+        <hr className="border-base-3 w-full border" />
 
         <h2 className="text-subtitle text-base-2">Valor</h2>
 
@@ -102,11 +102,11 @@ export function FilterProducts({ onSubmitFilters }: Props) {
           )}
         />
 
-        <span className="font-medium text-base-2">
+        <span className="text-base-2 font-medium">
           R$ {rangePrice?.[0]} — R$ {rangePrice?.[1]}
         </span>
 
-        <hr className="w-full border-base-3 border" />
+        <hr className="border-base-3 w-full border" />
 
         <h2 className="text-subtitle text-base-2">Validade</h2>
 
